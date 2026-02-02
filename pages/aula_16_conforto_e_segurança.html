@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 16</title>
+    
+    <style>
+        /* Mantendo a Identidade Visual da Aula 17 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        h4 { color: #2c3e50; margin-top: 10px; margin-bottom: 10px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Destaques */
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .safety-box { background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .instrument-box { background-color: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 20px 0; border-radius: 4px; }
+
+	/* Estilização para a seção de links */
+        .search-links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .search-button {
+            display: block;
+            text-decoration: none;
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            border-bottom: 3px solid #f1c40f;
+        }
+
+        .search-button:hover {
+            background-color: #34495e;
+            color: #f1c40f;
+        }
+        
+	/* Estilos para o Modal do Contator */
+	.modal {
+	    display: none; 
+	    position: fixed; 
+	    z-index: 2000; 
+	    left: 0;
+	    top: 0;
+	    width: 100%; 
+	    height: 100%; 
+	    background-color: rgba(0,0,0,0.5); 
+	}
+
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: 15% auto; 
+	    padding: 20px;
+	    border-left: 8px solid #f1c40f;
+	    width: 80%;
+	    max-width: 500px;
+	    border-radius: 8px;
+	    position: relative;
+	    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+	}
+
+	.close-modal {
+	    color: #aaa;
+	    float: right;
+	    font-size: 28px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+
+	.close-modal:hover { color: #333; }
+
+	.term-link {
+	    color: #2980b9;
+	    text-decoration: underline;
+	    cursor: pointer;
+	    font-weight: bold;
+	}
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0; text-align: center; }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 16</h1>
+        <div class="subtitle">Dispositivos de Conforto e Segurança</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>Tecnologia a Serviço da Instalação</h2>
+        <p>
+            Uma instalação elétrica moderna vai além de apenas ligar lâmpadas e tomadas. O uso de dispositivos inteligentes permite otimizar o consumo de energia, aumentar a vida útil dos equipamentos e proporcionar segurança passiva aos moradores.
+        </p>
+
+        <hr style="border: 0; height: 1px; background: #ddd; margin: 30px 0;">
+
+        <div class="component-box">
+            <h3>1. Sensor de Presença (PIR)</h3>
+            <p><strong>Função:</strong> Aciona a iluminação automaticamente ao detectar o movimento de fontes de calor (radiação infravermelha). Ideal para corredores, garagens e escadarias.</p>
+            <ul>
+                <li><strong>Conforto:</strong> Dispensa o uso de interruptores em locais de passagem.</li>
+                <li><strong>Segurança:</strong> Inibe a presença de intrusos ao iluminar áreas externas inesperadamente.</li>
+            </ul>
+            <div class="img-placeholder">
+                
+            </div>
+        </div>
+
+        <div class="component-box">
+            <h3>2. Relé Fotoelétrico</h3>
+            <p><strong>Função:</strong> Aciona as lâmpadas ao anoitecer e as desliga ao amanhecer, baseando-se na luminosidade natural (efeito fotovoltaico ou fotoresistivo).</p>
+            <ul>
+                <li><strong>Uso:</strong> Postes de jardim, fachadas e iluminação pública.</li>
+                <li><strong>Dica:</strong> Nunca direcione a luz da própria lâmpada para o sensor, ou ele entrará em efeito "pisca-pisca".</li>
+            </ul>
+            <div class="img-placeholder">
+                
+            </div>
+        </div>
+
+        <div class="component-box">
+            <h3>3. Dimmer (Variador de Luminosidade)</h3>
+            <p><strong>Função:</strong> Permite controlar a intensidade do fluxo luminoso, ajustando a tensão enviada à lâmpada.</p>
+            <ul>
+                <li><strong>Conforto:</strong> Cria cenários aconchegantes em salas de TV e quartos.</li>
+                <li><strong>Atenção:</strong> Nem toda lâmpada LED aceita dimerização. Verifique se a embalagem indica "Dimerizável".</li>
+            </ul>
+            <div class="img-placeholder">
+                
+            </div>
+        </div>
+
+        <div class="component-box">
+            <h3>4. Relé de Impulso</h3>
+            <p><strong>Função:</strong> Permite comandar um ponto de luz de diversos locais diferentes através de botões pulsadores (tipo campainha).</p>
+            <ul>
+                <li><strong>Vantagem:</strong> Substitui sistemas complexos de *Three-Way* e *Four-Way* usando fiação muito mais fina e simples para o comando.</li>
+                <li><strong>Aplicação:</strong> Grandes auditórios ou dormitórios com vários pontos de acionamento.</li>
+            </ul>
+            <div class="img-placeholder">
+                
+            </div>
+        </div>
+        
+        <div class="instrument-box">
+   	 <h4>⚠️ Atenção ao Esquema de Ligação</h4>
+    	<p>Para a instalação do <strong>Sensor de Presença, Relé Fotoelétrico, Dimmer e Relé de Impulso</strong>, é fundamental seguir rigorosamente o esquema elétrico fornecido pelo fabricante.</p>
+    	<ul>
+        	<li><strong>Padrão de Cores:</strong> Ao contrário da fiação comum, as cores dos fios desses componentes (fase, neutro e retorno) não são universais e mudam de marca para marca.</li>
+        	<li><strong>Risco de Danos:</strong> A inversão de um fio de retorno com o neutro pode causar o fechamento de um curto-circuito interno, inutilizando o dispositivo eletrônico imediatamente.</li>
+    	</ul>
+    	<p><em>Dica: O diagrama geralmente vem impresso na lateral do próprio componente ou na embalagem.</em></p>
+	</div>
+	
+	<div class="img-container">
+    	<a href="../images/esquema_ligacao_dimmer.png" target="_blank">     
+        <br>
+        <strong>🔍 Clique aqui para ver o diagrama de ligação de um Dimmer, conforme o fabricante.</strong></a> 	
+	</div>
+		
+	<div class="img-container">
+    	<a href="../pdf/Manual_Sensor_de_Presença.pdf" target="_blank">     
+        <br>
+        <strong>🔍 Clique aqui para ver o manual de instalação do sensor de presença multifuncional da Qualitronix.</strong></a> 	
+	</div>	
+
+	<div class="img-container">
+    	<a href="../pdf/guia do instalador Finder.pdf" target="_blank">     
+        <br>
+        <strong>🔍 Clique aqui para acessar o Manual do instalador Finder.</strong></a> 	
+	</div>	
+
+        <div class="alert">
+    		<strong>Nota de Instalação:</strong> Respeite a carga máxima (Watts). Para cargas altas, utilize um 
+    		<span class="term-link" onclick="openModal()">Contator</span> auxiliar.
+	</div>
+        
+        <hr style="border: 0; height: 1px; background: #ddd; margin: 30px 0;">
+        
+        <h2>Segurança Avançada e Autonomia</h2>
+
+        <div class="component-box">
+            <h3>5. DPS (Dispositivo de Proteção contra Surtos)</h3>
+            <p><strong>Função:</strong> Protege a instalação contra surtos elétricos causados por raios ou manobras da concessionária, desviando o excesso de energia para o aterramento.</p>
+            <ul>
+                <li><strong>Conforto:</strong> Segurança para equipamentos caros (TVs, PCs) durante tempestades.</li>
+                <li><strong>Instalação:</strong> Deve ser montado no quadro de distribuição, entre fase/terra e neutro/terra.</li>
+            </ul>
+        </div>
+
+        <div class="component-box">
+            <h3>6. Protetor de Sub e Sobretensão</h3>
+            <p><strong>Função:</strong> Monitora a voltagem da rede e desliga o circuito se a tensão subir ou descer além do limite seguro (ex: se o neutro da rua romper).</p>
+            <ul>
+                <li><strong>Segurança:</strong> Evita que eletrodomésticos queimem por instabilidade da rede externa.</li>
+                <li><strong>Retorno:</strong> Muitos modelos possuem temporizador para religar a carga só após a rede estabilizar.</li>
+            </ul>
+        </div>
+
+        <div class="component-box">
+            <h3>7. Minuteria</h3>
+            <p><strong>Função:</strong> Mantém as luzes acesas por um tempo pré-determinado após o acionamento de um botão e desliga automaticamente.</p>
+            <ul>
+                <li><strong>Economia:</strong> Perfeita para halls de prédios e garagens onde as pessoas esquecem a luz acesa.</li>
+                <li><strong>Diferencial:</strong> Diferente do sensor, ela depende de um toque, sendo ideal para onde há muito movimento de animais que poderiam disparar sensores.</li>
+            </ul>
+        </div>
+
+        <div class="component-box">
+            <h3>8. Módulo de Automação Wi-Fi</h3>
+            <p><strong>Função:</strong> Permite controlar lâmpadas ou tomadas pelo celular ou por comandos de voz (Alexa/Google Home).</p>
+            <ul>
+                <li><strong>Conforto Total:</strong> Agendamento de horários para simular presença ou desligar tudo ao sair de casa.</li>
+                <li><strong>Modernização:</strong> Pode ser instalado atrás de interruptores comuns, mantendo a estética original da residência.</li>
+            </ul>
+        </div>
+
+        <div class="safety-box" style="background-color: #e3f2fd; border-left: 5px solid #2196f3; padding: 15px;">
+            <h4>💡 Insight para o Cliente</h4>
+            <p>Sugerir a instalação de um <strong>DPS</strong> e de <strong>módulos inteligentes</strong> valoriza o seu serviço e mostra que você está atualizado com as normas (NBR 5410 exige DPS em certas condições) e com as tendências de mercado.</p>
+        </div>
+        
+	<!-- SEÇÃO DE LINKS DE ACESSO RÁPIDO -->
+        <hr style="border: 0; height: 1px; background: #ddd; margin: 30px 0;">
+        <h2>🛒 Onde encontrar e pesquisar</h2>
+        <p>Acesse os links abaixo para consultar modelos, preços e fichas técnicas atualizadas de cada componente:</p>
+        
+        <div class="search-links-container">
+            <a href="https://www.google.com/search?q=dispositivo+de+proteção+contra+surtos+dps&tbm=shop" target="_blank" class="search-button">
+                Pesquisar DPS
+            </a>
+            <a href="https://www.google.com/search?q=protetor+de+sub+e+sobretensão+din&tbm=shop" target="_blank" class="search-button">
+                Protetor de Tensão
+            </a>
+            <a href="https://www.google.com/search?q=minuteria+eletrônica+para+trilho+din&tbm=shop" target="_blank" class="search-button">
+                Pesquisar Minuteria
+            </a>
+            <a href="https://www.google.com/search?q=módulo+interruptor+inteligente+wifi&tbm=shop" target="_blank" class="search-button">
+                Módulo Automação Wi-Fi
+            </a>
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 16</p>
+    </footer>
+    
+	    <!-- Estrutura do Modal -->
+	<div id="contatorModal" class="modal">
+	    <div class="modal-content">
+		<span class="close-modal" onclick="closeModal()">&times;</span>
+		<h3>O que é um Contator?</h3>
+		<p>Um <strong>Contator</strong> é um dispositivo eletromecânico que funciona como um "interruptor de potência".</p>
+		<p>Ele permite que um dispositivo sensível (como um sensor de presença ou timer) controle cargas muito pesadas (como vários refletores ou motores) sem que a corrente elétrica passe diretamente pelo sensor, evitando que ele queime.</p>
+	    </div>
+	</div>
+
+	<script>
+	    function openModal() {
+		document.getElementById("contatorModal").style.display = "block";
+	    }
+
+	    function closeModal() {
+		document.getElementById("contatorModal").style.display = "none";
+	    }
+
+	    // Fecha o modal se o usuário clicar fora dele
+	    window.onclick = function(event) {
+		var modal = document.getElementById("contatorModal");
+		if (event.target == modal) {
+		    modal.style.display = "none";
+		}
+	    }
+	</script>
+
+</body>
+</html>

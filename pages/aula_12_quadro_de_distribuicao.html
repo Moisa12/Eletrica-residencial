@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 12</title>
+    
+    <style>
+        /* Mantendo seus estilos globais para consistência */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        
+        .img-container { text-align: center; margin: 25px 0; }
+        .img-container img { max-width: 600px; width: 100%; height: auto; border-radius: 8px; }
+        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+
+        footer { 
+            background-color: #2c3e50; 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 2rem 0; 
+            margin-top: 40px;
+            width: 100%;
+        }
+        footer p { text-align: center; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 12:</h1>
+        <div class="subtitle">O Quadro de Distribuição e Dispositivos de Proteção</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O Coração da Instalação: O QDC</h2>
+        <p>
+            O <strong>Quadro de Distribuição de Circuitos (QDC)</strong> é o centro de controle de toda a fiação interna. É nele que os cabos vindos do padrão de entrada se conectam aos barramentos e se dividem para alimentar os circuitos da casa.
+        </p>
+
+        
+
+        <h2>1. Disjuntores Termomagnéticos (DTM)</h2>
+        <p>
+            A função principal do disjuntor é proteger os <strong>cabos</strong> da instalação contra dois problemas graves:
+        </p>
+        <ul>
+            <li><strong>Sobrecarga:</strong> Quando ligamos muitos aparelhos e a corrente excede a capacidade do fio.</li>
+            <li><strong>Curto-circuito:</strong> Quando ocorre um contato direto entre Fase e Neutro ou entre Fases.</li>
+        </ul>
+
+        <div class="alert">
+            <strong>Dica Técnica:</strong> Atualmente utilizamos o padrão <strong>DIN</strong> (trilho europeu), que é mais moderno e seguro que o antigo padrão NEMA (disjuntor preto americano).
+        </div>
+
+        <hr>
+
+        <h2>2. O Dispositivo DR (Diferencial Residual)</h2>
+        <p>
+            Enquanto o disjuntor protege os fios, o <strong>IDR (Interruptor Diferencial Residual)</strong> protege as <strong>pessoas</strong>. Ele detecta fugas de corrente (como uma criança colocando o dedo na tomada ou um chuveiro com resistência furada) e desliga o circuito instantaneamente para evitar um choque fatal.
+        </p>
+
+
+        <div class="example-box" style="background-color: #fdecea; border-left-color: #e74c3c;">
+            <strong>Obrigação por Norma:</strong> Segundo a NBR 5410, o uso do DR é obrigatório em áreas molhadas (banheiros, cozinhas, áreas externas e lavanderias).
+        </div>
+
+        <hr>
+
+        <h2>3. O DPS (Dispositivo de Proteção contra Surtos)</h2>
+        <p>
+            O <strong>DPS</strong> protege os seus <strong>equipamentos eletrônicos</strong> (TVs, computadores, geladeiras) contra descargas atmosféricas (raios) ou surtos de tensão da rede elétrica. Ele desvia o excesso de voltagem para o sistema de aterramento.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dispositivo</th>
+                        <th>Protege O Quê?</th>
+                        <th>Causa da Atuação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Disjuntor</strong></td>
+                        <td>Os cabos da casa</td>
+                        <td>Sobrecarga e Curto-circuito</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IDR</strong></td>
+                        <td>Vidas (Pessoas e Animais)</td>
+                        <td>Choque elétrico e fuga de corrente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DPS</strong></td>
+                        <td>Eletroeletrônicos</td>
+                        <td>Raios e surtos de tensão</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2>Barramentos e Organização Interna</h2>
+        <p>
+            Um quadro moderno não utiliza "emendas de fita isolante". Para organizar a distribuição, utilizamos barramentos de cobre específicos:
+        </p>
+
+        <ul>
+            <li><strong>Barramento de Fase (Pente):</strong> Distribui a fase para vários disjuntores de forma limpa e segura, evitando o uso de "pontes" de fios.</li>
+            <li><strong>Barramento de Neutro:</strong> Local onde todos os cabos azuis da casa se conectam. Ele deve ser isolado da carcaça do quadro (se o quadro for metálico).</li>
+            <li><strong>Barramento de Terra:</strong> Local onde todos os cabos verdes se conectam. Ele é conectado diretamente à estrutura do quadro e à haste de aterramento.</li>
+        </ul>
+
+        <div class="alert" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32;">
+            
+            <strong>Dicas de Montagem:</strong> 
+        	<p>1 - No barramento de neutro, deve haver apenas um fio por borne (parafuso). Nunca amontoe vários fios no mesmo ponto!</p>
+        	<p>2 - Sempre instale primeiro um disjuntor geral seguido do DPS e depois o DR, e então os disjuntores dos circuito de iluminação, tomadas, chuveiro, etc... Essa é a sequência correta de prioridade de proteção dentro do Quadro de Distribuição.</P>
+        </div>
+
+        <hr>
+
+        <h2>Espaço Reserva (Previsão de Futuro)</h2>
+        <p>
+            A NBR 5410 exige que todo quadro de distribuição tenha espaços vazios para que o morador possa instalar novos circuitos no futuro (como um novo ar-condicionado) sem precisar trocar o quadro inteiro.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capacidade Total do Quadro (nº de módulos)</th>
+                        <th>Espaço Reserva Mínimo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Até 6 módulos</td>
+                        <td>2 módulos vazios</td>
+                    </tr>
+                    <tr>
+                        <td>De 7 a 12 módulos</td>
+                        <td>3 módulos vazios</td>
+                    </tr>
+                    <tr>
+                        <td>De 13 a 30 módulos</td>
+                        <td>4 módulos vazios</td>
+                    </tr>
+                    <tr>
+                        <td>Acima de 30 módulos</td>
+                        <td>15% da capacidade total</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2>Onde o Quadro (QDC) NÃO pode ser instalado?</h2>
+        <p>
+            A localização do quadro é estratégica. Ele deve estar em local de fácil acesso. De acordo com as normas técnicas e boas práticas, <strong>é proibido ou altamente desaconselhável</strong> instalar o QDC em:
+        </p>
+
+        <div class="alert" style="background-color: #fdecea; border-left: 5px solid #e74c3c;">
+            <ul>
+                <li><strong>Banheiros:</strong> Devido ao vapor de água e risco de corrosão/choque.</li>
+                <li><strong>Cozinhas (sobre o fogão) ou Áreas Gourmet:</strong> Próximo a fontes de calor ou gordura.</li>
+                <li><strong>Despensas ou armários fechados:</strong> O acesso deve ser livre; nunca esconda o quadro atrás de móveis.</li>
+                <li><strong>Locais com produtos inflamáveis:</strong> Como depósitos de gás ou produtos de limpeza voláteis.</li>
+                <li><strong>Áreas externas sem proteção:</strong> Onde possa sofrer incidência direta de chuva e sol.</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <strong>Local Ideal:</strong> O centro de carga da residência (geralmente corredores ou salas), em local iluminado, ventilado e com altura média de 1,50m para facilitar a operação dos disjuntores em emergências.
+        </div>
+        <hr>
+        
+              			
+       		<h2>Fabricantes de Quadros de Distribuição de Energia Elétrica</h2>
+                <p>Aqui, você encontrará uma seleção de fabricantes renomados de quadros de distribuição de energia elétrica. Esses fornecedores são reconhecidos por sua qualidade, inovação e compromisso com a segurança em instalações elétricas. Ao clicar nos links abaixo, você poderá explorar as soluções oferecidas por cada um deles, desde quadros residenciais até opções industriais, garantindo que você encontre o produto ideal para suas necessidades.</p>
+                
+                <ul>
+                	<li><a href="https://www.se.com/br/pt/product-category/4000-pain%C3%A9is-e-quadros-de-distribui%C3%A7%C3%A3o/?filter=business-5-residencial-e-pequenos-neg%C3%B3cios" target="_blank" rel="noopener">Painéis e Quadros de Distribuição Schneider Electric</a></li>
+                	<li><a href="https://www.strahl.com/linhas/quadros-de-distribuicao" target="_blank" rel="noopener">Quadros de Distribuição Strahl</a> </li>
+                	<li><a href="https://www.steck.com.br/produtos/residencial/caixas" target="_blank" rel="noopener">Caixas Residenciais Steck</a></li>
+                	<li><a href="https://www.tigre.com.br/produtos/obras-e-reformas/eletrica?q=quadro+de+distribui%C3%A7%C3%A3o" target="_blank" rel="noopener">Quadros de Distribuição Tigre</a></li>
+                </ul>
+
+        <hr>
+
+        <h2>Exercícios de Fixação - Aula 12</h2>
+
+        <p><strong>Questão 1:</strong> Se um disjuntor de 20A está "desarmando" constantemente quando você liga o micro-ondas e a fritadeira elétrica ao mesmo tempo, qual é o problema provável e qual a solução correta?</p>
+
+        <details>
+            <summary>Ver resposta e explicação</summary>
+            <div class="example-box">
+                <p><strong>Resposta:</strong> O problema é <strong>Sobrecarga</strong>. A soma das correntes dos dois aparelhos ultrapassa os 20A do disjuntor. <br>
+                <strong>Solução:</strong> Nunca troque apenas o disjuntor por um maior! É necessário verificar se os cabos suportam uma corrente maior. Se os cabos forem de 2,5mm², o limite é 21A. O correto seria separar os aparelhos em circuitos diferentes.</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 2:</strong> Qual a diferença básica entre a proteção oferecida por um Disjuntor e por um IDR?</p>
+
+        <details>
+            <summary>Ver resposta e explicação</summary>
+            <div class="example-box">
+                <p><strong>Resposta:</strong> O disjuntor protege o patrimônio (a fiação) contra aquecimento e incêndio. O IDR protege a vida contra choques elétricos decorrentes de contatos diretos ou indiretos.</p>
+            </div>
+        </details>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 12</p>
+    </footer>
+
+</body>
+</html>

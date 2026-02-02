@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 2</title>
+    <style>
+        /* Mantendo os estilos da Aula 1 para padronização */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 120px; 
+        }
+
+         /* Cabeçalho FIXO */
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+         }
+        .logo-header {
+            position: absolute;
+            bottom: 10px;  /* Distância do fundo do cabeçalho */
+            right: 20px;   /* Distância da borda direita */
+            height: 50px;  /* Ajuste o tamanho conforme sua necessidade */
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.5rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #e67e22; }
+        
+        .formula {
+            background-color: #2c3e50;
+            color: #f1c40f;
+            padding: 40px;
+            text-align: center;
+            font-size: 1.8rem;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #2c3e50; color: #fff; }
+
+        .alert {
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 40px;
+        }
+        /* Tabela */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Cards Comparativos */
+        .type-box {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .type-card {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fcfcfc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+        /* Exemplos */
+        .example-box {
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    	.type-box { display: flex; gap: 20px; margin: 20px 0; }
+        .type-card { flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #fcfcfc; }</style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 2: </h1>
+        <div class="subtitle">Grandezas Elétricas e a Lei de Ohm</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>As Três Grandezas Fundamentais</h2>
+        <p>Para entender como a eletricidade funciona em uma residência, precisamos conhecer três "forças" que trabalham juntas:</p>
+
+        <h3>1. Tensão Elétrica (V)</h3>
+        <p>É a <strong>pressão</strong> que empurra os elétrons. Nas tomadas residenciais, as tensões mais comuns são 127V ou 220V. Sem tensão, os elétrons não se movem. Unidade de medida: <strong>Volts (V)</strong>.</p>
+
+        <h3>2. Corrente Elétrica (I)</h3>
+        <p>É o <strong>fluxo</strong> real de elétrons passando pelo fio. Quanto mais aparelhos ligados, maior é a corrente. Unidade de medida: <strong>Ampères (A)</strong>.</p>
+
+        <h3>3. Resistência Elétrica (R)</h3>
+        <p>É a <strong>dificuldade</strong> que o material oferece à passagem da corrente. Um chuveiro tem uma resistência que aquece a água; um fio fino oferece mais resistência que um grosso. Unidade de medida: <strong>Ohms (Ω)</strong>.</p>
+
+        
+
+        <h2>A Lei de Ohm</h2>
+        <p>O físico Georg Simon Ohm descobriu que essas três grandezas estão sempre relacionadas por uma fórmula matemática simples. Ela permite calcular, por exemplo, qual disjuntor usar para um chuveiro.</p>
+
+        <div class="formula">
+            V = R × I
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Grandeza</th>
+                        <th>Símbolo</th>
+                        <th>Unidade</th>
+                        <th>Analogia Hidráulica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tensão</td>
+                        <td>V</td>
+                        <td>Volts (V)</td>
+                        <td>Pressão da Água</td>
+                    </tr>
+                    <tr>
+                        <td>Corrente</td>
+                        <td>I</td>
+                        <td>Ampères (A)</td>
+                        <td>Volume de Água saindo</td>
+                    </tr>
+                    <tr>
+                        <td>Resistência</td>
+                        <td>R</td>
+                        <td>Ohms (Ω)</td>
+                        <td>Largura do Cano</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+        <div class="alert">
+            <strong>Exemplo Prático:</strong> Se você aumenta a tensão (pressão) sem mudar o fio (resistência), a corrente (fluxo) também aumenta. Se a corrente subir demais, o fio esquenta e pode derreter! É por isso que usamos disjuntores para proteger o circuito.
+        </div>
+
+        <h2>Tipos de Tensão e Corrente</h2>
+        <p>A eletricidade pode se comportar de duas maneiras diferentes, dependendo de como os elétrons se movimentam no condutor:</p>
+
+        <div class="type-box">
+            <div class="type-card">
+                <h4>Alternada (AC / CA)</h4>
+                <p><strong>Siglas:</strong> VAC ou VCA (Volts de Corrente Alternada).</p>
+                <p>Neste tipo, os elétrons mudam de direção constantemente. É a energia que chega das usinas até as nossas tomadas.</p>
+                <p><strong>Exemplos:</strong> Tomadas de casa (127V/220V), chuveiros elétricos e eletrodomésticos pesados.</p>
+            </div>
+
+            <div class="type-card">
+                <h4>Contínua (DC / CC)</h4>
+                <p><strong>Siglas:</strong> VDC ou VCC (Volts de Corrente Contínua).</p>
+                <p>Os elétrons fluem em um único sentido, de forma constante. É ideal para circuitos eletrônicos sensíveis.</p>
+                <p><strong>Exemplos:</strong> Pilhas, baterias de carro, celulares e placas de energia solar.</p>
+            </div>
+        </div>
+
+        
+
+        <h2>Tabela Comparativa</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Corrente Alternada (AC)</th>
+                        <th>Corrente Contínua (DC)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Símbolo no Multímetro</strong></td>
+                        <td>V~ ou VAC</td>
+                        <td>V⎓ ou VDC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fonte de Origem</strong></td>
+                        <td>Rede Elétrica (Poste)</td>
+                        <td>Baterias e Fontes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Siglas Técnicas</strong></td>
+                        <td>VAC / VCA</td>
+                        <td>VDC / VCC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comportamento</strong></td>
+                        <td>Muda de sentido (Frequência)</td>
+                        <td>Sentido único e estável</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Observação Importante</h3>
+        <p>
+            A maioria dos aparelhos eletrônicos possui uma "fonte" externa ou interna. A função dela é justamente receber a tensão alternada da tomada (<strong>VAC</strong>) e transformá-la na tensão contínua (<strong>VDC</strong>) necessária para os componentes eletrônicos funcionarem sem queimar.
+        </p>
+        
+        <h2>1ª Lei de Ohm: A Relação Fundamental</h2>
+        <p>A primeira lei afirma que a corrente elétrica (I) é diretamente proporcional à tensão (U) e inversamente proporcional à resistência (R).</p>
+
+        <div class="grid-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center;">
+            <div class="mnemonic-container">
+                <svg width="260" height="230" viewBox="0 0 260 230">
+                            <!-- Triângulo Fundo -->
+                            <polygon points="130,10 10,220 250,220" fill="none" stroke="#9ca3af" stroke-width="4"/>
+                            
+                            <!-- Linha Horizontal -->
+                            <line x1="70" y1="115" x2="190" y2="115" stroke="#9ca3af" stroke-width="4" />
+                            
+                            <!-- Linha Vertical -->
+                            <line x1="130" y1="115" x2="130" y2="220" stroke="#9ca3af" stroke-width="4" />
+
+                            <!-- Texto U (Topo) -->
+                            <text x="130" y="85" font-family="Arial" font-size="50" font-weight="bold" fill="#60a5fa" text-anchor="middle">U</text>
+                            
+                            <!-- Texto R (Esquerda) -->
+                            <text x="80" y="190" font-family="Arial" font-size="50" font-weight="bold" fill="#fbbf24" text-anchor="middle">R</text>
+                            
+                            <!-- Símbolo Multiplicação -->
+                            <text x="130" y="190" font-family="Arial" font-size="30" fill="#9ca3af" text-anchor="middle">·</text>
+
+                            <!-- Texto I (Direita) -->
+                            <text x="180" y="190" font-family="Arial" font-size="50" font-weight="bold" fill="#34d399" text-anchor="middle">I</text>
+                        </svg>
+            </div>
+            <div>
+                <h3><strong>Dica Mnemônica:</strong> "Quem Vê, Ri" (U = R x I).</h3>
+                <p><small>Tampe a letra que deseja descobrir para ver a fórmula.</small></p>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h2>Exemplo 1: Cálculo de Corrente.</h2>
+            <h4>Um chuveiro tem uma resistência interna de 10 Ω é ligado em uma tensão de 220 V. Qual corrente circula por ele?</h4>
+            <p>Resistência: 10 Ω | Tensão: 220 V</p>
+            <p><strong>Cálculo:</strong> I = U / R = 220 / 10 = 22 A</p>
+        </div>
+        
+         <div class="example-box" style="background-color: #fff3e0; border-left-color: #ef6c00;">
+            <h2>Exemplo 2: Cálculo de Resistência elétrica.</h2>
+            <h4>Uma bateria de 12 V é conectada a uma carga, e o multímetro indica uma corrente de 2,5 A. Qual o valor da resistência dessa carga?</h4>
+            <p>Tensão: 12 V | Corrente: 2,5 A</p>
+            <p><strong>Cálculo:</strong> R = U / I = 12 / 2,5 = 4,8 Ω</p>
+        </div>
+        
+         <div class="example-box">
+            <h2>Exemplo 3: Cálculo da tensão elétrica. </h2>
+            <h4> Uma bateria está ligada a uma carga cuja resistência é de 12 Ω. A corrente elétrica é de 4 A. Val o valor da tensão elétrica dessa bateria?</h4>
+            <p>Resistência: 12 Ω | Corrente: 4 A</p>
+            <p><strong>Cálculo:</strong> U = R x I = 12 x 4 = 48 V</p> 
+        </div>
+        
+        <br></br>
+
+        <h2>2ª Lei de Ohm: A Resistividade</h2>
+        <h2>Cálculo da Resistência de um Condutor</h2>
+		<p>A resistência de um fio condutor depende do material do qual ele é feito, do seu comprimento e da sua espessura (área de seção transversal).</p>
+
+		<div class="formula-box" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+    			<span>R = ρ ·</span>
+    		<div style="display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle;">
+        	<span style="border-bottom: 2px solid #f1c40f; padding: 0 10px;">L</span>
+        	<span>A</span>
+    	</div>
+	</div>
+
+	<div class="example-box">
+    	<h4>Onde:</h4>
+    		<ul>
+        		<li><strong>R:</strong> Resistência elétrica (Ohms)</li>
+        		<li><strong>ρ (Rô):</strong> Resistividade elétrica do material (depende do tipo de metal)</li>
+        		<li><strong>L:</strong> Comprimento do condutor (metros)</li>
+        		<li><strong>A:</strong> Área da seção transversal (espessura do fio em mm²)</li>
+    		</ul>
+	</div>
+	
+            <h2 class="text-xl font-bold text-white mb-4">Tabela: Resistividade Específica do material (ρ)</h2>
+            <div class="mb-8 overflow-x-auto">
+                <table class="w-full border-collapse resistivity-table">
+                    <thead>
+                        <tr>
+                            <th class="rounded-tl-lg">Material</th>
+                            <th class="rounded-tr-lg">Resistividade (ρ) a 20 <sup>0</> C </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cobre</td>
+                            <td class="text-green-300">0,0172 Ω·mm²/m</td>
+                        </tr>
+                        <tr>
+                            <td>Alumínio</td>
+                            <td class="text-yellow-300">0,0282 Ω·mm²/m</td>
+                        </tr>
+                        <tr>
+                            <td>Níquel</td>
+                            <td>0.069 Ω·mm²/m</td>
+                        </tr>
+                        <tr>
+                            <td>Ferro</td>
+                            <td>0.100 Ω·mm²/m</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>	
+	
+	
+
+	<div class="example-box" style="border-left-color: #d35400;">
+    <h4>Exemplo 1: Condutor de Cobre</h4>
+    <p>Calcule a resistência de um fio de <strong>cobre</strong> com 20 metros de comprimento e área de seção de 2,5 mm².</p>
+    <p><em>Dado: Resistividade do Cobre (ρ) = 0,0172 Ohm·mm²/m</em></p>
+    
+    <p><strong>Cálculo:</strong></p>
+    <p>R = 0,0172 · (20 / 2,5)</p>
+    <p>R = 0,0172 · 8</p>
+    <p><strong>Resultado: R = 0,1376 Ohms</strong></p>
+</div>
+
+<div class="example-box" style="background-color: #eceff1; border-left-color: #607d8b;">
+    <h4>Exemplo 2: Condutor de Alumínio</h4>
+    <p>Calcule a resistência de um fio de <strong>alumínio</strong> com os mesmos 20 metros e 2,5 mm² para comparar.</p>
+    <p><em>Dado: Resistividade do Alumínio (ρ) = 0,0282 Ohm·mm²/m</em></p>
+    
+    <p><strong>Cálculo:</strong></p>
+    <p>R = 0,0282 · (20 / 2,5)</p>
+    <p>R = 0,0282 · 8</p>
+    <p><strong>Resultado: R = 0,2256 Ohms</strong></p>
+</div>
+
+<p style="font-size: 0.9rem; color: #666; font-style: italic;">
+    <strong>Observação:</strong> Note que, para as mesmas dimensões, o alumínio apresenta uma resistência maior que o cobre, o que explica por que o cobre é o condutor preferido em instalações residenciais internas.
+</p>
+    
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | aula 2</p>
+    </footer>
+
+</body>
+</html>

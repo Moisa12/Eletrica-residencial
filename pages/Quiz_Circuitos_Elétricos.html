@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Circuitos Série, Paralelo e Misto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração do MathJax para renderizar fórmulas LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate-900 */
+            color: #e2e8f0; /* Slate-200 */
+        }
+        .quiz-card {
+            background-color: #1e293b; /* Slate-800 */
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .option-button {
+            transition: all 0.2s;
+        }
+        .option-button:hover:not(.disabled) {
+            background-color: #374151; /* Gray-700 hover */
+        }
+        .correct {
+            background-color: #10b981 !important; /* Emerald-500 */
+            color: #111827 !important; /* Gray-900 */
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.7);
+        }
+        .incorrect {
+            background-color: #ef4444 !important; /* Red-500 */
+            color: #111827 !important; /* Gray-900 */
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.7);
+        }
+        .disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 min-h-screen flex items-center justify-center">
+
+    <div id="quiz-container" class="quiz-card w-full max-w-xl p-6 md:p-8 lg:p-10">
+        
+        <h1 class="text-3xl font-bold text-indigo-400 mb-6 border-b-2 border-indigo-700 pb-2">
+            Quiz: Circuitos Elétricos
+        </h1>
+
+        <!-- Content Area -->
+        <div id="quiz-content">
+            <!-- Question and options will be rendered here -->
+            <div id="question-area">
+                <p id="question-number" class="text-lg text-indigo-300 font-semibold mb-2"></p>
+                <div id="question-text" class="text-2xl mb-6 font-medium text-white">Carregando...</div>
+                
+                <div id="options-container" class="space-y-3">
+                    <!-- Options buttons will be injected here -->
+                </div>
+            </div>
+
+            <!-- Feedback and Next Button Area -->
+            <div id="feedback-area" class="mt-6 pt-4 border-t border-slate-700 hidden">
+                <div id="rationale-text" class="p-4 rounded-lg bg-slate-700 text-sm italic"></div>
+                <button id="next-button" onclick="nextQuestion()" class="w-full mt-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition duration-150 shadow-md">
+                    Próxima Pergunta &rarr;
+                </button>
+            </div>
+            
+            <!-- Hint Button -->
+            <div class="mt-4">
+                <button id="hint-button" onclick="showHint()" class="text-sm text-slate-400 hover:text-indigo-400 transition duration-150 underline">
+                    Ver Dica (Hint)
+                </button>
+                <p id="hint-text" class="text-sm text-slate-400 mt-2 p-2 bg-slate-800 rounded-md border border-slate-700 hidden"></p>
+            </div>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results-area" class="text-center hidden">
+            <h2 class="text-3xl font-bold text-teal-400 mb-4">Quiz Concluído!</h2>
+            <p id="final-score" class="text-5xl font-extrabold text-white mb-6"></p>
+            <p class="text-xl mb-6">Parabéns! Você concluiu os exercícios.</p>
+            <button onclick="startQuiz()" class="py-3 px-6 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition duration-150 shadow-md">
+                Recomeçar Quiz
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Dados do Quiz (convertidos de quiz format para JS object)
+        const quizData = [
+            {
+                "questionNumber": 1,
+                "question": "Em um circuito puramente em série, qual das seguintes afirmações sobre a corrente elétrica ($I$) é verdadeira?",
+                "answerOptions": [
+                    { "text": "A corrente se divide proporcionalmente à resistência de cada componente.", "rationale": "Isto é uma característica dos circuitos em paralelo, onde a corrente se divide nos nós.", "isCorrect": false },
+                    { "text": "A corrente é zero se a fonte de tensão for constante.", "rationale": "Isto só ocorreria se o circuito estivesse aberto ou se a resistência fosse infinita.", "isCorrect": false },
+                    { "text": "A corrente é constante (a mesma) em todos os pontos do circuito.", "rationale": "Em um circuito série, há apenas um caminho para o fluxo da corrente, garantindo que a intensidade seja a mesma em cada componente.", "isCorrect": true },
+                    { "text": "A corrente é igual à soma das correntes individuais que fluem nos resistores.", "rationale": "A corrente não se soma em um circuito série, pois ela não se divide.", "isCorrect": false }
+                ],
+                "hint": "Lembre-se de quantos caminhos a corrente pode seguir neste tipo de circuito (apenas um)."
+            },
+            {
+                "questionNumber": 2,
+                "question": "Se três resistores estão ligados em paralelo a uma fonte de $120\\,V$, qual será a tensão ($U$) medida em cada um dos resistores?",
+                "answerOptions": [
+                    { "text": "A tensão se divide igualmente entre os três, resultando em $40\\,V$ em cada um.", "rationale": "Esta é a regra para a tensão em um circuito série, não em paralelo.", "isCorrect": false },
+                    { "text": "A tensão é a mesma da fonte, ou seja, $120\\,V$ em cada um.", "rationale": "Em circuitos paralelos, todos os componentes estão ligados diretamente aos mesmos dois pontos (nós) da fonte, garantindo que a tensão seja constante em todos eles.", "isCorrect": true },
+                    { "text": "A soma das tensões deve ser $120\\,V$, mas o valor individual depende da resistência.", "rationale": "A soma das tensões ser igual à tensão da fonte é a regra dos circuitos em série.", "isCorrect": false },
+                    { "text": "A tensão será sempre menor que $120\\,V$ devido à perda de energia.", "rationale": "A tensão em cada ramo será igual à tensão da fonte (120 V), desconsiderando a resistência dos fios.", "isCorrect": false }
+                ],
+                "hint": "Pense na principal característica de ligação dos componentes em um circuito paralelo em relação à fonte de alimentação."
+            },
+            {
+                "questionNumber": 3,
+                "question": "Três resistores com valores de $R_1 = 10\\,\\Omega$, $R_2 = 20\\,\\Omega$ e $R_3 = 30\\,\\Omega$ são ligados em série. Qual é a Resistência Equivalente ($R_{eq}$) total do circuito?",
+                "answerOptions": [
+                    { "text": "$60\\,\\Omega$", "rationale": "Em um circuito em série, a resistência equivalente é a soma direta das resistências individuais: $10 + 20 + 30 = 60\\,\\Omega$.", "isCorrect": true },
+                    { "text": "$50\\,\\Omega$", "rationale": "Este seria o resultado da soma de $R_1 + R_2$, ignorando $R_3$.", "isCorrect": false },
+                    { "text": "$5.45\\,\\Omega$", "rationale": "Este valor é tipicamente obtido em cálculos de resistores em paralelo.", "isCorrect": false },
+                    { "text": "$3.33\\,\\Omega$", "rationale": "Este valor é o resultado de uma divisão incorreta ou o valor de $1/R_{eq}$ se estivessem em paralelo.", "isCorrect": false }
+                ],
+                "hint": "Lembre-se que a regra para calcular a Resistência Equivalente em série é a mais simples de todas."
+            },
+            {
+                "questionNumber": 4,
+                "question": "Qual é a Resistência Equivalente ($R_{eq}$) de um circuito com dois resistores em paralelo, sendo $R_1 = 6\\,\\Omega$ e $R_2 = 3\\,\\Omega$?",
+                "answerOptions": [
+                    { "text": "$9\\,\\Omega$", "rationale": "Este é o resultado da soma simples, aplicável apenas a circuitos em série.", "isCorrect": false },
+                    { "text": "$2\\,\\Omega$", "rationale": "Para dois resistores em paralelo, $R_{eq}$ é calculado por $\\frac{R_1 \\cdot R_2}{R_1 + R_2}$, resultando em $\\frac{18}{9} = 2\\,\\Omega$.", "isCorrect": true },
+                    { "text": "$18\\,\\Omega$", "rationale": "Este é o resultado da multiplicação das resistências, $\\text{R1} \\cdot \\text{R2}$.", "isCorrect": false },
+                    { "text": "$0.5\\,\\Omega$", "rationale": "Este valor é o inverso da resistência equivalente ($1/R_{eq}$).", "isCorrect": false }
+                ],
+                "hint": "A Resistência Equivalente em paralelo é sempre menor que o menor resistor individual (neste caso, $3\,\Omega$). Use a fórmula do produto pela soma."
+            },
+            {
+                "questionNumber": 5,
+                "question": "Para calcular a Resistência Equivalente total ($R_{eq}$) de um circuito misto, qual é a abordagem correta?",
+                "answerOptions": [
+                    { "text": "Calcular primeiro a corrente e depois a tensão para só então aplicar a Lei de Ohm geral.", "rationale": "Embora a Lei de Ohm seja fundamental, o cálculo de $R_{eq}$ deve vir antes do cálculo de corrente total.", "isCorrect": false },
+                    { "text": "Usar apenas a fórmula de soma simples, tratando todo o circuito como série.", "rationale": "Isto ignoraria as partes em paralelo e resultaria em um erro de cálculo.", "isCorrect": false },
+                    { "text": "Reduzir as partes em paralelo e/ou série progressivamente até restar um único resistor equivalente.", "rationale": "O circuito misto é simplificado por etapas, aplicando as regras de série e paralelo sequencialmente até obter a $R_{eq}$ total.", "isCorrect": true },
+                    { "text": "Usar apenas a fórmula de soma dos inversos, tratando todo o circuito como paralelo.", "rationale": "Isto ignoraria as partes em série e resultaria em um erro de cálculo.", "isCorrect": false }
+                ],
+                "hint": "Pense no processo de 'dobrar' o circuito para torná-lo mais simples, passo a passo."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        document.addEventListener('DOMContentLoaded', startQuiz);
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('quiz-content').classList.remove('hidden');
+            document.getElementById('results-area').classList.add('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            
+            document.getElementById('question-number').textContent = `Questão ${q.questionNumber} de ${quizData.length}`;
+            document.getElementById('question-text').innerHTML = q.question; // Use innerHTML to allow MathJax to process LaTeX
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            q.answerOptions.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.innerHTML = option.text;
+                button.className = 'option-button w-full text-left p-3 rounded-lg bg-slate-700 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 shadow-md';
+                button.onclick = () => checkAnswer(index);
+                button.setAttribute('data-index', index);
+                optionsContainer.appendChild(button);
+            });
+
+            // Reset feedback area
+            document.getElementById('feedback-area').classList.add('hidden');
+            document.getElementById('hint-button').classList.remove('hidden');
+            document.getElementById('hint-text').classList.add('hidden');
+            document.getElementById('hint-text').textContent = q.hint;
+            answered = false;
+
+            // Re-render MathJax after injecting new content
+            // MathJax.typesetPromise() ensures that all LaTeX content is processed.
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('question-area')]);
+            }
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+            
+            const q = quizData[currentQuestionIndex];
+            const selectedOption = q.answerOptions[selectedIndex];
+            const buttons = document.querySelectorAll('#options-container button');
+
+            let correctButton;
+            let selectedButton = buttons[selectedIndex];
+            
+            buttons.forEach((button, index) => {
+                button.classList.add('disabled');
+                if (q.answerOptions[index].isCorrect) {
+                    correctButton = button;
+                }
+            });
+
+            if (selectedOption.isCorrect) {
+                score++;
+                selectedButton.classList.add('correct');
+            } else {
+                selectedButton.classList.add('incorrect');
+                correctButton.classList.add('correct');
+            }
+
+            // Show feedback
+            document.getElementById('rationale-text').innerHTML = `
+                <span class="font-bold">${selectedOption.isCorrect ? 'Correto!' : 'Incorreto.'}</span> <br>
+                <span class="text-sm">Justificativa:</span> ${q.answerOptions.find(opt => opt.isCorrect).rationale}
+            `;
+            document.getElementById('feedback-area').classList.remove('hidden');
+            document.getElementById('hint-button').classList.add('hidden');
+            
+            // Re-render MathJax for the rationale text as well
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById('rationale-text')]);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showHint() {
+            document.getElementById('hint-text').classList.remove('hidden');
+        }
+
+        function showResults() {
+            document.getElementById('quiz-content').classList.add('hidden');
+            document.getElementById('results-area').classList.remove('hidden');
+            document.getElementById('final-score').textContent = `${score} / ${quizData.length}`;
+        }
+    </script>
+</body>
+</html>

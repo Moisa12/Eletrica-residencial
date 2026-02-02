@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 4</title>
+    
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        /* Cabeçalho FIXO */
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Estilo de Fórmulas */
+        .formula-box {
+            background-color: #2c3e50;
+            color: #f1c40f;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Destaques e Exercícios */
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        
+        details { background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+
+        .img-container { text-align: center; margin: 25px 0; }
+        .img-container img { max-width: 450px; width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd; }
+        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 4:</h1>
+        <div class="subtitle">Potência Elétrica e Fator de Potência</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O que é Potência Elétrica?</h2>
+        <p>
+            A potência elétrica é a medida de quanta energia um equipamento consome para realizar um trabalho em um determinado tempo. No dia a dia, ela indica a "força" de um aparelho: quanto maior a potência de um chuveiro, mais ele aquece a água. Sua unidade de medida é o <strong>Watt (W)</strong>.
+        </p>
+
+        <div class="formula-box">
+            P = V * I
+        </div>
+
+        <h2>Os Três Tipos de Potência</h2>
+        <p>Em instalações de Corrente Alternada (AC), como as nossas casas, a energia se manifesta de três formas distintas:</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de Potência</th>
+                        <th>Símbolo / Unidade</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Potência Ativa</strong></td>
+                        <td>P (Watts - W)</td>
+                        <td>É a que efetivamente realiza trabalho (gera luz, calor ou movimento).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Potência Reativa</strong></td>
+                        <td>Q (Volt-Ampere Reativo - VAr)</td>
+                        <td>Usada para criar campos magnéticos em motores e transformadores. Não gera trabalho, mas "ocupa espaço" nos fios.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Potência Aparente</strong></td>
+                        <td>S (Volt-Ampere - VA)</td>
+                        <td>É a potência total fornecida pela rede. É a soma vetorial da Ativa com a Reativa.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>O Triângulo das Potências</h2>
+        <p>
+            O Triângulo das Potências é a representação gráfica dessa relação. A Potência Aparente (S) é a hipotenusa, enquanto a Ativa (P) e a Reativa (Q) são os catetos.
+        </p>
+
+         <!-- SVG do Triângulo de Potências -->
+            <div class="flex justify-center my-6">
+		<svg width="250" height="200" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg" class="text-white">
+		    <!-- Linha P (Ativa) - Horizontal (Vermelho) -->
+		    <line x1="50" y1="150" x2="200" y2="150" stroke="#EF4444" stroke-width="4"/>
+		    <text x="125" y="175" fill="#EF4444" font-size="16" font-weight="bold" text-anchor="middle">P (Ativa, W)</text>
+		    
+		    <!-- Linha Q (Reativa) - Vertical (Roxo) -->
+		    <line x1="50" y1="150" x2="50" y2="50" stroke="#A855F7" stroke-width="4"/>
+		    <text x="40" y="100" fill="#A855F7" font-size="16" font-weight="bold" text-anchor="end" transform="rotate(-90 5,75)">Q (Reativa, VAR)</text>
+		    
+		    <!-- Linha S (Aparente) - Hipotenusa (Índigo) -->
+		    <line x1="50" y1="50" x2="200" y2="150" stroke="#4F46E5" stroke-width="4"/>
+		    <text x="145" y="80" fill="#4F46E5" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(33 130 65)">S (Aparente, VA)</text>
+
+		    <!-- Símbolo do ângulo reto -->
+		    <rect x="50" y="140" width="10" height="10" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+		    
+		    <!-- Arco cos φ CORRIGIDO: entre hipotenusa (160,150) e cateto P horizontal -->
+		    <path d="M 160 150 A 25 25 0 0 1 170 125" stroke="#10B981" fill="none" stroke-width="3"/>
+		    
+		    <!-- Letra φ grega próxima ao arco (verde para destacar cos φ) -->
+		    <text x="145" y="135" fill="#10B981" font-size="18" font-weight="bold" text-anchor="middle">φ</text>
+		</svg>
+
+            </div>
+            <!-- Fim do SVG -->
+
+        <h2>Cosseno Phi (cos φ) e o Fator de Potência</h2>
+        <p>
+            O <strong>Cosseno Phi</strong>, também conhecido como Fator de Potência, é a relação entre a potência que você realmente usa (Ativa) e a potência total que você solicita da rede (Aparente).
+        </p>
+        <div class="formula-box">
+            FP = P / S
+        </div>
+        <p>
+            Um fator de potência próximo de <strong>1.0</strong> significa que a instalação é eficiente. Um valor baixo (ex: 0.70) indica que há muita energia reativa "sobrando", o que pode causar aquecimento nos fios e multas na conta de luz.
+        </p>
+
+        <h2>Exemplos em Instalações Residenciais</h2>
+
+        <div class="example-box">
+            <h4>Exemplo 1: Dimensionamento de Tomada (VA)</h4>
+            <p>Um micro-ondas consome 1200W de potência ativa e possui um fator de potência de 0.8. Qual a potência aparente para dimensionar o fio?</p>
+            <p><strong>Cálculo:</strong> S = P / FP -> S = 1200 / 0.8</p>
+            <p><strong>Resultado:</strong> 1500 VA</p>
+            <small>*Lembre-se: Disjuntores e fios são dimensionados pela potência em VA (Aparente).</small>
+        </div>
+
+        <div class="example-box" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h4>Exemplo 2: Chuveiro Elétrico (Carga Resistiva)</h4>
+            <p>Em chuveiros, toda a energia é transformada em calor. Por isso, o fator de potência é 1. Se o chuveiro é de 5500W, qual a potência aparente?</p>
+            <p><strong>Resultado:</strong> 5500 VA (Pois P = S quando FP = 1).</p>
+        </div>
+
+        <div class="alert">
+            <strong>Dica de Ouro:</strong> Equipamentos que apenas aquecem (chuveiro, ferro de passar, lâmpada incandescente) são cargas resistivas e possuem FP = 1. Equipamentos com motores (geladeira, ar-condicionado) possuem FP menor que 1.
+        </div>
+
+        <hr>
+        <h2>Exercícios de Fixação</h2>
+        
+        <p><strong>Questão 1:</strong> Um motor de piscina tem uma potência aparente de 2000 VA e um fator de potência de 0.85. Qual a potência ativa (em Watts) que ele consome?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <p>P = S * FP -> P = 2000 * 0.85 = <strong>1700 Watts</strong>.</p>
+        </details>
+
+        <p><strong>Questão 2:</strong> Se uma instalação residencial soma 8000W de carga ativa e 10000VA de carga aparente, qual o Fator de Potência (cos φ) dessa casa?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <p>FP = P / S -> FP = 8000 / 10000 = <strong>0.8</strong>.</p>
+        </details>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 4</p>
+    </footer>
+
+</body>
+</html>

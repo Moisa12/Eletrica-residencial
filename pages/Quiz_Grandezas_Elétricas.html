@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais  | Quiz: Grandezas Elétricas</title>
+    <!-- Carrega o Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Configuration and Script -->
+    <script>
+        // Configura o MathJax para processar a notação matemática inline ($...$)
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <!-- Fim MathJax -->
+
+    <style>
+        /* Define a fonte Inter como padrão para melhor legibilidade */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Fundo escuro */
+            color: #e2e8f0; /* Texto claro */
+        }
+        .quiz-card {
+            background-color: #2d3748; /* Card de fundo cinza escuro */
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .option {
+            cursor: pointer;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+            border: 2px solid #4a5568; /* Borda cinza suave */
+        }
+        .option:hover:not(.correct):not(.incorrect) {
+            background-color: #4a5568; /* Hover mais escuro */
+        }
+        .correct {
+            background-color: #38a169; /* Verde para acerto */
+            border-color: #38a169;
+            color: #fff;
+        }
+        .incorrect {
+            background-color: #e53e3e; /* Vermelho para erro */
+            border-color: #e53e3e;
+            color: #fff;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        /* Estilo para o botão de reset/finalizar */
+        .action-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-gray-800 p-6 shadow-xl sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl font-extrabold text-indigo-400">
+                Guia em Instalações Elétricas Residenciais | Quiz: Grandezas Elétricas
+            </h1>
+            <p class="text-lg text-gray-400 mt-2">
+                Teste seus conhecimentos sobre Tensão, Corrente, Potência e Fator de Potência.
+            </p>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal do Quiz -->
+    <main class="max-w-4xl mx-auto p-4 sm:p-8">
+        
+        <div id="quiz-container">
+            <!-- As questões serão injetadas aqui pelo JavaScript -->
+        </div>
+
+        <!-- Resultados e Botão Finalizar/Resetar -->
+        <div id="results-container" class="mt-8 p-6 bg-gray-800 rounded-xl shadow-2xl text-center hidden">
+            <h3 class="text-3xl font-extrabold text-white mb-4">Quiz Finalizado!</h3>
+            <p class="text-xl text-gray-300">Sua pontuação final é:</p>
+            <p id="score-display" class="text-6xl font-black text-indigo-400 my-4">0/8</p>
+            <button id="reset-button" class="action-button bg-blue-600 hover:bg-blue-700 text-white mt-4">
+                Refazer o Quiz
+            </button>
+        </div>
+
+        <button id="submit-button" class="action-button bg-green-600 hover:bg-green-700 text-white w-full mt-8" onclick="checkAllAnswers()">
+            Verificar Todas as Respostas
+        </button>
+
+    </main>
+    
+    <!-- Rodapé -->
+    <footer class="mt-12 p-6 text-center text-gray-500 text-sm border-t border-gray-700">
+        <div class="max-w-6xl mx-auto">
+            <p>© 2026 - Guia em Instalações Elétricas Residenciais | Quiz de Grandezas Elétricas.</p>
+        </div>
+    </footer>
+    
+    <script>
+        const questions = [
+            {
+                question: "Qual grandeza elétrica é definida como a 'pressão' que impulsiona os elétrons e qual é sua unidade?",
+                options: ["Corrente (Ampere)", "Resistência (Ohm)", "Tensão (Volt)", "Potência Ativa (Watt)"],
+                answer: "Tensão (Volt)",
+                id: 1
+            },
+            {
+                question: "Um chuveiro elétrico de $5500\\ W$ é ligado em uma tensão de $220\\ V$ (DC ou carga puramente resistiva). Qual é a corrente ($I$) que ele consome? (Use $P = U \\cdot I$)",
+                options: ["$20\\ A$", "$25\\ A$", "$12.1\\ A$", "$55\\ A$"],
+                answer: "$25\\ A$",
+                id: 2
+            },
+            {
+                question: "Em um circuito AC, se a Potência Aparente ($S$) é de $1000\\ VA$ e a Potência Ativa ($P$) é de $800\\ W$, qual é o Fator de Potência ($\\text{FP}$)?",
+                options: ["$0.8$", "$1.25$", "$0.6$", "$1.0$"],
+                answer: "$0.8$",
+                id: 3
+            },
+            {
+                question: "A Potência Reativa ($Q$) é medida em qual unidade e qual sua principal função no circuito?",
+                options: [
+                    "Watt ($W$); Realiza trabalho útil",
+                    "Volt-Ampere ($VA$); É a potência total",
+                    "Volt-Ampere Reativo ($\\text{VAR}$); Cria campos magnéticos (motores)",
+                    "Ohm ($\\Omega$); Oferece oposição à corrente"
+                ],
+                answer: "Volt-Ampere Reativo ($\\text{VAR}$); Cria campos magnéticos (motores)",
+                id: 4
+            },
+            {
+                question: "Qual é a principal diferença entre Tensão Contínua (DC) e Tensão Alternada (AC)?",
+                options: [
+                    "DC é medida em Ampere e AC em Volt.",
+                    "DC é usada em indústrias e AC em residências.",
+                    "DC tem fluxo constante, AC muda de sentido periodicamente.",
+                    "AC só é gerada por painéis fotovoltaicos."
+                ],
+                answer: "DC tem fluxo constante, AC muda de sentido periodicamente.",
+                id: 5
+            },
+            {
+                question: "Segundo a Lei de Ohm ($U = R \\cdot I$), se a Resistência ($R$) de um circuito é $44\\ \\Omega$ e a Corrente ($I$) é $5\\ A$, qual é a Tensão ($U$) aplicada?",
+                options: ["$8.8\\ V$", "$220\\ V$", "$49\\ V$", "$5\\ V$"],
+                answer: "$220\\ V$",
+                id: 6
+            },
+            {
+                question: "Se o Fator de Potência ($\\text{FP}$) de uma instalação é $0.5$, isso indica que:",
+                options: [
+                    "A instalação é puramente resistiva.",
+                    "Metade da Potência Aparente está sendo convertida em trabalho útil.",
+                    "A Potência Ativa é o dobro da Potência Aparente.",
+                    "A instalação está com a eficiência máxima ($100\\%$)."
+                ],
+                answer: "Metade da Potência Aparente está sendo convertida em trabalho útil.",
+                id: 7
+            },
+            {
+                question: "Qual componente do Triângulo de Potências (P, Q, S) é a hipotenusa e representa a potência total (mas não necessariamente útil) que o gerador precisa fornecer?",
+                options: ["Potência Ativa ($P$)", "Potência Reativa ($Q$)", "Potência Média", "Potência Aparente ($S$)"],
+                answer: "Potência Aparente ($S$)",
+                id: 8
+            }
+        ];
+
+        let score = 0;
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreDisplay = document.getElementById('score-display');
+        const submitButton = document.getElementById('submit-button');
+        const resetButton = document.getElementById('reset-button');
+        
+        // Mapeia o estado de cada questão
+        let answersState = {};
+
+        // Função auxiliar para encontrar o elemento da opção de forma segura, evitando falhas no querySelector
+        // devido a caracteres especiais em atributos de dados (como LaTeX).
+        function getOptionElementByText(questionElement, optionText) {
+            let foundElement = null;
+            questionElement.querySelectorAll('.option').forEach(optionDiv => {
+                if (optionDiv.getAttribute('data-option') === optionText) {
+                    foundElement = optionDiv;
+                }
+            });
+            return foundElement;
+        }
+
+        function renderQuiz() {
+            quizContainer.innerHTML = '';
+            score = 0;
+            answersState = {};
+            resultsContainer.classList.add('hidden');
+            submitButton.classList.remove('hidden');
+
+            questions.forEach((q, index) => {
+                const qNumber = index + 1;
+                answersState[q.id] = null; // Inicializa o estado da resposta
+
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.id = `q-${q.id}`;
+
+                // Pergunta
+                const questionTitle = document.createElement('p');
+                questionTitle.className = 'text-lg font-semibold text-white mb-3';
+                questionTitle.innerHTML = `${qNumber}. ${q.question}`;
+                card.appendChild(questionTitle);
+
+                // Opções
+                q.options.forEach((optionText, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option text-gray-300';
+                    optionDiv.innerHTML = optionText;
+                    optionDiv.setAttribute('data-q-id', q.id);
+                    optionDiv.setAttribute('data-option', optionText); // Armazena a string de LaTeX
+                    
+                    optionDiv.onclick = function() {
+                        selectOption(q.id, optionText, optionDiv);
+                    };
+
+                    card.appendChild(optionDiv);
+                });
+
+                // Feedback
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback text-sm hidden';
+                feedbackDiv.id = `feedback-${q.id}`;
+                card.appendChild(feedbackDiv);
+                
+                quizContainer.appendChild(card);
+            });
+            
+            // Força o MathJax a renderizar as perguntas e opções após a injeção no DOM
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([quizContainer]);
+            }
+        }
+
+        function selectOption(qId, selectedOption, selectedDiv) {
+            const questionElement = document.getElementById(`q-${qId}`);
+            
+            // Remove a seleção de todas as opções desta pergunta
+            questionElement.querySelectorAll('.option').forEach(div => {
+                div.classList.remove('bg-blue-500/50', 'border-blue-500');
+            });
+
+            // Adiciona a classe de seleção à opção clicada
+            selectedDiv.classList.add('bg-blue-500/50', 'border-blue-500');
+            
+            answersState[qId] = selectedOption;
+        }
+
+        function checkAllAnswers() {
+            score = 0;
+            let allAnswered = true;
+            let feedbacksToTypeset = [];
+
+            questions.forEach(q => {
+                const questionElement = document.getElementById(`q-${q.id}`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const selectedOption = answersState[q.id];
+                
+                // Desabilitar cliques e limpar estados de seleção temporários
+                questionElement.querySelectorAll('.option').forEach(div => {
+                    div.onclick = null; // Desabilita o clique
+                    div.classList.remove('bg-blue-500/50', 'border-blue-500'); // Limpa a seleção temporária
+                    div.classList.remove('correct', 'incorrect');
+                });
+
+                if (selectedOption === null) {
+                    allAnswered = false;
+                    return; 
+                }
+                
+                // Usa a função auxiliar para encontrar o elemento correto (Corrige o TypeError)
+                const correctAnswerElement = getOptionElementByText(questionElement, q.answer);
+                const selectedOptionElement = getOptionElementByText(questionElement, selectedOption);
+                
+                if (!correctAnswerElement || !selectedOptionElement) {
+                    console.error("Erro: Elemento de opção não encontrado. Verifique a consistência dos dados.");
+                    return; 
+                }
+
+                // Verifica a resposta
+                if (selectedOption === q.answer) {
+                    score++;
+                    feedbackDiv.classList.remove('hidden');
+                    feedbackDiv.classList.add('text-green-400');
+                    feedbackDiv.innerHTML = "Parabéns! Resposta correta.";
+                    
+                    // Marca a opção correta
+                    correctAnswerElement.classList.add('correct');
+                } else {
+                    feedbackDiv.classList.remove('hidden');
+                    feedbackDiv.classList.add('text-red-400');
+                    // A resposta correta tem notação LaTeX (ex: $25\ A$)
+                    feedbackDiv.innerHTML = `Resposta incorreta. A resposta correta é: <span class="text-green-400">${q.answer}</span>.`;
+                    
+                    // Marca a opção selecionada incorretamente e a correta
+                    selectedOptionElement.classList.add('incorrect');
+                    correctAnswerElement.classList.add('correct');
+                    
+                    feedbacksToTypeset.push(feedbackDiv);
+                }
+            });
+
+            if (!allAnswered) {
+                // Alerta se nem todas as questões foram respondidas
+                // Nota: Usando alert(), pois o uso de modais customizados não foi solicitado.
+                alert("Por favor, responda a todas as 8 questões antes de verificar.");
+                questions.forEach(q => {
+                    // Se não foi respondido, reabilita o clique
+                    if (answersState[q.id] === null) {
+                        document.getElementById(`q-${q.id}`).querySelectorAll('.option').forEach(div => {
+                            div.onclick = function() {
+                                selectOption(q.id, div.getAttribute('data-option'), div);
+                            };
+                        });
+                    }
+                });
+                return;
+            }
+            
+            // Força o MathJax a renderizar o conteúdo LaTeX nos feedbacks (respostas corretas)
+            if (typeof MathJax !== 'undefined' && feedbacksToTypeset.length > 0) {
+                 MathJax.typesetPromise(feedbacksToTypeset);
+            }
+
+            // Exibe os resultados
+            submitButton.classList.add('hidden');
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            resultsContainer.classList.remove('hidden');
+        }
+
+        resetButton.onclick = renderQuiz;
+
+        // Inicializa o quiz ao carregar
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+</body>
+</html>

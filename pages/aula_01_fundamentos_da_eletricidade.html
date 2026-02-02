@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 1</title>
+    
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; /* Espaço para o cabeçalho fixo */
+        }
+
+        /* Cabeçalho FIXO */
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+         }
+        .logo-header {
+            position: absolute;
+            bottom: 10px;  /* Distância do fundo do cabeçalho */
+            right: 20px;   /* Distância da borda direita */
+            height: 50px;  /* Ajuste o tamanho conforme sua necessidade */
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        
+        .subtitle {
+        font-size: 1rem;
+        font-weight: normal;
+        color: #f1c40f;
+        margin-top: 5px;
+    }
+
+        /* Container Principal */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        /* Títulos e Parágrafos */
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Estilo de Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #2c3e50; color: #fff; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Estilo das Imagens (Ajuste de tamanho aqui) */
+        .img-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .img-container img {
+            max-width: 350px; /* Altere este valor para diminuir ou aumentar a imagem */
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+
+        /* Rodapé */
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 40px;
+            width: 100%; /* Garante que ele ocupe toda a largura para poder centralizar */
+        }
+        footer p {
+            margin: 0;
+            text-align: center; /* Reforça a centralização para a tag P */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 1: Fundamentos em Eletricidade. </h1>
+        <div class="subtitle">O Princípio, Átomos, e Materiais Elétricos</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O Princípio da Eletricidade</h2>
+        <p>
+            A eletricidade surge da movimentação de cargas elétricas. Nas residências, essa energia percorre condutores para alimentar aparelhos e iluminação.
+        </p>
+
+        <h2>Os Átomos e Elétrons</h2>
+        <p>
+            Tudo é formado por átomos. No centro temos o núcleo, e ao redor orbitam os <strong>elétrons</strong>. Materiais que permitem o movimento desses elétrons são fundamentais para a elétrica.
+        </p>
+        
+        <div class="img-container">
+            <img src="../images/atomo.png" alt="Estrutura do Átomo">
+            <p class="caption">Figura 1: Representação de um átomo e seus elétrons.</p>
+        </div>
+
+        <h2>Materiais Condutores e Isolantes</h2>
+        <p>
+            A <strong>resistividade (ρ)</strong> define se um material ajuda ou atrapalha a passagem da corrente.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Classificação</th>
+                        <th>Material</th>
+                        <th>Resistividade (ρ) em Ω·m</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="4"><strong>Condutores</strong></td>
+                        <td>Prata</td>
+                        <td>1,59 x 10<sup>-8</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Cobre</td>
+                        <td>1,72 x 10<sup>-8</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Ouro</td>
+                        <td>2,44 x 10<sup>-8</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Alumínio</td>
+                        <td>2,82 x 10<sup>-8</sup></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><strong>Isolantes</strong></td>
+                        <td>Vidro</td>
+                        <td>10<sup>10</sup> a 10<sup>14</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Borracha</td>
+                        <td>10<sup>13</sup></td>
+                    </tr>
+                    <tr>
+                        <td>Cerâmica</td>
+                        <td>10<sup>14</sup></td>
+                    </tr>
+                    <tr>
+                        <td>PVC</td>
+                        <td>10<sup>14</sup></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="img-container">
+            <img src="../images/cabo.jpg" alt="Cabo Elétrico">
+            <p class="caption">Figura 2: Cabo de cobre com isolação em PVC.</p>
+        </div>
+        
+        <h2>Dica Prática: Por que usamos Cobre?</h2>
+        <p>
+            Ao observar nossa tabela de resistividade, vemos que a <strong>Prata</strong> é o melhor condutor que existe. No entanto, usamos o <strong>Cobre</strong> nas instalações residenciais por um equilíbrio entre excelente condução e custo acessível. O alumínio é usado apenas em casos específicos (como redes de alta tensão na rua) por ser mais leve e barato, apesar de ter maior resistividade que o cobre.
+        </p>
+
+        <div class="alert" style="background-color: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 20px 0;">
+            <strong>Analogia para facilitar:</strong> Pense na eletricidade como uma rodovia. Os <strong>Condutores</strong> são estradas asfaltadas e livres. Os <strong>Isolantes</strong> são como grandes bloqueios ou muros que impedem os carros (elétrons) de seguir caminho.
+        </div>
+    </div>
+    
+    
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | aula 1</p>
+    </footer>
+
+</body>
+</html>

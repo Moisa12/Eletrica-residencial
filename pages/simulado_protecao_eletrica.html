@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Técnico: Disjuntores, DR e DPS</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f7; padding: 20px; color: #333; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { color: #1a5276; text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 15px; margin-bottom: 30px; }
+        .question { margin-bottom: 35px; padding: 20px; border-left: 5px solid #3498db; background: #f9f9f9; border-radius: 0 8px 8px 0; }
+        .options { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+        button { width: 100%; text-align: left; padding: 14px; border: 1px solid #ccc; border-radius: 6px; background: #fff; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+        button:hover:not([disabled]) { background: #ebf5fb; border-color: #3498db; transform: translateX(5px); }
+        .correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; font-weight: bold; }
+        .wrong { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+        .feedback { display: none; margin-top: 15px; padding: 15px; border-radius: 6px; font-weight: 500; border: 1px solid transparent; }
+        .btn-reset { display: block; margin: 30px auto; padding: 12px 25px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        /* Estilos da Pontuação */
+        .score-board {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1a5276;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            z-index: 1000;
+        }
+        #final-result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #f1f9ff;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .score-board { position: static; text-align: center; margin-bottom: 20px; width: 100%; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="score-board">
+    Acertos: <span id="current-score">0</span> / 10
+</div>
+
+<div class="container">
+    <h1>⚡ Simulado de Proteção Elétrica</h1>
+    <p style="text-align: center; margin-bottom: 40px;">Selecione uma das 4 opções para cada questão.</p>
+
+    <div id="quiz-container"></div>
+
+    <div id="final-result">
+        <h2 id="result-message"></h2>
+        <p id="result-score-text"></p>
+    </div>
+    
+    <button class="btn-reset" onclick="location.reload()">Reiniciar Questionário</button>
+</div>
+
+<script>
+let score = 0;
+let answeredQuestions = 0;
+
+const questions = [
+    {
+        q: "1. O disjuntor termomagnético protege o circuito contra quais fenômenos?",
+        options: [
+            { text: "Apenas contra choques elétricos por contato direto.", correct: false, reason: "Incorreto. Essa é a função do DR." },
+            { text: "Sobrecargas de longa duração e curtos-circuitos.", correct: true, reason: "Correto! O elemento térmico cuida da sobrecarga e o magnético do curto-circuito." },
+            { text: "Picos de tensão causados por raios na rede externa.", correct: false, reason: "Incorreto. Proteção contra surtos de tensão é papel do DPS." },
+            { text: "Fugas de corrente para a carcaça de equipamentos.", correct: false, reason: "Incorreto. Fugas de corrente são detectadas pelo DR." }
+        ]
+    },
+    {
+        q: "2. Qual a principal diferença entre um IDR e um disjuntor comum?",
+        options: [
+            { text: "O IDR aguenta mais carga que o disjuntor comum.", correct: false, reason: "Incorreto. São dispositivos com funções de proteção diferentes." },
+            { text: "O IDR protege os equipamentos e o disjuntor protege as pessoas.", correct: false, reason: "Incorreto. É o contrário: o IDR foca em pessoas e o disjuntor nos cabos." },
+            { text: "O IDR desarma ao detectar fuga de corrente, o disjuntor não.", correct: true, reason: "Correto! O IDR monitora o equilíbrio entre fase e neutro." },
+            { text: "O disjuntor precisa de aterramento para funcionar, o IDR não.", correct: false, reason: "Incorreto. Na verdade, o IDR é mais eficiente quando há aterramento." }
+        ]
+    },
+    {
+        q: "3. Na instalação de um DPS, o que o cabo de saída deve encontrar obrigatoriamente?",
+        options: [
+            { text: "O barramento de neutro da concessionária.", correct: false, reason: "Incorreto. O destino final do surto deve ser o terra." },
+            { text: "O disjuntor diferencial residual (IDR).", correct: false, reason: "Incorreto. O DPS deve ser ligado antes do IDR ou em paralelo." },
+            { text: "Um eletrodo de aterramento (Barramento PE).", correct: true, reason: "Correto! O DPS funciona 'escoando' o surto para o solo através do terra." },
+            { text: "A carcaça metálica do quadro de distribuição apenas.", correct: false, reason: "Incorreto. A carcaça deve estar aterrada para que isso funcione." }
+        ]
+    },
+    {
+        q: "4. Em um sistema Bifásico + Neutro, qual a configuração mínima de DPS Classe II?",
+        options: [
+            { text: "Apenas 1 DPS ligado entre as duas fases.", correct: false, reason: "Incorreto. Cada fase precisa de um caminho individual para o terra." },
+            { text: "2 DPS (um para cada fase) ligados ao barramento de terra.", correct: true, reason: "Correto! Em sistemas TN-S, protege-se as fases. No TT, adiciona-se o neutro." },
+            { text: "3 DPS ligados em série um com o outro.", correct: false, reason: "Incorreto. DPS devem ser instalados em paralelo com a carga." },
+            { text: "Nenhum, pois sistemas bifásicos são auto-protegidos.", correct: false, reason: "Incorreto. Surtos podem atingir qualquer condutor vivo." }
+        ]
+    },
+    {
+        q: "5. Se o visor do DPS está 'Verde', mas ocorreu um raio e os aparelhos queimaram, por que?",
+        options: [
+            { text: "O DPS está com defeito de fábrica.", correct: false, reason: "Improvável. Existem outras razões técnicas mais comuns." },
+            { text: "O cabo de aterramento do DPS era muito longo ou deu voltas.", correct: true, reason: "Correto! Cabos longos (>50cm) criam indutância que impede o DPS de atuar rápido." },
+            { text: "O visor verde significa que ele já está queimado.", correct: false, reason: "Incorreto. Verde indica que o componente interno está íntegro." },
+            { text: "O DPS Classe II não protege contra raios de forma alguma.", correct: false, reason: "Incorreto. Ele protege contra os efeitos secundários (surtos) dos raios." }
+        ]
+    },
+    {
+        q: "6. Por que o IDR de 30mA é chamado de 'proteção de alta sensibilidade'?",
+        options: [
+            { text: "Porque ele desarma com qualquer variação de voltagem.", correct: false, reason: "Incorreto. Ele é sensível à corrente (Amperes), não à voltagem." },
+            { text: "Porque 30mA é o limite antes da corrente causar parada cardíaca.", correct: true, reason: "Correto! Esse valor é projetado para salvar vidas humanas." },
+            { text: "Porque ele detecta curtos-circuitos muito pequenos.", correct: false, reason: "Incorreto. Curtos geram correntes altíssimas, muito maiores que 30mA." },
+            { text: "Porque ele reage em menos de 1 microsegundo.", correct: false, reason: "Incorreto. O tempo de resposta é rápido, mas medido em milissegundos." }
+        ]
+    },
+    {
+        q: "7. O que acontece se ligarmos o Neutro no barramento de Terra após o IDR?",
+        options: [
+            { text: "O sistema fica duplamente protegido.", correct: false, reason: "Incorreto. Isso cria um erro de leitura no IDR." },
+            { text: "O IDR vai desarmar constantemente (falso positivo).", correct: true, reason: "Correto! O IDR entenderá que parte da corrente está 'fugindo' pelo terra." },
+            { text: "Os aparelhos vão queimar por sobretensão.", correct: false, reason: "Incorreto. Isso causa apenas o desligamento do circuito pelo IDR." },
+            { text: "O disjuntor geral vai desarmar por curto-circuito.", correct: false, reason: "Incorreto. É uma fuga de corrente, não necessariamente um curto." }
+        ]
+    },
+    {
+        q: "8. Qual a função da coordenação entre Classe I e Classe II em DPS?",
+        options: [
+            { text: "Fazer o quadro de luz ficar mais organizado.", correct: false, reason: "A organização é estética, a coordenação é técnica." },
+            { text: "Reduzir o custo da instalação elétrica.", correct: false, reason: "Usar dois tipos de DPS geralmente aumenta o custo inicial." },
+            { text: "Drenar a energia em estágios, da entrada bruta até o quadro final.", correct: true, reason: "Correto! A Classe I segura o 'grosso' e a Classe II faz o ajuste fino." },
+            { text: "Permitir que a energia solar funcione à noite.", correct: false, reason: "Incorreto. Não há relação direta com a geração solar noturna." }
+        ]
+    },
+    {
+        q: "9. Em qual situação o uso do DR é dispensável segundo a NBR 5410?",
+        options: [
+            { text: "Em tomadas de banheiros e áreas de serviço.", correct: false, reason: "Incorreto. Nesses locais o DR é obrigatório." },
+            { text: "Em circuitos de iluminação localizados em áreas secas.", correct: true, reason: "Correto! Embora recomendado, a obrigatoriedade é maior em áreas úmidas e externas." },
+            { text: "Em qualquer tomada que alimente um computador.", correct: false, reason: "Incorreto. Tomadas de uso geral devem ter proteção DR se acessíveis." },
+            { text: "Nunca. O DR é obrigatório em 100% dos circuitos de uma casa.", correct: false, reason: "Incorreto. A norma especifica os locais obrigatórios (áreas úmidas/externas)." }
+        ]
+    },
+    {
+        q: "10. Qual a seção mínima do cabo para aterramento de um DPS Classe II?",
+        options: [
+            { text: "1.5 mm² (mesmo que iluminação).", correct: false, reason: "Incorreto. Muito fino para suportar a energia de um surto." },
+            { text: "4 mm² ou acompanhando a fase (mínimo conforme norma).", correct: true, reason: "Correto! Deve ter robustez para conduzir a descarga sem derreter." },
+            { text: "Não precisa de cabo, pode ser fixado com fita isolante.", correct: false, reason: "Incorreto. Conexões elétricas devem ser feitas com condutores e bornes." },
+            { text: "Cabo de rede (UTP) categoria 6.", correct: false, reason: "Incorreto. Cabos de dados não servem para potência ou aterramento." }
+        ]
+    }
+];
+
+const container = document.getElementById('quiz-container');
+
+questions.forEach((q, qIndex) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    qDiv.innerHTML = `<h3>${q.q}</h3><ul class="options" id="options-${qIndex}"></ul><div class="feedback" id="feedback-${qIndex}"></div>`;
+    container.appendChild(qDiv);
+
+    const optionsUl = document.getElementById(`options-${qIndex}`);
+    q.options.forEach((opt, oIndex) => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.innerText = opt.text;
+        btn.onclick = () => checkAnswer(qIndex, oIndex, btn);
+        li.appendChild(btn);
+        optionsUl.appendChild(li);
+    });
+});
+
+function checkAnswer(qIdx, oIdx, btn) {
+    const feedback = document.getElementById(`feedback-${qIdx}`);
+    const option = questions[qIdx].options[oIdx];
+    const buttons = document.querySelectorAll(`#options-${qIdx} button`);
+    
+    buttons.forEach(b => { b.disabled = true; });
+    answeredQuestions++;
+
+    if(option.correct) {
+        score++;
+        btn.classList.add('correct');
+        feedback.style.display = 'block';
+        feedback.style.backgroundColor = '#d4edda';
+        feedback.style.borderColor = '#28a745';
+        feedback.innerHTML = "🎯 <strong>ACERTOU!</strong> " + option.reason;
+    } else {
+        btn.classList.add('wrong');
+        feedback.style.display = 'block';
+        feedback.style.backgroundColor = '#f8d7da';
+        feedback.style.borderColor = '#dc3545';
+        feedback.innerHTML = "❌ <strong>ERRADO.</strong> " + option.reason;
+        
+        questions[qIdx].options.forEach((opt, i) => {
+            if(opt.correct) buttons[i].classList.add('correct');
+        });
+    }
+
+    document.getElementById('current-score').innerText = score;
+
+    if(answeredQuestions === questions.length) {
+        showFinalResult();
+    }
+}
+
+function showFinalResult() {
+    const finalDiv = document.getElementById('final-result');
+    const msg = document.getElementById('result-message');
+    const scoreTxt = document.getElementById('result-score-text');
+    
+    finalDiv.style.display = 'block';
+    scoreTxt.innerText = `Você acertou ${score} de ${questions.length} questões.`;
+
+    if(score >= 8) {
+        msg.innerText = "🏆 Excelente! Você é um mestre da proteção elétrica!";
+        msg.style.color = "#28a745";
+    } else if (score >= 5) {
+        msg.innerText = "👍 Bom trabalho! Mas ainda pode revisar alguns conceitos.";
+        msg.style.color = "#f39c12";
+    } else {
+        msg.innerText = "📚 Precisa estudar mais! Revise as normas NBR 5410.";
+        msg.style.color = "#dc3545";
+    }
+    
+    finalDiv.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

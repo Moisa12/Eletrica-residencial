@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 11</title>
+    
+    <style>
+        /* Estilos Globais mantidos para consistência */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        
+        .img-container { text-align: center; margin: 25px 0; }
+        .img-container img { max-width: 600px; width: 100%; height: auto; border-radius: 8px; }
+        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; }
+        footer p {text-align: center; /* Garante que o parágrafo interno também centralize */
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 11:</h1>
+        <div class="subtitle">Geração, Transmissão e Distribuição de Energia</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O Caminho da Energia: Da Usina até a sua Tomada</h2>
+        <p>
+            Você já parou para pensar de onde vem a energia que acende a luz da sua sala? Ela percorre milhares de quilômetros através de um sistema complexo e interconectado. No Brasil, esse sistema é um dos maiores do mundo.
+        </p>
+
+        
+
+        <h2>1. Geração de Energia no Brasil</h2>
+        <p>
+            A matriz elétrica brasileira é majoritariamente <strong>renovável</strong>. A maior parte da nossa energia vem da força das águas (hidrelétricas), mas temos crescido muito em energia eólica e solar.
+        </p>
+        
+        <h3>Principais Usinas Geradoras:</h3>
+        <ul>
+            <li><strong>Itaipu Binacional (PR):</strong> Uma das maiores do mundo, essencial para o suprimento nacional.</li>
+            <li><strong>Belo Monte (PA):</strong> Localizada no Rio Xingu, é a maior usina 100% brasileira.</li>
+            <li><strong>Complexos Eólicos (Nordeste):</strong> O Brasil é um dos líderes mundiais em geração pelos ventos.</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Curiosidade:</strong> Nas usinas, a energia é gerada em tensões relativamente baixas (entre 13kV e 25kV). Para ser transportada, ela precisa passar por transformadores "elevadores".
+        </div>
+
+        <hr>
+
+        <h2>2. Transmissão: As "Autoestradas" da Energia</h2>
+        <p>
+            Após ser gerada, a energia precisa viajar por longas distâncias. Para evitar perdas de energia por calor (Efeito Joule), a tensão é elevada para níveis altíssimos.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nível de Tensão</th>
+                        <th>Classificação</th>
+                        <th>Utilização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>230kV, 440kV, 500kV ou 750kV</strong></td>
+                        <td>Extra-Alta Tensão</td>
+                        <td>Linhas de transmissão de longa distância (torres grandes).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>69kV até 138kV</strong></td>
+                        <td>Alta Tensão</td>
+                        <td>Subtransmissão, alimentando indústrias e subestações urbanas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><strong>Por que subir a tensão?</strong> Quanto maior a tensão ($V$), menor a corrente ($I$) para a mesma potência. Menos corrente significa que podemos usar cabos menos grossos e perdemos menos energia no caminho.</p>
+
+        <hr>
+
+        <h2>3. Distribuição: O Trecho Final</h2>
+        <p>
+            A <strong>Distribuidora</strong> (como Enel, Light, Copel, CPFL, etc.) é quem recebe a energia das transmissoras em subestações de abaixamento e a leva até as ruas e residências.
+        </p>
+
+        <h3>Finalidade da Distribuidora:</h3>
+        <ul>
+            <li>Reduzir a tensão para níveis seguros de uso urbano.</li>
+            <li>Manter a rede de postes, transformadores de rua e medidores.</li>
+            <li>Realizar o faturamento e atendimento ao consumidor.</li>
+        </ul>
+
+        <div class="alert">
+            <strong>Nível de Tensão na Distribuição:</strong> Nos postes de rua (Média Tensão), a energia costuma circular em <strong>13,8kV (13.800 Volts)</strong>. Aqueles transformadores no topo dos postes baixam esse valor para o consumo final (127V/220V).
+        </div>
+
+        <hr>
+
+        <h2>De onde surgem o Neutro e a Fase?</h2>
+        <p>
+            Esta é a dúvida mais comum! A energia chega ao transformador da sua rua em 3 fios (Trifásico em Alta Tensão). O transformador faz uma ligação chamada <strong>Estrela</strong>.
+        </p>
+
+        
+
+        <h3>O Surgimento do Neutro:</h3>
+        <p>
+            No centro da ligação "Estrela" do transformador, os três enrolamentos se encontram. Esse ponto central é aterrado na terra física. <strong>Deste ponto de união aterrado, surge o cabo NEUTRO.</strong>
+        </p>
+        
+        <h3>O Surgimento da Fase:</h3>
+        <p>
+            Cada uma das extremidades dos enrolamentos do transformador que não são o centro formam as <strong>FASES</strong> (comumente chamadas de Fase A, B e C).
+        </p>
+
+        <div class="example-box">
+            <h4>No seu Padrão de Entrada:</h4>
+            <ul>
+                <li><strong>Ligação Monofásica:</strong> Chega 1 Fase + 1 Neutro.</li>
+                <li><strong>Ligação Bifásica:</strong> Chegam 2 Fases + 1 Neutro.</li>
+                <li><strong>Ligação Trifásica:</strong> Chegam 3 Fases + 1 Neutro.</li>
+            </ul>
+            <p>O <strong>Cabo de Proteção (Terra)</strong> não vem da rua! Ele é criado dentro da sua propriedade através de hastes de aterramento fincadas no solo, conectadas ao seu quadro.</p>
+        </div>
+        
+        <div class="img-container">
+    	<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px; background: #fff; border-radius: 8px; border: 1px solid #eee;">
+        <g stroke-width="3" fill="none">
+            <path d="M 200 150 L 200 50" stroke="#e74c3c" />
+            <path d="M 200 150 L 113 200" stroke="#2980b9" />
+            <path d="M 200 150 L 287 200" stroke="#f39c12" />
+        </g>
+
+        <circle cx="200" cy="150" r="6" fill="#2c3e50" />
+        
+        <path d="M 200 150 L 200 240" stroke="#27ae60" stroke-width="3" stroke-dasharray="5,2" />
+        <line x1="180" y1="240" x2="220" y2="240" stroke="#27ae60" stroke-width="2" />
+        <line x1="185" y1="247" x2="215" y2="247" stroke="#27ae60" stroke-width="2" />
+        <line x1="192" y1="254" x2="208" y2="254" stroke="#27ae60" stroke-width="2" />
+
+        <text x="210" y="55" font-family="Arial" font-size="14" font-weight="bold" fill="#e74c3c">Fase A</text>
+        <text x="55" y="210" font-family="Arial" font-size="14" font-weight="bold" fill="#2980b9">Fase B</text>
+        <text x="295" y="210" font-family="Arial" font-size="14" font-weight="bold" fill="#f39c12">Fase C</text>
+        <text x="210" y="145" font-family="Arial" font-size="12" font-weight="bold" fill="#2c3e50">Centro (Neutro)</text>
+        <text x="210" y="270" font-family="Arial" font-size="12" font-style="italic" fill="#27ae60">Aterramento do Neutro</text>
+        
+        <path d="M 200 170 L 350 170" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)" />
+        <text x="310" y="165" font-family="Arial" font-size="12" font-weight="bold" fill="#27ae60">NEUTRO</text>
+
+        <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#27ae60" />
+            </marker>
+        </defs>
+    	</svg>
+    	<p class="caption">Esquema de ligação Estrela (Y): O Neutro nasce da união das três fases e é aterrado na subestação.</p>
+	</div>
+	
+	<hr>
+
+        <h2>Identificação de Condutores (Cores dos Cabos)</h2>
+        <p>
+            Para garantir a segurança e facilitar a manutenção, a norma <strong>NBR 5410</strong> estabelece um padrão de cores obrigatório para os condutores. Ao abrir um padrão de entrada ou um quadro de distribuição, você deve identificar os cabos seguindo esta lógica:
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Função do Cabo</th>
+                        <th>Cor da Isolação</th>
+                        <th>Descrição Técnica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Neutro</strong></td>
+                        <td style="background-color: #3498db; color: white; text-align: center; font-weight: bold;">AZUL CLARO</td>
+                        <td>Condutor que vem do centro da "estrela" do transformador.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proteção (Terra)</strong></td>
+                        <td style="background-color: #27ae60; color: white; text-align: center; font-weight: bold;">VERDE ou VERDE-AMARELO</td>
+                        <td>Destinado à proteção contra choques elétricos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase</strong></td>
+                        <td style="background-color: #2c3e50; color: white; text-align: center; font-weight: bold;">PRETO, VERMELHO ou MARROM</td>
+                        <td>Qualquer cor, exceto azul, verde ou verde-amarelo.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert" style="background-color: #fffde7; border-left: 5px solid #fbc02d;">
+            <strong>⚠️ Regra de Ouro:</strong> Nunca utilize um cabo azul para fase ou um cabo verde para neutro. Seguir o padrão de cores evita acidentes fatais durante futuras manutenções por outros eletricistas.
+        </div>
+
+        <div class="example-box">
+            <h4>Resumo da Aula 11: O Checklist do Padrão</h4>
+            <ol>
+                <li>A energia é <strong>Gerada</strong> (Hidrelétricas/Eólicas).</li>
+                <li>É <strong>Transmitida</strong> em altíssima tensão (torres altas).</li>
+                <li>A <strong>Distribuidora</strong> baixa a tensão no transformador do poste.</li>
+                <li>No transformador, as 3 fases se unem no centro (Estrela) para criar o <strong>Neutro</strong>.</li>
+                <li>Na sua casa, o <strong>Neutro (Azul)</strong> e a <strong>Fase (Preto/Vermelho)</strong> chegam no medidor.</li>
+            </ol>
+        </div>
+        
+        <hr>
+
+        <h2>O Padrão de Entrada (O Ponto de Entrega)</h2>
+        <p>
+            O Padrão de Entrada é o conjunto de instalações composto por caixa de medição, condutos, cabos e acessório de fixação. É através dele que a energia da rede da distribuidora entra na sua residência. 
+        </p>
+
+        <div class="img-container">
+    <img src="../images/padrao-entrada.jpg" alt="Esquema de Padrão de Entrada" title="Padrão de Entrada Típico">
+    
+    <p class="caption">Esquema típico de um Padrão de Entrada: Conexão entre a rede da rua e a instalação interna.</p>
+</div>
+
+        <h3>Componentes Principais do Padrão:</h3>
+        <ul>
+            <li><strong>Ramal de Ligação:</strong> Cabos que conectam o poste da rede da rua até o seu ponto de fixação.</li>
+            <li><strong>Caixa de Medição:</strong> Onde fica o "relógio" (medidor) da concessionária.</li>
+            <li><strong>Disjuntor de Proteção Geral:</strong> Protege toda a instalação e limita a potência máxima que você pode usar.</li>
+            <li><strong>Haste de Aterramento:</strong> Item obrigatório no padrão. É aqui que o Neutro da rua é novamente aterrado e onde nasce o sistema de aterramento da casa.</li>
+        </ul>
+
+        <div class="table-container">
+            <h3 style="text-align: center;">Tipos de Fornecimento</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Cargas Comuns</th>
+                        <th>Condutores no Padrão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Monofásico</strong></td>
+                        <td>Casas pequenas, pouca iluminação e tomadas.</td>
+                        <td>1 Fase + 1 Neutro</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bifásico</strong></td>
+                        <td>Residências com chuveiro elétrico e ar-condicionado.</td>
+                        <td>2 Fases + 1 Neutro</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trifásico</strong></td>
+                        <td>Residências grandes, comércios ou motores potentes.</td>
+                        <td>3 Fases + 1 Neutro</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert" style="background-color: #e8f4fd; border-left: 5px solid #2980b9;">
+            <strong>Importante:</strong> Cada distribuidora (Enel, CPFL, Light) possui seu próprio manual técnico (chamado de <strong>RIC</strong> ou <strong>NOR</strong>). Antes de montar o padrão, o eletricista deve consultar as normas da concessionária local para saber as dimensões exatas da caixa e a bitola dos cabos.
+        </div>
+
+        <div class="example-box" style="border-left-color: #e74c3c;">
+            <strong>O que acontece após o Padrão?</strong>
+            <p>Do medidor, os cabos seguem pelo <strong>Ramal de Entrada</strong> até chegar ao seu <strong>Quadro de Distribuição (QD)</strong> dentro de casa. É no QD que a energia será dividida para as lâmpadas e tomadas que estudamos nas aulas anteriores.</p>
+        </div>
+
+        <hr>
+
+        <h2>Exercícios de Fixação - Aula 11</h2>
+
+        <p><strong>Questão 1:</strong> Por que a energia elétrica é transmitida em Extra-Alta Tensão (ex: 500.000 Volts) se as nossas casas usam apenas 127V ou 220V?</p>
+
+        <details>
+            <summary>Ver resposta e explicação</summary>
+            <div class="example-box">
+                <p><strong>Resposta:</strong> Para reduzir as perdas de energia. Ao aumentar a tensão, a corrente elétrica diminui. Com menos corrente, há menos aquecimento nos cabos (Efeito Joule) e é possível utilizar condutores mais leves para transportar grandes potências por milhares de quilômetros.</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 2:</strong> Qual a origem do cabo Neutro no sistema de distribuição?</p>
+
+        <details>
+            <summary>Ver resposta e explicação</summary>
+            <div class="example-box">
+                <p><strong>Resposta:</strong> O cabo neutro surge no centro da ligação tipo "Estrela" do transformador de distribuição (aquele que fica no poste). Esse ponto central é conectado à terra, tornando-se a referência de 0 volts do sistema.</p>
+            </div>
+        </details>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 11</p>
+    </footer>
+
+</body>
+</html>

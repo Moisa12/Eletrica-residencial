@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 3</title>
+    <style>
+        /* Mantendo os estilos das aulas anteriores para padronização */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 120px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+         }
+        .logo-header {
+            position: absolute;
+            bottom: 10px;  /* Distância do fundo do cabeçalho */
+            right: 20px;   /* Distância da borda direita */
+            height: 50px;  /* Ajuste o tamanho conforme sua necessidade */
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.5rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #e67e22; }
+
+        .alert {
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 5px solid #f1c40f;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .type-box { display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
+        .type-card { 
+            flex: 1; 
+            min-width: 250px;
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            background-color: #fcfcfc; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .example-box {
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .formula-box {
+            background-color: #2c3e50; /* Cor de fundo escura para fórmulas */
+            color: #f1c40f; /* Cor amarela para o texto da fórmula */
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem; /* Aumentado para melhor visualização */
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 40px;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* Estilos para a nova tabela de comparação */
+        .table-comparison {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        .table-comparison th, .table-comparison td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .table-comparison th {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+        }
+        .table-comparison tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 3:</h1>
+        <div class="subtitle">Circuitos Elétricos: Série, Paralelo e Misto</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O que são Circuitos Elétricos?</h2>
+        <p>Um circuito elétrico é um caminho fechado por onde a corrente elétrica pode fluir para realizar um trabalho (como acender uma lâmpada ou girar um motor). Para que o circuito funcione, ele precisa de componentes fundamentais conectados entre si.</p>
+        
+        <div class="alert">
+            <strong>Componentes Principais:</strong>
+            <ul>
+                <li><strong>Fonte (Gerador):</strong> Fornece a tensão (Ex: Bateria, tomada).</li>
+                <li><strong>Condutores:</strong> Caminho para os elétrons (Ex: Fios de cobre).</li>
+                <li><strong>Carga (Receptor):</strong> Transforma energia elétrica em outra forma (Ex: Lâmpada, chuveiro).</li>
+                <li><strong>Dispositivo de Manobra:</strong> Controla o fluxo (Ex: Interruptor).</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+    		<img src="../images/circuito-basico.png" alt="Diagrama de um circuito elétrico fundamental" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    		<p style="font-size: 0.9rem; color: #666;"><em>Figura 1: Representação de um circuito elétrico com fonte, condutores, interruptor e cargas.</em></p>
+	</div>
+
+        <p>Entender como esses componentes são organizados é o que define o comportamento da instalação. A escolha correta entre circuito série ou paralelo garante que os aparelhos recebam a tensão correta e que a segurança do imóvel seja preservada.</p>
+
+        <h2>1. Circuito em Série</h2>
+        <p>Neste tipo de circuito, os componentes estão ligados um após o outro, formando um <strong>caminho único</strong> para a corrente elétrica. A mesma corrente passa por todas as cargas. Se um componente falhar ou for removido, o circuito é interrompido e todos os demais param de funcionar.</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="../images/circuito-serie.png" alt="Diagrama de um circuito elétrico em série com três lâmpadas" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <p style="font-size: 0.9rem; color: #666;"><em>Figura 2: Diagrama de um circuito em série.</em></p>
+        </div>
+
+        <h3>Cálculo da Resistência Equivalente em Série (R<sub>eq</sub>)</h3>
+        <p>A resistência total (ou equivalente) em um circuito em série é a soma das resistências individuais de cada componente.</p>
+        <div class="formula-box">
+            R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub>
+        </div>
+        
+        <div class="example-box">
+            <h4>Exemplo de Cálculo de R<sub>eq</sub> em Série:</h4>
+            <p>Temos três resistores em série: R<sub>1</sub> = 10 Ω, R<sub>2</sub> = 15 Ω, R<sub>3</sub> = 20 Ω</p>
+            <p><strong>Cálculo:</strong> R<sub>eq</sub> = 10 Ω + 15 Ω + 20 Ω = <strong>45 Ω</strong></p>
+        </div>
+        
+        <div class="example-box">
+            <h4>Exemplos de Aplicações de Circuito Série:</h4>
+            <ul>
+                <li><strong>Luzes de Natal (modelos antigos):</strong> Se uma lâmpada queimar, o caminho da corrente é interrompido e todas as outras se apagam.</li>
+                <li><strong>Sensores de Segurança:</strong> Em sistemas de alarme, vários sensores (contatos magnéticos) são ligados em série para que qualquer abertura em qualquer porta ou janela interrompa o sinal e acione o alarme.</li>
+            </ul>
+        </div>
+
+        <h2>2. Circuito em Paralelo</h2>
+        <p>No circuito paralelo, as cargas são ligadas de forma independente à fonte. A corrente se divide entre os caminhos, mas a <strong>tensão (V) é a mesma</strong> em todos os componentes. Se um componente falhar, os demais continuam funcionando normalmente.</p>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="../images/circuito-paralelo.png" alt="Diagrama de um circuito elétrico em paralelo com três lâmpadas" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <p style="font-size: 0.9rem; color: #666;"><em>Figura 3: Diagrama de um circuito em paralelo.</em></p>
+        </div>
+
+        <h3>Cálculo da Resistência Equivalente em Paralelo (R<sub>eq</sub>)</h3>
+        <p>O cálculo da resistência equivalente em paralelo é um pouco mais complexo, pois considera o inverso da soma dos inversos das resistências.</p>
+        <div class="formula-box">
+            1 / R<sub>eq</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + ... + 1 / R<sub>n</sub>
+            <br>
+            <small>(Ou, para dois resistores: R<sub>eq</sub> = (R<sub>1</sub> × R<sub>2</sub>) / (R<sub>1</sub> + R<sub>2</sub>))</small>
+        </div>
+
+        <div class="example-box" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h4>Exemplo de Cálculo de R<sub>eq</sub> em Paralelo:</h4>
+            <p>Temos dois resistores em paralelo: R<sub>1</sub> = 20 Ω, R<sub>2</sub> = 30 Ω</p>
+            <p><strong>Cálculo:</strong> R<sub>eq</sub> = (20 × 30) / (20 + 30) = 600 / 50 = <strong>12 Ω</strong></p>
+        </div>
+        
+        <div class="example-box" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h4>Exemplos de Aplicações de Circuito Paralelo:</h4>
+            <ul>
+                <li><strong>Instalação Residencial:</strong> Todas as tomadas e lâmpadas de uma casa são ligadas em paralelo. Isso permite que você desligue a TV sem apagar a luz da sala, e se uma lâmpada queimar, as outras continuam funcionando.</li>
+                <li><strong>Iluminação Pública:</strong> Os postes de rua funcionam em paralelo; se uma lâmpada falha, as outras continuam iluminando o caminho normalmente.</li>
+            </ul>
+        </div>
+
+        <h2>3. Circuito Misto</h2>
+        <p>É a combinação dos dois tipos anteriores. Em uma mesma instalação, existem componentes ligados em série e outros em paralelo. O cálculo da resistência equivalente em circuitos mistos envolve a simplificação das partes em série e em paralelo separadamente até se chegar a uma única resistência.</p>
+
+        <div class="example-box" style="background-color: #fff3e0; border-left-color: #ef6c00;">
+            <h4>Exemplos de Circuito Misto:</h4>
+            <ul>
+                <li><strong>Eletrodomésticos Complexos:</strong> Dentro de uma máquina de lavar, você tem componentes de controle em série com dispositivos de segurança, enquanto o motor e a bomba podem estar em paralelo.</li>
+                <li><strong>Sistemas de Som:</strong> Divisores de frequência em caixas de som usam circuitos mistos para filtrar quais sons vão para o alto-falante grande (grave) e quais vão para o pequeno (agudo).</li>
+            </ul>
+        </div>
+
+        <h2>Tabela Comparativa: Comportamento de Tensão e Corrente</h2>
+        <table class="table-comparison">
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Circuito em Série</th>
+                    <th>Circuito em Paralelo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Caminho da Corrente</strong></td>
+                    <td>Único caminho</td>
+                    <td>Múltiplos caminhos (se divide)</td>
+                </tr>
+                <tr>
+                    <td><strong>Tensão (Voltagem)</strong></td>
+                    <td>Se divide entre as cargas (V<sub>total</sub> = V<sub>1</sub> + V<sub>2</sub> + ...)</td>
+                    <td>É a mesma em todas as cargas (V<sub>total</sub> = V<sub>1</sub> = V<sub>2</sub> = ...)</td>
+                </tr>
+                <tr>
+                    <td><strong>Corrente (Amperagem)</strong></td>
+                    <td>É a mesma em todas as cargas (I<sub>total</sub> = I<sub>1</sub> = I<sub>2</sub> = ...)</td>
+                    <td>Se divide entre as cargas (I<sub>total</sub> = I<sub>1</sub> + I<sub>2</sub> + ...)</td>
+                </tr>
+                <tr>
+                    <td><strong>Resistência Equivalente</strong></td>
+                    <td>A soma das resistências (R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + ...)</td>
+                    <td>Menor que a menor resistência individual (1/R<sub>eq</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + ...)</td>
+                </tr>
+                <tr>
+                    <td><strong>Componente Falho</strong></td>
+                    <td>Interrompe o circuito inteiro</td>
+                    <td>Os outros componentes continuam funcionando</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+        <div class="type-box">
+            <div class="type-card">
+                <h4>Resumo Rápido</h4>
+                <p><strong>Série:</strong> A corrente é igual, a tensão se divide. Se um para, todos param.</p>
+                <p><strong>Paralelo:</strong> A tensão é igual, a corrente se divide. Independência total.</p>
+            </div>
+        </div>
+        
+        <section id="exercicios" style="padding: 20px; font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: auto;">
+        <hr>
+        <h2 style="color: #2c3e50;">Exercícios Práticos</h2>
+
+        <div class="serie">
+            <h3>1. Circuito em Série</h3>
+            
+            <p><strong>Questão 1:</strong> Três resistores de R1 = 10 Ohms, R2 = 20 Ohms e R3 = 30 Ohms estão conectados em série a uma fonte de 120V.</p>
+            <ul>
+                <li>a) Qual a resistência equivalente (Req)?</li>
+                <li>b) Qual a corrente total (I) do circuito?</li>
+            </ul>
+            
+            <details style="background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer;">
+                <summary><strong>Clique para ver a resposta</strong></summary>
+                <p>a) Req = 10 + 20 + 30 = <strong>60 Ohms</strong>.</p>
+                <p>b) I = V / Req -> I = 120 / 60 = <strong>2 Amperes</strong>.</p>
+            </details>
+
+            <br>
+
+            <p><strong>Questão 2:</strong> Em um circuito série com duas lâmpadas, se a tensão da fonte é de 12V e a corrente que atravessa o circuito é de 0,5A, qual o valor da resistência total do sistema?</p>
+            
+            <details style="background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer;">
+                <summary><strong>Clique para ver a resposta</strong></summary>
+                <p>Req = V / I -> Req = 12 / 0,5 = <strong>24 Ohms</strong>.</p>
+            </details>
+        </div>
+
+        <br>
+
+        <div class="paralelo">
+            <h3>2. Circuito em Paralelo</h3>
+            
+            <div style="background-color: #fcf8e3; border-left: 5px solid #faf2cc; padding: 15px; margin-bottom: 20px; color: #8a6d3b;">
+                <strong>Dica Rápida:</strong> Quando você tem resistores <strong>iguais</strong> em paralelo, a resistência equivalente (Req) é o valor de um resistor dividido pela quantidade deles (n). 
+                <br><em>Fórmula: Req = R / n</em>
+            </div>
+
+            
+
+            <p><strong>Questão 3:</strong> Dois resistores, R1 = 40 Ohms e R2 = 40 Ohms, estão ligados em paralelo sob uma tensão de 20V.</p>
+            <ul>
+                <li>a) Utilizando a dica acima, qual a resistência equivalente?</li>
+                <li>b) Qual a corrente que passa por cada ramo do circuito?</li>
+            </ul>
+
+            <details style="background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer;">
+                <summary><strong>Clique para ver a resposta</strong></summary>
+                <p>a) Req = 40 / 2 = <strong>20 Ohms</strong>.</p>
+                <p>b) I = V / R -> I = 20 / 40 = <strong>0,5 Amperes</strong> em cada ramo.</p>
+            </details>
+
+            <br>
+
+            <p><strong>Questão 4:</strong> Um circuito paralelo é composto por três resistores idênticos. Sabendo que a resistência equivalente total é de 10 Ohms, qual é o valor de cada resistor individual?</p>
+            
+            <details style="background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer;">
+                <summary><strong>Clique para ver a resposta</strong></summary>
+                <p>Se Req = R / n, então R = Req * n. <br> R = 10 * 3 = <strong>30 Ohms cada</strong>.</p>
+            </details>
+        </div>
+        <hr>
+    </section>
+        
+    </div>
+    
+    
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 3</p>
+    </footer>
+
+</body>
+</html>

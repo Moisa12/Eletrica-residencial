@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 9</title>
+    
+    <style>
+        /* Estilos Globais mantidos para consistência */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        
+        .img-container { text-align: center; margin: 25px 0; }
+        .img-container img { max-width: 500px; width: 100%; height: auto; border-radius: 8px; }
+        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; }
+        footer p { margin: 0 auto; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 9:</h1>
+        <div class="subtitle">Tomadas de Corrente (TUG e TUE)</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O que é uma Tomada?</h2>
+        <p>
+            A tomada de corrente é um ponto da instalação destinado a conectar aparelhos elétricos móveis ou fixos à rede de energia. Sua principal utilidade é garantir uma conexão segura e padronizada para que a corrente elétrica flua do circuito para o equipamento sem riscos de mau contato ou choques.
+        </p>
+
+        <h2>Tipos de Tomadas Residenciais</h2>
+        <p>Na norma brasileira <strong>NBR 5410</strong>, as tomadas são divididas em duas categorias principais de acordo com a sua utilização:</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>TUG (Uso Geral)</th>
+                        <th>TUE (Uso Específico)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Aplicação</strong></td>
+                        <td>Aparelhos comuns (TV, abajur, carregador).</td>
+                        <td>Aparelhos com corrente > 10A (Chuveiro, AC).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Corrente Máxima</strong></td>
+                        <td>Até 10 Amperes (Pinos finos).</td>
+                        <td>20 Amperes (Pinos grossos).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Potência máxima da tomada</strong></td>
+                        <td>1270W em 127 V / 2540W em 220 V.</td>
+                        <td>2540 W em 127 V / 4400 W em 220 V.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Circuito</strong></td>
+                        <td>Pode alimentar várias tomadas.</td>
+                        <td>Circuito exclusivo para cada tomada.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Quando usar cada uma?</h3>
+        <ul>
+            <li><strong>TUG:</strong> Sempre que você não souber exatamente o que será ligado ali, ou quando os aparelhos forem de baixa potência.</li>
+            <li><strong>TUE:</strong> Obrigatória para equipamentos que consomem muita energia, como Ar-condicionado, Chuveiro, Secadora de Roupa, Forno Elétrico e Micro-ondas (dependendo do modelo).</li>
+        </ul>
+        
+        <div class="alert" style="background-color: #fdecea; border-left: 5px solid #e74c3c; color: #2c3e50;">
+    <h4 style="margin-top: 0; color: #e74c3c;">⚠️ NOTA DE SEGURANÇA: Chuveiros e Torneiras</h4>
+    <p>
+        Apesar de serem pontos de <strong>TUE (Uso Específico)</strong>, em chuveiros, aquecedores de água e torneiras elétricas, <strong>não é permitido o uso de tomadas e plugues convencionais</strong>.
+    </p>
+    <p>
+        Isso ocorre porque a alta corrente desses equipamentos, somada à umidade do ambiente, pode causar oxidação, superaquecimento e derretimento de tomadas comuns, gerando riscos reais de incêndio e choque elétrico.
+    </p>
+    
+    <hr style="border: 0; border-top: 1px solid #fab1a0; margin: 15px 0;">
+    
+    <h4>Como fazer a ligação correta?</h4>
+    <p>A conexão deve ser <strong>direta</strong>, utilizando conectores apropriados dentro da caixa de passagem. Os modelos mais utilizados são:</p>
+    
+    <ul>
+        <li><strong>Conector de Porcelana (Cerâmico):</strong> Tradicional, suporta altas temperaturas e isola bem o calor.</li>
+        <li><strong>Conector Automático (Ex: Wago):</strong> Tecnologia moderna que dispensa ferramentas, garante pressão constante nos fios e evita o mau contato por vibração ou dilatação térmica.</li>
+    </ul>
+
+    
+</div>
+
+<div class="table-container">
+    <h3 style="color: #2c3e50; text-align: center;">Comparativo: Porcelana vs. Automático</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Característica</th>
+                <th>Conector de Porcelana</th>
+                <th>Conector Automático (Ex: Wago)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Custo</strong></td>
+                <td>Muito baixo (Económico).</td>
+                <td>Mais elevado (Investimento em tecnologia).</td>
+            </tr>
+            <tr>
+                <td><strong>Instalação</strong></td>
+                <td>Exige chave de fendas e aperto manual preciso.</td>
+                <td>Rápida (sistema de alavanca ou mola), sem ferramentas.</td>
+            </tr>
+            <tr>
+                <td><strong>Segurança</strong></td>
+                <td>Alta resistência térmica (não derrete).</td>
+                <td>Alta segurança contra mau contacto (pressão constante).</td>
+            </tr>
+            <tr>
+                <td><strong>Manutenção</strong></td>
+                <td>Pode soltar com o tempo devido à vibração/dilatação.</td>
+                <td>Livre de manutenção (a mola compensa a dilatação).</td>
+            </tr>
+            <tr>
+                <td><strong>Estética/Espaço</strong></td>
+                <td>Ocupa mais espaço na caixa de passagem.</td>
+                <td>Compacto, facilita a organização dos fios.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="example-box" style="background-color: #fffde7; border-left-color: #fbc02d;">
+    <strong>Dica do Eletricista:</strong> Embora o conector de porcelana seja resistente ao calor, um aperto mal feito no parafuso é a maior causa de fios queimados em chuveiros. Se o orçamento permitir, opte sempre pelos <strong>conectores automáticos de boa qualidade</strong>, pois eles eliminam o erro humano no aperto.
+</div>
+        <hr>
+
+        <h2>Padrão ABNT (NBR 14136)</h2>
+        <p>O padrão brasileiro de 3 pinos garante a segurança através do pino de aterramento. Veja a posição correta de cada condutor ao olhar a tomada de frente (com o pino terra para cima):</p>
+
+        
+
+        <div class="img-container">
+    		<img src="../images/tomada.png" alt="Esquema da Tomada" style="width: 100%; max-width: 400px;"></div>
+
+        <div class="alert" style="background-color: #fce4ec; border-left: 5px solid #d81b60; color: #880e4f;">
+    		<h4 style="margin-top: 0; color: #d81b60;">🔴 Padronização de Segurança: 220V</h4>
+    <p>
+        Para evitar a ligação errônea de aparelhos 127V em tomadas de maior tensão, utilize sempre o padrão de <strong>identificação visual por cores</strong>:
+    </p>
+    <ul>
+        <li><strong>Tomadas Brancas/Gelo:</strong> Geralmente utilizadas para 127V.</li>
+        <li><strong>Tomadas Vermelhas:</strong> Padrão recomendado para identificar pontos de <strong>220V</strong>.</li>
+    </ul>
+    <p style="font-size: 0.9em; margin-bottom: 0;">
+        <em>Nota: Além da cor, a NBR 5410 recomenda que toda tomada que não seja de 127V tenha sua tensão claramente indicada de forma indelével no espelho da tomada.</em>
+    </p>
+</div>
+        
+        
+        <hr>
+
+        <h2>Dimensionamento segundo a NBR 5410</h2>
+        <p>A norma estabelece critérios mínimos para a quantidade e potência das TUGs em uma residência:</p>
+
+        <div class="alert">
+            <strong>Critérios para TUGs:</strong>
+            <ul>
+                <li><strong>Cômodos Secundários (Quartos/Salas):</strong> No mínimo uma tomada a cada 5 metros de perímetro.</li>
+                <li><strong>Cozinhas/Áreas de Serviço:</strong> No mínimo uma tomada a cada 3,5 metros de perímetro.</li>
+                <li><strong>Banheiros:</strong> Pelo menos uma tomada junto ao lavatório (mínimo 600VA).</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>Exemplo Prático: Dimensionamento de Cozinha</h4>
+            <p>Imagine uma cozinha de 3m x 4m (Perímetro = 14 metros).</p>
+            <p><strong>1. Quantidade:</strong> 14m / 3,5m = <strong>4 tomadas</strong>.</p>
+            <p><strong>2. Potência das TUGs:</strong> A norma exige que em cozinhas, as 3 primeiras tomadas tenham 600 VA cada, e as demais 100 VA.</p>
+            <p><strong>Cálculo final:</strong> (3 x 600 VA) + (1 x 100 VA) = <strong>1900 VA no total para este circuito.</strong></p>
+        </div>
+        
+        <hr>
+<h2>Exercícios de Fixação - Aula 9</h2>
+
+<p><strong>Questão 1:</strong> Um quarto possui dimensões de 4 metros por 4 metros. De acordo com a NBR 5410, qual a quantidade mínima de tomadas de uso geral (TUG) exigida e qual deve ser a potência mínima total atribuída a esse circuito?</p>
+
+<details>
+    <summary>Ver resposta e explicação</summary>
+    <div class="example-box">
+        <p><strong>Passo 1 (Perímetro):</strong> 4 + 4 + 4 + 4 = 16 metros.</p>
+        <p><strong>Passo 2 (Quantidade):</strong> Para quartos, a regra é 1 tomada a cada 5m de perímetro. <br>
+           16 / 5 = 3,2 -> Arredondamos sempre para cima: <strong>4 tomadas</strong>.</p>
+        <p><strong>Passo 3 (Potência):</strong> Em quartos/salas, cada tomada deve ter no mínimo 100 VA.<br>
+           4 x 100 VA = <strong>400 VA</strong>.</p>
+    </div>
+</details>
+
+<br>
+
+<p><strong>Questão 2:</strong> Durante uma reforma, o cliente solicita a instalação de uma torneira elétrica (5500W - 220V) na cozinha. O eletricista percebe que já existe uma tomada comum (TUG) de 10A perto da pia. Ele pode ligar a torneira nessa tomada? Justifique qual a forma correta de proceder.</p>
+
+<details>
+    <summary>Ver resposta e explicação</summary>
+    <div class="example-box">
+        <p><strong>Resposta:</strong> Não, ele não pode utilizar a tomada existente.</p>
+        <p><strong>Justificativa:</strong> 
+            1. A torneira elétrica é uma <strong>TUE</strong> de alta potência. Uma tomada de 10A suporta apenas cerca de 2200W em 220V, o que causaria o derretimento imediato do componente.<br>
+            2. Como é um aparelho que envolve água e alta corrente, a NBR 5410 proíbe o uso de tomada/plugue. <br>
+            3. <strong>O correto:</strong> Criar um circuito exclusivo com cabo de bitola adequada e disjuntor independente, fazendo a conexão final com <strong>conector de porcelana ou automático</strong> dentro da caixa de passagem.
+        </p>
+    </div>
+</details>
+
+<div class="alert">
+    <strong>Lembrete Final:</strong> Sempre verifique a tensão (127V ou 220V) do equipamento antes de definir o conector e o disjuntor!
+</div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 9</p>
+    </footer>
+
+</body>
+</html>

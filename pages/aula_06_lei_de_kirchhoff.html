@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 6</title>
+    
+    <style>
+        /* Mantendo o padrão visual das aulas anteriores */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Boxes de Fórmulas e Exemplos */
+        .formula-box { 
+            background-color: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 1.4rem; 
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #d35400;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+        }
+
+        .example-box { background-color: #e3f2fd; border-left: 5px solid #1976d2; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        
+        /* Grid para Exercícios */
+        .exercicios-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .exercicios-coluna { flex: 1; min-width: 300px; }
+        .exercicios-coluna p { margin-bottom: 5px; font-weight: bold; }
+        
+        details { background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; margin-bottom: 20px; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0 auto; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 6:</h1>
+        <div class="subtitle">1<sup>a</sup> e 2<sup>a</sup> Leis de Kirchhoff</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>1<sup>a</sup> Lei de Kirchhoff - Lei dos Nós</h2>
+        <p>
+            A primeira lei de Kirchhoff se refere à corrente elétrica. Em um "nó" (ponto de conexão de fios), a quantidade de corrente que entra deve ser exatamente igual à soma das correntes que saem.
+        </p>
+
+        <div class="formula-box">
+            Σ I<sub>entra</sub> = Σ I<sub>sai</sub>
+        </div>
+
+        <div class="example-box">
+            <strong>Exemplo 1.1 (Quadro de Distribuição):</strong> 
+            Um cabo de fase chega ao barramento de um quadro com 25A. Se este barramento alimenta dois disjuntores e o primeiro circuito consome 10A, o segundo circuito terá obrigatoriamente 15A saindo dele (25A - 10A = 15A).
+        </div>
+
+        <div class="example-box">
+            <strong>Exemplo 1.2 (Emenda em T):</strong> 
+            Se você faz uma emenda de onde saem três lâmpadas, e cada lâmpada consome 1A, o fio que traz a energia para essa emenda estará conduzindo a soma delas, ou seja, 3A.
+        </div>
+        <section style="background-color: #f0f7f4; padding: 20px; border-radius: 8px; margin-top: 30px;">
+    		<h3 style="color: #2e7d32; margin-top: 0;">Dica de Bancada: Use o Multímetro!</h3>
+    		<p>Para confirmar a <strong>Lei dos Nós</strong>, use o alicate amperímetro no cabo principal e depois nos cabos derivados. A matemática nunca falha na instalação bem feita!</p>
+	</section>
+
+        <br>
+
+        <h2>2<sup>a</sup> Lei de Kirchhoff - Lei das Malhas</h2>
+        <p>
+            A segunda lei é refere à tensão elétrica. A soma de todas as quedas de tensão nos componentes deve ser igual à tensão total fornecida pela fonte.
+        </p>
+
+        <div class="formula-box">
+            V<sub>total</sub> = V<sub>1</sub> + V<sub>2</sub> + V<sub>n</sub>
+        </div>
+
+        <div class="example-box" style="background-color: #fff3cd; border-left-color: #f1c40f;">
+            <strong>Exemplo 2.1 (Queda de Tensão no Cabo):</strong> 
+            Se uma tomada é alimentada por 220V, mas devido à distância o cabo "consome" (perde) 5V no caminho, o aparelho ligado na ponta receberá apenas 215V. A soma da perda (5V) com a carga (215V) resulta nos 220V da fonte.
+        </div>
+
+        <div class="example-box" style="background-color: #fff3cd; border-left-color: #f1c40f;">
+            <strong>Exemplo 2.2 (Circuito Série):</strong> 
+            Ao ligar dois refletores de 110V em série em uma rede de 220V, cada refletor ficará com uma queda de tensão de 110V. Se um deles queimar ou for mais potente, a divisão muda, mas a soma continuará sendo 220V.
+        </div>
+        
+        
+        <div style="background-color: #f0f7f4; border: 1px solid #c8e6c9; padding: 25px; border-radius: 8px; margin-top: 40px;">
+            <h2 style="color: #2e7d32; border-left: 5px solid #2e7d32; margin-top: 0;">Dicas de Mestre para Não Esquecer</h2>
+            
+            <h3>1. A Analogia da Água (O Segredo)</h3>
+            <p>Se você tiver dificuldade em visualizar, pense sempre em hidráulica:</p>
+            <ul>
+                <li><strong>Corrente:</strong> Um cano que se divide em dois. Se entram 10 litros por segundo, têm que sair 10 litros no total, somando as duas pontas.</li>
+                <li><strong>Tensão:</strong> Uma escada. Se você sobe 10 degraus (fonte), para voltar ao chão, você terá que descer os mesmos 10 degraus, não importa se em uma descida só ou em várias pequenas.</li>
+            </ul>
+            
+            
+
+            <h3>2. Onde está o "Nó" na Instalação Real?</h3>
+            <p>O aluno iniciante às vezes não vê o "Nó" no esquema elétrico. Na prática, o nó é:</p>
+            <ul>
+                <li>Um <strong>Barramento de Fase</strong> no quadro de distribuição.</li>
+                <li>Uma <strong>Emenda de derivação</strong> dentro de uma caixa de passagem.</li>
+                <li>Um <strong>Conector rápido (tipo Wago)</strong> onde um fio entra e vários saem.</li>
+            </ul>
+
+            
+
+            <div style="background-color: #fff; padding: 15px; border-radius: 5px; border: 1px dashed #2e7d32; margin-top: 20px;">
+                <h4 style="margin-top: 0; color: #2e7d32;">⚡ Prova Real com Multímetro</h4>
+                <p>
+                    <strong>Para comprovar a primeira lei de Kirchhoff:</strong> Use o alicate amperímetro no fio comum (antes da emenda) e anote o valor. Depois, meça cada fio que sai da emenda. A soma dos fios de saída deve bater com o valor inicial. Se não bater, pode haver fuga de corrente ou erro de medição!
+                </p>
+                <p>
+                    <strong>Para comprovar a segunda lei de Kirchhoff:</strong> Em um circuito com cargas em série (como fitas LED ou lâmpadas de natal), meça a tensão em cima de cada lâmpada. A soma dessas pequenas tensões será o valor total da tomada (ex: 127V ou 220V).
+                </p>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        <h2>Exercícios Práticos</h2>
+        
+        <div class="exercicios-grid">
+            <div class="exercicios-coluna">
+                <p>a) Se 10A entram em um nó e saem três fios iguais, qual a corrente em cada fio?</p>
+                <details>
+                    <summary>Ver resposta</summary>
+                    <p>10 / 3 = <strong>3,33 A</strong> em cada fio.</p>
+                </details>
+
+                <p>b) Um nó recebe 5A de um lado e 3A do outro. Qual a corrente total saindo?</p>
+                <details>
+                    <summary>Ver resposta</summary>
+                    <p>5 + 3 = <strong>8 A</strong>.</p>
+                </details>
+            </div>
+
+            <div class="exercicios-coluna">
+                <p>c) Numa malha de 12V, um LED consome 2V. Qual a tensão no resistor em série?</p>
+                <details>
+                    <summary>Ver resposta</summary>
+                    <p>12V - 2V = <strong>10 V</strong>.</p>
+                </details>
+
+                <p>d) Em um circuito residencial paralelo, a tensão muda nas tomadas?</p>
+                <details>
+                    <summary>Ver resposta</summary>
+                    <p><strong>Não.</strong> De acordo com a LKT aplicada em paralelo, todas as cargas recebem a mesma tensão da fonte.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 6</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 13</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; font-size: 1,1rem; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #2c3e50; color: #fff; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .info-box { background-color: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .info-box h4 { margin-top: 0; color: #0d47a1; }
+
+        footer { 
+            background-color: #2c3e50; 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 2rem 0; 
+            margin-top: 40px;
+            width: 100%;
+        }
+        footer p { text-align: center; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 13:</h1>
+        <div class="subtitle">Lâmpadas: Tecnologias, Eficiência e Aplicações</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>Finalidade das Lâmpadas</h2>
+        <p>
+            As lâmpadas são dispositivos conversores de energia elétrica em energia luminosa (luz). Em um projeto residencial, sua finalidade vai além de apenas "iluminar": elas definem o conforto visual, a estética dos ambientes e impactam diretamente na economia de energia e no dimensionamento dos circuitos.
+        </p>
+
+        <hr>
+
+        <h2>Tipos de Lâmpadas e Características</h2>
+        <p>
+            Abaixo, apresentamos as principais tecnologias utilizadas, comparando o consumo (Potência) com a quantidade de luz emitida (Lúmens).
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tecnologia</th>
+                        <th>Potência Comum</th>
+                        <th>Fluxo Luminoso (Lúmens)</th>
+                        <th>IRC (%)</th>
+                        <th>Vida Útil (h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Incandescente</strong></td>
+                        <td>60W</td>
+                        <td>~800 lm</td>
+                        <td>100</td>
+                        <td>1.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Halógena</strong></td>
+                        <td>42W</td>
+                        <td>~800 lm</td>
+                        <td>100</td>
+                        <td>2.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fluorescente Compacta</strong></td>
+                        <td>15W</td>
+                        <td>~800 lm</td>
+                        <td>80</td>
+                        <td>8.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bulbo LED</strong></td>
+                        <td>9W</td>
+                        <td>~810 lm</td>
+                        <td>80-90</td>
+                        <td>25.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fluorescente Tubular</strong></td>
+                        <td>40W</td>
+                        <td>~2800 lm</td>
+                        <td>85</td>
+                        <td>15.000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tubular LED</strong></td>
+                        <td>18W</td>
+                        <td>~1850 lm</td>
+                        <td>80</td>
+                        <td>25.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="info-box">
+            <h4>💡 Conceitos Fundamentais</h4>
+            <p><strong>Lúmens (lm):</strong> É a unidade de medida do <strong>fluxo luminoso</strong>. Ela indica a quantidade total de luz emitida por uma lâmpada em todas as direções. Ao comprar uma lâmpada, devemos olhar os lúmens para saber o quanto ela ilumina, e não apenas os Watts (que indicam apenas o consumo de energia).</p>
+            
+            <p><strong>IRC (Índice de Reprodução de Cores):</strong> É a escala (de 0 a 100) que indica quão fielmente uma lâmpada reproduz as cores dos objetos em comparação com a luz natural do sol. Lâmpadas com IRC 100 reproduzem as cores com perfeição.</p>
+        </div>
+
+        <hr>
+
+        <h2>Conexão Prática: Interruptor Simples e Bocal</h2>
+        <p>
+            A ligação de uma lâmpada deve seguir um padrão de segurança rigoroso para evitar choques elétricos no momento da manutenção ou troca da lâmpada. O segredo está em qual condutor deve ser interrompido pelo interruptor.
+        </p>
+
+        <div class="example-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <strong>Regra de Segurança (NBR 5410):</strong> O condutor <strong>Fase</strong> deve sempre ser o condutor que vai até o interruptor. O condutor <strong>Neutro</strong> deve ser ligado diretamente ao bocal da lâmpada.
+        </div>
+
+        <h3>Passo a Passo da Ligação:</h3>
+        <ol>
+            <li><strong>Neutro:</strong> Sai da rede elétrica e vai direto para um dos bornes do bocal (receptáculo). Por segurança, conecte o neutro na parte rosqueada do bocal.</li>
+            <li><strong>Fase:</strong> Sai da rede elétrica e vai até o <strong>interruptor simples</strong>.</li>
+            <li><strong>Retorno:</strong> É o fio que sai do interruptor e vai até o borne central do bocal da lâmpada. É este fio que "leva a fase" para a lâmpada quando o interruptor é acionado.</li>
+        </ol>
+
+        <div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <img src="../images/bocal_E27.png" 
+         alt="Bocal E27" 
+         style="max-width: 250px; height: auto; display: block; margin: 0 auto;">
+    <div class="caption" style="width: 100%; margin-top: 10px;">Figura: Receptáculo (Bocal) padrão E27, o mais utilizado em residências.</div>
+</div>
+	<br>
+	
+	
+	
+        <div class="alert" style="background-color: #ffebee; border-left-color: #f44336;">
+            <strong>Atenção:</strong> 
+            <p>Nunca ligue o <strong>Neutro</strong> no interruptor. Se fizer isso, a lâmpada desligará, mas o bocal continuará energizado com a <strong>Fase</strong>, o que pode causar um choque perigoso em quem for trocar a lâmpada, mesmo com o interruptor na posição "desligado".</p>
+        </div>
+        
+        <h3>Principais Tipos de Bases (Bocais)</h3>
+<p>As bases das lâmpadas são padronizadas por letras e números. A letra indica o tipo (ex: <strong>E</strong> para Edison/Rosca) e o número indica o diâmetro em milímetros.</p>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Base</th>
+                <th>Tipo de Conexão</th>
+                <th>Aplicações Comuns</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>E14</strong></td>
+                <td>Rosca Pequena (14mm)</td>
+                <td>Lustres, abajures e geladeiras modernas.</td>
+            </tr>
+            <tr>
+                <td><strong>E27</strong></td>
+                <td>Rosca Padrão (27mm)</td>
+                <td>Uso residencial geral (Bulbo LED).</td>
+            </tr>
+            <tr>
+                <td><strong>E40</strong></td>
+                <td>Rosca Grande (40mm)</td>
+                <td>Lâmpadas de alta potência, postes e indústrias.</td>
+            </tr>
+            <tr>
+                <td><strong>GU10</strong></td>
+                <td>Encaixe de Pinos (Bi-pino)</td>
+                <td>Spots decorativos e lâmpadas dicroicas.</td>
+            </tr>
+            <tr>
+                <td><strong>G13</strong></td>
+                <td>Pinos para Tubular</td>
+                <td>Lâmpadas Tubulares T8 e T10 (LED ou Fluorescente).</td>
+            </tr>
+            <tr>
+                <td><strong>G5</strong></td>
+                <td>Pinos Pequenos</td>
+                <td>Lâmpadas Tubulares T5 (modelos mais finos).</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="info-box" style="background-color: #fffde7; border-left-color: #fbc02d;">
+    <strong>Dica de Manutenção:</strong> Ao substituir lâmpadas antigas por LED, verifique se a base é compatível. Por exemplo, existem lâmpadas <strong>LED Tubular</strong> que usam a mesma base <strong>G13</strong> das fluorescentes, facilitando a substituição sem trocar o bocal.
+</div>
+        
+        <br>
+        <div class="alert" style="background-color: #e3f2fd; border-left-color: #2196f3;">
+            <strong>Dica de Profissional:</strong> <p>
+    Utilize cabos com cores diferentes, por exemplo: 
+    <span style="color: red; font-weight: bold;">vermelho</span> ou <strong>preto</strong> para fase, 
+    <span style="color: #f1c40f; font-weight: bold;">amarelo</span> para o retorno e 
+    <span style="color: #00bfff; font-weight: bold;">azul claro</span> para o neutro. 
+    Isso evita erros de ligação e atende a NBR 5410.
+</p>
+        </div>
+        
+        <hr>
+
+        <h2>Exercícios de Avaliação - Aula 13</h2>
+
+        <p><strong>Questão 1:</strong> Analisando a tabela, qual tecnologia apresenta a melhor eficiência (mais lúmens com menor potência)?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="info-box">
+                <p><strong>Resposta:</strong> A tecnologia <strong>LED</strong>. Por exemplo, o Bulbo LED gera 810 lúmens consumindo apenas 9W, enquanto a incandescente precisa de 60W para o mesmo resultado.</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 2:</strong> O que significa dizer que uma lâmpada tem IRC de 100%?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="info-box">
+                <p><strong>Resposta:</strong> Significa que ela reproduz as cores dos objetos de forma idêntica à luz do sol, sem distorções de tonalidade.</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 3:</strong> Por que a lâmpada Halógena, apesar de ser parecida com a incandescente, é considerada um pouco superior em vida útil?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="info-box">
+                <p><strong>Resposta:</strong> Devido ao gás halógeno em seu interior, que permite um ciclo de regeneração do filamento, dobrando sua vida útil (2.000h contra 1.000h da incandescente comum).</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 4:</strong> Na substituição de uma lâmpada Fluorescente Tubular por uma Tubular LED, o instalador deve manter o reator?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="info-box">
+                <p><strong>Resposta:</strong> Não. A lâmpada LED tubular deve ser ligada diretamente à rede elétrica. O reator deve ser removido do circuito para evitar danos à lâmpada nova e economizar energia.</p>
+            </div>
+        </details>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 13</p>
+    </footer>
+
+</body>
+</html>

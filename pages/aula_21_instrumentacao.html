@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 21</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #eee;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #f1c40f;
+        }
+
+        .safety-box { 
+            background-color: #ffebee; 
+            border-left: 5px solid #d32f2f; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+
+        .instrument-box { 
+            background-color: #eeee; 
+            border-left: 5px solid #2196f3; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+
+        .cat-tag {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: #f1c40f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .img-placeholder {
+            background-color: #fff;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #666;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-placeholder img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .btn-search {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: #34495e;
+            color: #f1c40f;
+        }
+
+        .list-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-items li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { text-align: center; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 21</h1>
+        <div class="subtitle">Ferramentas e Instrumentos Essenciais</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O Arsenal do Eletricista Profissional</h2>
+        <p>
+            Trabalhar com eletricidade exige precisão. Utilizar ferramentas inadequadas pode danificar os componentes e colocar a sua vida em risco. Toda ferramenta manual deve possuir <strong>isolamento para 1000V</strong> conforme a norma NR-10.
+        </p>
+
+        <h3>1. Ferramentas Manuais Básicas</h3>
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div>
+                    <h4>Alicate Universal (Isolado)</h4>
+                    <p>A ferramenta mais versátil. Serve para apertar, dobrar e cortar fios e cabos.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/universal.png" alt="Alicate Universal"> 
+                </div>
+                <a href="https://www.google.com/search?q=alicate+universal+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+            <div class="tool-card">
+                <div>
+                    <h4>Alicate de Corte Diagonal</h4>
+                    <p>Específico para cortar condutores. Sua ponta fina permite cortes rentes.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/lateral.png" alt="Alicate corte lateral"> 
+                </div>
+                <a href="https://www.google.com/search?q=alicate+de+corte+diagonal+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+            <div class="tool-card">
+                <div>
+                    <h4>Alicate de Bico Meia-Cana</h4>
+                    <p>Essencial para alcançar locais apertados e fazer "olhais" em bornes de parafuso.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/bico.png" alt="Alicate de Bico Meia-Cana">
+                </div>
+                <a href="https://www.google.com/search?q=alicate+de+bico+meia+cana+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+            <div class="tool-card">
+                <div>
+                    <h4>Jogos de Chaves Isoladas</h4>
+                    <p>Devem ter a haste isolada para evitar curtos ao trabalhar em quadros energizados.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/chaves.png" alt="Jogo de chaves isoladas"> 
+                </div>
+                <a href="https://www.google.com/search?q=jogo+de+chaves+fenda+philips+isoladas+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+            <div class="tool-card">
+                <div>
+                    <h4>Alicate Decapador</h4>
+                    <p>Aumenta a velocidade do trabalho e preserva os filamentos do cabo.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/decapador.png" alt="Alicate decapador"> 
+                </div>
+                <a href="https://www.google.com/search?q=alicate+decapador+de+fios+automatico&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+        </div>
+
+        <div class="safety-box">
+            <h4>🚨 Regra Crítica de Segurança</h4>
+            <p>Nunca utilize ferramentas com o cabo rachado. O isolamento de fábrica é testado em laboratório; o improviso não garante proteção contra choque.</p>
+        </div>
+
+        <h2>Instrumentos de Medição e Categorias</h2>
+        <p>A escolha do instrumento depende do local onde você vai medir. Isso é determinado pela <strong>Categoria de Sobretensão (CAT)</strong>.</p>
+
+        <div class="instrument-box">
+            <span class="cat-tag">CAT III 600V ou CAT IV</span>
+            <h3>2. Multímetro Digital</h3>
+            <p>Essencial para medir Tensão, Resistência e Continuidade.</p>
+            <p><strong>Segurança:</strong> Para uso residencial em quadros de distribuição, o multímetro deve ser no mínimo <strong>CAT III</strong>.</p>
+            <a href="https://www.google.com/search?q=multimetro+digital+cat+iii+600v&tbm=shop" target="_blank" class="btn-search">Pesquisar Multímetros CAT III</a>
+        </div>
+
+        <div class="instrument-box" style="background-color: #f0f4c3; border-left-color: #afb42b;">
+            <span class="cat-tag">CAT III ou IV</span>
+            <h3>3. Alicate Amperímetro</h3>
+            <p>Mede a corrente elétrica sem precisar abrir o circuito.</p>
+            <p><strong>Segurança:</strong> Fundamental para identificar balanceamento de fases e sobrecargas.</p>
+            <a href="https://www.google.com/search?q=alicate+amperimetro+digital+cat+iii&tbm=shop" target="_blank" class="btn-search">Pesquisar Amperímetros</a>
+        </div>
+
+        <div class="instrument-box" style="background-color: #fff9c4; border-left-color: #fbc02d;">
+            <h3>4. Detector de Tensão (Caneta)</h3>
+            <p>Identifica o fio Fase sem contato metálico. É a primeira ferramenta a ser usada.</p>
+            <a href="https://www.google.com/search?q=detector+de+tensão+tipo+caneta+sonoro&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
+        </div>
+
+        <h3>5. Itens Complementares e Organização</h3>
+        <p>Para uma instalação bem feita e produtiva, estes itens não podem faltar na sua mala:</p>
+        
+        <ul class="list-items">
+            <li>
+                <div>
+                    <strong>Trena de 5 metros:</strong> Essencial para medições de infraestrutura e altura de tomadas.
+                </div>
+                <a href="https://www.google.com/search?q=trena+5m+emborrachada+profissional&tbm=shop" target="_blank" class="btn-search">Ver Trena</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Fita Isolante Profissional:</strong> Prefira as de classe A para garantir boa adesão e isolamento térmico.
+                </div>
+                <a href="https://www.google.com/search?q=fita+isolante+profissional+3m+scotch+33&tbm=shop" target="_blank" class="btn-search">Ver Fitas</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Bolsa ou Mala de Ferramentas:</strong> Mantém seu material organizado e passa uma imagem de profissionalismo.
+                </div>
+                <a href="https://www.google.com/search?q=bolsa+para+ferramentas+de+eletricista+reforçada&tbm=shop" target="_blank" class="btn-search">Ver Bolsas</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Guia Passa-fio Profissional:</strong> Com alma de aço para tubulações longas.
+                </div>
+                <a href="https://www.google.com/search?q=passa+fio+profissional+nylon+alma+de+aço&tbm=shop" target="_blank" class="btn-search">Ver Guia</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Nível de Bolha Magnético:</strong> Para alinhamento perfeito de caixas e quadros.
+                </div>
+                <a href="https://www.google.com/search?q=nivel+de+bolha+magnetico+pequeno&tbm=shop" target="_blank" class="btn-search">Ver Níveis</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 21</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Infraestrutura Elétrica</title>
+    <!-- Incluindo Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .quiz-container {
+            max-width: 800px;
+        }
+        .option-button {
+            transition: all 0.2s ease;
+        }
+        .option-button:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.1), 0 2px 4px -2px rgba(6, 182, 212, 0.06);
+            border-color: #06b6d4;
+        }
+        .selected {
+            border-color: #f97316 !important;
+            background-color: #fff7ed !important;
+        }
+        .correct {
+            background-color: #10b981 !important;
+            color: white !important;
+            border-color: #059669 !important;
+        }
+        .incorrect {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
+        }
+        .disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        /* Estilo para fórmulas (MathJax) */
+        .math {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex justify-center items-center min-h-screen">
+
+    <div id="quiz-app" class="quiz-container w-full bg-white p-6 sm:p-10 rounded-xl shadow-2xl">
+        <h1 class="text-3xl font-extrabold text-center text-blue-800 mb-2">Quiz: Infraestrutura Elétrica</h1>
+        <p class="text-center text-gray-500 mb-8">Teste seus conhecimentos sobre eletrodutos, QDC e segurança na NR-10.</p>
+
+        <!-- Área do Quiz -->
+        <div id="question-area">
+            <!-- Conteúdo da pergunta será injetado aqui -->
+        </div>
+
+        <!-- Área de Controles e Resultado -->
+        <div class="mt-8 pt-6 border-t border-gray-200 flex justify-between items-center">
+            <button id="next-button" 
+                    class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md disabled:opacity-50"
+                    disabled>
+                Avançar
+            </button>
+            <span id="progress-text" class="text-lg font-semibold text-gray-700">Pergunta 0/5</span>
+        </div>
+
+        <!-- Modal de Resultado Final -->
+        <div id="result-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50">
+            <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md text-center">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4">Resultado Final!</h2>
+                <p id="final-score" class="text-4xl font-extrabold text-cyan-600 mb-6">0/5</p>
+                <p id="message" class="text-lg mb-6 text-gray-700"></p>
+                <button onclick="resetQuiz()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+                    Refazer Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para renderizar fórmulas LaTeX (MathJax) -->
+    <script>
+        (function () {
+            var script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML';
+            script.onload = function () {
+                window.MathJax.Hub.Config({
+                    tex2jax: {
+                        inlineMath: [['$','$'], ['\\(','\\)']],
+                        displayMath: [['$$','$$'], ['\\[','\\]']]
+                    },
+                    config: ["MMLorHTML.js"],
+                    jax: ["input/TeX","input/MathML","output/HTML-CSS"],
+                    extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"]
+                });
+                window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
+    
+    <script>
+        // Dados do Quiz
+        const quizData = {
+            "questions": [
+                {
+                    "questionNumber": 1,
+                    "question": "Qual é a principal diferença de aplicação, de acordo com a resistência mecânica, entre o eletroduto PVC flexível corrugado laranja (reforçado) e o amarelo (padrão)?",
+                    "answerOptions": [
+                        {
+                            "text": "Amarelo é para cabos de baixa tensão; Laranja para média tensão.",
+                            "rationale": "A cor no PVC flexível indica a resistência mecânica, não a classe de tensão dos condutores internos.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Laranja é obrigatório em lajes e pisos, devido à maior resistência; Amarelo é para embutir em paredes.",
+                            "rationale": "O eletroduto laranja reforçado ($750 \\text{ N}/5\\text{cm}$) é exigido em locais de alta solicitação mecânica como lajes e pisos, enquanto o amarelo ($320 \\text{ N}/5\\text{cm}$) é ideal para alvenaria.",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "Amarelo é usado para áreas secas; Laranja para áreas úmidas.",
+                            "rationale": "Ambos são primariamente para instalações embutidas e a cor se relaciona à resistência mecânica, não ao nível de umidade do local.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Laranja é usado em instalações aparentes; Amarelo em instalações embutidas.",
+                            "rationale": "Ambos os tipos são projetados para serem embutidos, seja em alvenaria ou concreto; eletrodutos rígidos são mais comuns em instalações aparentes.",
+                            "isCorrect": false
+                        }
+                    ],
+                    "hint": "Pense no local da instalação onde a solicitação de esforço mecânico (como a concretagem) é maior."
+                },
+                {
+                    "questionNumber": 2,
+                    "question": "Segundo a NBR 5410, qual é a taxa máxima de ocupação da área da seção transversal de um eletroduto quando este contém três ou mais condutores?",
+                    "answerOptions": [
+                        {
+                            "text": "31%",
+                            "rationale": "A taxa de 31% é a máxima permitida quando o eletroduto contém apenas dois condutores.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "40%",
+                            "rationale": "A NBR 5410 define 40% como a taxa máxima de ocupação para eletrodutos com três ou mais condutores, garantindo a dissipação de calor e a manutenibilidade.",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "53%",
+                            "rationale": "A taxa de 53% é a máxima permitida quando o eletroduto contém um único condutor.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "70%",
+                            "rationale": "Uma taxa de ocupação superior a 40% para múltiplos cabos não é permitida, pois dificultaria a passagem e prejudicaria a dissipação térmica.",
+                            "isCorrect": false
+                        }
+                    ],
+                    "hint": "Lembre-se que mais cabos exigem mais espaço livre dentro do eletroduto."
+                },
+                {
+                    "questionNumber": 3,
+                    "question": "Qual é a principal função do Dispositivo Diferencial Residual (DR) em um Quadro de Distribuição de Cargas (QDC)?",
+                    "answerOptions": [
+                        {
+                            "text": "Proteger os equipamentos contra surtos de tensão e descargas atmosféricas.",
+                            "rationale": "Essa é a função do Dispositivo de Proteção contra Surtos (DPS), não do DR.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Interromper a corrente em caso de sobrecarga ou curto-circuito.",
+                            "rationale": "Essa é a função do disjuntor termomagnético (Disjuntor de Circuito), não do DR.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Proteger pessoas e animais contra choques elétricos, detectando correntes de fuga à terra.",
+                            "rationale": "O DR é um dispositivo de proteção de vida que monitora e interrompe o circuito quando detecta uma corrente de fuga perigosa (corrente residual).",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "Garantir a continuidade da energia para circuitos essenciais.",
+                            "rationale": "Essa função é tipicamente associada a sistemas de energia ininterrupta (UPS/No-Breaks).",
+                            "isCorrect": false
+                        }
+                    ],
+                    "hint": "O DR é um dispositivo de segurança projetado para proteger a vida humana e animal."
+                },
+                {
+                    "questionNumber": 4,
+                    "question": "Em instalações elétricas aparentes (em superfície), que tipo de caixa de ligação é tipicamente utilizada para fazer derivações ou mudanças de direção na linha, associada a eletrodutos rígidos?",
+                    "answerOptions": [
+                        {
+                            "text": "Caixa de Luz 4x2.",
+                            "rationale": "A caixa 4x2 é destinada a instalações embutidas em alvenaria.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Caixa Octogonal.",
+                            "rationale": "Caixas octogonais são geralmente utilizadas para pontos de luz no teto em instalações embutidas.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Conduletes.",
+                            "rationale": "Conduletes são caixas projetadas especificamente para instalações aparentes e para fazer conexões e desvios em eletrodutos rígidos de superfície.",
+                            "isCorrect": true
+                        },
+                        {
+                            "text": "Caixa de Piso.",
+                            "rationale": "Caixas de piso são projetadas para instalações embutidas no chão, e não para uso aparente.",
+                            "isCorrect": false
+                        }
+                    ],
+                    "hint": "O nome da peça é frequentemente associado ao tipo de eletroduto rígido com o qual trabalha em superfície."
+                },
+                {
+                    "questionNumber": 5,
+                    "question": "Segundo a NR-10 (Segurança em Instalações e Serviços em Eletricidade), qual é a 'Regra de Ouro' que deve ser rigorosamente seguida antes de iniciar qualquer trabalho na infraestrutura elétrica (passagem de cabos, fixação de caixas, etc.)?",
+                    "answerOptions": [
+                        {
+                            "text": "Usar obrigatoriamente luvas de borracha classe 00.",
+                            "rationale": "O uso de EPIs é um requisito essencial, mas a Regra de Ouro é o primeiro e mais crítico passo de segurança.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Garantir que a área de trabalho esteja devidamente isolada e sinalizada.",
+                            "rationale": "Isolamento e sinalização são medidas de segurança importantes, mas a prioridade máxima é eliminar o risco de energia.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Realizar o bloqueio de religamento (LOTO).",
+                            "rationale": "LOTO (Lockout/Tagout) é parte do procedimento, mas a Regra de Ouro engloba o estado da instalação em si.",
+                            "isCorrect": false
+                        },
+                        {
+                            "text": "Desenergizar totalmente a instalação ou o circuito em questão.",
+                            "rationale": "A desenergização total (seccionamento) é a 'Regra de Ouro' da NR-10, sendo o requisito fundamental para garantir a segurança em trabalhos elétricos.",
+                            "isCorrect": true
+                        }
+                    ],
+                    "hint": "A 'Regra de Ouro' se refere à ação que elimina totalmente o risco principal da eletricidade."
+                }
+            ]
+        };
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let quizActive = true;
+
+        const questionArea = document.getElementById('question-area');
+        const nextButton = document.getElementById('next-button');
+        const progressText = document.getElementById('progress-text');
+        const resultModal = document.getElementById('result-modal');
+        const finalScoreText = document.getElementById('final-score');
+        const messageText = document.getElementById('message');
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.questions.length) {
+                showResults();
+                return;
+            }
+
+            const currentQuestion = quizData.questions[currentQuestionIndex];
+            
+            // Renderiza o HTML da pergunta
+            questionArea.innerHTML = `
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">Pergunta ${currentQuestion.questionNumber} de ${quizData.questions.length}</h2>
+                    <p class="text-lg text-gray-700 font-medium">${currentQuestion.question}</p>
+                    <p class="text-sm text-cyan-700 italic mt-3 p-2 bg-cyan-50 border-l-4 border-cyan-400 rounded-md">
+                        Dica: ${currentQuestion.hint}
+                    </p>
+                </div>
+                <div id="options-container" class="space-y-4 mb-4">
+                    ${currentQuestion.answerOptions.map((option, index) => `
+                        <button class="option-button w-full text-left p-4 border-2 border-gray-300 rounded-lg bg-white text-gray-700 shadow-sm"
+                                data-index="${index}"
+                                onclick="selectOption(this, ${index})">
+                            ${option.text}
+                        </button>
+                    `).join('')}
+                </div>
+                <div id="rationale-area" class="mt-4 p-4 bg-gray-100 border-l-4 border-gray-400 rounded-lg hidden">
+                    <p class="font-bold text-gray-800">Justificativa:</p>
+                    <p id="rationale-text" class="text-sm text-gray-700 mt-1"></p>
+                </div>
+            `;
+            
+            // Atualiza o progresso
+            progressText.textContent = `Pergunta ${currentQuestion.questionNumber}/${quizData.questions.length}`;
+
+            // Reset o botão "Avançar"
+            nextButton.disabled = true;
+            nextButton.textContent = "Avançar";
+
+            // Se for MathJax, garante que seja renderizado
+            if (window.MathJax) {
+                window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
+            }
+        }
+
+        function selectOption(selectedButton, selectedIndex) {
+            if (!quizActive) return;
+
+            const currentQuestion = quizData.questions[currentQuestionIndex];
+            const options = currentQuestion.answerOptions;
+            const optionsContainer = document.getElementById('options-container');
+            const rationaleArea = document.getElementById('rationale-area');
+            const rationaleText = document.getElementById('rationale-text');
+            let isAnswerCorrect = false;
+
+            // Desabilita todos os botões e aplica a classe 'disabled'
+            Array.from(optionsContainer.children).forEach(button => {
+                button.classList.add('disabled');
+                
+                const optionIndex = parseInt(button.getAttribute('data-index'));
+                const optionData = options[optionIndex];
+
+                if (optionData.isCorrect) {
+                    button.classList.add('correct');
+                } else if (button === selectedButton && !optionData.isCorrect) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            // Adiciona a classe 'selected' ao botão clicado (para feedback visual)
+            selectedButton.classList.add('selected');
+
+            // Verifica se a resposta está correta
+            if (options[selectedIndex].isCorrect) {
+                score++;
+                isAnswerCorrect = true;
+            }
+
+            // Exibe a Justificativa
+            rationaleArea.classList.remove('hidden');
+            const correctOption = options.find(opt => opt.isCorrect);
+            rationaleText.innerHTML = `${correctOption.rationale} <br><span class="font-semibold">${isAnswerCorrect ? 'Correto!' : 'Incorreto.'}</span>`;
+
+            // Habilita o botão "Avançar"
+            nextButton.disabled = false;
+        }
+
+        function goToNextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            let message = '';
+            if (score === quizData.questions.length) {
+                message = "Parabéns! Você demonstrou um domínio excelente sobre a infraestrutura elétrica.";
+            } else if (score >= quizData.questions.length / 2) {
+                message = "Muito bom! Você acertou a maioria das questões. Revise as seções de segurança e dimensionamento para aprimorar.";
+            } else {
+                message = "Continue praticando! Reveja o conteúdo sobre QDC e eletrodutos para melhorar seus resultados.";
+            }
+
+            finalScoreText.textContent = `${score}/${quizData.questions.length}`;
+            messageText.textContent = message;
+            resultModal.style.display = 'flex';
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizActive = true;
+            resultModal.style.display = 'none';
+            loadQuestion();
+        }
+
+        // Event Listeners
+        nextButton.addEventListener('click', goToNextQuestion);
+
+        // Inicia o Quiz
+        document.addEventListener('DOMContentLoaded', loadQuestion);
+    </script>
+</body>
+</html>

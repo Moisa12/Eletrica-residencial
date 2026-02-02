@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 14</title>
+    
+    <style>
+        /* ESTILO PADRONIZADO CONFORME MODELO AULA 04 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; /* Espaço para o cabeçalho fixo */
+        }
+
+        /* Cabeçalho Fixo Padronizado */
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; text-transform: uppercase; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        /* Container de Conteúdo */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        h2 { 
+            color: #2c3e50; 
+            border-left: 6px solid #f1c40f; 
+            padding-left: 15px; 
+            margin-top: 40px;
+            font-size: 1.8rem;
+        }
+
+        h3 { color: #2980b9; margin-top: 25px; font-size: 1.4rem; }
+        
+        p { 
+            margin-bottom: 1.5rem; 
+            text-align: justify; 
+            font-size: 1.05rem;
+        }
+
+        /* Destaque de Fórmulas (Math Box) */
+        .formula-box {
+            background-color: #2c3e50;
+            color: #f1c40f;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            margin: 30px 0;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            line-height: 1.8;
+        }
+
+        /* Tabelas Estilizadas */
+        .table-container { 
+            overflow-x: auto; 
+            margin: 30px 0; 
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background-color: #fff; 
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td { 
+            border: 1px solid #dee2e6; 
+            padding: 15px; 
+            text-align: left; 
+        }
+        
+        th { 
+            background-color: #34495e; 
+            color: #fff; 
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        tr:nth-child(even) { background-color: #f8f9fa; }
+
+        /* Caixas de Exemplo e Alerta */
+        .alert { 
+            padding: 20px; 
+            background-color: #fff3cd; 
+            border-left: 6px solid #f1c40f; 
+            margin: 30px 0; 
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .example-box { 
+            background-color: #e8f5e9; 
+            border-left: 6px solid #2e7d32; 
+            padding: 25px; 
+            margin: 25px 0; 
+            border-radius: 8px; 
+        }
+        
+        .example-box h4 {
+            margin-top: 0;
+            color: #1b5e20;
+            font-size: 1.2rem;
+        }
+
+        .danger-box {
+            background-color: #fdf2f2;
+            border-left: 6px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* Listas */
+        .list-standard { padding-left: 25px; margin-bottom: 1.5rem; }
+        .list-standard li { margin-bottom: 10px; }
+
+        /* Rodapé Padronizado */
+        footer { 
+            background-color: #2c3e50; 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 30px 0; 
+            margin-top: 60px; 
+            width: 100%; 
+            border-top: 5px solid #f1c40f;
+        }
+
+        footer p { margin: 0; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .container { padding: 20px; margin: 10px; }
+            .logo-header { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 18</h1>
+        <div class="subtitle">Infraestrutura da Instalação Elétrica</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        
+        <div class="alert" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <p style="margin: 0;">
+                A infraestrutura é a base de qualquer instalação elétrica segura e durável. Exploraremos os eletrodutos, caixas de passagem e o Quadro de Distribuição de Cargas (QDC), seguindo as diretrizes da <strong>NBR 5410</strong>.
+            </p>
+        </div>
+
+        <h2>1. Eletrodutos: Proteção Mecânica</h2>
+        
+        <h3>1.1 Eletrodutos Flexíveis</h3>
+        <p>Utilizados principalmente em trechos que exigem curvas ou embutimento em alvenaria e lajes.</p>
+        
+        <ul class="list-standard">
+            <li><strong>Laranja Corrugado (Reforçado):</strong> Aplicado embutido em lajes de concreto e contra pisos. Alta resistência diametral ($750 \text{ N}/5\text{cm}$).</li>
+            <li><strong>Amarelo Corrugado (Padrão):</strong> Para instalações embutidas em paredes de alvenaria e drywall. Resistência padrão ($320 \text{ N}/5\text{cm}$). <strong>Não usar em lajes.</strong></li>
+            <li><strong>Metálico Flexível:</strong> Conexão de motores e máquinas sujeitas a vibração.</li>
+        </ul>
+
+        <h3>1.2 Eletrodutos Rígidos</h3>
+        <ul class="list-standard">
+            <li><strong>PVC Rígido (Rosqueável):</strong> Usado em instalações aparentes ou subterrâneas.</li>
+            <li><strong>Aço Rígido (Metálico):</strong> Máxima proteção mecânica. Áreas industriais ou locais sujeitos a explosão.</li>
+        </ul>
+
+        <h2>2. Caixas de Passagem e de Luz</h2>
+        <p>As caixas acomodam emendas e dispositivos nos pontos terminais ou de derivação.</p>
+        <ul class="list-standard">
+            <li><strong>Caixa 4x2:</strong> Pontos de luz e tomadas simples (Retangular).</li>
+            <li><strong>Caixa 4x4:</strong> Múltiplos dispositivos ou maior volume de cabos (Quadrada).</li>
+            <li><strong>Caixa Octogonal:</strong> Pontos de luz no teto (luminárias).</li>
+            <li><strong>Conduletes:</strong> Utilizados em instalações aparentes (alumínio ou PVC).</li>
+        </ul>
+
+        <h2>3. Dimensionamento (NBR 5410)</h2>
+        <h3>3.1 Taxa Máxima de Ocupação</h3>
+        <p>Para garantir a dissipação de calor e facilitar a passagem dos fios, respeite os limites abaixo:</p>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quantidade de Condutores</th>
+                        <th>Ocupação Máxima (Área Útil)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Um condutor</td>
+                        <td>53%</td>
+                    </tr>
+                    <tr>
+                        <td>Dois condutores</td>
+                        <td>31%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Três ou mais condutores</strong></td>
+                        <td><strong>40%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <h4>Exemplo Prático: Dimensionamento para Cabo 6 $mm^2$</h4>
+            <p><strong>Cálculo da Seção Mínima:</strong></p>
+            <div class="formula-box">
+                S<sub>tc</sub> (3 cabos) = 3 × 30 mm² = 90 mm² <br>
+                S<sub>Eletroduto</sub> = (90 × 100) / 40 = 225 mm²
+            </div>
+            <p><strong>Conclusão:</strong> O Eletroduto de 20mm ($186 mm^2$) é insuficiente. Escolhe-se o de <strong>25mm ($3/4''$)</strong> que possui $283 mm^2$.</p>
+        </div>
+
+        <h2>4. Quadro de Distribuição de Cargas (QDC)</h2>
+        
+        <p>O QDC centraliza a proteção e distribuição da energia:</p>
+        <ul class="list-standard">
+            <li><strong>Disjuntor Geral:</strong> Interrupção total da energia.</li>
+            <li><strong>Dispositivo DR:</strong> Proteção contra choques elétricos (Obrigatório em áreas molhadas).</li>
+            <li><strong>Dispositivo DPS:</strong> Proteção contra surtos (raios).</li>
+        </ul>
+
+        <h2>5. Segurança e Ferramentas (NR-10)</h2>
+        <div class="danger-box">
+            <strong>Regra de Ouro:</strong> Antes de qualquer atividade na infraestrutura, a instalação deve estar totalmente <strong>desenergizada</strong>.
+        </div>
+        <p><strong>EPIs Essenciais:</strong> Luvas isolantes, óculos e calçados sem componentes metálicos. Use sempre o <strong>passa fio</strong> para evitar danos aos condutores.</p>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 18</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script>
+        MathJax.Hub.Config({
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script>
+</body>
+</html>

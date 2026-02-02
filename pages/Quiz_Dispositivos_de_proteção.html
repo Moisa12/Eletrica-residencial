@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Dispositivos de Proteção Elétrica</title>
+    <!-- Carrega o Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Fundo leve */
+            padding-top: 140px; /* Espaço para o cabeçalho fixo */
+        }
+        
+        /* Cabeçalho Fixo Personalizado */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1e40af; /* Azul Escuro (blue-800) */
+            color: white;
+            padding: 1.5rem;
+            z-index: 50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilização das opções de rádio */
+        .option-label {
+            display: block;
+            padding: 1.25rem;
+            background-color: #ffffff; /* Fundo branco */
+            border: 2px solid #cbd5e1; /* gray-300 */
+            border-radius: 0.75rem; /* Mais arredondado */
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option-label:hover {
+            background-color: #eff6ff; /* blue-50 */
+            border-color: #3b82f6; /* blue-500 */
+        }
+
+        input[type="radio"]:checked + .option-label {
+            background-color: #dbeafe; /* blue-100 */
+            border-color: #1e40af; /* blue-800 */
+            font-weight: 700;
+            color: #1e40af;
+        }
+
+        /* Feedback visual (cores) */
+        .correct-answer {
+            background-color: #dcfce7 !important; /* green-100 */
+            border-color: #15803d !important; /* green-700 */
+            color: #16a34a !important; /* green-600 */
+        }
+        
+        .wrong-answer {
+            background-color: #fee2e2 !important; /* red-100 */
+            border-color: #b91c1c !important; /* red-700 */
+            color: #ef4444 !important; /* red-500 */
+        }
+
+        .feedback-text {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Fixo Conforme Solicitação -->
+    <header>
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Quiz: Dispositivos de proteção</h1>
+            <p class="text-lg md:text-xl text-blue-200 font-light">Teste seus conhecimentos sobre o Disjuntor, o DR e o DPS.</p>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto p-4 sm:p-6">
+        
+        <form id="quizForm" class="space-y-10">
+            
+            <!-- Questão 1: DR -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">1. Qual dispositivo é responsável por proteger as pessoas contra choques elétricos ao detectar correntes de fuga?</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q1" value="a" class="hidden">
+                        <span class="option-label">a) Disjuntor Termomagnético</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="b" class="hidden">
+                        <span class="option-label">b) Dispositivo Diferencial Residual (DR)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="c" class="hidden">
+                        <span class="option-label">c) Dispositivo de Proteção contra Surtos (DPS)</span>
+                    </label>
+                </div>
+                <div id="feedback-q1" class="feedback-text"></div>
+            </div>
+
+            <!-- Questão 2: Disjuntor (Magnético) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">2. O Disjuntor Termomagnético possui dois disparadores. O disparador MAGNÉTICO atua contra:</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q2" value="a" class="hidden">
+                        <span class="option-label">a) Curto-circuito (aumentos bruscos e elevados de corrente)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="b" class="hidden">
+                        <span class="option-label">b) Sobrecarga (aquecimento lento e gradual)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="c" class="hidden">
+                        <span class="option-label">c) Surtos de tensão vindos da rede elétrica</span>
+                    </label>
+                </div>
+                <div id="feedback-q2" class="feedback-text"></div>
+            </div>
+
+            <!-- Questão 3: DPS -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">3. Qual é a principal função do DPS (Dispositivo de Proteção contra Surtos)?</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q3" value="a" class="hidden">
+                        <span class="option-label">a) Desligar o circuito quando ligamos muitos aparelhos na tomada.</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="b" class="hidden">
+                        <span class="option-label">b) Proteger contra choques elétricos no chuveiro.</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="c" class="hidden">
+                        <span class="option-label">c) Desviar sobretensões transitórias (raios) para a terra.</span>
+                    </label>
+                </div>
+                <div id="feedback-q3" class="feedback-text"></div>
+            </div>
+
+            <!-- Questão 4: DR (Sensibilidade) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">4. Segundo a NBR 5410, qual é a sensibilidade do DR recomendada para proteção de vidas (proteção pessoal)?</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q4" value="a" class="hidden">
+                        <span class="option-label">a) 30 mA</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="b" class="hidden">
+                        <span class="option-label">b) 100 mA</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="c" class="hidden">
+                        <span class="option-label">c) 500 mA</span>
+                    </label>
+                </div>
+                <div id="feedback-q4" class="feedback-text"></div>
+            </div>
+
+            <!-- Questão 5: Disjuntor (Curva C) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">5. Qual disjuntor (curva de atuação) é o mais indicado para circuitos gerais residenciais e tomadas comuns?</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q5" value="a" class="hidden">
+                        <span class="option-label">a) Curva B (Cargas resistivas puras)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value="b" class="hidden">
+                        <span class="option-label">b) Curva C (Cargas indutivas e uso geral)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q5" value="c" class="hidden">
+                        <span class="option-label">c) Curva D (Grandes motores industriais)</span>
+                    </label>
+                </div>
+                <div id="feedback-q5" class="feedback-text"></div>
+            </div>
+
+            <!-- Questão 6: DPS (Local de Instalação) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                <h3 class="text-xl font-bold text-gray-800 mb-5">6. Onde o DPS Classe II deve ser instalado preferencialmente?</h3>
+                <div class="space-y-4">
+                    <label>
+                        <input type="radio" name="q6" value="a" class="hidden">
+                        <span class="option-label">a) Diretamente na tomada do equipamento sensível.</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q6" value="b" class="hidden">
+                        <span class="option-label">b) No padrão de entrada junto ao medidor (poste).</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="q6" value="c" class="hidden">
+                        <span class="option-label">c) No Quadro de Distribuição de Circuitos (QDC).</span>
+                    </label>
+                </div>
+                <div id="feedback-q6" class="feedback-text"></div>
+            </div>
+
+            <!-- Botão de Enviar -->
+            <div class="text-center mt-12 mb-16">
+                <button type="button" onclick="calcularResultado()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full shadow-xl text-xl transition duration-300 transform hover:scale-105">
+                    Verificar Respostas
+                </button>
+                <div id="resultado-final" class="mt-8 p-4 bg-white rounded-lg shadow-inner text-2xl font-bold text-gray-800 hidden"></div>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="py-6 bg-gray-800 text-white text-center text-sm">
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais </p>
+    </footer>
+
+    <!-- Script de Lógica do Quiz -->
+    <script>
+        // Gabarito do Quiz
+        const gabarito = {
+            q1: 'b', // DR (Proteção contra choque/fuga)
+            q2: 'a', // Magnético (Curto-circuito)
+            q3: 'c', // DPS (Desviar sobretensões/raios)
+            q4: 'a', // 30 mA (Proteção pessoal)
+            q5: 'b', // Curva C (Uso geral)
+            q6: 'c'  // DPS Classe II (No QDC)
+        };
+
+        function calcularResultado() {
+            let acertos = 0;
+            const total = Object.keys(gabarito).length;
+
+            for (let questao in gabarito) {
+                const respostaCorreta = gabarito[questao];
+                const opcoes = document.getElementsByName(questao);
+                let respondido = false;
+                const feedbackEl = document.getElementById(`feedback-${questao}`);
+                
+                // Configura feedback inicial
+                feedbackEl.style.display = 'block';
+                feedbackEl.className = 'feedback-text mt-3 p-3 rounded';
+
+                for (let i = 0; i < opcoes.length; i++) {
+                    const label = opcoes[i].nextElementSibling;
+                    
+                    // Limpa estilos de resposta (exceto o check do rádio)
+                    label.classList.remove('correct-answer', 'wrong-answer');
+
+                    if (opcoes[i].checked) {
+                        respondido = true;
+                        
+                        if (opcoes[i].value === respostaCorreta) {
+                            acertos++;
+                            label.classList.add('correct-answer');
+                            feedbackEl.innerHTML = `✓ Correto! A resposta é: <span class="font-bold">${label.textContent.trim()}</span>`;
+                            feedbackEl.classList.add('bg-green-100', 'text-green-800');
+                            feedbackEl.classList.remove('bg-red-100', 'text-red-800', 'bg-orange-100', 'text-orange-800');
+                        } else {
+                            label.classList.add('wrong-answer');
+                            
+                            // Adiciona estilo à resposta correta não marcada (apenas visual)
+                            const labelCorreta = document.querySelector(`input[name="${questao}"][value="${respostaCorreta}"]`).nextElementSibling;
+                            labelCorreta.classList.add('correct-answer');
+                            
+                            feedbackEl.innerHTML = `✗ Incorreto. A resposta correta era: <span class="font-bold">${labelCorreta.textContent.trim()}</span>.`;
+                            feedbackEl.classList.add('bg-red-100', 'text-red-800');
+                            feedbackEl.classList.remove('bg-green-100', 'text-green-800', 'bg-orange-100', 'text-orange-800');
+                        }
+                    }
+                }
+
+                if (!respondido) {
+                    // Adiciona estilo à resposta correta não marcada (apenas visual)
+                    const labelCorreta = document.querySelector(`input[name="${questao}"][value="${respostaCorreta}"]`).nextElementSibling;
+                    labelCorreta.classList.add('correct-answer');
+                    
+                    feedbackEl.innerHTML = "⚠ Você não respondeu esta questão. A resposta correta está destacada em verde.";
+                    feedbackEl.classList.add('bg-orange-100', 'text-orange-800');
+                    feedbackEl.classList.remove('bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+                }
+            }
+
+            const divResultado = document.getElementById('resultado-final');
+            divResultado.classList.remove('hidden');
+            divResultado.innerHTML = `Você acertou <span class="text-blue-600">${acertos}</span> de ${total} questões!`;
+            
+            // Rola suavemente para o resultado
+            divResultado.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+
+</body>
+</html>

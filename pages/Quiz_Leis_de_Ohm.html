@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Leis de Ohm - 1ª e 2ª Leis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuração do MathJax para renderizar fórmulas LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate-900 */
+            color: #e2e8f0; /* Slate-200 */
+        }
+        .quiz-card {
+            background-color: #1e293b; /* Slate-800 */
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            background-color: #334155; /* Slate-700 */
+            color: #f1f5f9; /* Slate-100 */
+            transition: all 0.2s;
+            border: 1px solid #475569;
+        }
+        .option-btn:hover:not(.selected):not(.correct):not(.incorrect) {
+            background-color: #475569; /* Slate-600 */
+            transform: translateY(-1px);
+        }
+        .option-btn.selected {
+            border: 2px solid #6366f1; /* Indigo-500 */
+            background-color: #4f46e5; /* Indigo-600 */
+        }
+        .option-btn.correct {
+            background-color: #10b981; /* Emerald-500 */
+            border-color: #059669;
+            color: white;
+            font-weight: bold;
+        }
+        .option-btn.incorrect {
+            background-color: #ef4444; /* Red-500 */
+            border-color: #dc2626;
+            color: white;
+            font-weight: bold;
+        }
+        .rationale {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 4px solid #f97316; /* Orange-500 */
+            background-color: #2a3447;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-indigo-900/50 p-6 shadow-xl border-b border-indigo-700">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-indigo-300">
+                <span class="text-5xl mr-2">⚡</span> Quiz: Leis de Ohm
+            </h1>
+            <p class="text-lg text-indigo-400 mt-1">Teste seus conhecimentos sobre a 1ª e 2ª Lei de Ohm.</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6">
+        <div id="quiz-container">
+            <!-- Questions will be rendered here -->
+        </div>
+
+        <div class="flex justify-center mt-8 mb-12">
+            <button id="submit-btn" onclick="submitQuiz()" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg rounded-full shadow-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                Finalizar e Corrigir Quiz
+            </button>
+        </div>
+        
+        <div id="results-container" class="hidden quiz-card bg-green-900/30 border border-green-700">
+            <h2 class="text-3xl font-bold text-center mb-4 text-green-300">Resultado do Quiz</h2>
+            <p id="score-display" class="text-center text-4xl font-extrabold text-white mb-4"></p>
+            <p class="text-center text-lg text-gray-300">Revise as questões onde você errou e leia a justificativa para aprender!</p>
+            <button onclick="window.location.reload()" class="mt-4 block mx-auto px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+                Tentar Novamente
+            </button>
+        </div>
+
+    </main>
+
+    <script>
+        // Variável para armazenar as respostas do usuário (índice da questão -> índice da opção)
+        let userAnswers = {};
+        let isSubmitted = false;
+        
+        // Dados do Quiz (JSON importado do arquivo 'ohm_laws_quiz_01')
+        const quizData = [
+            {
+                "questionNumber": 1,
+                "question": "Qual foi a principal contribuição de Georg Simon Ohm, resumida em sua Primeira Lei, para a eletricidade?",
+                "options": [
+                    { "text": "O princípio da conservação de energia nos circuitos.", "isCorrect": false, "rationale": "Embora importante, este princípio foi estabelecido por Kirchhoff e não é o foco principal da Lei de Ohm." },
+                    { "text": "A relação matemática exata entre Tensão, Corrente e Resistência.", "isCorrect": true, "rationale": "A Primeira Lei de Ohm estabeleceu que em um resistor ôhmico, a Tensão é o produto da Corrente pela Resistência ($U=R \\cdot I$).", "formula": "$U=R \\cdot I$" },
+                    { "text": "A descoberta de que a eletricidade pode ser gerada por magnetismo.", "isCorrect": false, "rationale": "Esta descoberta está ligada aos estudos de indução eletromagnética, como os de Faraday." },
+                    { "text": "O cálculo da potência elétrica de equipamentos.", "isCorrect": false, "rationale": "O cálculo da potência ($P=U \\cdot I$) é uma aplicação, mas não a contribuição fundamental de Ohm." }
+                ],
+                "hint": "Pense nas três grandezas fundamentais (U, R, I) que a Lei conecta."
+            },
+            {
+                "questionNumber": 2,
+                "question": "A Primeira Lei de Ohm é expressa pela fórmula $U = R \\cdot I$. O que essa relação indica sobre a Tensão ($U$) e a Corrente ($I$) em um resistor ôhmico, considerando a Resistência ($R$) constante?",
+                "options": [
+                    { "text": "A Tensão é inversamente proporcional à Corrente.", "isCorrect": false, "rationale": "Para que isso fosse verdade, a Corrente teria que aparecer no denominador da fórmula ($U = R/I$).", "formula": "$U = R/I$" },
+                    { "text": "A Corrente é sempre igual à Tensão, independentemente da Resistência.", "isCorrect": false, "rationale": "Isto está incorreto; a Resistência sempre limita o fluxo de Corrente, conforme a fórmula." },
+                    { "text": "A Tensão é diretamente proporcional à Corrente.", "isCorrect": true, "rationale": "Isso significa que, se a Tensão aumentar, a Corrente também aumenta na mesma proporção, desde que $R$ seja constante." },
+                    { "text": "A Resistência varia com o quadrado da Corrente.", "isCorrect": false, "rationale": "Esta variação não é prevista pela Primeira Lei de Ohm em resistores ôhmicos ideais." }
+                ],
+                "hint": "Observe a posição das variáveis $U$ e $I$ em relação ao sinal de igualdade na fórmula. O que aumenta junto?"
+            },
+            {
+                "questionNumber": 3,
+                "question": "Se um motor elétrico ligado a uma tomada de $127\\ V$ consome uma corrente de $5\\ A$, qual é a resistência elétrica ($R$) do motor?",
+                "options": [
+                    { "text": "$635\\ \\Omega$", "isCorrect": false, "rationale": "Este valor seria obtido pela multiplicação das grandezas, não pela divisão para encontrar a Resistência." },
+                    { "text": "$25.4\\ \\Omega$", "isCorrect": true, "rationale": "A Resistência é calculada pela divisão da Tensão pela Corrente: $R = 127\\ V / 5\\ A = 25.4\\ \\Omega$.", "formula": "$R = 127\\ V / 5\\ A = 25.4\\ \\Omega$" },
+                    { "text": "$0.039\\ \\Omega$", "isCorrect": false, "rationale": "Este seria o valor de $I/U$, que é a condutância, não a Resistência." },
+                    { "text": "$132\\ \\Omega$", "isCorrect": false, "rationale": "Este valor é o resultado da soma, o que não faz sentido neste contexto." }
+                ],
+                "hint": "Use a variação da fórmula que isola a Resistência: $R = U/I$."
+            },
+            {
+                "questionNumber": 4,
+                "question": "Uma lâmpada incandescente tem uma resistência de $44\\ \\Omega$. Ao ser ligada em uma rede de $220\\ V$, qual a corrente ($I$) que passará por ela?",
+                "options": [
+                    { "text": "$5\\ A$", "isCorrect": true, "rationale": "A Corrente é calculada pela divisão da Tensão pela Resistência: $I = 220\\ V / 44\\ \\Omega = 5\\ A$.", "formula": "$I = 220\\ V / 44\\ \\Omega = 5\\ A$" },
+                    { "text": "$9680\\ A$", "isCorrect": false, "rationale": "Este seria o valor da multiplicação ($U \\cdot R$), que é a Tensão ao quadrado, o que está incorreto para a Corrente." },
+                    { "text": "$0.2\\ A$", "isCorrect": false, "rationale": "Este valor seria o resultado de $R/U$, que não corresponde à Corrente." },
+                    { "text": "$176\\ A$", "isCorrect": false, "rationale": "Este valor é o resultado da subtração, o que não se aplica à Lei de Ohm." }
+                ],
+                "hint": "Para calcular a Corrente ($I$), você deve dividir a Tensão ($U$) pela Resistência ($R$)."
+            },
+            {
+                "questionNumber": 5,
+                "question": "Um aquecedor com resistência de $3\\ \\Omega$ é percorrido por uma corrente de $40\\ A$. Qual é a Tensão ($U$) aplicada ao aquecedor?",
+                "options": [
+                    { "text": "$13.33\\ V$", "isCorrect": false, "rationale": "Este valor seria o resultado da divisão da Resistência pela Corrente, o que está incorreto para a Tensão." },
+                    { "text": "$120\\ V$", "isCorrect": true, "rationale": "A Tensão é o produto da Resistência pela Corrente: $U = 3\\ \\Omega \\cdot 40\\ A = 120\\ V$.", "formula": "$U = 3\\ \\Omega \\cdot 40\\ A = 120\\ V$" },
+                    { "text": "$43\\ V$", "isCorrect": false, "rationale": "Este valor é o resultado da soma, o que não se aplica à Lei de Ohm." },
+                    { "text": "$0.075\\ V$", "isCorrect": false, "rationale": "Este valor é o resultado da divisão de $I/R$, que não corresponde à Tensão." }
+                ],
+                "hint": "Para calcular a Tensão, use a forma principal da Primeira Lei de Ohm: $U = R \\cdot I$."
+            },
+            {
+                "questionNumber": 6,
+                "question": "De acordo com a Segunda Lei de Ohm ($R = \\rho \\cdot L/A$), quais são os três fatores físicos que determinam a Resistência de um condutor?",
+                "options": [
+                    { "text": "Potência, Corrente e Tensão.", "isCorrect": false, "rationale": "Essas são grandezas relacionadas à Primeira Lei ou à Potência, mas não à geometria e material do condutor." },
+                    { "text": "Resistividade ($\\rho$), Comprimento ($L$) e Área de Seção Transversal ($A$).", "isCorrect": true, "rationale": "A Resistividade depende do material, e o Comprimento e a Área dependem da geometria do condutor, conforme a 2ª Lei." },
+                    { "text": "Frequência, Impedância e Fator de Potência.", "isCorrect": false, "rationale": "Essas grandezas são mais relevantes em circuitos de Corrente Alternada (CA)." },
+                    { "text": "Temperatura, Umidade e Pressão.", "isCorrect": false, "rationale": "Embora a temperatura afete $\\rho$, não são os fatores geométricos principais da 2ª Lei." }
+                ],
+                "hint": "Lembre-se das variáveis que compõem a fórmula $R = \\rho \\cdot L/A$."
+            },
+            {
+                "questionNumber": 7,
+                "question": "O que acontece com a Resistência Elétrica ($R$) de um cabo se seu Comprimento ($L$) for reduzido pela metade, mantendo o material e a bitola (área) constantes?",
+                "options": [
+                    { "text": "A Resistência aumenta.", "isCorrect": false, "rationale": "Como $R$ e $L$ são diretamente proporcionais, a redução de $L$ causa a redução de $R$." },
+                    { "text": "A Resistência dobra.", "isCorrect": false, "rationale": "Isto ocorreria se o Comprimento fosse dobrado, não reduzido pela metade." },
+                    { "text": "A Resistência é reduzida pela metade.", "isCorrect": true, "rationale": "Na Segunda Lei, $R$ é diretamente proporcional a $L$: se $L$ diminui pela metade, $R$ também diminui pela metade." },
+                    { "text": "A Resistência permanece a mesma.", "isCorrect": false, "rationale": "A Resistência depende linearmente do Comprimento do condutor." }
+                ],
+                "hint": "Pense na relação de proporcionalidade entre $R$ e $L$ na fórmula."
+            },
+            {
+                "questionNumber": 8,
+                "question": "Para minimizar a Resistência Elétrica de uma fiação e evitar quedas de tensão, qual estratégia o eletricista deve priorizar em relação à bitola (Área, $A$) do cabo?",
+                "options": [
+                    { "text": "Usar um cabo com menor bitola (Área $A$ pequena).", "isCorrect": false, "rationale": "Uma área menor aumentaria a Resistência, exacerbando a queda de tensão." },
+                    { "text": "Usar um cabo com maior bitola (Área $A$ grande).", "isCorrect": true, "rationale": "A Resistência é inversamente proporcional à Área ($A$): aumentar $A$ diminui $R$, melhorando a instalação." },
+                    { "text": "Usar um material de maior resistividade ($\\rho$).", "isCorrect": false, "rationale": "Um material de maior resistividade ($\\rho$) aumentaria a Resistência e a perda de energia." },
+                    { "text": "Aumentar o Comprimento ($L$) do cabo.", "isCorrect": false, "rationale": "Aumentar o Comprimento aumentaria a Resistência, o que é o oposto do objetivo." }
+                ],
+                "hint": "A Resistência é inversamente proporcional à Área de Seção Transversal do condutor."
+            },
+            {
+                "questionNumber": 9,
+                "question": "Um cabo de **Cobre** ($ \\rho_{\\text{cobre}} = 0.017\\ \\Omega \\cdot \\text{mm}^2/\\text{m}$) tem $80\\ m$ de comprimento ($L$) e $6\\ mm^2$ de área ($A$). Qual é a Resistência ($R$) total deste cabo?",
+                "options": [
+                    { "text": "$0.226\\ \\Omega$", "isCorrect": true, "rationale": "O cálculo é $R = 0.017 \\cdot 80 / 6 = 1.36 / 6 \\approx 0.226\\ \\Omega$.", "formula": "$R = 0.017 \\cdot 80 / 6 \\approx 0.226\\ \\Omega$" },
+                    { "text": "$0.816\\ \\Omega$", "isCorrect": false, "rationale": "Este valor é o resultado de $0.017 \\cdot 80 \\cdot 6$, que não corresponde à fórmula da 2ª Lei." },
+                    { "text": "$0.0035\\ \\Omega$", "isCorrect": false, "rationale": "Este valor é muito pequeno e seria obtido por uma divisão incorreta." },
+                    { "text": "$4.7\\ \\Omega$", "isCorrect": false, "rationale": "Este valor seria o resultado de uma divisão incorreta entre as grandezas." }
+                ],
+                "hint": "Utilize a fórmula $R = \\rho \\cdot \\frac{L}{A}$. Lembre-se de dividir pelo valor da Área ($A$)."
+            },
+            {
+                "questionNumber": 10,
+                "question": "No contexto da Lei de Ohm ($U=R \\cdot I$), qual das seguintes opções relaciona corretamente a grandeza elétrica e sua unidade de medida?",
+                "options": [
+                    { "text": "Tensão (Ampere, $A$)", "isCorrect": false, "rationale": "O Ampere ($A$) é a unidade de medida da Corrente Elétrica ($I$)." },
+                    { "text": "Corrente (Volt, $V$)", "isCorrect": false, "rationale": "O Volt ($V$) é a unidade de medida da Tensão Elétrica ($U$)." },
+                    { "text": "Resistência (Ohm, $\\Omega$)", "isCorrect": true, "rationale": "O Ohm ($\\Omega$) é a unidade de medida da Resistência Elétrica ($R$), em homenagem a Georg Simon Ohm." },
+                    { "text": "Potência (Watt, $W$)", "isCorrect": false, "rationale": "Embora correto, a Potência ($P$) não é uma das três grandezas primárias da Lei de Ohm." }
+                ],
+                "hint": "O nome da unidade de medida da Resistência é uma homenagem direta ao físico que a descobriu."
+            }
+        ];
+
+        function selectAnswer(questionIndex, optionIndex) {
+            if (isSubmitted) return; // Não permite alteração após a submissão
+
+            // Armazena a resposta
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Remove a classe 'selected' de todos os botões da questão
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            optionsContainer.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Adiciona a classe 'selected' ao botão clicado
+            const selectedButton = document.getElementById(`q${questionIndex}-o${optionIndex}`);
+            selectedButton.classList.add('selected');
+
+            updateSubmitButtonState();
+        }
+
+        function updateSubmitButtonState() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const totalQuestions = quizData.length;
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (answeredCount === totalQuestions) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Finalizar e Corrigir Quiz (10/10)';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.textContent = `Finalizar e Corrigir Quiz (${answeredCount}/${totalQuestions})`;
+            }
+        }
+
+        function renderQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            let html = '';
+
+            quizData.forEach((q, qIndex) => {
+                let optionsHtml = '';
+                q.options.forEach((option, oIndex) => {
+                    optionsHtml += `
+                        <button id="q${qIndex}-o${oIndex}" class="option-btn" 
+                                onclick="selectAnswer(${qIndex}, ${oIndex})">
+                            ${option.text}
+                        </button>
+                    `;
+                });
+
+                html += `
+                    <div class="quiz-card" id="question-${qIndex}">
+                        <h3 class="text-xl font-bold text-indigo-400 mb-4">
+                            Questão ${q.questionNumber}
+                        </h3>
+                        <p class="text-lg mb-4 text-white">${q.question}</p>
+                        
+                        <div id="options-${qIndex}">
+                            ${optionsHtml}
+                        </div>
+
+                        <div id="feedback-${qIndex}" class="hidden">
+                            <!-- Rationale will be placed here -->
+                        </div>
+                    </div>
+                `;
+            });
+            quizContainer.innerHTML = html;
+            
+            // Re-renderizar fórmulas MathJax após a inserção do HTML
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([quizContainer]);
+            }
+
+            // Inicialmente desabilita o botão de submissão
+            updateSubmitButtonState();
+        }
+
+        function submitQuiz() {
+            if (isSubmitted) return;
+            isSubmitted = true;
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('submit-btn').classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+            document.getElementById('submit-btn').classList.add('bg-gray-500');
+
+            let score = 0;
+
+            quizData.forEach((q, qIndex) => {
+                const selectedOptionIndex = userAnswers[qIndex];
+                const optionsContainer = document.getElementById(`options-${qIndex}`);
+                const feedbackContainer = document.getElementById(`feedback-${qIndex}`);
+                const questionElement = document.getElementById(`question-${qIndex}`);
+                
+                let rationaleText = '';
+
+                q.options.forEach((option, oIndex) => {
+                    const btn = document.getElementById(`q${qIndex}-o${oIndex}`);
+                    
+                    btn.onclick = null; // Desabilita cliques
+                    btn.classList.remove('selected');
+
+                    if (option.isCorrect) {
+                        btn.classList.add('correct');
+                        rationaleText = option.rationale; // Captura a justificativa da correta
+                    }
+                    
+                    if (oIndex === selectedOptionIndex) {
+                        if (option.isCorrect) {
+                            score++;
+                            questionElement.classList.add('border-l-4', 'border-green-500');
+                        } else {
+                            btn.classList.add('incorrect');
+                            questionElement.classList.add('border-l-4', 'border-red-500');
+                        }
+                    }
+                });
+
+                // Exibe a justificativa
+                feedbackContainer.innerHTML = `
+                    <div class="rationale">
+                        <p class="font-bold text-orange-300">Justificativa:</p>
+                        <p>${rationaleText}</p>
+                    </div>
+                `;
+                feedbackContainer.classList.remove('hidden');
+
+                // Re-renderizar fórmulas MathJax no feedback
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([feedbackContainer]);
+                }
+            });
+
+            // Exibe o resultado final
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.textContent = `${score} / ${quizData.length}`;
+            document.getElementById('results-container').classList.remove('hidden');
+            
+            // Rola a tela para o resultado
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicializa o quiz ao carregar a página
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

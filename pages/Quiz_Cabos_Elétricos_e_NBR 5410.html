@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interativo: Cabos Elétricos e NBR 5410</title>
+    <!-- Carrega o Tailwind CSS CDN para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte Inter como principal */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        /* Estilo base do botão de opção de resposta */
+        .option-button {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        /* Cor de fundo para o cabeçalho e card */
+        .quiz-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="quiz-card w-full max-w-2xl bg-white rounded-xl p-6 sm:p-8 lg:p-10">
+        
+        <!-- Título do Quiz -->
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-6 text-center">
+            Quiz: <span class="text-red-600">Cabos Elétricos e NBR 5410</span>
+        </h1>
+
+        <!-- Container Principal do Quiz -->
+        <div id="quiz-container">
+            
+            <!-- Tela Inicial/Status -->
+            <div id="status-screen" class="text-center space-y-4">
+                <p class="text-lg text-gray-700">Teste seus conhecimentos sobre Condutores Elétricos, cores e regras de emendas da NBR 5410.</p>
+                <button id="start-button" class="w-full sm:w-auto mt-4 px-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition duration-300 transform hover:scale-105 shadow-md">
+                    Iniciar Quiz
+                </button>
+                <div id="score-display" class="text-xl font-bold text-gray-600 mt-4">Pontuação: 0/0</div>
+            </div>
+
+            <!-- Área de Perguntas (Escondida Inicialmente) -->
+            <div id="question-area" class="hidden">
+                
+                <!-- Progresso e Pergunta -->
+                <div class="mb-6 space-y-4">
+                    <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div id="progress-indicator" class="bg-red-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p id="question-counter" class="text-sm font-semibold text-gray-500 text-right"></p>
+                    <h2 id="question-text" class="text-xl sm:text-2xl font-semibold text-gray-800"></h2>
+                    <div id="image-placeholder" class="mt-4 hidden">
+                         <!-- [Image of Image Placeholder] -->
+                    </div>
+                </div>
+
+                <!-- Opções de Resposta -->
+                <div id="options-container" class="space-y-3">
+                    <!-- Opções serão injetadas aqui -->
+                </div>
+
+                <!-- Feedback e Racional -->
+                <div id="feedback-area" class="mt-6 p-4 rounded-lg hidden">
+                    <p id="feedback-text" class="font-bold"></p>
+                    <p id="rationale-text" class="text-sm mt-1"></p>
+                </div>
+
+                <!-- Botão Próxima Pergunta (Escondido) -->
+                <div class="mt-6 text-right">
+                    <button id="next-button" class="px-6 py-2 bg-gray-400 text-white font-bold rounded-lg transition duration-300 hidden" disabled>
+                        Próxima Pergunta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Área de Resultados (Escondida Inicialmente) -->
+            <div id="results-area" class="text-center hidden space-y-6 mt-8">
+                <h2 class="text-3xl font-bold text-red-600">Resultado Final!</h2>
+                <p id="final-score" class="text-4xl font-extrabold text-gray-800"></p>
+                <p id="score-message" class="text-lg text-gray-700"></p>
+                <button id="restart-button" class="px-8 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition duration-300 transform hover:scale-105 shadow-md">
+                    Tentar Novamente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados do Quiz (JSON do arquivo quiz_cabos_eletricos_nbr5410.json)
+        const quizData = {
+            "questions": [{
+                "question": "De acordo com a ABNT NBR 5410, qual é a cor de isolamento reservada para o condutor Neutro (N) em instalações elétricas de baixa tensão?",
+                "answerOptions": [{
+                    "text": "Verde ou Verde/Amarelo",
+                    "isCorrect": false,
+                    "rationale": "As cores Verde e Verde/Amarelo são reservadas para o condutor de Proteção (Terra/PE), não para o Neutro."
+                }, {
+                    "text": "Preto, Vermelho ou Marrom",
+                    "isCorrect": false,
+                    "rationale": "Essas cores são comumente utilizadas para os condutores de Fase (L), permitidas pela norma, mas não são exclusivas do Neutro."
+                }, {
+                    "text": "Azul Claro",
+                    "isCorrect": true,
+                    "rationale": "A NBR 5410 exige que o condutor Neutro seja identificado pela cor Azul Claro, sendo este uso exclusivo."
+                }, {
+                    "text": "Qualquer cor, desde que identificada com fita",
+                    "isCorrect": false,
+                    "rationale": "A identificação de cor para o Neutro (Azul Claro) é obrigatória e não pode ser substituída apenas por fitas de identificação."
+                }],
+                "hint": "Lembre-se da regra de exclusividade de cores para condutores de proteção e neutro.",
+                "questionNumber": 1,
+                "imageUrl": ""
+            }, {
+                "question": "Qual é a principal diferença de composição entre um 'Fio Elétrico' (condutor rígido) e um 'Cabo Elétrico' (condutor flexível)?",
+                "answerOptions": [{
+                    "text": "O fio é feito de alumínio, e o cabo é feito de cobre.",
+                    "isCorrect": false,
+                    "rationale": "Embora existam condutores de alumínio, tanto fios quanto cabos utilizados em instalações residenciais são majoritariamente de cobre."
+                }, {
+                    "text": "O fio é revestido por PVC de dupla camada, e o cabo por PVC de camada única.",
+                    "isCorrect": false,
+                    "rationale": "O número de camadas de isolamento (simples ou dupla) está mais relacionado ao tipo de cabo (ex: Cabo PP) do que à diferença básica entre fio e cabo."
+                }, {
+                    "text": "O fio é composto por um único filamento maciço, e o cabo por múltiplos filamentos finos trançados.",
+                    "isCorrect": true,
+                    "rationale": "O fio possui um único condutor rígido, enquanto o cabo é formado por vários fios finos que lhe conferem flexibilidade (encordoamento)."
+                }, {
+                    "text": "O fio é para circuitos de iluminação, e o cabo para circuitos de tomadas.",
+                    "isCorrect": false,
+                    "rationale": "Tanto o fio quanto o cabo podem ser usados em qualquer circuito, desde que respeitada a seção mínima exigida pela NBR 5410."
+                }],
+                "hint": "A diferença reside na estrutura interna do condutor e como isso afeta a flexibilidade.",
+                "imageUrl": ""
+            }, {
+                "question": "Qual a principal exigência da NBR 5410 em relação ao local onde as emendas de condutores devem ser realizadas?",
+                "answerOptions": [{
+                    "text": "Em qualquer parte do eletroduto, desde que bem isoladas.",
+                    "isCorrect": false,
+                    "rationale": "É estritamente proibido realizar ou deixar emendas dentro de eletrodutos, pois causam aquecimento e dificultam a manutenção."
+                }, {
+                    "text": "Apenas dentro de quadros de distribuição (QDC).",
+                    "isCorrect": false,
+                    "rationale": "Embora o QDC contenha conexões, as emendas (uniões) de circuitos devem ser feitas em caixas de passagem e derivação."
+                }, {
+                    "text": "Exclusivamente nas caixas de passagem e derivação.",
+                    "isCorrect": true,
+                    "rationale": "As caixas de passagem são os únicos locais onde as emendas são permitidas para garantir a inspeção e manutenção."
+                }, {
+                    "text": "Nos bornes de tomadas e interruptores, junto ao dispositivo.",
+                    "isCorrect": false,
+                    "rationale": "As tomadas e interruptores são pontos de conexão, mas emendas que não sejam a própria conexão do borne devem estar na caixa de passagem."
+                }],
+                "hint": "Pense na necessidade de acesso para manutenção e segurança contra incêndio.",
+                "imageUrl": ""
+            }, {
+                "question": "Qual emenda manual é utilizada para criar um ramal ou ramificação a partir de um condutor principal que não é cortado?",
+                "answerOptions": [{
+                    "text": "Emenda Rabo de Rato",
+                    "isCorrect": false,
+                    "rationale": "A Emenda Rabo de Rato é usada para unir condutores de topo dentro de caixas de passagem."
+                }, {
+                    "text": "Emenda de Prolongamento",
+                    "isCorrect": false,
+                    "rationale": "A Emenda de Prolongamento une dois condutores em linha reta para estender o circuito."
+                }, {
+                    "text": "Emenda de Derivação",
+                    "isCorrect": true,
+                    "rationale": "A Emenda de Derivação (ou em T) é especificamente usada para ramificar um condutor principal sem interrompê-lo."
+                }, {
+                    "text": "Emenda Soldada",
+                    "isCorrect": false,
+                    "rationale": "A solda é um método de reforço, mas não o nome do tipo de geometria da emenda para ramificação."
+                }],
+                "hint": "O nome sugere que um condutor está sendo 'derivado' ou ramificado do principal.",
+                "imageUrl": ""
+            }, {
+                "question": "Qual é a principal vantagem da utilização de cabos flexíveis (em comparação com fios rígidos) em novas instalações, de acordo com a prática moderna?",
+                "answerOptions": [{
+                    "text": "Maior capacidade de condução de corrente (Amperagem).",
+                    "isCorrect": false,
+                    "rationale": "A capacidade de condução é determinada pela seção transversal (área em mm²) e não pela flexibilidade."
+                }, {
+                    "text": "Resistência superior a altas temperaturas.",
+                    "isCorrect": false,
+                    "rationale": "A resistência à temperatura depende do material isolante (PVC, XLPE) e não da flexibilidade do condutor."
+                }, {
+                    "text": "Facilidade e rapidez na instalação, especialmente em eletrodutos com curvas.",
+                    "isCorrect": true,
+                    "rationale": "A flexibilidade do cabo permite que ele deslize e se adapte mais facilmente a curvas e desvios no eletroduto, otimizando o tempo de trabalho."
+                }, {
+                    "text": "Menor custo de aquisição por metro.",
+                    "isCorrect": false,
+                    "rationale": "O custo pode variar, mas não é a principal razão técnica para a preferência do cabo flexível."
+                }],
+                "hint": "Pense no processo de 'passar' os cabos dentro da tubulação da parede.",
+                "imageUrl": ""
+            }, {
+                "question": "Para qual condutor a NBR 5410 exige, de forma exclusiva, a cor de isolamento Verde ou Verde/Amarelo?",
+                "answerOptions": [{
+                    "text": "Condutor de Fase (L)",
+                    "isCorrect": false,
+                    "rationale": "Os condutores de Fase usam cores variadas (preto, vermelho, marrom, etc.), desde que não sejam as cores exclusivas do Neutro ou Terra."
+                }, {
+                    "text": "Condutor Neutro (N)",
+                    "isCorrect": false,
+                    "rationale": "O Neutro tem o Azul Claro como cor exclusiva."
+                }, {
+                    "text": "Condutor de Retorno",
+                    "isCorrect": false,
+                    "rationale": "Condutores de Retorno utilizam cores de Fase ou uma cor específica diferente das de Fase, Neutro e Terra, mas não verde."
+                }, {
+                    "text": "Condutor de Proteção (PE)",
+                    "isCorrect": true,
+                    "rationale": "A cor Verde ou a combinação Verde/Amarelo é de uso exclusivo para o Condutor de Proteção (Terra/PE) em baixa tensão."
+                }],
+                "hint": "Esta cor é vital para a segurança e aterramento da instalação.",
+                "imageUrl": ""
+            }, {
+                "question": "O que a NBR 5410 define como a principal finalidade das instalações elétricas de baixa tensão?",
+                "answerOptions": [{
+                    "text": "Garantir o menor custo de projeto e execução da obra.",
+                    "isCorrect": false,
+                    "rationale": "O custo é um fator prático, mas a NBR 5410 foca em requisitos técnicos de segurança e desempenho, não em economia."
+                }, {
+                    "text": "Proporcionar a máxima estética e design para os pontos de utilização.",
+                    "isCorrect": false,
+                    "rationale": "A estética é uma preocupação arquitetônica, não o foco da NBR 5410, que é uma norma técnica de segurança."
+                }, {
+                    "text": "Garantir a segurança de pessoas e animais, e o funcionamento adequado da instalação.",
+                    "isCorrect": true,
+                    "rationale": "A segurança contra choques e incêndios, juntamente com o desempenho e a conservação dos bens, são os pilares da NBR 5410."
+                }, {
+                    "text": "Permitir o uso de cabos com seções inferiores às recomendadas, se forem flexíveis.",
+                    "isCorrect": false,
+                    "rationale": "A NBR 5410 estabelece seções mínimas que devem ser rigorosamente seguidas, independentemente da flexibilidade do condutor."
+                }],
+                "hint": "A norma é um código de segurança e boas práticas para proteger a vida e o patrimônio.",
+                "imageUrl": ""
+            }, {
+                "question": "Em relação à emenda Rabo de Rato, qual é a sua aplicação mais comum?",
+                "answerOptions": [{
+                    "text": "Estender o comprimento de um cabo em linha reta.",
+                    "isCorrect": false,
+                    "rationale": "Essa é a função da Emenda de Prolongamento, utilizada quando a fiação precisa ser mais longa."
+                }, {
+                    "text": "Conectar um eletrodoméstico à tomada.",
+                    "isCorrect": false,
+                    "rationale": "Essa conexão é feita por cabos PP e plugues, não por emendas manuais."
+                }, {
+                    "text": "Unir dois ou mais condutores de topo dentro de caixas de passagem.",
+                    "isCorrect": true,
+                    "rationale": "A emenda Rabo de Rato é usada para unir o final de vários condutores juntos dentro de uma caixa, sendo ideal para circuitos de iluminação."
+                }, {
+                    "text": "Criar um ponto de ramificação lateral em um cabo de grande diâmetro.",
+                    "isCorrect": false,
+                    "rationale": "Essa é a função da Emenda de Derivação (em T)."
+                }],
+                "hint": "Pense no formato do 'rabo' e onde esse tipo de união é feita (como em um ponto de luz).",
+                "imageUrl": ""
+            }, {
+                "question": "Qual é a desvantagem primária da Emenda Manual em relação ao uso de Conectores (como o Wago ou de Torção), conforme as práticas modernas de instalação?",
+                "answerOptions": [{
+                    "text": "É um método proibido pela NBR 5410.",
+                    "isCorrect": false,
+                    "rationale": "A NBR 5410 não proíbe a emenda manual, desde que bem executada, mas incentiva o uso de conectores."
+                }, {
+                    "text": "A emenda manual tem maior custo total.",
+                    "isCorrect": false,
+                    "rationale": "O custo de materiais da emenda manual (fita isolante) é geralmente menor, mas o custo de mão de obra e riscos são maiores."
+                }, {
+                    "text": "A dependência da qualidade de isolamento manual e risco de contato imperfeito.",
+                    "isCorrect": true,
+                    "rationale": "A emenda manual exige perfeição no isolamento (fita isolante) e depende da força do aperto, o que aumenta o risco de mau contato e aquecimento se mal executada. Conectores garantem padronização."
+                }, {
+                    "text": "A emenda manual só pode ser usada com fios rígidos e não com cabos flexíveis.",
+                    "isCorrect": false,
+                    "rationale": "As emendas manuais podem ser feitas em ambos, mas a complexidade e a qualidade podem ser um desafio em cabos muito finos."
+                }],
+                "hint": "Considere o fator humano e a garantia de qualidade na junção e isolamento.",
+                "imageUrl": ""
+            }, {
+                "question": "Em relação à solda em condutores elétricos, o que é permitido e o que é proibido pela NBR 5410 em instalações de baixa tensão?",
+                "answerOptions": [{
+                    "text": "A solda é obrigatória em todas as emendas de prolongamento.",
+                    "isCorrect": false,
+                    "rationale": "A solda é permitida para reforçar emendas, mas não é obrigatória. O aperto firme já deve garantir a conexão."
+                }, {
+                    "text": "É proibido soldar emendas, mas permitido soldar pontas para bornes de disjuntores.",
+                    "isCorrect": false,
+                    "rationale": "O inverso é o correto. A solda é permitida em emendas para reforço, mas proibida nas pontas para bornes para evitar o escoamento do metal sob pressão."
+                }, {
+                    "text": "É permitido soldar emendas para reforço, mas proibido soldar as pontas dos cabos para conexão em bornes (parafusos).",
+                    "isCorrect": true,
+                    "rationale": "A solda nas pontas é proibida, pois pode causar o 'escoamento a frio' do metal sob pressão do parafuso, comprometendo a conexão e causando aquecimento."
+                }, {
+                    "text": "É proibido o uso de solda em qualquer parte da instalação elétrica.",
+                    "isCorrect": false,
+                    "rationale": "A solda é permitida nas emendas manuais para garantir a conexão elétrica e mecânica antes do isolamento, sendo proibida apenas nas pontas que vão para bornes."
+                }],
+                "hint": "Lembre-se do problema que a solda causa quando o cabo é apertado em um borne de parafuso.",
+                "imageUrl": ""
+            }]
+        };
+
+        // Variáveis de estado do Quiz
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        // Elementos do DOM
+        const startButton = document.getElementById('start-button');
+        const restartButton = document.getElementById('restart-button');
+        const nextButton = document.getElementById('next-button');
+        
+        const statusScreen = document.getElementById('status-screen');
+        const questionArea = document.getElementById('question-area');
+        const resultsArea = document.getElementById('results-area');
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const feedbackText = document.getElementById('feedback-text');
+        const rationaleText = document.getElementById('rationale-text');
+        const questionCounter = document.getElementById('question-counter');
+        const scoreDisplay = document.getElementById('score-display');
+        const progressBar = document.getElementById('progress-indicator');
+        const finalScoreText = document.getElementById('final-score');
+        const scoreMessage = document.getElementById('score-message');
+
+        const totalQuestions = quizData.questions.length;
+
+        // Função para iniciar ou reiniciar o Quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+
+            // Esconde telas e mostra a área de perguntas
+            statusScreen.classList.add('hidden');
+            resultsArea.classList.add('hidden');
+            questionArea.classList.remove('hidden');
+
+            // Atualiza a exibição da pontuação inicial
+            updateScoreDisplay();
+
+            // Carrega a primeira pergunta
+            loadQuestion();
+        }
+
+        // Função para atualizar a pontuação no status/final
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `Pontuação: ${score}/${currentQuestionIndex}`;
+        }
+
+        // Função para carregar a pergunta atual
+        function loadQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                showResults();
+                return;
+            }
+
+            answered = false;
+            nextButton.classList.add('hidden');
+            nextButton.disabled = true;
+            feedbackArea.classList.add('hidden');
+            optionsContainer.innerHTML = '';
+            
+            const currentQuestion = quizData.questions[currentQuestionIndex];
+
+            // Atualiza o texto da pergunta e o contador
+            questionText.textContent = `${currentQuestion.questionNumber || (currentQuestionIndex + 1)}. ${currentQuestion.question}`;
+            questionCounter.textContent = `Pergunta ${currentQuestionIndex + 1} de ${totalQuestions}`;
+
+            // Atualiza a barra de progresso
+            const progress = ((currentQuestionIndex) / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Renderiza as opções
+            currentQuestion.answerOptions.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.innerHTML = `<span class="font-bold mr-2">${String.fromCharCode(65 + index)}:</span> ${option.text}`; // A, B, C...
+                button.className = 'option-button w-full text-left p-3 rounded-lg border border-gray-300 bg-gray-50 hover:bg-red-50 hover:border-red-400 text-gray-700';
+                button.setAttribute('data-index', index);
+                button.onclick = () => checkAnswer(button, index, currentQuestion);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Função para verificar a resposta
+        function checkAnswer(selectedButton, selectedIndex, currentQuestion) {
+            if (answered) return;
+            answered = true;
+            
+            const selectedOption = currentQuestion.answerOptions[selectedIndex];
+            const isCorrect = selectedOption.isCorrect;
+            
+            // Desabilita todos os botões
+            Array.from(optionsContainer.children).forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // Feedback visual e lógico
+            if (isCorrect) {
+                score++;
+                selectedButton.classList.remove('bg-gray-50', 'hover:bg-red-50', 'text-gray-700');
+                selectedButton.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'font-semibold');
+                feedbackText.textContent = "Correto! ✅";
+                feedbackArea.classList.remove('bg-red-100');
+                feedbackArea.classList.add('bg-green-100');
+                feedbackText.classList.add('text-green-800');
+            } else {
+                selectedButton.classList.remove('bg-gray-50', 'hover:bg-red-50', 'text-gray-700');
+                selectedButton.classList.add('bg-red-100', 'border-red-500', 'text-red-800', 'font-semibold');
+                feedbackText.textContent = "Incorreto. ❌";
+                feedbackArea.classList.remove('bg-green-100');
+                feedbackArea.classList.add('bg-red-100');
+                feedbackText.classList.add('text-red-800');
+            }
+
+            // Destaca a resposta correta
+            const correctIndex = currentQuestion.answerOptions.findIndex(opt => opt.isCorrect);
+            if (correctIndex !== selectedIndex) {
+                const correctButton = optionsContainer.children[correctIndex];
+                correctButton.classList.remove('bg-gray-50', 'hover:bg-red-50', 'text-gray-700');
+                correctButton.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'font-semibold');
+            }
+
+
+            // Mostra o racional e a área de feedback
+            rationaleText.textContent = selectedOption.rationale;
+            feedbackArea.classList.remove('hidden');
+
+            // Atualiza o índice para o próximo passo
+            currentQuestionIndex++;
+            updateScoreDisplay();
+
+            // Mostra o botão Próxima Pergunta
+            nextButton.classList.remove('hidden');
+            nextButton.disabled = false;
+            nextButton.classList.remove('bg-gray-400');
+            nextButton.classList.add('bg-red-600', 'hover:bg-red-700');
+        }
+
+        // Função para exibir os resultados finais
+        function showResults() {
+            // Atualiza a barra de progresso para 100%
+            progressBar.style.width = '100%';
+
+            questionArea.classList.add('hidden');
+            resultsArea.classList.remove('hidden');
+
+            finalScoreText.textContent = `${score}/${totalQuestions}`;
+
+            let message = '';
+            const percentage = (score / totalQuestions) * 100;
+
+            if (percentage === 100) {
+                message = "Parabéns! Excelente domínio da NBR 5410 e Cabos Elétricos!";
+            } else if (percentage >= 70) {
+                message = "Ótimo resultado! Você tem um bom conhecimento sobre o tema.";
+            } else if (percentage >= 50) {
+                message = "Bom, mas revise as regras de cores e tipos de emendas para melhorar!";
+            } else {
+                message = "Continue estudando! Foque nos requisitos de segurança e cores da NBR 5410.";
+            }
+            scoreMessage.textContent = message;
+        }
+
+        // --- Event Listeners ---
+        startButton.addEventListener('click', startQuiz);
+        restartButton.addEventListener('click', startQuiz);
+        nextButton.addEventListener('click', loadQuestion);
+
+        // Inicializa a tela de status
+        scoreDisplay.textContent = `Perguntas: ${totalQuestions}`;
+    </script>
+</body>
+</html>

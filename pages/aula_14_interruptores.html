@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 14</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        header h1 { margin: 0; font-size: 1.9rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 30px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .img-container { text-align: center; margin: 25px 0; display: flex; flex-direction: column; align-items: center; }
+        .img-container img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px; }
+        .caption { font-size: 0.85rem; color: #666; font-style: italic; }
+
+        footer { 
+            background-color: #2c3e50; 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 2rem 0; 
+            margin-top: 40px;
+        }
+        footer p { text-align: center; margin: 0; }
+        .example-box {
+    	background-color: #e8f5e9;
+    	border-left: 5px solid #2e7d32;
+    	padding: 20px 20px 20px 35px; /* Ordem: Topo, Direita, Baixo, Esquerda */
+    	margin: 20px 0;
+    	border-radius: 4px;
+	}
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 14:</h1>
+        <div class="subtitle">Tipos de Interruptores: Funções e Aplicações</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>O Comando do Circuito de Iluminação</h2>
+        <p>
+            Os interruptores são dispositivos de manobra destinados a abrir ou fechar circuitos elétricos. A escolha do modelo correto depende da necessidade de controle: de onde se quer ligar a luz e quantos pontos de luz serão comandados.
+        </p>
+
+        <hr>
+
+        <h2>Principais Tipos de Interruptores</h2>
+
+        <h3>1. Interruptor Simples (1 Seção)</h3>
+        <p>É o modelo mais básico, possuindo dois bornes de conexão (Fase e Retorno). Ele comanda um ou mais pontos de luz a partir de um único local.</p>
+        <p><strong>Aplicação:</strong> Quartos pequenos, banheiros e áreas de serviço.</p>
+        
+
+	<div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
+    		<img src="../images/interruptor_simples.png" 
+         alt="Esquema de ligação interruptor simples" 
+         style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+    	<div class="caption" style="margin-top: 10px; font-weight: bold;">Esquema de ligação: Fase no interruptor, Neutro na lâmpada.</div>
+</div>
+
+
+        <h3>2. Interruptor Simples de Dupla Seção</h3>
+        <p>Possui duas teclas no mesmo conjunto. Permite comandar grupos de lâmpadas diferentes de forma independente no mesmo ambiente.</p>
+        <p><strong>Aplicação:</strong> Salas onde se deseja acender o lustre central e as dicroicas separadamente.</p>
+        
+
+	<div class="example-box" style="background-color: #f4f6f7; border-left: 5px solid #7f8c8d;">
+    		<h4> Esquema de Ligação: Dupla Seção (Duas Teclas)</h4><p>
+        		Utilizado para controlar duas lâmpadas independentes no mesmo ponto. 
+        		A <span style="color: red; font-weight: bold;">Fase</span> entra no borne comum (ou faz-se um "jumper" entre os dois bornes de entrada) e saem dois <span style="color: #f1c40f; font-weight: bold;">Retornos</span> independentes, um para cada lâmpada.</p>
+    
+    		<div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
+        <img src="../images/interruptor_dupla_secao.png" 
+             alt="Diagrama Interruptor Dupla Seção" 
+             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Esquema de ligação para duas lâmpadas independentes.</div>
+    </div>
+</div>
+
+
+        <h3>3. Interruptor Paralelo (Three-Way)</h3>
+        <p>Possui três bornes. É utilizado para comandar uma lâmpada a partir de dois pontos diferentes. Eles trabalham sempre em pares.</p>
+        <p><strong>Aplicação:</strong> Corredores, escadas e nas laterais da cama (entrada do quarto e cabeceira).</p>
+        
+	<div class="example-box" style="background-color: #f0f4f8; border-left: 5px solid #2980b9;">
+    	<h4>Esquema de Ligação: Interruptor Paralelo (Three-Way)</h4>
+    <p>
+        Para esta ligação, utilizamos dois fios extras que interligam os interruptores. Siga o padrão de cores para facilitar: 
+        <span style="color: red; font-weight: bold;">Fase</span> no centro do interruptor A, dois fios 
+        <span style="color: #f1c40f; font-weight: bold;">Amarelos</span> ligando as laterais, e o fio de 
+        <span style="color: #f39c12; font-weight: bold;">Retorno</span> saindo do centro do interruptor B para a lâmpada. O 
+        <span style="color: #00bfff; font-weight: bold;">Neutro</span> vai sempre direto para a lâmpada.
+    </p>
+    
+    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
+        <img src="../images/interruptor_paralelo.png" 
+             alt="Diagrama Interruptor Paralelo" 
+             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Diagrama multifilar de uma ligação em paralelo (Three-Way).</div>
+    </div>
+</div>
+
+
+        <h3>4. Interruptor Intermediário (Four-Way)</h3>
+        <p>Possui quatro bornes. Ele é utilizado quando se deseja comandar uma lâmpada de <strong>três ou mais pontos</strong> diferentes. Ele deve ser instalado obrigatoriamente entre dois interruptores paralelos.</p>
+        <p><strong>Aplicação:</strong> Grandes auditórios, escadarias extensas ou quartos amplos.</p>
+        
+
+<div class="example-box" style="background-color: #fdfefe; border-left: 5px solid #16a085;">
+    <h4>Esquema Avançado: Interruptor Intermediário (Four-Way)</h4>
+    <p>
+        Este sistema permite adicionar infinitos pontos de comando. Se quiser controlar de 5 pontos, por exemplo, usará 2 paralelos nas pontas e 3 intermediários entre eles.
+    </p>
+    <p>
+        <strong>Dica de Montagem:</strong> No interruptor intermediário, os fios vêm sempre em pares. O par que vem do interruptor anterior entra em um lado, e o par que vai para o próximo interruptor sai pelo outro. 
+    </p>
+    
+    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+        <img src="../images/interruptor_intermediario.png" 
+             alt="Diagrama Interruptor Intermediário" 
+             style="max-width: 600px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Diagrama multifilar para comando de 3 pontos (Paralelo + Intermediário + Paralelo).</div>
+    </div>
+</div>
+
+<div class="alert" style="background-color: #e8f8f5; border-left-color: #1abc9c;">
+    <strong>Resumo de Fios:</strong> 
+    <br>• <strong>Paralelo:</strong> 3 bornes (Fase ou Retorno no meio, "balanços" nas pontas).
+    <br>• <strong>Intermediário:</strong> 4 bornes (recebe 2 fios de balanço e envia outros 2).
+</div>
+
+
+        <h3>5. Interruptor Bipolar Simples</h3>
+        <p>Diferente dos outros, ele interrompe as duas fases simultaneamente (em sistemas 220V entre fases). Garante que não haja tensão no bocal da lâmpada quando desligado.</p>
+        <p><strong>Aplicação:</strong> Instalações bifásicas sem neutro, onde a lâmpada é ligada entre Fase-Fase.</p>
+
+	<div class="example-box" style="background-color: #fdf2f2; border-left: 5px solid #c0392b;">
+    		<h4>Esquema de Segurança: Interruptor Bipolar (Fase-Fase)</h4><p>
+        Obrigatório em circuitos 220V onde não há neutro. Ele possui 4 bornes: as duas 
+        <span style="color: red; font-weight: bold;">Fases</span> entram de um lado e os dois 
+        <span style="color: #f1c40f; font-weight: bold;">Retornos</span> saem do outro em direção à lâmpada.
+    </p>
+    
+    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+        <img src="../images/interruptor_bipolar.png" 
+             alt="Diagrama multifilar Interruptor Bipolar" 
+             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Figura: Instalação Bipolar para proteção total em circuitos bifásicos.</div>
+    </div>
+</div>
+
+        <h3>6. Interruptor Pulsador</h3>
+        <p>É um interruptor que retorna à posição original após ser pressionado (possui mola interna). Ele apenas envia um sinal elétrico temporário.</p>
+        <p><strong>Aplicação:</strong> Campainhas e sistemas de automação ou minuteria.</p>
+        
+        <div class="example-box" style="background-color: #f4fdf4; border-left: 5px solid #27ae60;">
+    <h4>Esquema de Ligação: Pulsador (Campainha ou Minuteria)</h4>
+    <p>
+        O pulsador funciona enviando um "pulso" de energia. A <span style="color: red; font-weight: bold;">Fase</span> entra no primeiro borne e o <span style="color: #f1c40f; font-weight: bold;">Retorno</span> sai do segundo borne em direção à campainha (ou relé de minuteria). O <span style="color: #00bfff; font-weight: bold;">Neutro</span> é ligado diretamente ao dispositivo sonoro ou de iluminação.
+    </p>
+    
+    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+        <img src="../images/interruptor_pulsador.png" 
+             alt="Diagrama Interruptor Pulsador Campainha" 
+             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Ligação de campainha utilizando interruptor tipo pulsador.</div>
+    </div>
+</div>
+
+        <hr>
+
+        <h2>Resumo de Aplicações</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nº de Bornes</th>
+                        <th>Função Principal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Simples</strong></td>
+                        <td>2</td>
+                        <td>Comando de 1 ponto fixo.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paralelo</strong></td>
+                        <td>3</td>
+                        <td>Comando de 2 pontos diferentes.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermediário</strong></td>
+                        <td>4</td>
+                        <td>Comando de 3 ou mais diferentes.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bipolar</strong></td>
+                        <td>4</td>
+                        <td>Secciona duas fases (Segurança 220V).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pulsador</strong></td>
+                        <td>2</td>
+                        <td>Acionamento de campainhas/minuterias.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert">
+            <strong>Dica Técnica:</strong> Ao instalar interruptores paralelos e intermediários, utilize cabos de cores diferentes para os "fios de comunicação" entre eles, facilitando a manutenção futura.
+        </div>
+
+        <hr>
+
+        <h2>Exercícios de Avaliação - Aula 14</h2>
+
+        <p><strong>Questão 1:</strong> Qual é o tipo de interruptor necessário para ligar uma lâmpada no início de um corredor e desligá-la no final?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="alert">
+                <p><strong>Resposta:</strong> Interruptores <strong>Paralelos</strong> (são necessários dois deles).</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 2:</strong> Para comandar uma lâmpada de 4 pontos diferentes, quantos e quais interruptores são necessários?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="alert">
+                <p><strong>Resposta:</strong> São necessários <strong>2 Interruptores Paralelos</strong> (nas extremidades) e <strong>2 Interruptores Intermediários</strong> (no meio).</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 3:</strong> Em uma instalação Fase-Fase (220V), por que o uso do Interruptor Bipolar é mais seguro que o simples?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="alert">
+                <p><strong>Resposta:</strong> Porque o interruptor simples cortaria apenas uma fase, deixando a lâmpada energizada pela outra. O bipolar corta ambas, eliminando o risco de choque no bocal.</p>
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 4:</strong> Qual a principal diferença física interna de um interruptor pulsador para um interruptor simples?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="alert">
+                <p><strong>Resposta:</strong> O pulsador possui uma mola que faz o contato voltar para a posição "aberto" assim que você solta o botão, enquanto o simples mantém a posição (ligado ou desligado).</p>
+            </div>
+        </details>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 14</p>
+    </footer>
+
+</body>
+</html>

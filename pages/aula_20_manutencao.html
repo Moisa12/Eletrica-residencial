@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 20</title>
+    
+    <style>
+        /* Mantendo a Identidade Visual da Aula 17 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        h3 { color: #2980b9; margin-top: 20px; }
+        h4 { color: #2c3e50; margin-top: 10px; margin-bottom: 10px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: #fff; text-align: center; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Destaques */
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .safety-box { background-color: #ffebee; border-left: 5px solid #d32f2f; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .instrument-box { background-color: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 20px 0; border-radius: 4px; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0; text-align: center; }
+        
+        <hr style="border: 0; height: 1px; background: #ddd; margin: 20px 0;">
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 20</h1>
+        <div class="subtitle">Manutenção Preventiva e Corretiva</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>Conceitos de Manutenção</h2>
+        <p>
+            Manter uma instalação elétrica saudável é vital para a preservação do patrimônio e, principalmente, da vida. A manutenção não deve ser feita apenas quando algo para de funcionar, mas sim de forma estratégica.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Definição</th>
+                        <th>Vantagens</th>
+                        <th>Desvantagens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Preventiva</strong></td>
+                        <td>Realizada preventinamente para evitar falhas futuras. Ex: Reaperto dos parafusos dos disjuntores.</td>
+                        <td>Maior segurança, economia de energia, evita paradas repentinas.</td>
+                        <td>Requer planejamento e custos iniciais de inspeção.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Corretiva</strong></td>
+                        <td>Realizada após a ocorrência de uma falha. Ex: Trocar disjuntor queimado.</td>
+                        <td>Custo zero até que o defeito apareça.</td>
+                        <td>Risco de incêndio, danos a aparelhos e custo de reparo urgente elevado.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2>Defeitos Comuns: Causas e Soluções</h2>
+        
+        <h3>1. Aquecimento em Tomadas e Disjuntores</h3>
+        <p><strong>Causa:</strong> Conexões frouxas (mau contato) ou sobrecarga de aparelhos.</p>
+        <p><strong>Solução:</strong> Reaperto dos parafusos ou substituição dos componentes danificados.</p>
+        <p><strong>Prevenção:</strong> Revisão semestral das conexões no quadro de distribuição.</p>
+
+        <h3>2. Disjuntor Desarmando Frequentemente</h3>
+        <p><strong>Causa:</strong> Sobrecarga no circuito ou curto-circuito em algum equipamento.</p>
+        <p><strong>Solução:</strong> Redistribuir as cargas ou identificar o aparelho defeituoso.</p>
+        <p><strong>Prevenção:</strong> Dimensionamento correto conforme norma técnica (NBR 5410).</p>
+
+        <h3>3. Lâmpadas Queimando Rápido</h3>
+        <p><strong>Causa:</strong> Oscilações de tensão ou receptáculos (soquetes) oxidados.</p>
+        <p><strong>Solução:</strong> Troca do receptáculo e verificação da tensão da rede.</p>
+        
+        <h3>4. DR desligando frequentemente</h3>
+        <p><strong>Causa:</strong> Fuga de corrente decorrente de falhas de isolação dos cabos ou emendas mau feitas.</p>
+        <p><strong>Solução:</strong> Verificar isolação dos cabos e revisar as emendas.</p>
+
+        <div class="safety-box">
+            <h4>⚠️ Segurança em Primeiro Lugar (NR-10)</h4>
+            <ul>
+                <li><strong>Desenergize:</strong> Desligue o disjuntor geral antes de qualquer intervenção.</li>
+                <li><strong>Sinalize:</strong> Coloque um aviso no quadro para que ninguém ligue o disjuntor enquanto você trabalha.</li>
+                <li><strong>Teste:</strong> Sempre use um multímetro para confirmar a ausência de tensão.</li>
+                <li><strong>EPIs:</strong> Utilize luvas isolantes e ferramentas com cabo emborrachado (norma 1000V).</li>
+            </ul>
+        </div>
+
+        <h2>Instrumento Indispensável: O Multímetro</h2>
+        <p>
+            Para qualquer manutenção, o <strong>Multímetro Digital</strong> (ou o Alicate Amperímetro) é o seu melhor amigo. Ele permite "enxergar" a eletricidade.
+        </p>
+
+        
+        <div class="instrument-box">
+            <h4>Como usar nas principais funções:</h4>
+            <ul>
+                <li><strong>Tensão (V~):</strong> Coloque na escala de Corrente Alternada para verificar se chega 127V ou 220V na tomada.</li>
+                <li><strong>Continuidade (Bip):</strong> Usado (com o circuito desligado) para saber se um fio está rompido ou se um fusível está bom.</li>
+                <li><strong>Corrente (A):</strong> Com o Alicate Amperímetro, abra a pinça em volta de <u>um único fio</u> para medir o consumo em Amperes.</li>
+            </ul>
+        </div>
+
+        <h2>Inspeção Visual: O "Check-up" do Eletricista</h2>
+        <p>Nem tudo precisa de multímetro. Seus olhos são ferramentas poderosas. Procure por:</p>
+        
+        <div class="check-list">
+            <ul>
+                <li><strong>Tomadas com Pontos Escuros:</strong> Indica "mau contato" ou sobreaquecimento. A tomada perdeu a pressão interna e deve ser trocada imediatamente.</li>
+                <li><strong>Cheiro de Queimado":</strong> Sinal clássico de isolamento de cabo derretendo por sobrecarga.</li>
+                <li><strong>Fiação Rígida/Quebradiça:</strong> O isolamento ressecou. O cabo perdeu sua vida útil e pode causar curto-circuito.</li>
+                <li><strong>Sensor de Presença Oscilando:</strong> Se a luz pisca ou não apaga, pode ser interferência de lâmpadas LED de má qualidade ou carga acima da capacidade do sensor.</li>
+            </ul> 
+        </div>
+
+        <h2>O Perigo Silencioso: Rompimento do Neutro</h2>
+        <p>Em instalações bifásicas (127/220V), o neutro é o ponto de equilíbrio. Se ele se rompe no quadro ou na entrada:</p>
+        
+        <div class="danger-box">
+            <h4>⚠️ Sobretensão Destrutiva</h4>
+            <p>Sem o neutro, as cargas 127V podem acabar ligadas em série entre duas fases. O resultado? Uma tomada de 127V pode receber subitamente <strong>perto de 220V</strong>.</p>
+            <strong>Consequência:</strong> Queima instantânea de eletrodomésticos, lâmpadas e risco real de incêndio.
+        </div>
+
+        <h2>Quando a coisa "Não Funciona": Fluxograma de Diagnóstico</h2>
+        <p>Se um ponto parou de funcionar, siga esta ordem lógica de investigação:</p>
+
+        <ol>
+            <li><strong>Teste a Carga:</strong> O aparelho funciona em outra tomada? (Elimine o defeito do equipamento).</li>
+            <li><strong>Verifique o Disjuntor:</strong> Ele está desarmado? Se sim, tente religar <u>uma vez</u>. Se desarmar de novo, há um curto real.</li>
+            <li><strong>Teste de Tensão:</strong> Com o multímetro, meça a tomada.
+                <ul>
+                    <li>0V: Cabo rompido ou disjuntor com defeito.</li>
+                    <li>Tensão baixa (ex: 90V): Mau contato no neutro ou queda de tensão excessiva.</li>
+                </ul>
+            </li>
+            <li><strong>Abra a Caixa de Passagem:</strong> Procure por emendas mau feitas ou fios soltos.</li>
+        </ol>
+        
+        <br></br>
+        
+        <div class="danger-box" style="border-left-color: #d32f2f; background-color: #fff5f5;">
+            <h2 style="color: #d32f2f; border-left: none; padding-left: 0; margin-top: 0;">🚨 ALERTA CRÍTICO: O Perigo do "Falso Aterramento"</h2>
+            <p>
+                Uma das falhas mais comuns e perigosas encontradas em manutenções é a <strong>ausência de condutor de proteção (terra)</strong> ou, pior, o uso do <strong>neutro como se fosse terra</strong> diretamente na tomada.
+            </p>
+
+            <h4>Por que NÃO usar o Neutro no lugar do Terra?</h4>
+            <ul>
+                <li><strong>Energização de Carcaças:</strong> O neutro é um condutor carregado. Se houver um desequilíbrio na rede ou o neutro se romper, a carcaça metálica do seu eletrodoméstico (geladeira, micro-ondas) ficará energizada, causando choques fatais.</li>
+                <li><strong>Falha do DR:</strong> O uso do neutro no lugar do terra impede o funcionamento correto do IDR (Interruptor Diferencial Residual), anulando a principal proteção contra choques elétricos da residência.</li>
+                <li><strong>Ruído Eletrônico:</strong> O neutro carrega "ruido" elétrico da rede que pode danificar placas eletrônicas sensíveis de computadores e TVs.</li>
+            </ul>
+
+            <div class="alert" style="background-color: #f8d7da; border-left-color: #721c24; color: #721c24;">
+                <strong>Regra de Ouro:</strong> Neutro é neutro, Terra é terra. Eles só se encontram no ponto de equipotencialização principal (geralmente no padrão de entrada ou quadro principal), nunca dentro das tomadas.
+            </div>
+        </div>
+
+        <div class="alert">
+            <strong>Dica Pro:</strong> Durante a manutenção preventiva, use um termômetro infravermelho no quadro de distribuição. Pontos muito mais quentes que os fios indicam mau contato iminente!
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 20</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">Conteúdo focado em Manutenção Preventiva e Segurança do Trabalho</p>
+    </footer>
+
+</body>
+</html>

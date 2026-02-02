@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Elétrica Avançada - Aula 10</title>
+    
+    <style>
+        /* PADRÃO VISUAL UNIFICADO */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 15px; margin-top: 40px; text-transform: uppercase; font-size: 1.3rem; }
+        h3 { color: #2980b9; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .norma-box {
+            background-color: #e8f4fd;
+            border: 1px solid #2980b9;
+            padding: 15px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        /* GRID DO GRÁFICO */
+        .chart-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            background: #fdfdfd;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .chart-img-container { flex: 1; min-width: 320px; text-align: center; }
+        .chart-explanation { flex: 1; min-width: 320px; }
+
+        .zone-item { margin-bottom: 12px; padding: 12px; border-radius: 6px; font-size: 0.9rem; }
+        .z1 { background-color: #d4edda; border-left: 6px solid #28a745; }
+        .z2 { background-color: #fff3cd; border-left: 6px solid #ffc107; }
+        .z3 { background-color: #f8d7da; border-left: 6px solid #dc3545; }
+
+        .alert-box { background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .danger-box { background-color: #fdf2f2; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #ddd; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .safety-list { list-style-type: none; padding-left: 0; }
+        .safety-list li { margin-bottom: 12px; padding-left: 35px; position: relative; }
+        .safety-list li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: #27ae60; font-weight: bold; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 2rem 0; margin-top: 50px; }
+        .quiz-section {
+            background-color: #fcfcfc;
+            border: 2px dashed #2c3e50;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .question strong { display: block; margin-bottom: 10px; color: #2c3e50; }
+        .options { list-style: none; padding-left: 0; }
+        .options li { margin-bottom: 8px; }
+        
+        .btn-gabarito {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+        .btn-gabarito:hover { background-color: #34495e; }
+        
+        /* Classes para o JavaScript */
+        .correct { background-color: #d4edda !important; border: 1px solid #c3e6cb; }
+        .wrong { background-color: #f8d7da !important; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 10</h1>
+        <div class="subtitle">Segurança e Efeitos Fisiológicos (Normas NBR IEC 60479-1, NBR 5410 e NR10)</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+
+        <h2>1. O Choque Elétrico e a NBR IEC 60479-1</h2>
+        <p>Segundo a norma técnica, a gravidade do choque não é determinada apenas pela tensão (V), mas pela <strong>Corrente Resultante   (I = U/R)</strong> e pelo tempo em que ela circula pelo corpo.</p>
+
+        <div class="chart-section">
+            <div class="chart-img-container">
+                <strong>Curva Tempo x Corrente (Zonas AC)</strong><br><br>
+                <img src="../images/tempo_corrente.jpg" alt="Gráfico NBR IEC 60479-1" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+            </div>
+
+            <div class="chart-explanation">
+                <div class="zone-item z1">
+                    <strong>Zona AC-1:</strong> Até 0,5 mA. Limiar de percepção. Não causa reações musculares.
+                </div>
+                <div class="zone-item z2">
+                    <strong>Zona AC-2:</strong> De 0,5 mA até curva b. Percepção clara e contrações involuntárias, geralmente sem danos orgânicos permanentes.
+                </div>
+                <div class="zone-item z3">
+                    <strong>Zona AC-3:</strong> Entre curva b e c1. Risco de dificuldades respiratórias e contrações fortes (tetanização). 
+                </div>
+                <div class="zone-item z3" style="background-color: #721c24; color: white; border-left-color: #000;">
+                    <strong>Zona AC-4:</strong> Além da curva c1. Probabilidade de <strong>fibrilação ventricular</strong>, parada cardíaca e queimaduras graves.
+                </div>
+            </div>
+        </div>
+
+        <h2>2. Desmistificando: 127V "Gruda" e 220V "Joga"?</h2>
+        <p>Fisicamente, a eletricidade não possui propriedades de "atração" ou "repulsão". O que ocorre são fenômenos fisiológicos distintos baseados na intensidade da corrente:</p>
+        
+        <ul>
+            <li><strong>O "Grudar" (Tetanização):</strong> Ocorre em intensidades médias (Zona AC-3). A corrente estimula os músculos flexores com mais força que os extensores, impedindo que a pessoa abra a mão para soltar o condutor.</li>
+            <li><strong>O "Jogar" (Reação Muscular Brusca):</strong> Tensões maiores (como 220V ou superior) podem gerar uma corrente tão alta instantaneamente que a contração muscular é violenta o suficiente para projetar o corpo longe da fonte.</li>
+        </ul>
+
+        <div class="danger-box">
+            <strong>Nota Técnica:</strong> O perigo do "jogar" são os traumas secundários (quedas de escadas ou batidas de cabeça), enquanto o perigo do "grudar" é o tempo de exposição prolongado, que leva à fibrilação.
+        </div>
+
+        <h2>3. Tensão Extra Baixa (SELV e PELV)</h2>
+        <p>A NBR 5410 define limites de tensão tão baixos que, mesmo em contato direto, a corrente resultante não atinge níveis perigosos (Zona AC-1).</p>
+        <table>
+            <tr>
+                <th>Sistema</th>
+                <th>Descrição</th>
+                <th>Limite (CA)</th>
+            </tr>
+            <tr>
+                <td><strong>SELV</strong></td>
+                <td>Sistema de Extra Baixa Tensão de Segurança (isolado da terra).</td>
+                <td>&le; 50V</td>
+            </tr>
+            <tr>
+                <td><strong>PELV</strong></td>
+                <td>Sistema de Extra Baixa Tensão de Proteção (pode ser aterrado).</td>
+                <td>&le; 50V</td>
+            </tr>
+        </table>
+
+        <h2>4. Procedimentos de Segurança (NR10)</h2>
+        <p>A NR10 estabelece que uma instalação só é considerada <strong>desenergizada</strong> após seguir esta sequência rigorosa:</p>
+        <ol>
+            <li><strong>Seccionamento:</strong> Abertura física do circuito (disjuntor ou chave).</li>
+            <li><strong>Impedimento de Reenergização:</strong> Travamento com cadeados e etiquetas (LOTO - Lockout/Tagout).</li>
+            <li><strong>Constatação da Ausência de Tensão:</strong> Teste real com voltímetro ou detector de tensão.</li>
+            <li><strong>Instalação de Aterramento Temporário:</strong> Conectar as fases à terra para garantir segurança em caso de falha.</li>
+            <li><strong>Sinalização:</strong> Delimitar a área de trabalho para evitar acesso de terceiros.</li>
+        </ol>
+
+        <h2>5. Canteiros de Obras e Riscos Ambientais</h2>
+        <p>Canteiros são ambientes de altíssimo risco devido à umidade e presença de superfícies metálicas (que reduzem a resistência do corpo).</p>
+        <ul class="safety-list">
+            <li><strong>Uso Obrigatório de DR:</strong> Todo circuito de tomadas em obras deve possuir proteção Diferencial Residual.</li>
+            <li><strong>Cabos Blindados:</strong> Utilizar cabos com proteção mecânica contra esmagamento por máquinas.</li>
+            <li><strong>Quadros Blindados:</strong> Invólucros com IP (Grau de Proteção) adequado contra jatos de água e poeira.</li>
+        </ul>
+
+        <h2>6. Segurança no Lar e Proteção Adicional</h2>
+        <p>O conceito moderno de segurança residencial foca em camadas de proteção:</p>
+
+        <ul class="safety-list">
+            <li><strong>Proteção contra Sobretensões (DPS):</strong> Protege equipamentos contra surtos de raios.</li>
+            <li><strong>Dimensionamento Correto:</strong> Evita o aquecimento excessivo de cabos (Efeito Joule), prevenindo incêndios.</li>
+            <li><strong>Manutenção de Contatos:</strong> Tomadas "frouxas" aumentam a resistência de contato, gerando pontos de ignição.</li>
+            <li><strong>Cuidado com áreas molhadas:</strong> A pele úmida reduz a resistência do corpo de 100.000&Omega; para menos de 1.000&Omega;, aumentando a corrente do choque em até 100 vezes.</li>
+        </ul>
+        
+        <p>Pequenos detalhes evitam grandes tragédias domésticas:</p>
+
+        
+
+        <ul class="safety-list">
+            <li><strong>Evite o "Efeito Cascata":</strong> Nunca utilize adaptadores (benjamins) para ligar vários aparelhos potentes na mesma tomada.</li>
+            <li><strong>Isole os Cabos Danificados:</strong> Cabos ressecados ou descascados devem ser trocados, não apenas remendados.</li>
+            <li><strong>Atualize Tomadas Antigas:</strong> Tomadas folgadas geram calor excessivo e risco de fogo.</li>
+            <li><strong>Soquetes de Lâmpadas:</strong> Devem estar firmes. Soquetes soltos facilitam curtos-circuitos durante a troca.</li>
+            <li><strong>Emendas Mal Feitas:</strong> São pontos de aquecimento e perda financeira na conta de luz.</li>
+            <li><strong>Extensões Provisórias:</strong> Não devem ser usadas permanentemente por trás de móveis ou tapetes.</li>
+            <li><strong>Cuidado com Áreas Úmidas:</strong> Jamais use aparelhos ligados à rede elétrica perto de pias ou banheiras.</li>
+            <li><strong>Teste o seu DR:</strong> Aperte o botão "T" do DR mensalmente para garantir que o mecanismo está operante.</li>
+            <li><strong>Limite das Tomadas:</strong> Use tomadas de 20A para aparelhos potentes (micro-ondas, airfryer).</li>
+        </ul>
+
+        <div class="alert-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
+            <strong>Fique atento!:</strong> O olfato ajuda! Se sentir cheiro de plástico queimado vindo das paredes ou tomadas, desligue o disjuntor imediatamente. Esse é um sinal claro de sobrecarga ou mau contato (arco elétrico).
+        </div>
+
+        <div class="alert-box" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <strong>Dica de Ouro:</strong> O Dispositivo DR não é luxo, é lei! Ele é o único capaz de salvar vidas em caso de contato direto acidental, desligando o circuito antes que o coração entre em fibrilação, conforme as curvas da NBR IEC 60479-1.
+        </div>
+        
+        <div class="quiz-section">
+            <h2 style="border-left-color: #2980b9; margin-top: 0;">7. Exercícios de Fixação</h2>
+            
+            <div class="question" id="q1">
+                <strong>1. Segundo a NBR IEC 60479-1, qual o principal fator que define a gravidade de um choque elétrico?</strong>
+                <select id="ans1" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Apenas a cor do isolamento do cabo.</option>
+                    <option value="correct">A combinação da intensidade da corrente (mA) e o tempo de exposição.</option>
+                    <option value="wrong">Somente a tensão (Volts) da rede elétrica.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q2">
+                <strong>2. Em qual zona da norma IEC 60479-1 o risco de fibrilação ventricular torna-se iminente?</strong>
+                <select id="ans2" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Zona AC-1 (Limiar de percepção).</option>
+                    <option value="wrong">Zona AC-2 (Reações musculares leves).</option>
+                    <option value="correct">Zona AC-4 (Risco letal de fibrilação).</option>
+                </select>
+            </div>
+
+            <div class="question" id="q3">
+                <strong>3. Qual a função técnica do Dispositivo DR (30mA) baseada no gráfico de zonas?</strong>
+                <select id="ans3" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Evitar que a conta de luz venha muito alta.</option>
+                    <option value="correct">Desligar o circuito antes que o choque atinja tempos e intensidades letais (Zona AC-4).</option>
+                    <option value="wrong">Apenas proteger contra curtos-circuitos entre fase e neutro.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q4">
+                <strong>4. O que caracteriza o fenômeno da "Tetanização"?</strong>
+                <select id="ans4" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">O aquecimento dos cabos por efeito Joule.</option>
+                    <option value="correct">A contração muscular involuntária que impede a vítima de soltar o condutor vivo.</option>
+                    <option value="wrong">A queima instantânea do fusível de proteção.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q5">
+                <strong>5. De acordo com a NR10, qual o passo final obrigatório para garantir a desenergização?</strong>
+                <select id="ans5" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Apenas desligar o disjuntor de entrada.</option>
+                    <option value="correct">Sinalização e instalação de aterramento temporário.</option>
+                    <option value="wrong">Verificar se os aparelhos eletrônicos pararam de funcionar.</option>
+                </select>
+            </div>
+
+            <button class="btn-gabarito" onclick="verificarQuiz()">Verificar Gabarito</button>
+        </div>
+
+    </div> <script>
+        function verificarQuiz() {
+            for (let i = 1; i <= 5; i++) {
+                let res = document.getElementById('ans' + i).value;
+                let questionBox = document.getElementById('q' + i);
+                
+                if (res === "correct") {
+                    questionBox.className = "question correct";
+                } else if (res === "wrong") {
+                    questionBox.className = "question wrong";
+                } else {
+                    questionBox.className = "question";
+                }
+            }
+        }
+    </script>
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Baseado em Normas Internacionais</p>
+    </footer>
+
+</body>
+</html>

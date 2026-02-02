@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 5</title>
+    
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+        p { margin-bottom: 1.2rem; text-align: justify; }
+
+        /* Tabelas */
+        .table-container { overflow-x: auto; margin: 25px 0; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background-color: #2c3e50; color: #fff; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* Estilo para a tabela SI (Verde) */
+        .table-si th { background-color: #00796b; }
+        .bg-unit-base { background-color: #ddd !important; font-weight: bold; }
+
+        /* Boxes e Alertas */
+        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
+        .highlight-box { background-color: #f0f4f4; padding: 10px; border-radius: 8px; margin-bottom: 10px; list-style: none; }
+        
+        details { background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+
+        /* Grid de Exercícios */
+        .exercicios-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .exercicios-coluna { flex: 1; min-width: 300px; }
+        .exercicios-coluna p { margin-bottom: 5px; font-weight: bold; }
+        .exercicios-coluna details { margin-bottom: 20px; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0 auto; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 5:</h1>
+        <div class="subtitle">Múltiplos e Submúltiplos das Grandezas Elétricas</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>Por que usar múltiplos e submúltiplos?</h2>
+        <p>
+            Na eletricidade, lidamos com valores que podem ser extremamente grandes (como a potência de uma usina) ou extremamente pequenos (como a corrente em um sensor eletrônico). Para facilitar a leitura e o cálculo, utilizamos prefixos que representam potências de base 10.
+        </p>
+
+        <h2>Tabela de Prefixos Elétricos</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Prefixo</th>
+                        <th>Símbolo</th>
+                        <th>Fator Matemático</th>
+                        <th>Exemplo Comum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #ffebee;">
+                        <td><strong>Múltiplo</strong></td>
+                        <td>Mega</td>
+                        <td>M</td>
+                        <td>1.000.000 (um milhão)</td>
+                        <td>Resistência de isolação (M Ohms)</td>
+                    </tr>
+                    <tr style="background-color: #fff8e1;">
+                        <td><strong>Múltiplo</strong></td>
+                        <td>Quilo (Kilo)</td>
+                        <td>k</td>
+                        <td>1.000 (mil)</td>
+                        <td>Potência (kW), Tensão (kV)</td>
+                    </tr>
+                    <tr style="background-color: #ffffff;">
+                        <td><strong>Unidade Base</strong></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>1</td>
+                        <td>Volts, Amperes, Watts, Ohms</td>
+                    </tr>
+                    <tr style="background-color: #e3f2fd;">
+                        <td><strong>Submúltiplo</strong></td>
+                        <td>Mili</td>
+                        <td>m</td>
+                        <td>0,001 (dividido por mil)</td>
+                        <td>Corrente de choque (mA)</td>
+                    </tr>
+                    <tr style="background-color: #e8eaf6;">
+                        <td><strong>Submúltiplo</strong></td>
+                        <td>Micro</td>
+                        <td>µ</td>
+                        <td>0,000001 (dividido por um milhão)</td>
+                        <td>Capacitores (µF)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+
+        <h2>Exemplos Aplicados</h2>
+
+        <div class="example-box">
+            <h4>1. Potência (Mega e Kilo)</h4>
+            <p><strong>De Watts para kW:</strong> Um chuveiro de 5500 W é o mesmo que <strong>5,5 kW</strong> (dividimos por 1.000).</p>
+            <p><strong>De Mega para Watts:</strong> Um gerador de 2 MW produz <strong>2.000.000 W</strong> (multiplicamos por 1.000.000).</p>
+        </div>
+
+        <div class="example-box" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <h4>2. Corrente e Tensão (Mili e Micro)</h4>
+            <p><strong>De Ampere para mA:</strong> Um dispositivo DR é projetado para atuar com 0,03 A. Isso equivale a <strong>30 mA</strong> (multiplicamos por 1.000).</p>
+            <p><strong>MicroAmperes:</strong> Uma corrente de fuga de 500 µA é o mesmo que <strong>0,0005 A</strong> (dividimos por 1.000.000).</p>
+        </div>
+
+        <div class="alert">
+            <strong>Regra Prática:</strong> 
+            <ul>
+                <li>Para transformar de uma unidade <strong>MAIOR para uma MENOR</strong>: Multiplique.</li>
+                <li>Para transformar de uma unidade <strong>MENOR para uma MAIOR</strong>: Divida.</li>
+            </ul>
+        </div>
+
+        <h2>Exercícios de Conversão</h2>
+
+        <p><strong>Questão 1:</strong> A resistência de um isolador é medida em 4,7 M Ohms. Qual o valor dessa resistência em Ohms?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <p>4,7 * 1.000.000 = <strong>4.700.000 Ohms</strong>.</p>
+        </details>
+
+        <p><strong>Questão 2:</strong> Uma lâmpada LED consome uma corrente de 150 mA. Como expressar esse valor em Amperes (A)?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <p>150 / 1.000 = <strong>0,15 A</strong>.</p>
+        </details>
+
+        <p><strong>Questão 3:</strong> Um transformador de poste recebe uma tensão de 13,8 kV. Quantos Volts chegam a ele?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <p>13,8 * 1.000 = <strong>13.800 Volts</strong>.</p>
+        </details>
+        
+        <br></br>
+       
+        <!--: Múltiplos e Submúltiplos do SI (Geral) -->
+        <section class="mt-10 pt-8 border-t border-gray-200">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-l-4 border-[#00796b] pl-3">Conhecendo o SI: Múltiplos e Submúltiplos Universais</h2>
+            <p class="text-gray-700 mb-6">Embora na eletricidade residencial sejam mais comuns os prefixos Kilo, Mega, Mili e Micro, o Sistema Internacional de Unidades (SI) possui uma escala muito mais ampla para medições em diversas áreas da ciência e tecnologia. Esta tabela é apresentada apenas para seu conhecimento geral.</p>
+
+            <div class="overflow-x-auto rounded-lg shadow-md mb-8">
+                <table class="min-w-full divide-y divide-gray-200 table-custom">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg bg-[#00796b]/90">Nome</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider bg-[#00796b]/90">Símbolo</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg bg-[#00796b]/90">Fator de Multiplicação</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 text-gray-800">
+                        <tr class="bg-teal-50">
+                            <td class="px-6 py-3 whitespace-nowrap font-medium text-teal-800">Tera</td>
+                            <td class="px-6 py-3 whitespace-nowrap text-teal-800">T</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono text-teal-800">10<sup>12</sup> (Trilhão)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3 whitespace-nowrap font-medium">Giga</td>
+                            <td class="px-6 py-3 whitespace-nowrap">G</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>9</sup> (Bilhão)</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-3 whitespace-nowrap font-medium">Mega</td>
+                            <td class="px-6 py-3 whitespace-nowrap">M</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>6</sup> (Milhão)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3 whitespace-nowrap font-medium">Kilo</td>
+                            <td class="px-6 py-3 whitespace-nowrap">k</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>3</sup> (Mil)</td>
+                        </tr>
+                        <tr class="bg-gray-300">
+                            <td class="px-6 py-3 whitespace-nowrap font-medium text-gray-900">UNIDADE BASE</td>
+                            <td class="px-6 py-3 whitespace-nowrap">-</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>0</sup> (Um)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3 whitespace-nowrap font-medium">mili</td>
+                            <td class="px-6 py-3 whitespace-nowrap">m</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>-3</sup> (Milésimo)</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-3 whitespace-nowrap font-medium">micro</td>
+                            <td class="px-6 py-3 whitespace-nowrap">μ</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono">10<sup>-6</sup> (Milionésimo)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3 whitespace-nowrap font-medium text-red-700">nano</td>
+                            <td class="px-6 py-3 whitespace-nowrap text-red-700">n</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono text-red-700">10<sup>-9</sup> (Bilionésimo)</td>
+                        </tr>
+                        <tr class="bg-teal-50">
+                            <td class="px-6 py-3 whitespace-nowrap font-medium text-red-700">pico</td>
+                            <td class="px-6 py-3 whitespace-nowrap text-red-700">p</td>
+                            <td class="px-6 py-3 whitespace-nowrap font-mono text-red-700">10<sup>-12</sup> (Trilionésimo)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">Exemplos em Outras Áreas:</h3>
+            <ul class="space-y-4 text-gray-700">
+                <li class="p-3 highlight-box rounded-lg">
+<span style="font-weight: bold; color: #00796b;">Tera (T) - Armazenamento de Dados:</span>
+                    <p class="text-sm">Um disco rígido moderno pode ter uma capacidade de <span class="font-mono bg-teal-200 px-1 rounded">2 Terabytes (TB)</span>, que são 2.000.000.000.000 bytes. (Note que em computação, Tera muitas vezes representa 2<sup>40</sup>, mas na padronização SI é 10<sup>12</sup>).</p>
+                </li>
+                <li class="p-3 highlight-box rounded-lg">
+               <span style="font-weight: bold; color: #00796b;">Giga (G) - Frequência:</span>
+                    <p class="text-sm">Os processadores de computadores (CPU) e as redes Wi-Fi ou 5G operam na faixa de <span class="font-mono bg-teal-200 px-1 rounded">Giga-hertz (GHz)</span>. Por exemplo, um processador pode ter uma frequência de 3,5 GHz, ou 3.500.000.000 ciclos por segundo.</p>
+                </li>
+                <li class="p-3 highlight-box rounded-lg">
+                    <span style="font-weight: bold; color: #00796b;">Nano (n) - Tecnologia e Saúde:</span>
+                    <p class="text-sm">A nanotecnologia lida com estruturas na escala de <span class="font-mono bg-teal-200 px-1 rounded">nanômetros (nm)</span>, onde 1 nm é 10<sup>-9</sup> metros. Um chip de computador moderno pode ser fabricado usando processos de 5 nm ou menos.</p>
+                </li>
+                <li class="p-3 highlight-box rounded-lg">
+                    <span style="font-weight: bold; color: #00796b;">Pico (p) - Eletrônica de Alta Frequência:</span>
+                    <p class="text-sm">Em eletrônica, pequenos capacitores (componentes que armazenam carga) são frequentemente medidos em <span class="font-mono bg-teal-200 px-1 rounded">pico-farads (pF)</span>, sendo 10<sup>-12</sup> Farads, um valor extremamente pequeno.</p>
+                </li>
+            </ul>
+        </section>
+        <!-- FIM DA NOVA SEÇÃO -->
+        
+<h2>Exercícios de Conversão de Unidades</h2>
+        <p>Converta os valores das grandezas elétricas utilizando os múltiplos e submúltiplos vistos em aula.</p>
+
+        <div class="exercicios-grid">
+            
+            <div class="exercicios-coluna">
+                <p>a) 1.200 V = ___ kV</p>
+                <details><summary>Ver resposta</summary><p>1.200 / 1.000 = <strong>1,2 kV</strong></p></details>
+
+                <p>b) 3,8 kA = ___ A</p>
+                <details><summary>Ver resposta</summary><p>3,8 * 1.000 = <strong>3.800 A</strong></p></details>
+
+                <p>c) 235 MV = ___ V</p>
+                <details><summary>Ver resposta</summary><p>235 * 1.000.000 = <strong>235.000.000 V</strong></p></details>
+
+                <p>d) 5 A = ___ mA</p>
+                <details><summary>Ver resposta</summary><p>5 * 1.000 = <strong>5.000 mA</strong></p></details>
+
+                <p>e) 150 mV = ___ V</p>
+                <details><summary>Ver resposta</summary><p>150 / 1.000 = <strong>0,15 V</strong></p></details>
+
+                <p>f) 30 mA = ___ A</p>
+                <details><summary>Ver resposta</summary><p>30 / 1.000 = <strong>0,03 A</strong></p></details>
+
+                <p>g) 0,3 A = ___ mA</p>
+                <details><summary>Ver resposta</summary><p>0,3 * 1.000 = <strong>300 mA</strong></p></details>
+            </div>
+
+            <div class="exercicios-coluna">
+                <p>h) 250.000.000 V = ___ MV</p>
+                <details><summary>Ver resposta</summary><p>250.000.000 / 1.000.000 = <strong>250 MV</strong></p></details>
+
+                <p>i) 4,5 A = ___ mA</p>
+                <details><summary>Ver resposta</summary><p>4,5 * 1.000 = <strong>4.500 mA</strong></p></details>
+
+                <p>j) 10 V = ___ mV</p>
+                <details><summary>Ver resposta</summary><p>10 * 1.000 = <strong>10.000 mV</strong></p></details>
+
+                <p>k) 100 kA = ___ A</p>
+                <details><summary>Ver resposta</summary><p>100 * 1.000 = <strong>100.000 A</strong></p></details>
+
+                <p>l) 1.500 A = ___ kA</p>
+                <details><summary>Ver resposta</summary><p>1.500 / 1.000 = <strong>1,5 kA</strong></p></details>
+
+                <p>m) 4,75 A = ___ kA</p>
+                <details><summary>Ver resposta</summary><p>4,75 / 1.000 = <strong>0,00475 kA</strong></p></details>
+
+                <p>n) 250 mV = ___ μV</p>
+                <details><summary>Ver resposta</summary><p>250 * 1.000 = <strong>250.000 μV</strong></p></details>
+            </div>
+        </div>
+        
+        <div class="exercicio-item" style="margin-bottom: 20px;">      
+   
+</div>      
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 5</p>
+    </footer>
+
+</body>
+</html>

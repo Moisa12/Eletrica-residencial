@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Início</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        header h1 { margin: 0; font-size: 1.8rem; }
+        .subtitle { font-size: 1.1rem; color: #f1c40f; margin-top: 5px; }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h2 { color: #2c3e50; font-size: 2rem; }
+        .hero-section p { font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto; }
+
+        /* Card do Autor Profissional */
+        .author-banner {
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-left: 8px solid #f1c40f;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .author-banner h4 {
+            margin: 0;
+            color: #2980b9;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .author-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .author-name {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #2c3e50;
+        }
+
+        .badge-senai {
+            background-color: #d32f2f;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .author-desc {
+            margin: 10px 0;
+            color: #444;
+            text-align: justify;
+        }
+
+        .author-social {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .author-social a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .author-social a:hover {
+            color: #1a5276;
+            text-decoration: underline;
+        }
+
+        /* Grade de Aulas */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .aula-card {
+            background: #fdfdfd;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            border-left: 5px solid #2c3e50;
+        }
+
+        .aula-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left-color: #f1c40f;
+            background-color: #fff;
+        }
+
+        .aula-card span {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #2980b9;
+            text-transform: uppercase;
+        }
+
+        .aula-card h3 {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        footer { 
+            background-color: #2c3e50; 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 3rem 1rem; 
+            margin-top: 60px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais</h1>
+        <div class="subtitle">Do Planejamento à Manutenção</div>
+        <img src="images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <section class="hero-section">
+            <h2>Bem-vindo ao Guia Técnico</h2>
+            <p>Este repositório de conhecimento foi desenvolvido para fornecer uma base sólida em eletricidade residencial, cobrindo desde fundamentos físicos até automação moderna, sempre pautado na segurança da NBR 5410.</p>
+        </section>
+        
+        <!-- Seção do Autor com LinkedIn Integrado -->
+        <section class="author-banner">
+            <h4>Sobre o Autor</h4>
+            <div class="author-title">
+                <span class="author-name">Moisés Antônio Mazzarolo</span>
+                <span class="badge-senai">Instrutor SENAI</span>
+            </div>
+            <p class="author-desc">
+                Especialista em Instalações Elétricas Residenciais com foco em conformidade normativa. 
+                Atua como instrutor na escola <strong>SENAI</strong>, capacitando profissionais para o setor elétrico. 
+                Este guia reúne anos de experiência docente e prática de campo para auxiliar no dimensionamento e manutenção segura de sistemas elétricos.
+            </p>
+            <div class="author-social">
+                <span><strong>E-mail:</strong> <a href="mailto:moisesmoisaone@gmail.com">moisesmoisaone@gmail.com</a></span>
+                <span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/moises-mazzarolo" target="_blank">linkedin.com/in/moises-mazzarolo</a></span>
+            </div>
+        </section>
+
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">Conteúdo das Aulas</h2>
+
+        <div class="course-grid">
+            <a href="pages/aula_01_fundamentos_da_eletricidade.html" class="aula-card"><span>Aula 01</span><h3>Fundamentos da Eletricidade</h3></a>
+            <a href="pages/aula_02_grandezas_eletricas.html" class="aula-card"><span>Aula 02</span><h3>Grandezas Elétricas</h3></a>
+            <a href="pages/aula_02_b_grandezas_interativas.html" class="aula-card"><span>Aula 02_b</span><h3>Grandezas Elétricas Interativas</h3></a>
+            <a href="pages/aula_03_circuitos _eletricos.html" class="aula-card"><span>Aula 03</span><h3>Circuitos Elétricos</h3></a>
+            <a href="pages/aula_04_potencia_eletrica.html" class="aula-card"><span>Aula 04</span><h3>Potência Elétrica</h3></a>
+            <a href="pages/aula_05_multiplos_e_submultiplos.html" class="aula-card"><span>Aula 05</span><h3>Múltiplos e Submúltiplos</h3></a>
+            <a href="pages/aula_06_lei_de_kirchhoff.html" class="aula-card"><span>Aula 06</span><h3>Lei de Kirchhoff</h3></a>
+            <a href="pages/aula_07_circuitos_serie_paralelo_misto.html" class="aula-card"><span>Aula 07</span><h3>Circuitos Série, Paralelo e Misto</h3></a>
+            <a href="pages/aula_08_consumo_de_energia.html" class="aula-card"><span>Aula 08</span><h3>Consumo de Energia</h3></a>
+            <a href="pages/aula_9_tomadas_residenciais.html" class="aula-card"><span>Aula 09</span><h3>Tomadas Residenciais</h3></a>
+            <a href="pages/aula_10_seguranca_em_eletricidade.html" class="aula-card"><span>Aula 10</span><h3>Segurança em Eletricidade</h3></a>
+            <a href="pages/aula_11_geracao_e_distribuicao.html" class="aula-card"><span>Aula 11</span><h3>Geração e Distribuição</h3></a>
+            <a href="pages/aula_12_quadro_de_distribuicao.html" class="aula-card"><span>Aula 12</span><h3>Quadro de Distribuição</h3></a>
+            <a href="pages/aula_13_lampadas.html" class="aula-card"><span>Aula 13</span><h3>Lâmpadas</h3></a>
+            <a href="pages/aula_14_interruptores.html" class="aula-card"><span>Aula 14</span><h3>Interruptores</h3></a>
+            <a href="pages/aula_15_cabos _eletricos.html" class="aula-card"><span>Aula 15</span><h3>Cabos Elétricos</h3></a>
+            <a href="pages/aula_16_conforto_e_segurança.html" class="aula-card"><span>Aula 16</span><h3>Conforto e Segurança</h3></a>
+            <a href="pages/aula_17_dimensionamento_de_condutores.html" class="aula-card"><span>Aula 17</span><h3>Dimensionamento de Condutores</h3></a>
+            <a href="pages/aula_18_infraestrutura.html" class="aula-card"><span>Aula 18</span><h3>Infraestrutura</h3></a>
+            <a href="pages/aula_19_aterramento_eletrico.html" class="aula-card"><span>Aula 19</span><h3>Aterramento Elétrico</h3></a>
+            <a href="pages/aula_20_manutencao.html" class="aula-card"><span>Aula 20</span><h3>Manutenção Elétrica</h3></a>
+            <a href="pages/aula_21_instrumentacao.html" class="aula-card"><span>Aula 21</span><h3>Ferramentas e Instrumentos</h3></a>
+        </div>
+        
+        <h2 style="color: #2980b9; margin-top: 50px; margin-bottom: 30px;">Recursos de Fixação</h2>
+
+        <div class="course-grid">
+            <a href="pages/Quiz_Fundamentos_da_Eletricidade.html" class="aula-card"><h3>Simulado: Fundamentos</h3></a>
+            <a href="pages/Quiz_Grandezas_Elétricas.html" class="aula-card"><h3>Simulado: Grandezas</h3></a>
+            <a href="pages/Quiz_Circuitos_Elétricos.html" class="aula-card"><h3>Simulado: Circuitos</h3></a>
+            <a href="pages/Quiz_Leis_de_Ohm.html" class="aula-card"><h3>Simulado: Lei de Ohm</h3></a>
+            <a href="pages/Quiz_Dispositivos_de_proteção.html" class="aula-card"><h3>Simulado: Proteção</h3></a>
+            <a href="pages/Quiz_Cabos_Elétricos_e_NBR 5410.html" class="aula-card"><h3>Simulado: Cabos</h3></a>
+            <a href="pages/Quiz_Infraestrutura_Elétrica.html" class="aula-card"><h3>Simulado: Infraestrutura</h3></a>
+            <a href="pages/Quiz_Segurança_em_Eletricidade.html" class="aula-card"><h3>Simulado: Segurança</h3></a>
+            <a href="pages/simulado_protecao_eletrica.html" class="aula-card"><h3>Simulado: Avançado</h3></a>
+            <a href="pages/calculadora_ohm.html" class="aula-card"><h3>Ferramenta: Calculadora Ohm</h3></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Instalações Elétricas Residenciais. Todos os direitos reservados.</p>
+        <hr style="border: 0; border-top: 1px solid #f1c40f; width: 60px; margin: 20px auto;">
+        <p style="font-size: 0.85em; color: #bdc3c7; max-width: 700px; margin: 0 auto; line-height: 1.4;">
+            <strong>Transparência:</strong> Este material educativo foi desenvolvido com auxílio de Inteligência Artificial para estruturação e design, sob supervisão e revisão técnica rigorosa de Moisés Antônio Mazzarolo (Instrutor SENAI), garantindo a precisão das informações em conformidade com a NBR 5410.
+        </p>
+    </footer>
+
+</body>
+</html>

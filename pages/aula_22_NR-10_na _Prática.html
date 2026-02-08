@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NR-10 na Prática: Habilitação, Autorização e Controle</title>
+    
+    <style>
+        /* PADRÃO VISUAL UNIFICADO */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 100px; 
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 15px; margin-top: 40px; text-transform: uppercase; font-size: 1.3rem; }
+        h3 { color: #2980b9; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .norma-box {
+            background-color: #e8f4fd;
+            border: 1px solid #2980b9;
+            padding: 15px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .alert-box { background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #ddd; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .safety-list { list-style-type: none; padding-left: 0; }
+        .safety-list li { margin-bottom: 12px; padding-left: 35px; position: relative; }
+        .safety-list li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: #27ae60; font-weight: bold; }
+
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 2rem 0; margin-top: 50px; }
+
+        .highlight { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 22</h1>
+        <div class="subtitle">NR-10 na Prática: Habilitação, Autorização e Controle de Risco</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+
+        <h2>1. O que é a NR-10 e qual sua finalidade?</h2>
+        <p>A NR-10 é a Norma Regulamentadora que visa garantir a segurança e a saúde dos trabalhadores que interagem em instalações elétricas e serviços com eletricidade. Ela se aplica a todas as fases: geração, transmissão, distribuição e consumo, incluindo as etapas de projeto, construção, montagem, operação e manutenção.</p>
+        
+        <div class="norma-box">
+            <strong>Para que serve?</strong> Sua finalidade é estabelecer requisitos e condições mínimas de proteção para prevenir acidentes de origem elétrica, como choques e arcos elétricos, que podem causar queimaduras graves e morte.
+        </div>
+
+        <h2>2. Categorias de Trabalhadores na NR-10</h2>
+        <p>A norma classifica os profissionais para assegurar que apenas pessoas devidamente preparadas intervenham no sistema elétrico:</p>
+
+        <table>
+            <tr>
+                <th>Trabalhador</th>
+                <th>Definição Conforme o Manual</th>
+            </tr>
+            <tr>
+                <td><strong>Habilitado</strong></td>
+                <td>Profissional previamente qualificado e com registro no conselho de classe (ex: CREA, CFT).</td>
+            </tr>
+            <tr>
+                <td><strong>Qualificado</strong></td>
+                <td>Aquele que comprova conclusão de curso específico na área elétrica em instituição reconhecida pelo sistema oficial de ensino.</td>
+            </tr>
+            <tr>
+                <td><strong>Capacitado</strong></td>
+                <td>Aquele que recebe treinamento sob orientação de profissional habilitado e autorizado, trabalhando sob a responsabilidade deste.</td>
+            </tr>
+            <tr>
+                <td><strong>Autorizado</strong></td>
+                <td>Trabalhadores qualificados, habilitados ou capacitados com anuência formal (por escrito) da empresa para exercer as atividades.</td>
+            </tr>
+        </table>
+
+        <h2>3. Medidas de Controle do Risco Elétrico</h2>
+        <p>Para controlar os riscos, a NR-10 exige a adoção de medidas preventivas de caráter coletivo e individual:</p>
+
+        <h3>3.1. Medidas de Proteção Coletiva (EPC)</h3>
+        <p>Prioridade absoluta na norma. Devem ser integradas aos projetos de instalações elétricas:</p>
+        <ul class="safety-list">
+            <li><strong>Desenergização:</strong> Conjunto de procedimentos ordenados (seccionamento, travamento, verificação e aterramento) que garante a ausência de tensão.</li>
+            <li><strong>Isolamento das partes vivas:</strong> Barreiras físicas que impedem o contato direto com condutores energizados.</li>
+            <li><strong>Obstáculos e Barreiras:</strong> Destinados a impedir o acesso acidental a zonas de perigo.</li>
+            <li><strong>Sinalização:</strong> Identificação clara de circuitos e áreas de risco para evitar erros humanos.</li>
+        </ul>
+
+        <h3>3.2. Medidas de Proteção Individual (EPI)</h3>
+        <p>Utilizadas quando as medidas coletivas são inviáveis ou insuficientes para completar a proteção:</p>
+        <ul class="safety-list">
+            <li>Vestimentas de trabalho adequadas à inflamabilidade e proteção contra arco elétrico (não podem ser combustíveis).</li>
+            <li>Uso obrigatório de calçados isolantes, luvas de borracha e proteção facial/ocular conforme o risco.</li>
+            <li><span class="highlight">Proibição de Adornos:</span> É estritamente vedado o uso de pulseiras, anéis, correntes ou relógios durante o trabalho, pois estes itens podem causar curtos-circuitos ou arcos elétricos letais.</li>
+        </ul>
+
+        <div class="alert-box">
+            <strong>Quem deve fazer o treinamento?</strong> Todos os trabalhadores autorizados a intervir em instalações elétricas devem possuir treinamento específico sobre os riscos decorrentes do emprego da energia elétrica e as medidas de prevenção, conforme o Anexo II da norma.
+        </div>
+        
+        <div class="norma-box" style="border-style: dashed; background-color: #f9f9f9; margin-top: 40px;">
+            <h3 style="margin-top: 0; border: none;">📚 Material Complementar</h3>
+            <p>Para um estudo mais aprofundado e consulta aos comentários técnicos detalhados de cada item da norma, acesse o documento oficial do Ministério do Trabalho:</p>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="../pdf/manual_de_auxilio_na_interpretacao_e_aplicacao_da_nr10.pdf" target="_blank" 
+                   style="background-color: #2980b9; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                   📖 Acessar Manual da NR-10 na Íntegra
+                </a>
+            </p>
+        </div>
+        
+        <div class="quiz-section" style="background-color: #fcfcfc; border: 2px dashed #2c3e50; padding: 25px; margin-top: 40px; border-radius: 8px;">
+            <h2 style="margin-top: 0;">📝 Exercícios de Verificação</h2>
+            <p>Teste seus conhecimentos sobre as diretrizes da NR-10:</p>
+
+            <div class="question" id="q1" style="margin-bottom: 20px; padding: 15px; border-radius: 6px;">
+                <strong>1. Segundo a NR-10, quem é o profissional habilitado?</strong>
+                <select id="ans1" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Aquele que aprendeu a profissão na prática com familiares.</option>
+                    <option value="correct">Aquele qualificado e com registro no conselho de classe competente (ex: CFT/CREA).</option>
+                    <option value="wrong">Qualquer trabalhador que tenha feito o curso básico de 40 horas.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q2" style="margin-bottom: 20px; padding: 15px; border-radius: 6px;">
+                <strong>2. Qual a principal diferença entre um profissional "Qualificado" e um "Autorizado"?</strong>
+                <select id="ans2" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">O qualificado ganha mais que o autorizado.</option>
+                    <option value="wrong">Não há diferença, são sinônimos perante a lei.</option>
+                    <option value="correct">O autorizado possui anuência formal da empresa para trabalhar, além de sua qualificação.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q3" style="margin-bottom: 20px; padding: 15px; border-radius: 6px;">
+                <strong>3. De acordo com a hierarquia de controle da NR-10, qual medida deve ter prioridade?</strong>
+                <select id="ans3" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="correct">Medidas de Proteção Coletiva (EPC), como a desenergização.</option>
+                    <option value="wrong">Medidas de Proteção Individual (EPI), como luvas e botas.</option>
+                    <option value="wrong">O uso de ferramentas manuais isoladas.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q4" style="margin-bottom: 20px; padding: 15px; border-radius: 6px;">
+                <strong>4. Sobre o uso de adornos pessoais (anéis, relógios, etc), a NR-10 determina que:</strong>
+                <select id="ans4" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Podem ser usados se forem revestidos com fita isolante.</option>
+                    <option value="correct">É terminantemente vedado seu uso em trabalhos com eletricidade ou proximidades.</option>
+                    <option value="wrong">São permitidos apenas para profissionais habilitados.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q5" style="margin-bottom: 20px; padding: 15px; border-radius: 6px;">
+                <strong>5. Qual o objetivo principal das medidas de controle descritas no Manual da NR-10?</strong>
+                <select id="ans5" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="correct">Prevenir a ocorrência de choques elétricos e arcos elétricos.</option>
+                    <option value="wrong">Aumentar a velocidade de execução das obras elétricas.</option>
+                    <option value="wrong">Substituir a necessidade de ferramentas elétricas.</option>
+                </select>
+            </div>
+
+            <button onclick="verificarGabarito()" style="background-color: #2c3e50; color: white; border: none; padding: 12px 25px; font-size: 1rem; border-radius: 4px; cursor: pointer; display: block; margin: 20px auto;">
+                Verificar Respostas
+            </button>
+        </div>
+
+        <script>
+            function verificarGabarito() {
+                for (let i = 1; i <= 5; i++) {
+                    let res = document.getElementById('ans' + i).value;
+                    let questionBox = document.getElementById('q' + i);
+                    
+                    if (res === "correct") {
+                        questionBox.style.backgroundColor = "#d4edda"; // Verde claro
+                        questionBox.style.borderLeft = "5px solid #28a745";
+                    } else if (res === "wrong") {
+                        questionBox.style.backgroundColor = "#f8d7da"; // Vermelho claro
+                        questionBox.style.borderLeft = "5px solid #dc3545";
+                    }
+                }
+            }
+        </script>
+        
+        
+
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Baseado no Manual de Auxílio na Interpretação da NR-10 </p>
+    </footer>
+
+</body>
+</html>

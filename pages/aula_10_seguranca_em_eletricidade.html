@@ -202,8 +202,61 @@
             <li><strong>Instalação de Aterramento Temporário:</strong> Conectar as fases à terra para garantir segurança em caso de falha.</li>
             <li><strong>Sinalização:</strong> Delimitar a área de trabalho para evitar acesso de terceiros.</li>
         </ol>
+        
+        <h2>5. O Perigo Invisível: Adornos e Eletricidade</h2>
+        <p>Trabalhar com eletricidade exige que o corpo do profissional esteja o mais isolado possível no circuito. O uso de adornos (anéis, alianças, pulseiras, correntes, relógios, brincos e piercings) quebra essa premissa básica de segurança.</p>
 
-        <h2>5. Canteiros de Obras e Riscos Ambientais</h2>
+        <div class="norma-box">
+            <strong>O que diz a NR-10 (item 10.2.9.3)?</strong><br>
+            "É vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades". Esta é uma medida de proteção que visa evitar caminhos para a corrente elétrica ou a formação de arcos elétricos.
+        </div>
+
+        <h3>Riscos Associados ao Uso de Metais</h3>
+        <p>A NBR 5410 reforça que o uso de adornos anula as barreiras de isolamento, transformando o trabalhador em um "condutor móvel".</p>
+
+        <div class="chart-section">
+            <div class="chart-explanation">
+                <ul class="safety-list">
+                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Curto-circuito Acidental:</strong> Um anel pode tocar simultaneamente partes energizadas e aterradas.</li>
+                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Arco Elétrico:</strong> Metais facilitam a abertura de arcos que podem ultrapassar os 5000<sup>0</sup> C.</li>
+                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Queimaduras Gravíssimas:</strong> O metal aquece instantaneamente e funde-se à pele.</li>
+                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Efeito de Aprisionamento:</strong> A contração muscular pode prender o adorno à fonte de energia.</li>
+                </ul>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <th>Adorno</th>
+                <th>Risco Principal</th>
+            </tr>
+            <tr>
+                <td><strong>Alianças/Anéis</strong></td>
+                <td>Curtos-circuitos e risco de amputação.</td>
+            </tr>
+            <tr>
+                <td><strong>Relógios Metálicos</strong></td>
+                <td>Ponte de condução entre o braço e partes vivas.</td>
+            </tr>
+            <tr>
+                <td><strong>Correntes/Colares</strong></td>
+                <td>Podem pender e tocar barramentos energizados.</td>
+            </tr>
+            <tr>
+                <td><strong>Piercings</strong></td>
+                <td>Atração de arcos em áreas de alta indução.</td>
+            </tr>
+        </table>
+
+        <div class="alert-box">
+            <strong>Nota Importante:</strong> Mesmo adornos de borracha ou silicone devem ser evitados, pois podem acumular sujeira condutora ou causar riscos mecânicos (enroscar em partes móveis).
+        </div>
+        
+        <div class="alert-box" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
+            <strong>Fique esperto!</strong> A segurança em eletricidade começa na disciplina pessoal. Retirar esses objetos antes de iniciar a jornada é o passo mais simples para garantir que você volte para casa em segurança..
+        </div>
+
+        <h2>6. Canteiros de Obras e Riscos Ambientais</h2>
         <p>Canteiros são ambientes de altíssimo risco devido à umidade e presença de superfícies metálicas (que reduzem a resistência do corpo).</p>
         <ul class="safety-list">
             <li><strong>Uso Obrigatório de DR:</strong> Todo circuito de tomadas em obras deve possuir proteção Diferencial Residual.</li>
@@ -211,7 +264,7 @@
             <li><strong>Quadros Blindados:</strong> Invólucros com IP (Grau de Proteção) adequado contra jatos de água e poeira.</li>
         </ul>
 
-        <h2>6. Segurança no Lar e Proteção Adicional</h2>
+        <h2>7. Segurança no Lar e Proteção Adicional</h2>
         <p>O conceito moderno de segurança residencial foca em camadas de proteção:</p>
 
         <ul class="safety-list">
@@ -297,13 +350,33 @@
                     <option value="wrong">Verificar se os aparelhos eletrônicos pararam de funcionar.</option>
                 </select>
             </div>
+            
+            <div class="question" id="q6">
+                <strong>6. De acordo com a NR-10, o uso de adornos (anéis, relógios, etc) é:</strong>
+                <select id="ans6" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Permitido se o adorno for de ouro puro.</option>
+                    <option value="correct">Vedado em trabalhos com instalações elétricas ou proximidades.</option>
+                    <option value="wrong">Opcional, dependendo da vontade do eletricista.</option>
+                </select>
+            </div>
+
+            <div class="question" id="q7">
+                <strong>7. Por que adornos de "silicone" também devem ser evitados?</strong>
+                <select id="ans7" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="correct">Podem acumular sujeira condutora e oferecem riscos mecânicos.</option>
+                    <option value="wrong">Porque o silicone atrai raios.</option>
+                    <option value="wrong">Não precisam ser evitados, pois são isolantes.</option>
+                </select>
+            </div>
 
             <button class="btn-gabarito" onclick="verificarQuiz()">Verificar Gabarito</button>
         </div>
 
     </div> <script>
         function verificarQuiz() {
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= 7; i++) {
                 let res = document.getElementById('ans' + i).value;
                 let questionBox = document.getElementById('q' + i);
                 

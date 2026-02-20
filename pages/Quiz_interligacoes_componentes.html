@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ: Interligação de componentes elétricos - V2</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+            color: #212529;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #004085;
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #6c757d;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 15px;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        .option-item {
+            margin: 12px 0;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .option-item:hover {
+            background: #f1f3f5;
+        }
+        .option-item input {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e2e3e5;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+            color: #383d41;
+        }
+        #btn-finish {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        #btn-finish:hover {
+            background: #0056b3;
+        }
+        #score-summary {
+            margin-top: 25px;
+            padding: 20px;
+            display: none;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Quiz: Ligação de componentes elétricos</h1>
+    <h2>Lâmpada, Sensores, Interruptores e Quadro de Distribuição</h2>
+    
+    <form id="quiz-form">
+        <div id="quiz-content"></div>
+        <button type="button" id="btn-finish" onclick="checkAnswers()">Finalizar Avaliação</button>
+    </form>
+
+    <div id="score-summary"></div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "Qual condutor deve ser obrigatoriamente ligado ao borne do interruptor simples para segurança?",
+            options: ["Neutro", "Fase", "Retorno", "Terra"],
+            correct: 1,
+            exp: "O condutor FASE deve ser interrompido para que a lâmpada não receba energia quando desligada."
+        },
+        {
+            q: "Quantos fios de RETORNO saem de um interruptor de dupla seção (duas teclas)?",
+            options: ["1 retorno", "2 retornos", "3 retornos", "4 retornos"],
+            correct: 1,
+            exp: "Cada tecla controla um circuito independente, logo, cada uma precisa de seu próprio retorno."
+        },
+        {
+            q: "Para controlar uma lâmpada de dois pontos diferentes, usamos interruptores do tipo:",
+            options: ["Simples", "Bipolares", "Paralelos (Three-way)", "Intermediários"],
+            correct: 2,
+            exp: "O paralelo permite alternar a passagem da corrente entre dois pontos distintos."
+        },
+        {
+            q: "No esquema paralelo, quantos fios conectam as laterais dos dois interruptores?",
+            options: ["1 fio", "2 fios", "3 fios", "4 fios"],
+            correct: 1,
+            exp: "São necessários 2 fios (ponte) para que o sistema de comutação funcione."
+        },
+        {
+            q: "Qual a função do Disjuntor Termomagnético (DTM) no Quadro de Distribuição?",
+            options: ["Evitar choque elétrico", "Proteger fios contra sobrecarga e curto-circuito", "Ligar e desligar a luz", "Economizar energia"],
+            correct: 1,
+            exp: "O disjuntor protege a fiação contra aquecimento excessivo (sobrecarga) e curtos."
+        },
+        {
+            q: "No QD, o barramento de NEUTRO deve ficar:",
+            options: ["Ligado no mesmo barramento do Terra", "Isolado eletricamente da carcaça do quadro", "Ligado diretamente na fase", "Fora do quadro"],
+            correct: 1,
+            exp: "O neutro é um condutor carregado e deve ser isolado do terra e da carcaça no quadro principal."
+        },
+        {
+            q: "Em um circuito paralelo, se a fase entra no centro do 1º interruptor, o retorno sai de onde?",
+            options: ["Da lateral do 1º interruptor", "Do centro do 2º interruptor", "Do barramento de neutro", "Direto do disjuntor"],
+            correct: 1,
+            exp: "A lógica do paralelo é: Fase no centro de um, Retorno no centro do outro."
+        },
+        {
+            q: "A NBR 5410 exige que a cor do condutor NEUTRO seja:",
+            options: ["Verde", "Preta", "Azul-claro", "Vermelha"],
+            correct: 2,
+            exp: "O azul-claro é a cor normativa para identificação do condutor Neutro."
+        },
+        {
+            q: "Como é feita a alimentação da Fase em um interruptor de duas teclas (dupla seção)?",
+            options: ["Uma fase para cada tecla", "Um 'jump' (ponte) de fase entre os dois bornes de entrada", "Fase e Neutro no mesmo interruptor", "A fase não vai no interruptor"],
+            correct: 1,
+            exp: "Utiliza-se uma ponte de fio para levar a mesma fase aos dois bornes de entrada das teclas."
+        },
+        {
+            q: "Qual dispositivo no QD protege pessoas contra choques e tem um botão de teste?",
+            options: ["Disjuntor Geral", "DPS", "Barramento de cobre", "DR (Diferencial Residual)"],
+            correct: 3,
+            exp: "O DR detecta fugas de corrente (choques) e desarma instantaneamente."
+        },
+        /* NOVAS QUESTÕES ADICIONADAS */
+        {
+            q: "O interruptor SIMPLES BIPOLAR é utilizado obrigatoriamente quando:",
+            options: ["A lâmpada é controlada de 3 pontos", "O circuito é alimentado por duas fases (220V entre fases)", "Queremos economizar fios", "A lâmpada é de LED"],
+            correct: 1,
+            exp: "Em circuitos bifásicos, ambas as fases devem ser seccionadas para garantir a segurança na manutenção da luminária."
+        },
+        {
+            q: "No Sensor de Presença de 3 fios, quais são as funções típicas de cada condutor?",
+            options: ["Fase, Neutro e Retorno", "Fase, Fase e Terra", "Fase, Neutro e Terra", "Retorno, Retorno e Neutro"],
+            correct: 0,
+            exp: "O sensor precisa de alimentação (Fase e Neutro) e fornece um Retorno para acionar a carga (lâmpada)."
+        },
+        {
+            q: "Para controlar uma lâmpada de TRÊS ou mais pontos diferentes, usamos o interruptor:",
+            options: ["Simples", "Bipolar", "Intermediário (Four-way)", "Diferencial"],
+            correct: 2,
+            exp: "O interruptor intermediário deve ser instalado obrigatoriamente entre dois interruptores paralelos."
+        },
+        {
+            q: "Na ligação do bocal (receptáculo) da lâmpada, o condutor NEUTRO deve ser ligado preferencialmente onde?",
+            options: ["No pino central (fundo)", "Na parte roscada (lateral)", "Em qualquer um dos bornes", "No fio terra"],
+            correct: 1,
+            exp: "Ligar o Neutro na rosca evita choques se alguém tocar na parte metálica da lâmpada durante a troca."
+        },
+        {
+            q: "Qual condutor deve ser conectado ao contato CENTRAL (fundo) do bocal da lâmpada?",
+            options: ["Neutro", "Terra", "Retorno", "Fase Direta"],
+            correct: 2,
+            exp: "O Retorno vai ao centro para garantir que, com o interruptor desligado, não haja energia em nenhum ponto do bocal."
+        }
+    ];
+
+    const quizContent = document.getElementById('quiz-content');
+
+    // Renderizar questões
+    quizData.forEach((item, qIdx) => {
+        let qBlock = document.createElement('div');
+        qBlock.className = 'question-block';
+        qBlock.id = `block-${qIdx}`;
+        
+        qBlock.innerHTML = `<p><strong>${qIdx + 1}. ${item.q}</strong></p>`;
+        
+        let uList = document.createElement('ul');
+        uList.className = 'options-list';
+        
+        item.options.forEach((opt, oIdx) => {
+            uList.innerHTML += `
+                <li class="option-item" id="opt-${qIdx}-${oIdx}">
+                    <input type="radio" name="q${qIdx}" value="${oIdx}"> ${opt}
+                </li>
+            `;
+        });
+        
+        qBlock.appendChild(uList);
+        qBlock.innerHTML += `<div class="explanation" id="exp-${qIdx}">${item.exp}</div>`;
+        quizContent.appendChild(qBlock);
+    });
+
+    function checkAnswers() {
+        let score = 0;
+        
+        quizData.forEach((item, qIdx) => {
+            const selected = document.querySelector(`input[name="q${qIdx}"]:checked`);
+            const explanation = document.getElementById(`exp-${qIdx}`);
+            explanation.style.display = 'block';
+
+            // Resetar estilos
+            item.options.forEach((_, oIdx) => {
+                document.getElementById(`opt-${qIdx}-${oIdx}`).className = 'option-item';
+            });
+
+            // Mostrar a correta em verde sempre
+            document.getElementById(`opt-${qIdx}-${item.correct}`).classList.add('correct');
+
+            if (selected) {
+                const answer = parseInt(selected.value);
+                if (answer === item.correct) {
+                    score++;
+                } else {
+                    // Se errou, marca a selecionada de vermelho
+                    document.getElementById(`opt-${qIdx}-${answer}`).classList.add('incorrect');
+                }
+            }
+        });
+
+        // Sumário final
+        const summary = document.getElementById('score-summary');
+        summary.style.display = 'block';
+        summary.innerHTML = `Resultado: Acertou ${score} de ${quizData.length}`;
+        summary.style.backgroundColor = score >= 11 ? '#d4edda' : '#f8d7da';
+        summary.style.color = score >= 11 ? '#155724' : '#721c24';
+
+        // Desativar botão após finalizar
+        document.getElementById('btn-finish').disabled = true;
+        document.getElementById('btn-finish').innerText = "Avaliação Concluída";
+        document.getElementById('btn-finish').style.background = "#6c757d";
+        
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>

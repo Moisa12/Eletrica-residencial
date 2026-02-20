@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo de Automação Residencial com Alexa</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9;
+            padding-top: 110px; 
+        }
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 5px solid #f1c40f;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-header {
+            position: absolute;
+            bottom: 10px; 
+            right: 20px;   
+            height: 50px;  
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; }
+        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+        
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 15px; margin-top: 40px; text-transform: uppercase; font-size: 1.4rem; }
+        h3 { color: #2980b9; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        p { margin-bottom: 1.2rem; text-align: justify; }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Card Hover Effects */
+        .hover-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 4, 8, 0.05);
+        }
+
+        /* Chart Container Specifics */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Room Simulation Transitions */
+        .room-panel {
+            transition: background-color 0.8s ease, color 0.5s ease;
+        }
+        .device-icon {
+            transition: opacity 0.5s ease, transform 0.5s ease, color 0.5s ease;
+        }
+
+        /* Custom style for the closed/open curtain icon */
+        .curtain-closed {
+            opacity: 0.6;
+            color: #78716C; /* Stone 600 */
+        }
+        .curtain-open {
+            opacity: 1;
+            color: #FACC15; /* Amber 400 */
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.5); /* Light glow */
+        }
+        
+        /* Animation for Vacation Mode */
+        @keyframes random-flicker {
+            0% { opacity: 0.1; }
+            50% { opacity: 1; }
+            100% { opacity: 0.1; }
+        }
+        .simulating {
+            animation: random-flicker 3s infinite steps(10, end);
+        }
+	.btn-voltar {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
+        footer p { margin: 0; text-align: center; }
+    </style>
+
+</head>
+
+    
+    <div class="container">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#conceito" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Conceito</a>
+                    <a href="#dispositivos" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Dispositivos</a>
+                    <a href="#simulador" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Simulador</a>
+                    <a href="#planejamento" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Roteiro</a>
+                    <a href="#ecossistema" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Apps</a>
+                    <a href="#rede" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Rede & Segurança</a>
+                    <a href="#cuidado" class="text-stone-600 hover:text-sky-600 transition-colors font-medium">Cuidados e cessibilidades</a>
+                </div>
+                <!-- Mobile Menu Button (Simplified for this demo) -->
+                <button id="mobile-menu-btn" class="md:hidden text-2xl text-stone-600">☰</button>
+            </div>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <a href="#conceito" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Conceito</a>
+            <a href="#dispositivos" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Dispositivos</a>
+            <a href="#simulador" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Simulador</a>
+            <a href="#planejamento" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Roteiro</a>
+            <a href="#ecossistema" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Apps</a>
+            <a href="#rede" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Rede & Segurança</a>
+            <a href="#cuidado" class="block px-4 py-2 text-stone-600 hover:bg-stone-50">Cuidado</a>
+        </div>
+    </nav>
+
+    
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Módulo - Automação Residencial</h1>
+        <div class="subtitle">Integração, Praticidade e Segurança com Alexa</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+
+    <main>
+        <!-- Section 1: Concept & Analytics -->
+        <section id="conceito" class="py-16 bg-stone-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-stone-900">O Que é Casa Inteligente?</h2>
+                    <p class="mt-4 text-stone-600 max-w-3xl mx-auto">
+                        A automação residencial integra tecnologia para gerenciar funções da casa de forma centralizada. 
+                        Nesta seção, visualizamos os principais pilares que motivam a adoção dessa tecnologia e equilibramos as vantagens com os desafios comuns enfrentados por novos usuários.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Chart 1: Benefits -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 hover-card">
+                        <h3 class="text-lg font-semibold text-stone-800 mb-4 text-center">Pilares da Automação</h3>
+                        <div class="chart-container">
+                            <canvas id="benefitsChart"></canvas>
+                        </div>
+                        <p class="text-sm text-stone-500 text-center mt-4">Distribuição do impacto na qualidade de vida.</p>
+                    </div>
+
+                    <!-- Text Content: Pros & Cons -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-400">
+                            <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                                <span class="text-emerald-500">▲</span> Vantagens
+                            </h3>
+                            <ul class="mt-4 space-y-2 text-stone-600">
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> <strong>Conforto:</strong> Controle luzes e temperatura sem sair do sofá.</li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> <strong>Segurança:</strong> Monitoramento remoto e simulação de presença.</li>
+                                <li class="flex items-start gap-2"><span class="text-emerald-500">✓</span> <strong>Economia:</strong> Rotinas que desligam aparelhos ociosos.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-rose-400">
+                            <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                                <span class="text-rose-500">▼</span> Desafios
+                            </h3>
+                            <ul class="mt-4 space-y-2 text-stone-600">
+                                <li class="flex items-start gap-2"><span class="text-rose-500">⚠</span> <strong>Dependência:</strong> Exige conexão Wi-Fi estável (2.4GHz).</li>
+                                <li class="flex items-start gap-2"><span class="text-rose-500">⚠</span> <strong>Custo Inicial:</strong> Investimento em Hubs e dispositivos.</li>
+                                <li class="flex items-start gap-2"><span class="text-rose-500">⚠</span> <strong>Curva de Aprendizado:</strong> Configuração de múltiplos apps.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Hardware Selector -->
+        <section id="dispositivos" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-stone-900">Escolha Seu "Cérebro"</h2>
+                    <p class="mt-4 text-stone-600 max-w-3xl">
+                        O dispositivo Amazon Echo é o centro da automação. Selecione o modelo ideal baseado nas suas prioridades: custo-benefício, experiência visual ou qualidade de som. Clique nas opções abaixo para filtrar.
+                    </p>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button onclick="filterDevices('all', this)" class="filter-btn px-6 py-2 rounded-full bg-stone-100 text-stone-600 hover:bg-sky-100 hover:text-sky-700 font-medium transition active-filter ring-2 ring-sky-500 ring-offset-2">Todos</button>
+                    <button onclick="filterDevices('custo', this)" class="filter-btn px-6 py-2 rounded-full bg-stone-100 text-stone-600 hover:bg-sky-100 hover:text-sky-700 font-medium transition">Custo-Benefício</button>
+                    <button onclick="filterDevices('tela', this)" class="filter-btn px-6 py-2 rounded-full bg-stone-100 text-stone-600 hover:bg-sky-100 hover:text-sky-700 font-medium transition">Com Tela</button>
+                    <button onclick="filterDevices('som', this)" class="filter-btn px-6 py-2 rounded-full bg-stone-100 text-stone-600 hover:bg-sky-100 hover:text-sky-700 font-medium transition">Som Premium</button>
+                </div>
+
+                <!-- Device Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="device-grid">
+                    <!-- Echo Dot -->
+                    <div class="device-card group bg-stone-50 rounded-3xl p-8 border border-stone-100 relative overflow-hidden transition-all duration-300" data-category="custo">
+                        <div class="absolute top-0 right-0 bg-sky-100 text-sky-700 px-4 py-1 rounded-bl-2xl font-bold text-xs">MAIS POPULAR</div>
+                        <div class="text-5xl mb-4 text-stone-300 group-hover:text-sky-500 transition-colors">🔊</div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2">Echo Dot (5ª Geração)</h3>
+                        <p class="text-stone-500 mb-6 text-sm">Compacto, discreto e acessível. O ponto de entrada perfeito.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Ideal para Quartos</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Versão com Relógio</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Sensor de Temperatura</li>
+                        </ul>
+                        <div class="text-2xl font-bold text-stone-900">R$ 350 - 450</div>
+                    </div>
+
+                    <!-- Echo Show -->
+                    <div class="device-card group bg-stone-50 rounded-3xl p-8 border border-stone-100 relative overflow-hidden transition-all duration-300" data-category="tela">
+                        <div class="absolute top-0 right-0 bg-amber-100 text-amber-700 px-4 py-1 rounded-bl-2xl font-bold text-xs">VISUAL</div>
+                        <div class="text-5xl mb-4 text-stone-300 group-hover:text-amber-500 transition-colors">📺</div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2">Echo Show 8</h3>
+                        <p class="text-stone-500 mb-6 text-sm">Central de controle visual. Veja câmeras, receitas e vídeos.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Tela HD Interativa</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Câmera para Vídeo</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Ideal para Cozinha/Sala</li>
+                        </ul>
+                        <div class="text-2xl font-bold text-stone-900">R$ 800 - 1000</div>
+                    </div>
+
+                    <!-- Echo Studio -->
+                    <div class="device-card group bg-stone-50 rounded-3xl p-8 border border-stone-100 relative overflow-hidden transition-all duration-300" data-category="som">
+                        <div class="absolute top-0 right-0 bg-purple-100 text-purple-700 px-4 py-1 rounded-bl-2xl font-bold text-xs">PREMIUM</div>
+                        <div class="text-5xl mb-4 text-stone-300 group-hover:text-purple-500 transition-colors">🎵</div>
+                        <h3 class="text-2xl font-bold text-stone-900 mb-2">Echo Studio</h3>
+                        <p class="text-stone-500 mb-6 text-sm">Áudio de alta fidelidade e Hub Zigbee integrado.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Áudio Espacial / Atmos</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Hub Zigbee Nativo</li>
+                            <li class="text-sm text-stone-600 flex items-center"><span class="mr-2">🔹</span> Home Theater Power</li>
+                        </ul>
+                        <div class="text-2xl font-bold text-stone-900">R$ 1600+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Room Simulator -->
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="mb-12">
+                    <span class="text-sky-400 font-bold tracking-wider uppercase text-sm">Experiência Interativa</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-2">Simule suas Rotinas</h2>
+                    <p class="mt-4 text-stone-400 max-w-4xl mx-auto">
+                        A mágica acontece nas rotinas. Clique nos comandos de voz abaixo para ver como a Sala, o Quarto e a Cozinha reagem aos comandos da Alexa.
+                    </p>
+                </div>
+        
+        
+        <section>
+            
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    
+                    <!-- Living Room Simulator -->
+                    <div id="living-room" class="room-panel bg-stone-800 rounded-3xl p-6 border border-stone-700 min-h-[500px] flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-blue-900/0 transition-colors duration-700" id="living-overlay"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold flex items-center gap-2">🛋️ Sala de Estar</h3>
+                            <p class="text-stone-400 text-sm mt-1">Dispositivos: Echo Show, TV, <strong class="text-white">Interruptor Touch/Dimmer</strong>, Ar Condicionado</p>
+                        </div>
+
+                        <!-- Devices Visualization -->
+                        <div class="relative z-10 flex flex-col justify-center items-center gap-4 flex-1 pt-6 pb-6">
+                            <div id="dev-tv" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>📺</span>
+                                <span class="text-xs mt-2 opacity-0 font-mono text-sky-400 transition-opacity">DESLIGADA</span>
+                            </div>
+                            <div id="dev-light-living" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>💡</span>
+                                <span class="text-xs mt-2 font-mono transition-colors">DESLIGADO</span>
+                            </div>
+                            <div id="dev-ac" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>❄️</span>
+                                <span class="text-xs mt-2 opacity-0 font-mono text-sky-400 transition-opacity">OFF</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="relative z-10 bg-stone-900/80 backdrop-blur rounded-xl p-4 border border-stone-600">
+                            <p class="text-xs text-stone-400 uppercase font-bold mb-3">Comandos de Voz</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="triggerRoutine('cinema')" class="bg-sky-600 hover:bg-sky-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 col-span-2">
+                                    <span>🗣️</span> "Alexa, Modo Filme"
+                                </button>
+                                <!-- MODO VIAGEM -->
+                                <button onclick="triggerRoutine('vacation')" class="bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <span>🛡️</span> "Alexa, Modo Viagem"
+                                </button>
+                                <button onclick="triggerRoutine('living_off')" class="bg-stone-700 hover:bg-stone-600 text-white py-3 rounded-lg text-sm font-semibold transition">
+                                    "Alexa, Apagar Sala"
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bedroom Simulator -->
+                    <div id="bedroom" class="room-panel bg-stone-800 rounded-3xl p-6 border border-stone-700 min-h-[500px] flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-orange-900/0 transition-colors duration-700" id="bedroom-overlay"></div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold flex items-center gap-2">🛏️ Quarto</h3>
+                            <p class="text-stone-400 text-sm mt-1">Dispositivos: Echo Dot Relógio, Cortina, Luz Cabeceira, Umidificador</p>
+                        </div>
+
+                        <!-- Devices Visualization -->
+                        <div class="relative z-10 flex flex-col justify-center items-center gap-4 flex-1 pt-6 pb-6">
+                            <div id="dev-dot" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>⏰</span>
+                                <span class="text-xs mt-2 opacity-0 font-mono text-amber-400 transition-opacity">OFF</span>
+                            </div>
+                            <!-- Icone 🪟 (Janela) / 🌤️ (Sol) -->
+                            <div id="dev-curtain" class="device-icon text-6xl flex flex-col items-center curtain-closed">
+                                <span>🪟</span> 
+                                <span class="text-xs mt-2 font-mono transition-colors">FECHADA</span>
+                            </div>
+                            <div id="dev-light-bed" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>🏮</span>
+                                <span class="text-xs mt-2 font-mono transition-colors">DESLIGADO</span>
+                            </div>
+                            <div id="dev-humid" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>💧</span>
+                                <span class="text-xs mt-2 opacity-0 font-mono text-blue-300 transition-opacity">OFF</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="relative z-10 bg-stone-900/80 backdrop-blur rounded-xl p-4 border border-stone-600">
+                            <p class="text-xs text-stone-400 uppercase font-bold mb-3">Comandos de Voz</p>
+                            <div class="flex flex-col gap-3">
+                                <button onclick="triggerRoutine('sleep')" class="bg-amber-600 hover:bg-amber-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <span>🗣️</span> "Alexa, Modo Dormir"
+                                </button>
+                                <button onclick="triggerRoutine('wake')" class="bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <span>🗣️</span> "Alexa, Acordar"
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Kitchen Simulator -->
+                    <div id="kitchen" class="room-panel bg-stone-800 rounded-3xl p-6 border border-stone-700 min-h-[500px] flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 bg-emerald-900/0 transition-colors duration-700" id="kitchen-overlay"></div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold flex items-center gap-2">🍳 Cozinha</h3>
+                            <p class="text-stone-400 text-sm mt-1">Dispositivos: Echo Show, Tomada Inteligente, Sensor de Vazamento</p>
+                        </div>
+
+                        <!-- Devices Visualization -->
+                        <div class="relative z-10 flex flex-col justify-center items-center gap-4 flex-1 pt-6 pb-6">
+                            <div id="dev-show-kitchen" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>👨‍🍳</span>
+                                <span class="text-xs mt-2 opacity-0 font-mono text-white transition-opacity">OFF</span>
+                            </div>
+                            <div id="dev-coffee" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>☕</span>
+                                <span class="text-xs mt-2 font-mono transition-colors">DESLIGADA</span>
+                            </div>
+                            <div id="dev-sensor" class="device-icon text-6xl text-stone-600 flex flex-col items-center">
+                                <span>💧</span>
+                                <span class="text-xs mt-2 font-mono transition-colors">OK</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="relative z-10 bg-stone-900/80 backdrop-blur rounded-xl p-4 border border-stone-600">
+                            <p class="text-xs text-stone-400 uppercase font-bold mb-3">Comandos de Voz e Eventos</p>
+                            <div class="flex flex-col gap-3">
+                                <button onclick="triggerRoutine('coffee_morning')" class="bg-red-600 hover:bg-red-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <span>🗣️</span> "Alexa, Hora do Café"
+                                </button>
+                                <button onclick="triggerRoutine('leak_alarm')" class="bg-yellow-500 hover:bg-yellow-400 text-stone-900 py-3 rounded-lg text-sm font-semibold transition">
+                                    ⚠️ Simular Vazamento
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Shopping Planner & Calculator -->
+        <section id="planejamento" class="py-16 bg-stone-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10">
+                    <h2 class="text-3xl font-bold text-stone-900">Seu Roteiro de Compras e Orçamento</h2>
+                    <p class="mt-4 text-stone-600">
+                        Um checklist interativo com estimativa de custos. Marque os itens adquiridos para calcular o investimento total. (Preços médios estimados).
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                    <div class="p-6 bg-stone-100 border-b border-stone-200 flex justify-between items-center">
+                        <h3 class="font-bold text-stone-800">Itens Essenciais (Total de 15)</h3>
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm bg-white px-3 py-1 rounded-full border border-stone-300 text-stone-600" id="progress-text">0/15 Adquiridos</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Calculator Display -->
+                    <div class="p-4 bg-sky-50 border-b border-sky-200 flex justify-between items-center">
+                        <span class="font-bold text-lg text-sky-800">Custo Total Estimado:</span>
+                        <span class="font-extrabold text-2xl text-sky-600" id="total-cost">R$ 0,00</span>
+                    </div>
+
+                    <div class="divide-y divide-stone-100" id="shopping-list">
+                        <!-- JS Generated Items -->
+                    </div>
+                    <div class="p-6 bg-stone-50 border-t border-stone-200">
+                        <h4 class="font-bold text-stone-800 mb-2 text-sm uppercase">Marcas Recomendadas (Compatíveis com Alexa)</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 font-medium">Positivo Casa Inteligente</span>
+                            <span class="px-3 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 font-medium">Intelbras</span>
+                            <span class="px-3 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 font-medium">Sonoff (Relés)</span>
+                            <span class="px-3 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 font-medium">Geonav</span>
+                            <span class="px-3 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 font-medium">Elgin</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: App Ecosystem Guide -->
+        <section id="ecossistema" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <span class="text-purple-600 font-bold tracking-wider uppercase text-sm">Passo Crucial</span>
+                    <h2 class="text-3xl font-bold text-stone-900 mt-2">Guia do Ecossistema de Aplicativos</h2>
+                    <p class="mt-4 text-stone-600 max-w-4xl mx-auto">
+                        Para a Alexa controlar um dispositivo de terceiros (tomada, lâmpada), você precisará do aplicativo do <strong>Fabricante</strong>. É este app que faz o cadastro inicial. Depois, você ativa a <strong>Habilidade</strong> correspondente na Alexa para "ligar" os dois mundos.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Card 1: Tuya / Smart Life -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-stone-100 hover-card text-center">
+                        <div class="text-5xl mb-4">🌐</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">Tuya / Smart Life</h3>
+                        <p class="text-sm text-stone-500 mb-4">O ecossistema mais universal e abrangente.</p>
+                        <div class="border-t border-stone-100 pt-4 text-left">
+                            <p class="text-sm font-semibold text-stone-700 mb-1">Uso Principal:</p>
+                            <ul class="text-xs text-stone-600 space-y-1">
+                                <li>Tomadas, Interruptores, Lâmpadas (genéricas)</li>
+                                <li>Sensores de Segurança (Porta/Janela, Presença)</li>
+                                <li>Controladores Infravermelho</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Positivo / Intelbras IZY -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-stone-100 hover-card text-center">
+                        <div class="text-5xl mb-4">🇧🇷</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">Positivo e Intelbras Izy</h3>
+                        <p class="text-sm text-stone-500 mb-4">Marcas brasileiras com suporte local, geralmente baseadas em Tuya.</p>
+                        <div class="border-t border-stone-100 pt-4 text-left">
+                            <p class="text-sm font-semibold text-stone-700 mb-1">Uso Principal:</p>
+                            <ul class="text-xs text-stone-600 space-y-1">
+                                <li>Câmeras IP (Várias Linhas)</li>
+                                <li>Kits de Alarme e Sensores</li>
+                                <li>Interruptores de Alta Qualidade</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Segurança Específica (Ex: Wyze, Tapo) -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-stone-100 hover-card text-center">
+                        <div class="text-5xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold text-stone-900 mb-2">Apps de Segurança (Tapo/Wyze)</h3>
+                        <p class="text-sm text-stone-500 mb-4">Focados em dispositivos de monitoramento e vigilância.</p>
+                        <div class="border-t border-stone-100 pt-4 text-left">
+                            <p class="text-sm font-semibold text-stone-700 mb-1">Uso Principal:</p>
+                            <ul class="text-xs text-stone-600 space-y-1">
+                                <li>Visualização ao Vivo de Câmeras (Crucial!)</li>
+                                <li>Armazenamento de Vídeo (Nuvem/SD)</li>
+                                <li>Gravação de Rotinas de Patrulha</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 p-6 bg-yellow-50 rounded-xl border-l-4 border-yellow-400">
+                    <h4 class="font-bold text-lg text-yellow-800 flex items-center gap-2">
+                        <span class="text-2xl">💡</span> Dica de Setup
+                    </h4>
+                    <p class="text-sm text-yellow-700 mt-2">
+                        Sempre instale o dispositivo **primeiro** no aplicativo do Fabricante (ex: Smart Life). **Segundo**, vá para o App Alexa e procure pela **Habilidade (Skill)** "Smart Life". Habilite-a, faça o login e a Alexa importará automaticamente todos os seus dispositivos.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: Network Optimization & Privacy -->
+        <section id="rede" class="py-16 bg-stone-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <span class="text-red-600 font-bold tracking-wider uppercase text-sm">Estabilidade é a Chave</span>
+                    <h2 class="text-3xl font-bold text-stone-900 mt-2">Otimização de Rede e Privacidade</h2>
+                    <p class="mt-4 text-stone-600 max-w-4xl mx-auto">
+                        Quase todos os problemas de automação vêm de uma rede Wi-Fi mal configurada. Garanta que a sua base esteja sólida.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Card 1: Network Stability -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-sky-400 hover-card">
+                        <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                            📶 Estabilidade da Rede (2.4GHz)
+                        </h3>
+                        <ul class="mt-4 space-y-4 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">1.</span> 
+                                <p><strong>Frequência 2.4 GHz:</strong> A maioria dos dispositivos baratos SÓ funciona nesta banda. Se seu roteador é dual-band, certifique-se de que o nome da rede 2.4 GHz (SSID) é diferente do 5 GHz (ex: `MeuWifi-2.4G`).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">2.</span> 
+                                <p><strong>Força do Sinal:</strong> Use roteadores Mesh para cobrir grandes áreas ou residências de dois andares. Evite repetidores simples, que costumam dividir a velocidade e causar instabilidade nos dispositivos.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">3.</span> 
+                                <p><strong>Posicionamento do Echo:</strong> Coloque o Echo em um local central da casa, não escondido. Ele precisa ouvir você e servir de ponte (Hub Zigbee, se aplicável) para outros dispositivos.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2: Privacy and Security -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-400 hover-card">
+                        <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                            🔒 Controle de Privacidade e Segurança
+                        </h3>
+                        <ul class="mt-4 space-y-4 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-500 mt-1">1.</span> 
+                                <p><strong>Botão Mute:</strong> Todos os dispositivos Echo possuem um botão físico para desligar o microfone (a luz fica vermelha). Use-o quando desejar privacidade total.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-500 mt-1">2.</span> 
+                                <p><strong>Revisão de Dados:</strong> Você pode revisar e excluir todas as suas gravações de voz no App Alexa (Configurações > Privacidade da Alexa > Gerenciar seus dados da Alexa).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-500 mt-1">3.</span> 
+                                <p><strong>Automações de Câmera:</strong> Nunca use comandos de voz para destravar fechaduras. Sempre use PIN de voz para compras ou acesso a informações sensíveis, ou o método biométrico/senha física da fechadura.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-10 p-6 bg-red-50 rounded-xl border-l-4 border-red-400">
+                    <h4 class="font-bold text-lg text-red-800 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> ALERTA DE SEGURANÇA (Fechadura)
+                    </h4>
+                    <p class="text-sm text-red-700 mt-2">
+                        A Amazon desabilitou o destravamento por comando de voz da Alexa para fechaduras inteligentes por questões de segurança. Você **deve** usar a biometria, o teclado ou o aplicativo para abrir a porta. A Alexa pode apenas **trancar** a porta (o que é uma ótima rotina de saída).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Care and Accessibility (New Section) -->
+        <section id="cuidado" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <span class="text-emerald-600 font-bold tracking-wider uppercase text-sm">Inclusão e Vigilância</span>
+                    <h2 class="text-3xl font-bold text-stone-900 mt-2">Cuidado e Acessibilidade (Crianças e Idosos)</h2>
+                    <p class="mt-4 text-stone-600 max-w-4xl mx-auto">
+                        Use a automação para oferecer um ambiente mais seguro, monitorado e adaptável para os membros da família que mais precisam.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Card 1: Children and Pets Safety -->
+                    <div class="bg-stone-50 p-6 rounded-2xl shadow-sm border-l-4 border-sky-400 hover-card">
+                        <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                            👶 Crianças e Pets
+                        </h3>
+                        <ul class="mt-4 space-y-4 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">1.</span> 
+                                <p><strong>Drop In (Babá Eletrônica):</strong> Use o recurso "Drop In" no App Alexa para ouvir e falar através de qualquer Echo na casa. Excelente para verificar o bebê ou repreender um pet à distância.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">2.</span> 
+                                <p><strong>Sensores de Contato:</strong> Instale em portas e janelas de áreas perigosas (sacadas, área de serviço). Se abertas, a Alexa pode tocar um alarme e enviar um alerta imediato.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-sky-500 mt-1">3.</span> 
+                                <p><strong>Controle de Tempo:</strong> Use as Rotinas para desligar a TV ou o videogame conectado a uma tomada inteligente em horários definidos, ajudando na disciplina de tempo de tela.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2: Seniors and Accessibility -->
+                    <div class="bg-stone-50 p-6 rounded-2xl shadow-sm border-l-4 border-emerald-400 hover-card">
+                        <h3 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                            👴 Idosos e Acessibilidade
+                        </h3>
+                        <ul class="mt-4 space-y-4 text-stone-600">
+                            <li class="flex items-start gap-3">
+                                <span class="text-emerald-500 mt-1">1.</span> 
+                                <p><strong>Chamada de Emergência:</strong> Crie uma Rotina simples: ao ouvir a frase "Alexa, ajuda", ela pode enviar uma mensagem (Drop In) para todos os Echos e ligar para um contato de emergência (se o serviço estiver ativo).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-emerald-500 mt-1">2.</span> 
+                                <p><strong>Lembretes de Medicação:</strong> Programe lembretes de voz recorrentes para horários de remédios. O Echo com tela (Show) pode exibir a foto do medicamento ou uma mensagem de apoio.</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-emerald-500 mt-1">3.</span> 
+                                <p><strong>Caminho Iluminado:</strong> Use **sensores de movimento** (ou a detecção de presença do Echo) para acender luzes dimerizadas em 10% no caminho do quarto ao banheiro, prevenindo quedas noturnas.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Glossary (now section 7) -->
+        <section class="py-16 bg-stone-50">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-stone-900 mb-8">Glossário Técnico</h2>
+                <div class="space-y-4">
+                    
+                    <!-- NOVO CONTEÚDO: Sensor de Movimento/Presença -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Sensor de Movimento/Presença (PIR)</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Função:</strong> Detecta a presença de calor e movimento (infravermelho passivo - PIR). É o gatilho principal para automação por presença.
+                            <br><br>
+                            <strong>Ações:</strong>
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                <li><strong>Ligar Luz:</strong> Se houver movimento no corredor à noite, acende a luz (e apaga automaticamente após 1 minuto de ausência).</li>
+                                <li><strong>Segurança:</strong> Se detectar movimento em um ambiente vazio, pode disparar o alarme ou enviar uma notificação.</li>
+                            </ul>
+                            <strong>Observação:</strong> Geralmente usa bateria e requer um Hub Zigbee ou é baseado em Wi-Fi (mais rápido, mas drena mais bateria).
+                        </p>
+                    </details>
+
+                    <!-- CONTEÚDO EXISTENTE: Fechadura Eletrônica -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Fechadura Eletrônica (Biometria, Senha e App)</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Função:</strong> Garante acesso seguro e sem chaves, usando métodos como impressão digital, código numérico, cartão RFID ou controle via app.
+                            <br><br>
+                            <strong>Requisitos:</strong>
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                <li><strong>Bateria:</strong> Usa pilhas AA; verifique a vida útil e a porta de emergência (USB).</li>
+                                <li><strong>Conectividade:</strong> Modelos Wi-Fi conectam diretamente; modelos Zigbee/Z-Wave precisam de um Hub (Echo Studio ou similar).</li>
+                                <li><strong>Instalação:</strong> Verifique a compatibilidade com a espessura e tipo da sua porta (embutir/sobrepor). Recomenda-se instalação profissional.</li>
+                            </ul>
+                            <strong>Benefício:</strong> Permite rotinas de segurança avançadas (ex: se o usuário "João" destranca, as luzes de "João" acendem) e monitoramento remoto.
+                        </p>
+                    </details>
+                    
+                    <!-- CONTEÚDO EXISTENTE: Sensor de Vazamento/Fumaça -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Sensor de Vazamento e/ou Fumaça</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Função:</strong> Dispositivo crucial para a segurança passiva. O sensor de fumaça detecta partículas de fumaça, enquanto o sensor de vazamento detecta a presença de água no chão (cozinhas, banheiros, lavanderias).
+                            <br><br>
+                            <strong>Ações:</strong> Ao ser acionado, ele pode tocar um alarme sonoro localmente e, através da Alexa, enviar um alerta para o seu celular ou iniciar uma Rotina de emergência (ex: desligar a tomada da cafeteira, acender todas as luzes).
+                            <br><br>
+                            <strong>Tecnologia:</strong> Geralmente funcionam por Wi-Fi e são alimentados por bateria, exigindo baixa manutenção. É um investimento de segurança altamente recomendado.
+                        </p>
+                    </details>
+                    
+                    <!-- CONTEÚDO EXISTENTE: Cortina Automatizada -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Cortina Automatizada / Motorizada</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Característica:</strong> Motor elétrico que abre e fecha cortinas ou persianas, controlando a entrada de luz e calor. Pode ser integrado diretamente por Wi-Fi ou através de um Hub RF (Radiofrequência) que é conectado à Alexa.
+                            <br><br>
+                            <strong>Modo de Ligação:</strong> Exige um ponto de energia (Fase e Neutro) próximo à cortina, na parte superior. O motor geralmente é alimentado por energia CA ou bateria recarregável (menos complexo para instalar, mas requer recarga periódica). O controle de abertura/fechamento é feito por comando de voz ou por percentual (ex: "Alexa, abrir cortina 50%").
+                            <br><br>
+                            <strong>Benefício:</strong> Ideal para rotinas de despertar ("Nascer do Sol") e para simular presença durante viagens.
+                        </p>
+                    </details>
+
+                    <!-- CONTEÚDO EXISTENTE: Sensor de Porta/Janela -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Sensor de Contato (Porta/Janela)</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Função:</strong> Dispositivo em duas partes que detecta quando uma porta ou janela é aberta, disparando uma ação na Alexa (como ligar uma luz ou uma sirene).
+                            <br><br>
+                            <strong>Tecnologia:</strong> Geralmente usa bateria de longa duração e se comunica via **Wi-Fi** (precisa de bateria maior) ou **Zigbee** (mais eficiente e confiável, mas exige um Hub).
+                            <br><br>
+                            <strong>Aplicações:</strong> Essencial para rotinas de segurança. Ex: Se a porta abrir entre 23h e 6h, a Alexa pode tocar um alarme e ligar todas as luzes da casa.
+                        </p>
+                    </details>
+
+                    <!-- CONTEÚDO EXISTENTE: Câmera IP -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Câmera IP Wi-Fi</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Característica:</strong> Câmera de vigilância que se conecta diretamente ao Wi-Fi. Permite visualização em tempo real pelo celular e, mais importante, pelo **Echo Show** (tela) usando o comando: "Alexa, mostre a câmera da sala".
+                            <br><br>
+                            <strong>Recursos Comuns:</strong> Detecção de movimento, áudio bidirecional (falar e ouvir) e visão noturna.
+                            <br><br>
+                            <strong>Requisito:</strong> Para funcionar com a Alexa, a marca da câmera deve ter uma **Habilidade (Skill)** oficial habilitada.
+                        </p>
+                    </details>
+                    
+                    <!-- CONTEÚDO EXISTENTE: Dimmer Inteligente -->
+                    <details class="group bg-white p-4 rounded-xl border-xl border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Dimmer Inteligente</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Característica:</strong> Permite controlar a intensidade (0% a 100%) da iluminação, essencial para criar ambientes e cenas. Pode ser encontrado em formato de interruptor de parede (Teclado Touch) ou módulo (Relé Dimmer).
+                            <br><br>
+                            <strong>Requisito Crucial:</strong> A lâmpada conectada <strong>DEVE</strong> ser dimerizável (Dimmable LED). Lâmpadas comuns podem piscar ou queimar.
+                            <br><br>
+                            <strong>Modo de Ligação:</strong> Exige a conexão do fio de **Fase (L)** e do fio de **Neutro (N)** para fornecer energia estável ao módulo Wi-Fi e funcionar com precisão, controlando o retorno (Lout) para a lâmpada. Modelos "Sem Neutro" existem, mas são menos confiáveis e geralmente requerem um capacitor na lâmpada para estabilizar a energia mínima necessária para o módulo Wi-Fi.
+                        </p>
+                    </details>
+                    
+                    <!-- CONTEÚDO EXISTENTE: Relé de Impulso / Módulo de Parede -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Relé de Impulso / Módulo (DIY)</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Função:</strong> Dispositivo compacto que se instala por trás do interruptor tradicional ou no forro. Adiciona controle Wi-Fi (ON/OFF) a qualquer lâmpada ou dispositivo elétrico, mantendo o interruptor físico funcional.
+                            <br><br>
+                            <strong>Modos de Ligação (Crucial):</strong>
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                <li><strong>Com Neutro (N):</strong> Modo preferencial. O módulo recebe Fase (L) e Neutro (N). Isso garante estabilidade, confiabilidade e permite o controle de cargas maiores.</li>
+                                <li><strong>Sem Neutro (Apenas Fase L):</strong> Usado em instalações antigas onde o fio neutro não está presente na caixa do interruptor. Estes módulos são mais instáveis e podem requerer um **capacitor** instalado na lâmpada para estabilizar a energia mínima necessária para o módulo Wi-Fi.</li>
+                            </ul>
+                        </p>
+                    </details>
+                    
+                    <!-- CONTEÚDO EXISTENTE: Teclado Touch (Interruptor Inteligente) -->
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Teclado Touch (Interruptor Inteligente)</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            <strong>Características:</strong> Substitui o interruptor de parede tradicional por um painel de vidro com botões sensíveis ao toque (capacitivos). Oferece uma estética moderna e limpa.
+                            <br><br>
+                            <strong>Requisitos de Instalação:</strong> A maioria dos modelos de teclado touch (1, 2 ou 3 seções) <strong>exige a presença do fio Neutro (N)</strong> para alimentar o circuito eletrônico e o módulo Wi-Fi de forma estável. 
+                            <br><br>
+                            <strong>Vantagem vs. Relé:</strong> É uma solução completa, dispensando lâmpadas inteligentes se o objetivo for apenas ligar/desligar (ON/OFF).
+                        </p>
+                    </details>
+                    
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>O que é uma Habilidade (Skill)?</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            Habilidades (Skills) são como aplicativos para a Alexa. Elas permitem que a assistente se conecte a serviços de terceiros (Spotify, Uber) ou controle dispositivos de marcas específicas (Tuya, Positivo). É a ponte de comunicação entre o aplicativo do fabricante do seu dispositivo e a Alexa.
+                        </p>
+                    </details>
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>O que é uma Rotina?</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            Uma sequência de ações automáticas disparadas por um gatilho. Exemplo: Ao dizer "Bom dia" (gatilho), a Alexa acende a luz, lê as notícias e liga a cafeteira (ações).
+                        </p>
+                    </details>
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>O que é IR Blaster?</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            Um dispositivo que emite sinais infravermelhos, imitando controles remotos tradicionais. Permite controlar TV, Ar Condicionado e Home Theater (que não são smart nativamente) através da Alexa.
+                        </p>
+                    </details>
+                    <details class="group bg-white p-4 rounded-xl border border-stone-100 cursor-pointer">
+                        <summary class="flex justify-between items-center font-medium text-stone-800 list-none">
+                            <span>Zigbee vs Wi-Fi</span>
+                            <span class="transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <p class="text-stone-600 mt-4 text-sm leading-relaxed">
+                            Wi-Fi conecta direto ao roteador (bom para poucos dispositivos). Zigbee cria uma rede separada de baixo consumo (melhor para muitos sensores e lâmpadas), mas exige um Hub (que pode vir dentro do Echo Studio/Show).
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+        
+        </div>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+	<p>© 2026 - Guia em Instalações Elétricas Residenciais</p>
+	<p style="font-size: 0.8rem; opacity: 0.7;"> Baseado no roteiro "Transformando Sua Casa"</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Charts Implementation ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Benefits Chart (Doughnut)
+            const ctxBenefits = document.getElementById('benefitsChart').getContext('2d');
+            new Chart(ctxBenefits, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Conforto', 'Segurança', 'Eficiência', 'Acessibilidade'],
+                    datasets: [{
+                        data: [40, 25, 25, 10], // Estimated weights based on report emphasis
+                        backgroundColor: [
+                            '#0EA5E9', // Sky 500
+                            '#F59E0B', // Amber 500
+                            '#10B981', // Emerald 500
+                            '#6366F1'  // Indigo 500
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Inter', sans-serif" },
+                                color: '#57534E'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initialize Shopping List
+            renderShoppingList();
+            filterDevices('all'); // Initialize filter state
+        });
+
+        // --- 2. Device Filtering Logic ---
+        function filterDevices(category, clickedButton = null) {
+            const cards = document.querySelectorAll('.device-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Reset buttons styling
+            buttons.forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-sky-500', 'ring-offset-2');
+            });
+
+            // Apply styling to the clicked button or the "Todos" button on init
+            if (clickedButton) {
+                 clickedButton.classList.add('ring-2', 'ring-sky-500', 'ring-offset-2');
+            } else {
+                document.querySelector('.active-filter').classList.add('ring-2', 'ring-sky-500', 'ring-offset-2');
+            }
+
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    // Small animation reset
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.opacity = '1', 50);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- 3. Room Simulation Logic ---
+        const routines = {
+            cinema: {
+                roomId: 'living-room',
+                overlayColor: 'rgba(15, 23, 42, 0.85)', // Dark Blue tint
+                devices: {
+                    'dev-tv': { active: true, color: 'text-sky-400', label: 'NETFLIX' },
+                    // Dimmer em 10%
+                    'dev-light-living': { active: true, color: 'text-blue-500', label: 'LUZ CINEMA (10%)' }, 
+                    'dev-ac': { active: true, color: 'text-white', label: '22°C' }
+                }
+            },
+            // ROTINA: Modo Viagem (Simulação de Presença)
+            vacation: {
+                roomId: 'living-room',
+                overlayColor: 'rgba(0, 0, 0, 0.5)', // Slightly dim
+                devices: {
+                    'dev-tv': { active: true, color: 'text-amber-300', label: 'SIMULANDO RUIDO', customClass: 'simulating' },
+                    'dev-light-living': { active: true, color: 'text-yellow-500', label: 'ON/OFF ALEATÓRIO', customClass: 'simulating' },
+                    'dev-ac': { active: false, color: 'text-stone-600', label: 'OFF' }
+                }
+            },
+            living_off: {
+                roomId: 'living-room',
+                overlayColor: 'rgba(0,0,0,0)',
+                devices: {
+                    'dev-tv': { active: false, color: 'text-stone-600', label: 'DESLIGADA' },
+                    'dev-light-living': { active: false, color: 'text-stone-600', label: 'DESLIGADO' },
+                    'dev-ac': { active: false, color: 'text-stone-600', label: 'OFF' }
+                }
+            }
+            ,
+            sleep: {
+                roomId: 'bedroom',
+                overlayColor: 'rgba(67, 20, 7, 0.8)', // Warm dark tint
+                devices: {
+                    'dev-dot': { active: true, color: 'text-purple-400', label: 'NÃO PERTURBE' },
+                    'dev-curtain': { active: true, customClass: 'curtain-closed', label: 'FECHADA' },
+                    // Dimmer em 1%
+                    'dev-light-bed': { active: true, color: 'text-amber-600', label: 'LUZ QUENTE (1%)' }, 
+                    'dev-humid': { active: true, color: 'text-blue-400', label: 'SONS DE CHUVA' }
+                }
+            },
+            wake: {
+                roomId: 'bedroom',
+                overlayColor: 'rgba(255, 251, 235, 0.1)', // Bright tint
+                devices: {
+                    'dev-dot': { active: true, color: 'text-white', label: 'BOM DIA' },
+                    // Cortina se abrindo
+                    'dev-curtain': { active: true, customClass: 'curtain-open', label: 'ABRINDO (50%)' },
+                    'dev-light-bed': { active: true, color: 'text-yellow-400', label: 'NASCER DO SOL' },
+                    'dev-humid': { active: false, color: 'text-stone-500', label: 'OFF' }
+                }
+            },
+            coffee_morning: {
+                roomId: 'kitchen',
+                overlayColor: 'rgba(245, 158, 11, 0.2)', // Amber tint
+                devices: {
+                    'dev-show-kitchen': { active: true, color: 'text-white', label: 'TEMPO DO CAFÉ' },
+                    'dev-coffee': { active: true, color: 'text-red-400', label: 'LIGADA' },
+                    'dev-sensor': { active: false, color: 'text-stone-600', label: 'OK' }
+                }
+            },
+            leak_alarm: {
+                roomId: 'kitchen',
+                overlayColor: 'rgba(248, 113, 113, 0.4)', // Red/Alarm tint
+                devices: {
+                    'dev-show-kitchen': { active: true, color: 'text-red-500', label: 'ALERTA DE VAZAMENTO!' },
+                    'dev-coffee': { active: false, color: 'text-red-500', label: 'DESLIGADA (Segurança)' },
+                    'dev-sensor': { active: true, color: 'text-red-500', label: 'VAZAMENTO DETECTADO' }
+                }
+            }
+        };
+
+        function triggerRoutine(routineName) {
+            const routine = routines[routineName];
+            const overlayEl = document.getElementById(routine.roomId === 'living-room' ? 'living-overlay' : (routine.roomId === 'bedroom' ? 'bedroom-overlay' : 'kitchen-overlay'));
+
+            // Set overlay color
+            overlayEl.style.backgroundColor = routine.overlayColor;
+
+            // Update Devices
+            for (const [id, state] of Object.entries(routine.devices)) {
+                const devEl = document.getElementById(id);
+                // Ensure the icon is the first span and the label is the second
+                const iconSpan = devEl.querySelector('span:first-child');
+                const labelSpan = devEl.querySelector('span:last-child');
+                
+                // Clear all previous routine-specific classes (especially 'simulating')
+                devEl.classList.remove('simulating');
+
+                // Check for special class application (like curtains or simulating)
+                if (state.customClass) {
+                    // This handles the curtain specific classes and the new 'simulating' class
+                    devEl.className = `device-icon text-6xl flex flex-col items-center ${state.customClass} ${state.color}`;
+                } else {
+                    // Default color change
+                    devEl.className = `device-icon text-6xl flex flex-col items-center ${state.color}`;
+                }
+
+                // Temporary: Update curtain icon for visual feedback (use Window emoji 🪟 when closed, Sun 🌤️ when open)
+                if (id === 'dev-curtain') {
+                    iconSpan.textContent = state.customClass === 'curtain-open' ? '🌤️' : '🪟'; 
+                }
+                
+                // If it's the TV/Light in vacation mode, remove the default color and rely only on the animation class
+                if (routineName === 'vacation' && (id === 'dev-tv' || id === 'dev-light-living')) {
+                    devEl.className = `device-icon text-6xl flex flex-col items-center ${state.customClass}`;
+                }
+
+
+                // Label update
+                labelSpan.textContent = state.label;
+                labelSpan.style.opacity = state.active || state.label !== '' ? '1' : '0';
+            }
+        }
+
+        // --- 4. Shopping List Logic (with Cost) ---
+        const shoppingData = [
+            { id: 1, name: 'Amazon Echo (Show ou Dot)', category: 'Hub', price: 500.00, checked: false },
+            { id: 2, name: 'Interruptor ON/OFF Inteligente (unidade)', category: 'Iluminação', price: 120.00, checked: false },
+            { id: 3, name: 'Dimmer Inteligente de Parede (unidade)', category: 'Iluminação/Cena', price: 200.00, checked: false },
+            { id: 4, name: 'Módulo de Automação (Relé de Parede)', category: 'DIY/Avançado', price: 90.00, checked: false },
+            { id: 5, name: 'Controle Universal Wi-Fi (IR Blaster)', category: 'Sala', price: 150.00, checked: false },
+            { id: 6, name: 'Lâmpadas Inteligentes (RGB - unidade)', category: 'Iluminação', price: 80.00, checked: false },
+            { id: 7, name: 'Tomadas Inteligentes (unidade)', category: 'Utilidade', price: 100.00, checked: false },
+            // Itens de Segurança adicionados
+            { id: 8, name: 'Sensor de Vazamento/Fumaça', category: 'Segurança', price: 140.00, checked: false },
+            { id: 9, name: 'Cortina Automatizada (Motor)', category: 'Conforto', price: 1000.00, checked: false },
+            { id: 10, name: 'Câmera IP Wi-Fi Interna (Full HD)', category: 'Segurança', price: 300.00, checked: false },
+            { id: 11, name: 'Sensor de Porta/Janela (unidade)', category: 'Segurança', price: 80.00, checked: false },
+            // NOVO ITEM: Sensor de Movimento
+            { id: 12, name: 'Sensor de Movimento/Presença', category: 'Segurança/Automação', price: 90.00, checked: false }, 
+            { id: 13, name: 'Sirene Inteligente Wi-Fi (Alarme)', category: 'Segurança', price: 180.00, checked: false },
+            { id: 14, name: 'App Alexa + App Fabricante', category: 'Software', price: 0.00, checked: false },
+            // NOVO ITEM: Fechadura Eletrônica (ID 15)
+            { id: 15, name: 'Fechadura Eletrônica (Biometria/Senha)', category: 'Segurança/Acesso', price: 1200.00, checked: false }
+        ];
+
+        function renderShoppingList() {
+            const listEl = document.getElementById('shopping-list');
+            const progressEl = document.getElementById('progress-text');
+            const totalCostEl = document.getElementById('total-cost');
+            
+            listEl.innerHTML = '';
+            
+            let checkedCount = 0;
+            let calculatedCost = 0;
+
+            shoppingData.forEach(item => {
+                if (item.checked) {
+                    checkedCount++;
+                    calculatedCost += item.price;
+                }
+                
+                const div = document.createElement('div');
+                div.className = 'p-4 flex items-center justify-between hover:bg-stone-50 transition cursor-pointer group';
+                div.onclick = () => toggleItem(item.id);
+
+                const priceFormatted = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(item.price);
+
+                div.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition ${item.checked ? 'bg-emerald-500 border-emerald-500' : 'border-stone-300 group-hover:border-sky-400'}">
+                            ${item.checked ? '<span class="text-white text-xs">✓</span>' : ''}
+                        </div>
+                        <div class="${item.checked ? 'line-through text-stone-400' : 'text-stone-700'} font-medium">
+                            ${item.name}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs px-2 py-1 rounded bg-sky-100 text-sky-800 font-bold">${priceFormatted}</span>
+                        <span class="text-xs px-2 py-1 rounded bg-stone-200 text-stone-600">${item.category}</span>
+                    </div>
+                `;
+                listEl.appendChild(div);
+            });
+
+            // Update Total Cost Display
+            totalCostEl.textContent = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(calculatedCost);
+
+            const totalItems = shoppingData.length;
+            progressEl.textContent = `${checkedCount}/${totalItems} Adquiridos`;
+            
+            // Check for progress message update
+            const progressClassName = checkedCount === totalItems 
+                ? 'text-sm bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200 font-bold'
+                : 'text-sm bg-white px-3 py-1 rounded-full border border-stone-300 text-stone-600';
+            
+            progressEl.className = progressClassName;
+
+            if (checkedCount === totalItems) {
+                progressEl.textContent = '🎉 Tudo Pronto!';
+            }
+        }
+
+        function toggleItem(id) {
+            const item = shoppingData.find(i => i.id === id);
+            if (item) {
+                item.checked = !item.checked;
+                renderShoppingList();
+            }
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guia em Instalações Elétricas Residenciais - Educação Financeira (Módulo)</title>
+
+  <style>
+    /* =========================================================
+       Base visual (mesmos estilos da aula_19_aterramento_eletrico.html)
+       ========================================================= */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f4f4f9;
+      padding-top: 100px; /* espaço para o header fixo */
+    }
+    header {
+      background-color: #2c3e50;
+      color: #ffffff;
+      padding: 1rem 0;
+      text-align: center;
+      border-bottom: 5px solid #f1c40f;
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
+    .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 30px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
+    h3 { color: #2980b9; margin-top: 20px; }
+    p  { margin-bottom: 1.2rem; text-align: justify; }
+
+    .table-container { overflow-x: auto; margin: 25px 0; }
+    table { width: 100%; border-collapse: collapse; background-color: #fff; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+    th { background-color: #2c3e50; color: #fff; text-align: center; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+
+    .alert {
+      padding: 15px; background-color: #fff3cd;
+      border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px;
+    }
+    .example-box {
+      background-color: #e8f5e9; border-left: 5px solid #2e7d32;
+      padding: 20px; margin: 20px 0; border-radius: 4px;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: #bdc3c7;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 40px; width: 100%;
+    }
+    footer p { text-align: center; margin: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 760px){ .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .box {
+      background: #fff; border: 1px solid #ddd; border-radius: 8px;
+      padding: 16px; box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .kpi {
+      display: grid; gap: 6px;
+      background: #f7fafc; border: 1px solid #e6e6e6; border-radius: 6px; padding: 12px;
+    }
+    .kpi h4 { margin: 0; color: #2c3e50; }
+    .kpi p  { margin: 0; color: #555; font-weight: 700; }
+
+    .field { display: grid; gap: 6px; }
+    .field label { font-weight: 600; }
+    .field input, .field select, .field textarea {
+      padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem;
+      outline: none; background:#fff;
+    }
+    .help { font-size: .9rem; color: #666; }
+
+    .btn {
+      display: inline-block; border: none; cursor: pointer; font-weight: 700;
+      padding: 10px 14px; border-radius: 6px;
+      background: #f1c40f; color: #2c3e50;
+    }
+    .btn:hover { filter: brightness(0.98); }
+    .btn-outline {
+      background: transparent; color: #2c3e50; border: 2px solid #2c3e50;
+    }
+    .btn-danger {
+      background: #e74c3c; color: #fff; border: none;
+    }
+    .btn-muted {
+      background: #ecf0f1; color: #2c3e50; border: 1px solid #dfe6e9;
+    }
+
+    .tag-ok {
+      display: inline-block; font-size: .85rem; font-weight: 700;
+      background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; padding: 2px 8px; border-radius: 999px;
+    }
+    .tag-warn {
+      display: inline-block; font-size: .85rem; font-weight: 700;
+      background: #fdecea; color: #e74c3c; border: 1px solid #f5b7b1; padding: 2px 8px; border-radius: 999px;
+    }
+
+    .actions { display:flex; gap:10px; flex-wrap: wrap; align-items:center; }
+    .muted { color: #666; }
+	.btn-voltar {display: inline-block; margin-bottom: 20px; text-decoration: none; color: #2980b9; font-weight: bold;}
+  </style>
+</head>
+<body>
+  
+  <header>
+    <h1>Guia em Instalações Elétricas Residenciais</h1>
+    <div class="subtitle">Módulo — Educação Financeira para Eletricistas Autônomos</div>
+    <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+  </header>
+
+  <div class="container">
+	<a class="btn-voltar" href="../index.html">← Voltar ao Início</a>
+    <!-- Introdução -->
+    <h2>Objetivo do módulo</h2>
+    <p>
+      Este conteúdo foi criado para ajudar eletricistas autônomos a organizarem seus custos, formarem preços com segurança,
+      manterem um fluxo de caixa simples e começarem a investir com clareza — sem jargões e com foco na prática do dia a dia.
+    </p>
+    <div class="alert">
+      <strong>Aviso:</strong> O material é educativo e não constitui recomendação de investimento. Use como apoio para
+      estruturar sua rotina financeira e consulte profissionais quando necessário.
+    </div>
+
+    <!-- 1. Calculadora de preço -->
+    <h2>Calculadora de preço do serviço</h2>
+    <p>
+      A base da precificação é a <strong>hora técnica</strong>: quanto custa sua hora de trabalho considerando seus
+      <em>custos fixos</em>, o número de <em>horas faturáveis</em> no mês e os <em>custos variáveis</em> de cada serviço.
+    </p>
+
+    <div class="box" id="calc-preco">
+      <div class="grid-3">
+        <div class="field">
+          <label for="cf">Custos fixos mensais (R$)</label>
+          <input id="cf" inputmode="decimal" placeholder="Ex.: 1800"/>
+          <span class="help">Ex.: internet, transporte, EPIs, ferramentas, celular, seguros.</span>
+        </div>
+        <div class="field">
+          <label for="horas">Horas faturáveis/mês (h)</label>
+          <input id="horas" type="number" step="1" placeholder="Ex.: 160"/>
+          <span class="help">Horas realmente produtivas/faturadas.</span>
+        </div>
+        <div class="field">
+          <label for="cv">Custo variável por serviço (R$)</label>
+          <input id="cv" inputmode="decimal" placeholder="Ex.: 35"/>
+          <span class="help">Ex.: deslocamento, pequenos materiais, taxas.</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="field">
+          <label for="tempo">Tempo estimado do serviço (h)</label>
+          <input id="tempo" type="number" step="0.25" placeholder="Ex.: 2"/>
+        </div>
+        <div class="field">
+          <label for="margem">Margem desejada (%)</label>
+          <input id="margem" type="number" step="0.5" placeholder="Ex.: 30"/>
+        </div>
+        <div class="field">
+          <label for="imposto">Impostos/Taxas (%)</label>
+          <input id="imposto" type="number" step="0.5" placeholder="Ex.: 8"/>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:8px;">
+        <button class="btn" onclick="calcPreco()">Calcular</button>
+        <button class="btn btn-outline" onclick="limparPreco()">Limpar</button>
+      </div>
+
+      <div class="grid-4" style="display:grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 12px;">
+        <div class="kpi">
+          <h4>Hora técnica</h4>
+          <p id="out-hora">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Preço base (custo)</h4>
+          <p id="out-base">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Preço com margem</h4>
+          <p id="out-margem">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Preço final c/ impostos</h4>
+          <p id="out-final">—</p>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <strong>Dica:</strong> Se o cliente pedir desconto, evite mexer na sua margem abaixo do viável.
+        Em vez disso, reduza escopo ou ofereça etapas (visita + execução).
+      </div>
+    </div>
+
+    <!-- 2. Fluxo de caixa -->
+    <h2>Fluxo de caixa simples</h2>
+    <p>
+      Registre entradas (serviços, visitas) e saídas (custos, compras) e acompanhe o saldo. Os dados ficam salvos
+      no seu navegador (localStorage) e você pode exportar para CSV a qualquer momento.
+    </p>
+
+    <div class="box" id="fluxo-caixa">
+      <div class="grid-3">
+        <div class="field">
+          <label for="fc-data">Data</label>
+          <input id="fc-data" type="date"/>
+        </div>
+        <div class="field">
+          <label for="fc-tipo">Tipo</label>
+          <select id="fc-tipo">
+            <option value="Entrada">Entrada</option>
+            <option value="Saída">Saída</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fc-desc">Descrição</label>
+          <input id="fc-desc" placeholder="Ex.: Instalação de disjuntor"/>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="fc-valor">Valor (R$)</label>
+          <input id="fc-valor" inputmode="decimal" placeholder="Ex.: 250"/>
+        </div>
+        <div class="actions" style="align-items:flex-end;">
+          <button class="btn" onclick="adicionarLancamento()">Adicionar</button>
+          <button class="btn btn-muted" onclick="salvarLocal()">Salvar no navegador</button>
+          <button class="btn btn-outline" onclick="carregarLocal()">Carregar</button>
+          <button class="btn btn-outline" onclick="exportarCSV()">Exportar CSV</button>
+          <button class="btn btn-danger" onclick="limparLancamentos()">Limpar lista</button>
+        </div>
+      </div>
+
+      <div class="table-container" style="margin-top:12px;">
+        <table aria-label="Tabela de fluxo de caixa">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Saldo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="fc-body"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">Totais</td>
+              <td id="fc-total">—</td>
+              <td id="fc-saldo">—</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="muted">Dica: separe contas pessoais das profissionais. Defina um pró-labore mensal.</p>
+    </div>
+
+    <!-- 3. Reserva de Emergência -->
+    <h2>Reserva de emergência</h2>
+    <p>
+      Uma boa prática é ter de <strong>3 a 6 meses</strong> de despesas mensais guardados em produto de
+      <em>baixa volatilidade e alta liquidez</em> (ex.: renda fixa pós-fixada). Aqui você estima a meta e o tempo.
+    </p>
+
+    <div class="box" id="reserva">
+      <div class="grid-3">
+        <div class="field">
+          <label for="re-despesa">Despesa média mensal (R$)</label>
+          <input id="re-despesa" inputmode="decimal" placeholder="Ex.: 2200"/>
+        </div>
+        <div class="field">
+          <label for="re-meses">Meses de reserva</label>
+          <input id="re-meses" type="number" step="1" value="6"/>
+        </div>
+        <div class="field">
+          <label for="re-aporte">Aporte mensal (R$)</label>
+          <input id="re-aporte" inputmode="decimal" placeholder="Ex.: 400"/>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:8px;">
+        <button class="btn" onclick="calcReserva()">Calcular</button>
+        <button class="btn btn-outline" onclick="limparReserva()">Limpar</button>
+      </div>
+
+      <div class="grid-3" style="margin-top:12px;">
+        <div class="kpi">
+          <h4>Meta total</h4>
+          <p id="re-meta">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Meses para atingir</h4>
+          <p id="re-tempo">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Status</h4>
+          <p id="re-status">—</p>
+        </div>
+      </div>
+
+      <div class="alert" style="background:#e3f2fd; border-left-color:#2196f3;">
+        <strong>Lembrete:</strong> Reserva é para <em>imprevistos</em>. Para metas de médio/longo prazo, a estratégia pode ser outra.
+      </div>
+    </div>
+
+    <!-- 4. Simulador de Investimentos -->
+    <h2>Simulador de investimentos (juros compostos)</h2>
+    <p>
+      Simule quanto seus aportes podem acumular ao longo do tempo com uma taxa mensal estimada.
+    </p>
+
+    <div class="box" id="simulador">
+      <div class="grid-3">
+        <div class="field">
+          <label for="si-inicial">Aporte inicial (R$)</label>
+          <input id="si-inicial" inputmode="decimal" placeholder="Ex.: 500"/>
+        </div>
+        <div class="field">
+          <label for="si-mensal">Aporte mensal (R$)</label>
+          <input id="si-mensal" inputmode="decimal" placeholder="Ex.: 300"/>
+        </div>
+        <div class="field">
+          <label for="si-juros">Juros ao mês (%)</label>
+          <input id="si-juros" type="number" step="0.01" placeholder="Ex.: 0.8"/>
+          <span class="help">Ex.: 0,8% a.m. (~10% a.a. aproximado)</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="si-meses">Período (meses)</label>
+          <input id="si-meses" type="number" step="1" value="24"/>
+        </div>
+        <div class="actions" style="align-items:flex-end;">
+          <button class="btn" onclick="simularInvestimento()">Simular</button>
+          <button class="btn btn-outline" onclick="limparSimulador()">Limpar</button>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:12px;">
+        <div class="kpi">
+          <h4>Montante final</h4>
+          <p id="si-montante">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Total investido</h4>
+          <p id="si-investido">—</p>
+        </div>
+        <div class="kpi">
+          <h4>Juros acumulados</h4>
+          <p id="si-juros-total">—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Checklist / Boas práticas -->
+    <h2>Boas práticas rápidas</h2>
+    <div class="example-box">
+      <ul style="margin:0; padding-left: 18px;">
+        <li>Registre <strong>todas</strong> as entradas/saídas, mesmo as pequenas.</li>
+        <li>Separe finanças <strong>PJ x PF</strong> (contas diferentes; defina pró-labore).</li>
+        <li>Tenha <strong>reserva</strong> antes de buscar investimentos de risco.</li>
+        <li>Revise sua <strong>tabela de preços</strong> a cada 3–6 meses (combustível, materiais, impostos).</li>
+      </ul>
+    </div>
+
+    <!-- ===================== -->
+<!-- INVESTIMENTOS -->
+<!-- ===================== -->
+<h2>Investimentos</h2>
+<p>
+  Aqui está um panorama simples para você entender a diferença entre <strong>renda fixa</strong> e <strong>renda variável</strong>
+  e usar isso a seu favor no planejamento financeiro de autônomo.
+</p>
+
+<div class="box">
+  <h3 style="margin-top:0;">Renda Fixa</h3>
+  <p>
+    Na <strong>renda fixa</strong>, as regras de remuneração são conhecidas desde o início (por exemplo,
+    “paga 100% do CDI” ou “Selic + taxa”). É ideal para <em>reserva de emergência</em> e metas de curto prazo,
+    por ter <strong>volatilidade baixa</strong> e, em alguns casos, <strong>liquidez diária</strong>.
+  </p>
+  <ul style="margin:0; padding-left: 18px;">
+    <li><strong>Exemplos:</strong> Tesouro Selic, CDB pós-fixado com liquidez diária, LCI/LCA, LC.</li>
+    <li><strong>Quando usar:</strong> guardar a reserva, caixa do mês, objetivos próximos (troca de ferramenta, capital de giro).</li>
+    <li><strong>Cuidados:</strong> conferir <em>liquidez</em> (quando pode resgatar), <em>custos</em> e <em>tributação</em>.</li>
+  </ul>
+  <div class="example-box" style="margin-top:14px;">
+    <strong>Dica prática:</strong> Para a <em>reserva</em>, priorize liquidez diária e baixo risco.
+  </div>
+</div>
+
+<div class="box" style="margin-top:16px;">
+  <h3 style="margin-top:0;">Renda Variável</h3>
+  <p>
+    Na <strong>renda variável</strong>, o valor dos ativos oscila no curto prazo (ações, ETFs, fundos imobiliários).
+    Pode ter maior potencial de retorno no longo prazo, mas com <strong>maior risco e volatilidade</strong>.
+    Não é indicada para a <em>reserva de emergência</em>.
+  </p>
+  <ul style="margin:0; padding-left: 18px;">
+    <li><strong>Exemplos:</strong> Ações, ETFs de índices, FIIs.</li>
+    <li><strong>Quando considerar:</strong> somente depois de ter sua reserva formada e um horizonte de longo prazo.</li>
+    <li><strong>Cuidados:</strong> aceite as oscilações, estude o produto e diversifique.</li>
+  </ul>
+  <div class="alert" style="margin-top:14px;">
+    <strong>Atenção:</strong> Use renda variável apenas para objetivos de longo prazo e com disciplina.
+  </div>
+</div>
+
+<div class="table-container" style="margin-top:18px;">
+  <table aria-label="Comparativo entre renda fixa e renda variável">
+    <thead>
+      <tr>
+        <th>Critério</th>
+        <th>Renda Fixa</th>
+        <th>Renda Variável</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Volatilidade</td>
+        <td>Baixa / previsível</td>
+        <td>Alta / oscila no curto prazo</td>
+      </tr>
+      <tr>
+        <td>Objetivo típico</td>
+        <td>Reserva, curto prazo, caixa</td>
+        <td>Longo prazo, crescimento</td>
+      </tr>
+      <tr>
+        <td>Liquidez</td>
+        <td>Pode ter diária (depende do produto)</td>
+        <td>Geralmente imediata, mas preço pode estar desfavorável</td>
+      </tr>
+      <tr>
+        <td>Risco</td>
+        <td>Baixo a moderado</td>
+        <td>Moderado a alto</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert">
+  <strong>Importante:</strong> Este módulo é educativo e <strong>não é recomendação</strong>. Defina primeiro sua
+  <em>reserva de emergência</em> (3–6 meses de despesas), mantenha o fluxo de caixa saudável e só então considere
+  produtos de maior risco.
+</div>
+``
+  </div>
+
+  <footer>
+    <p>© <span id="year"></span> - Guia em Instalações Elétricas Residenciais — Módulo de Educação Financeira</p>
+  </footer>
+
+  <script>
+    // ============================
+    // Utilidades: formato BR
+    // ============================
+    const fmtBRL = (v) => new Intl.NumberFormat('pt-BR', { style:'currency', currency:'BRL' }).format(Number(v) || 0);
+    const fmtNum = (v, dec=2) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(Number(v) || 0);
+
+    // Aceita "1.234,56" ou "1234.56" ou "1234"
+    function parseBR(value){
+      if(value == null) return 0;
+      let s = String(value).trim();
+      if(!s) return 0;
+      s = s.replace(/[R$\s]/g,'').replace(/\./g,'').replace(',', '.');
+      const n = Number(s);
+      return isFinite(n) ? n : 0;
+    }
+
+    // ============================
+    // 1) Precificação
+    // ============================
+    function calcPreco(){
+      const cf      = parseBR(document.getElementById('cf').value);
+      const horas   = parseBR(document.getElementById('horas').value);
+      const cv      = parseBR(document.getElementById('cv').value);
+      const tempo   = parseBR(document.getElementById('tempo').value);
+      const margem  = parseBR(document.getElementById('margem').value) / 100;
+      const imposto = parseBR(document.getElementById('imposto').value) / 100;
+
+      if(horas <= 0 || tempo <= 0){
+        alert('Informe horas/mês e tempo de serviço maiores que zero.');
+        return;
+      }
+
+      const horaTecnica     = cf / horas;
+      const precoBase       = (horaTecnica * tempo) + cv;
+      const precoComMargem  = precoBase * (1 + margem);
+      const precoFinal      = precoComMargem * (1 + imposto);
+
+      document.getElementById('out-hora').textContent   = fmtBRL(horaTecnica);
+      document.getElementById('out-base').textContent   = fmtBRL(precoBase);
+      document.getElementById('out-margem').textContent = fmtBRL(precoComMargem);
+      document.getElementById('out-final').textContent  = fmtBRL(precoFinal);
+    }
+    function limparPreco(){
+      ['cf','horas','cv','tempo','margem','imposto'].forEach(id => document.getElementById(id).value = '');
+      ['out-hora','out-base','out-margem','out-final'].forEach(id => document.getElementById(id).textContent = '—');
+    }
+
+    // ============================
+    // 2) Fluxo de caixa (com persistência)
+    // ============================
+    let fc = []; // { data, tipo, desc, valor }
+    const KEY_LOCAL = 'fc_eletricista_autonomo';
+
+    function adicionarLancamento(){
+      const data = document.getElementById('fc-data').value || new Date().toISOString().slice(0,10);
+      const tipo = document.getElementById('fc-tipo').value;
+      const desc = document.getElementById('fc-desc').value || '';
+      const v    = parseBR(document.getElementById('fc-valor').value);
+
+      if(!v){ alert('Informe um valor válido.'); return; }
+
+      const valor = (tipo === 'Saída') ? -Math.abs(v) : Math.abs(v);
+      fc.push({ data, tipo, desc, valor });
+      renderFC();
+
+      // Limpa inputs práticos
+      document.getElementById('fc-desc').value = '';
+      document.getElementById('fc-valor').value = '';
+    }
+
+    function removerLancamento(i){
+      fc.splice(i,1);
+      renderFC();
+    }
+
+    function limparLancamentos(){
+      if(confirm('Deseja limpar todos os lançamentos?')){
+        fc = []; renderFC(); localStorage.removeItem(KEY_LOCAL);
+      }
+    }
+
+    function renderFC(){
+      const tbody = document.getElementById('fc-body');
+      tbody.innerHTML = '';
+      let saldo = 0, total = 0;
+
+      fc.forEach((l, i) => {
+        saldo += l.valor;
+        total += l.valor;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${i+1}</td>
+          <td>${l.data}</td>
+          <td>${l.tipo}</td>
+          <td>${l.desc || '-'}</td>
+          <td>${fmtBRL(l.valor)}</td>
+          <td>${saldo >= 0 ? '<span class="tag-ok">'+fmtBRL(saldo)+'</span>' : '<span class="tag-warn">'+fmtBRL(saldo)+'</span>'}</td>
+          <td><button class="btn btn-muted" onclick="removerLancamento(${i})">Remover</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('fc-total').textContent = fmtBRL(total);
+      document.getElementById('fc-saldo').textContent = fmtBRL(fc.reduce((a,b)=>a+b.valor,0));
+    }
+
+    function exportarCSV(){
+      if(fc.length === 0){ alert('Não há lançamentos.'); return; }
+      let saldo = 0;
+      const linhas = [['Data','Tipo','Descrição','Valor (R$)','Saldo (R$)']];
+      fc.forEach(l => {
+        saldo += l.valor;
+        linhas.push([
+          l.data,
+          l.tipo,
+          l.desc,
+          (l.valor.toFixed(2)).replace('.',','),
+          (saldo.toFixed(2)).replace('.',',')
+        ]);
+      });
+      const csv = linhas.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(';')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url;
+      a.download = `fluxo_caixa_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function salvarLocal(){
+      localStorage.setItem(KEY_LOCAL, JSON.stringify(fc));
+      alert('Lançamentos salvos no navegador.');
+    }
+    function carregarLocal(){
+      const raw = localStorage.getItem(KEY_LOCAL);
+      if(!raw){ alert('Nenhum dado salvo.'); return; }
+      try{
+        fc = JSON.parse(raw) || [];
+        renderFC();
+      }catch(e){
+        alert('Não foi possível carregar os dados.');
+      }
+    }
+
+    // ============================
+    // 3) Reserva de emergência
+    // ============================
+    function calcReserva(){
+      const despesa = parseBR(document.getElementById('re-despesa').value);
+      const meses   = parseBR(document.getElementById('re-meses').value);
+      const aporte  = parseBR(document.getElementById('re-aporte').value);
+
+      if(despesa <= 0 || meses <= 0){
+        alert('Informe despesa mensal e meses de reserva.'); return;
+      }
+      const meta  = despesa * meses;
+      const tempo = aporte > 0 ? Math.ceil(meta / aporte) : Infinity;
+
+      document.getElementById('re-meta').textContent  = fmtBRL(meta);
+      document.getElementById('re-tempo').textContent = (tempo === Infinity) ? '—' : `${tempo} ${tempo>1?'meses':'mês'}`;
+
+      const statusEl = document.getElementById('re-status');
+      if(tempo === Infinity){
+        statusEl.innerHTML = '<span class="tag-warn">Defina um aporte</span>';
+      }else if(tempo <= meses){
+        statusEl.innerHTML = '<span class="tag-ok">No ritmo certo</span>';
+      }else{
+        statusEl.innerHTML = '<span class="tag-warn">Ajuste o plano</span>';
+      }
+    }
+    function limparReserva(){
+      ['re-despesa','re-meses','re-aporte'].forEach(id => document.getElementById(id).value = '');
+      ['re-meta','re-tempo','re-status'].forEach(id => document.getElementById(id).textContent = '—');
+    }
+
+    // ============================
+    // 4) Simulador de investimento
+    // ============================
+    function simularInvestimento(){
+      const inicial = parseBR(document.getElementById('si-inicial').value);
+      const mensal  = parseBR(document.getElementById('si-mensal').value);
+      const taxa    = parseBR(document.getElementById('si-juros').value) / 100;
+      const meses   = parseBR(document.getElementById('si-meses').value);
+
+      if(meses <= 0){ alert('Informe o número de meses.'); return; }
+
+      let montante = inicial;
+      for(let i=1;i<=meses;i++){
+        montante = montante * (1 + taxa) + mensal;
+      }
+      const investido = inicial + (mensal * meses);
+      const juros     = montante - investido;
+
+      document.getElementById('si-montante').textContent   = fmtBRL(montante);
+      document.getElementById('si-investido').textContent  = fmtBRL(investido);
+      document.getElementById('si-juros-total').textContent= fmtBRL(juros);
+    }
+    function limparSimulador(){
+      ['si-inicial','si-mensal','si-juros','si-meses'].forEach(id => document.getElementById(id).value = '');
+      ['si-montante','si-investido','si-juros-total'].forEach(id => document.getElementById(id).textContent = '—');
+    }
+
+    // Ano do rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Fixação | Aula 25</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f9; padding-top: 100px; color: #333; }
+        header { background-color: #2c3e50; color: #ffffff; padding: 1rem 0; text-align: center; border-bottom: 5px solid #f1c40f; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .question { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .question p { font-weight: bold; color: #2c3e50; }
+        .options label { display: block; margin: 8px 0; cursor: pointer; padding: 8px; border-radius: 4px; border: 1px solid transparent; }
+        .options label:hover { background-color: #f8f9fa; }
+        
+        button { background-color: #2980b9; color: white; border: none; padding: 15px 30px; font-size: 1rem; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px; }
+        button:hover { background-color: #3498db; }
+
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 4px; font-size: 0.9rem; display: none; }
+        .correct-ans { background-color: #d4edda; color: #155724; }
+        .wrong-ans { background-color: #f8d7da; color: #721c24; }
+        #result { margin-top: 20px; text-align: center; font-size: 1.3rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Quiz de Fixação | Aula 25</h1>
+        <div class="subtitle">Manutenção e Gestão de Riscos</div>
+    </header>
+
+    <div class="container" id="quiz"></div>
+
+    <script>
+        const questions = [
+            {
+                q: "Qual o principal objetivo da APR antes de um serviço?",
+                a: ["Reduzir o tempo de execução.", "Identificar perigos e estabelecer medidas de controle.", "Substituir o uso de EPIs.", "Documentar estoque de materiais."],
+                correct: 1,
+                exp: "A APR é essencial para antecipar riscos e planejar ações preventivas, garantindo a segurança do profissional."
+            },
+            {
+                q: "Qual instrumento é indicado para detectar fugas de isolamento?",
+                a: ["Alicate Amperímetro", "Multímetro Digital", "Megômetro", "Termômetro Infravermelho"],
+                correct: 2,
+                exp: "O Megômetro aplica alta tensão para testar a qualidade do isolamento, detectando fugas que outros aparelhos não identificam."
+            },
+            {
+                q: "Como definir a manutenção preditiva?",
+                a: ["Intervenção após a falha.", "Ações baseadas em calendário.", "Monitoramento de parâmetros para antecipar falhas.", "Substituição total de peças."],
+                correct: 2,
+                exp: "A preditiva baseia-se em dados e monitoramento contínuo, atuando antes que a falha ocorra."
+            },
+            {
+                q: "Para que serve a Termografia?",
+                a: ["Identificar pontos de aquecimento anormal.", "Medir tensão da tomada.", "Verificar corrente contínua.", "Calcular consumo mensal."],
+                correct: 0,
+                exp: "A termografia visualiza o calor, indicando mau contato ou sobrecargas antes que o equipamento pare."
+            },
+            {
+                q: "Importância das 'Recomendações ao Cliente'?",
+                a: ["É obrigação burocrática.", "Transfere a responsabilidade.", "Transforma o eletricista em um consultor que sugere melhorias.", "Justifica apenas o preço."],
+                correct: 2,
+                exp: "As recomendações agregam valor ao seu serviço, educando o cliente sobre segurança e eficiência."
+            },
+            {
+                q: "Sobre a NR-10 e documentação:",
+                a: ["APR pode ser feita mentalmente.", "Relatório é opcional em serviços pequenos.", "Nenhuma atividade sem desenergização, sinalização e APR.", "EPI é dispensável."],
+                correct: 2,
+                exp: "Segurança, bloqueio e APR são pilares inegociáveis. Sem documento assinado, não há proteção legal."
+            },
+            {
+                q: "O que caracteriza a manutenção 'Detectiva'?",
+                a: ["Reparação de quebras visíveis.", "Busca de falhas ocultas em sistemas de proteção.", "Monitoramento via Wi-Fi.", "Troca preventiva."],
+                correct: 1,
+                exp: "A detectiva foca em encontrar falhas que não são óbvias, como um DR que não desarma quando deveria."
+            },
+            {
+                q: "Ao diagnosticar um disjuntor desarmando, o que fazer?",
+                a: ["Trocar por amperagem maior.", "Coletar informações e medir corrente com carga.", "Isolar toda a casa.", "Trocar toda a fiação."],
+                correct: 1,
+                exp: "Nunca aumente a amperagem sem cálculo. O correto é investigar a causa real (sobrecarga, curto ou falha)."
+            },
+            {
+                q: "Por que registrar 'Materiais Substituídos'?",
+                a: ["Para cobrar mais caro.", "Garantir rastreabilidade e qualidade das peças.", "Exigência fiscal.", "Evitar compras futuras."],
+                correct: 1,
+                exp: "O registro protege o profissional, provando o que foi instalado e facilitando futuras manutenções."
+            },
+            {
+                q: "Diferença entre quem 'conserta' e quem 'gestiona':",
+                a: ["O valor cobrado.", "O uso de ferramentas digitais.", "O uso de registros, APR e foco na prevenção.", "Não seguir normas."],
+                correct: 2,
+                exp: "A gestão profissional baseia-se em método, padronização e foco no longo prazo do sistema elétrico."
+            }
+        ];
+
+        const container = document.getElementById('quiz');
+        
+        function renderQuiz() {
+            container.innerHTML = "";
+            questions.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `<p>${index + 1}. ${item.q}</p>`;
+                item.a.forEach((opt, optIndex) => {
+                    div.innerHTML += `
+                        <label>
+                            <input type="radio" name="q${index}" value="${optIndex}"> ${opt}
+                        </label>`;
+                });
+                div.innerHTML += `<div id="feed${index}" class="feedback"></div>`;
+                container.appendChild(div);
+            });
+            container.innerHTML += `<button onclick="checkAnswers()">Finalizar e ver feedback</button><div id="result"></div>`;
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            questions.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const feedbackDiv = document.getElementById(`feed${index}`);
+                feedbackDiv.style.display = "block";
+                
+                if (selected) {
+                    if (parseInt(selected.value) === item.correct) {
+                        score++;
+                        feedbackDiv.className = "feedback correct-ans";
+                        feedbackDiv.innerHTML = "<strong>Correto!</strong> " + item.exp;
+                    } else {
+                        feedbackDiv.className = "feedback wrong-ans";
+                        feedbackDiv.innerHTML = "<strong>Incorreto.</strong> " + item.exp;
+                    }
+                } else {
+                    feedbackDiv.className = "feedback wrong-ans";
+                    feedbackDiv.innerHTML = "<strong>Você não respondeu.</strong> " + item.exp;
+                }
+            });
+            document.getElementById('result').innerHTML = `Pontuação Final: ${score} de ${questions.length}`;
+        }
+
+        renderQuiz();
+    </script>
+</body>
+</html>

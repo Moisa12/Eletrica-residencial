@@ -54,6 +54,20 @@
             border-radius: 12px;
         }
 
+.img-container {
+text-align: center;
+margin: 25px 0;
+}
+
+	.img-container img {
+	display: block;
+	margin: 0 auto;
+	max-width: 500px;
+	width: 100%;
+	border-radius: 8px;
+	}
+
+
         h2 { color: #2c3e50; border-left: 6px solid #f1c40f; padding-left: 15px; margin-top: 40px; font-size: 1.8rem; }
         h3 { color: #2980b9; margin-top: 25px; font-size: 1.4rem; }
         p { margin-bottom: 1.5rem; text-align: justify; font-size: 1.05rem; }
@@ -87,7 +101,7 @@
         
         <div class="alert">
             <p style="margin: 0;">
-                A correta passagem de condutores garante a integridade da isolação e facilita manutenções futuras. Seguiremos as boas práticas de instalação descritas na NBR 5410.
+                A correta passagem de condutores garante a integridade da isolação, evita danos mecânicos aos cabos e facilita futuras manutenções. Nesta aula, seguimos as boas práticas estabelecidas pela NBR 5410.
             </p>
         </div>
 
@@ -96,7 +110,7 @@
         
         <ul class="list-standard">
             <li><strong>Guia Passa-Fio:</strong> Utilize modelos de nylon com alma de aço ou aço revestido. Verifique sempre a integridade da ponteira metálica.</li>
-            <li><strong>Lubrificantes:</strong> Use vaselina industrial ou talco próprio. <strong>Nunca utilize detergente comum</strong>, pois ele resseca e degrada a isolação do cabo ao longo do tempo.</li>
+            <li><strong>Lubrificantes:</strong> Use vaselina industrial ou talco próprio. <strong>Nunca utilize detergente comum</strong>, pois pode causar degradação química da isolação ao longo do tempo.</li>
             <li><strong>Limpeza:</strong> Se necessário, passe um pano seco amarrado à guia para remover restos de argamassa ou umidade interna.</li>
         </ul>
 
@@ -107,8 +121,25 @@
             <li><strong>Folga de Segurança:</strong> Deixe sempre uma sobra de 15 a 20 cm em cada caixa de passagem para futuras manutenções.</li>
         </ul>
 
+
+	<div class="img-container">
+	<img src="../images/passagem_cabos.png" alt="Passagem de cabos em eletroduto"></div>
+
+	<div class="caption">
+	<strong>Análise técnica do procedimento de passagem:</strong><br>
+	Observe a preparação da ponta dos condutores (rabicho), com formato afilado e bem isolado com fita. Esse formato evita que o conjunto enrosque nas curvas do eletroduto 	durante a passagem.<br><br>
+
+	Note também a organização dos cabos por cores e o alinhamento durante a tração. Esse cuidado reduz o atrito interno e evita danos à isolação.<br><br>
+
+	👉 Em campo, a má preparação da ponta é uma das principais causas de travamento dos cabos dentro da tubulação.
+	</div>
+	
+
+
+
+
         <h2>3. Limites de Ocupação</h2>
-        <p>Lembre-se: O espaço vazio no eletroduto é vital para a dissipação de calor e para permitir a retirada ou adição de condutores futuramente.</p>
+        <p>Lembre-se: O espaço vazio no eletroduto é vital para a dissipação de calor e para permitir a retirada ou adição de condutores futuramente. Esses limites garantem a dissipação térmica e evitam superaquecimento dos condutores.</p>
 
         <div class="example-box">
             <h4>Atenção aos limites (NBR 5410):</h4>
@@ -120,7 +151,7 @@
         </div>
 
         <div class="danger-box">
-            <strong>Dica de Campo:</strong> Se sentir excesso de resistência ao puxar, pare imediatamente. O esforço mecânico excessivo altera as propriedades moleculares do cobre, reduzindo a capacidade de condução do cabo.
+            <strong>Dica de Campo:</strong> Se sentir excesso de resistência ao puxar, pare imediatamente. O esforço mecânico excessivo pode danificar o condutor e comprometer sua capacidade de condução elétrica.
         </div>
 
         <h2>4. Identificação dos Circuitos</h2>
@@ -148,7 +179,15 @@
 <div class="example-box">
     <h4>Questão Rápida:</h4>
     <p>Se você estiver instalando 3 cabos de 2,5mm² em um eletroduto, qual é a taxa de ocupação máxima permitida pela NBR 5410?</p>
-    <button onclick="alert('A resposta correta é 40%!')" style="padding: 10px 20px; cursor: pointer; background: #2e7d32; color: white; border: none; border-radius: 5px;">Verificar Resposta</button>
+   
+
+<details>
+<summary>Ver resposta</summary>
+<div class="example-box">
+A taxa permitida é <strong>40%</strong> para três ou mais condutores, conforme NBR 5410.
+</div>
+</details>
+
 </div>
 
 

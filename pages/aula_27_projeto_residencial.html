@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia em Instalações Elétricas Residenciais - Aula 27</title>
+
+<style>
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+line-height: 1.6;
+margin: 0;
+padding: 0;
+color: #333;
+background-color: #f4f4f9;
+padding-top: 110px;
+}
+
+header {
+background-color: #2c3e50;
+color: #ffffff;
+padding: 1rem 0;
+text-align: center;
+border-bottom: 5px solid #f1c40f;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 1000;
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.logo-header {
+position: absolute;
+bottom: 10px;
+right: 20px;
+height: 50px;
+}
+
+header h1 { margin: 0; font-size: 1.6rem; text-transform: uppercase; }
+
+.subtitle {
+font-size: 1rem;
+color: #f1c40f;
+margin-top: 5px;
+}
+
+.container {
+max-width: 900px;
+margin: 20px auto;
+padding: 40px;
+background: #fff;
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+border-radius: 12px;
+}
+
+h2 {
+color: #2c3e50;
+border-left: 6px solid #f1c40f;
+padding-left: 15px;
+margin-top: 40px;
+font-size: 1.8rem;
+}
+
+p { text-align: justify; }
+
+.list-standard {
+padding-left: 25px;
+}
+
+.list-standard li {
+margin-bottom: 10px;
+}
+
+.alert {
+padding: 20px;
+background-color: #e3f2fd;
+border-left: 6px solid #1976d2;
+margin: 30px 0;
+border-radius: 4px;
+}
+
+.example-box {
+background-color: #e8f5e9;
+border-left: 6px solid #2e7d32;
+padding: 25px;
+margin: 25px 0;
+border-radius: 8px;
+}
+
+.danger-box {
+background-color: #fdf2f2;
+border-left: 6px solid #e74c3c;
+padding: 20px;
+margin: 20px 0;
+border-radius: 4px;
+}
+
+.table-container {
+overflow-x: auto;
+margin: 30px 0;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+th, td {
+border: 1px solid #ddd;
+padding: 12px;
+}
+
+th {
+background-color: #2c3e50;
+color: #fff;
+text-align: center;
+}
+
+footer {
+background-color: #2c3e50;
+color: #bdc3c7;
+text-align: center;
+padding: 30px 0;
+margin-top: 60px;
+border-top: 5px solid #f1c40f;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Guia em Instalações Elétricas Residenciais - Aula 27</h1>
+<div class="subtitle">Projeto Elétrico Residencial</div>
+<img src="../images/logo-.png" class="logo-header">
+</header>
+
+<div class="container">
+
+<div class="alert">
+Nesta aula você aprenderá a elaborar um projeto elétrico residencial completo, incluindo dimensionamento de iluminação, tomadas e definição do padrão de entrada, conforme critérios da NBR 5410.
+</div>
+
+<h2>1. O que é um Projeto Elétrico?</h2>
+
+<p>
+O projeto elétrico é o planejamento técnico da instalação, onde são definidos os circuitos, cargas, proteções e distribuição dos pontos elétricos de uma residência.
+</p>
+
+<div class="example-box">
+<strong>Objetivo:</strong> garantir segurança, eficiência e funcionamento adequado da instalação.
+</div>
+
+<hr>
+
+<h2>2. Levantamento da Planta</h2>
+
+<p>
+O primeiro passo é analisar a planta arquitetônica do imóvel e definir:
+</p>
+
+<ul class="list-standard">
+<li>Quantidade de cômodos</li>
+<li>Área de cada ambiente</li>
+<li>Localização de pontos de iluminação</li>
+<li>Pontos de tomada</li>
+<li>Equipamentos específicos (chuveiro, ar-condicionado)</li>
+</ul>
+
+<hr>
+
+<h2>3. Dimensionamento da Iluminação</h2>
+
+<p>
+A NBR 5410 estabelece uma potência mínima de iluminação conforme a área:
+</p>
+
+<ul class="list-standard">
+<li>100 VA para os primeiros 6 m²</li>
+<li>+60 VA para cada 4 m² adicionais</li>
+</ul>
+
+<div class="example-box">
+<strong>Exemplo:</strong><br>
+Um cômodo de 10 m²:  
+100 VA + 60 VA = <strong>160 VA</strong>
+</div>
+
+<hr>
+
+<h2>4. Tomadas de Uso Geral (TUG)</h2>
+
+<p>
+As tomadas de uso geral (TUG) devem ser dimensionadas considerando a quantidade mínima exigida por norma e a potência atribuída a cada ponto, de acordo com o ambiente.
+</p>
+
+<h3>4.1 Quantidade de Tomadas</h3>
+
+<div class="table-container">
+<table>
+<tr>
+<th>Ambiente</th>
+<th>Critério da NBR 5410</th>
+</tr>
+
+<tr>
+<td>Salas e Quartos</td>
+<td>1 tomada a cada 5 m de perímetro</td>
+</tr>
+
+<tr>
+<td>Cozinhas, Copas e Áreas de Serviço</td>
+<td>1 tomada a cada 3,5 m de perímetro</td>
+</tr>
+
+<tr>
+<td>Banheiros</td>
+<td>Mínimo 1 tomada próxima ao lavatório</td>
+</tr>
+</table>
+</div>
+
+<h3>4.2 Potência das Tomadas (Carga)</h3>
+
+<p>
+Para o dimensionamento da carga, a norma estabelece valores mínimos por ponto de tomada:
+</p>
+
+<ul class="list-standard">
+<li><strong>Ambientes comuns (quartos, salas):</strong> 100 VA por tomada;</li>
+<li><strong>Cozinhas, áreas de serviço (primeiras 3 tomadas):</strong> 600 VA por ponto;</li>
+<li><strong>Demais tomadas nessas áreas:</strong> 100 VA por ponto.</li>
+</ul>
+
+<div class="example-box">
+<strong>Exemplo de cálculo:</strong><br>
+Uma cozinha com 5 tomadas:
+
+<ul>
+<li>3 primeiras tomadas → 600 VA cada = 1800 VA</li>
+<li>2 tomadas restantes → 100 VA cada = 200 VA</li>
+</ul>
+
+<strong>Carga total das TUG da cozinha = 2000 VA</strong>
+</div>
+
+<div class="alert">
+Esse critério garante que circuitos de uso geral não sejam subdimensionados, evitando sobrecarga durante o uso simultâneo de equipamentos.
+</div>
+
+<h2>5. Tomadas de Uso Específico (TUE)</h2>
+
+<p>
+São destinadas a equipamentos com potência definida:
+</p>
+
+<ul class="list-standard">
+<li>Chuveiro elétrico</li>
+<li>Micro-ondas</li>
+<li>Ar-condicionado</li>
+<li>Máquina de lavar</li>
+</ul>
+
+<div class="danger-box">
+Cada equipamento deve possuir <strong>circuito exclusivo</strong>.
+</div>
+
+<hr>
+
+<h2>6. Divisão de Circuitos</h2>
+
+<ul class="list-standard">
+<li>Circuito de iluminação separado</li>
+<li>Circuito de tomadas separado</li>
+<li>Circuitos exclusivos para TUE</li>
+</ul>
+
+<div class="example-box">
+<strong>Boa prática:</strong> dividir os circuitos melhora a segurança e evita desligamento geral.
+</div>
+
+<hr>
+
+<h2>7. Dimensionamento do Padrão de Entrada</h2>
+
+<p>
+O dimensionamento depende da carga total instalada:
+</p>
+
+<ul class="list-standard">
+<li>Até ~8 kW → Monofásico</li>
+<li>De 8 a 15 kW → Bifásico</li>
+<li>Acima de 15 kW → Trifásico</li>
+</ul>
+
+<div class="alert">
+A escolha deve ser confirmada com a concessionária local.
+</div>
+
+<hr>
+
+<h2>8. Cálculo de Carga Total</h2>
+
+<p>
+Somar todas as cargas instaladas:
+</p>
+
+<div class="example-box">
+Iluminação + TUGs + TUEs = <strong>Carga Total da Instalação</strong>
+</div>
+
+<p>
+Essa carga será usada para:
+</p>
+
+<ul class="list-standard">
+<li>Dimensionar disjuntor geral</li>
+<li>Definir padrão de entrada</li>
+<li>Calcular divisão de circuitos</li>
+</ul>
+
+<hr>
+
+<h2>9. Cálculo de Demanda</h2>
+
+<p>
+O cálculo de demanda é o processo de determinação da carga real que será utilizada simultaneamente em uma instalação elétrica. Diferente da carga total instalada, a demanda considera que nem todos os equipamentos funcionam ao mesmo tempo.
+</p>
+
+<div class="example-box">
+<strong>Resumo técnico:</strong><br>
+Carga instalada = soma de todas as potências<br>
+Demanda = parcela da carga que realmente é utilizada simultaneamente
+</div>
+
+<h3>9.1 Para que serve o cálculo de demanda?</h3>
+
+<ul class="list-standard">
+<li>Evitar superdimensionamento da instalação</li>
+<li>Definir corretamente o padrão de entrada</li>
+<li>Dimensionar condutores e disjuntores com maior precisão</li>
+<li>Reduzir custos com materiais e energia</li>
+</ul>
+
+<div class="alert">
+O cálculo de demanda é essencial para garantir equilíbrio entre segurança, eficiência e economia no projeto elétrico.
+</div>
+
+<h3>19.2 Fator de Demanda</h3>
+
+<p>
+O fator de demanda representa a relação entre a carga utilizada e a carga instalada:
+</p>
+
+<div class="example-box">
+Fator de Demanda = Demanda / Carga Instalada
+</div>
+
+<p>
+Esse valor depende do tipo de instalação e do comportamento de uso dos equipamentos.
+</p>
+
+<h3>9.3 Exemplo Prático</h3>
+
+<div class="example-box">
+
+<p>
+Uma residência possui carga instalada de 10.000 W (10 kW).
+</p>
+
+<p>
+Considerando que nem todos os equipamentos funcionam ao mesmo tempo, adotamos um fator de demanda de 0,7:
+</p>
+
+<p>
+<strong>Demanda = 10.000 x 0,7 = 7.000 W (7 kW)</strong>
+</p>
+
+</div>
+
+<div class="alert">
+Isso significa que a instalação deve ser dimensionada para aproximadamente 7 kW, e não para a soma total das cargas.
+</div>
+
+<h3>9.4 Aplicação no Projeto</h3>
+
+<ul class="list-standard">
+<li>Escolha do padrão (mono, bi ou trifásico)</li>
+<li>Dimensionamento do disjuntor geral</li>
+<li>Definição da capacidade do quadro de distribuição</li>
+</ul>
+
+<div class="danger-box">
+<strong>Atenção:</strong> ignorar o fator de demanda pode levar ao superdimensionamento (custo alto) ou subdimensionamento (risco de sobrecarga).
+</div>
+
+
+
+<h2>Verifique seu Aprendizado</h2>
+
+<div class="example-box">
+
+<p><strong>Questão 1:</strong>  
+Uma residência possui:
+</p>
+
+<ul>
+<li>Iluminação: 800 VA</li>
+<li>Tomadas: 2000 VA</li>
+<li>Chuveiro: 5500 W</li>
+</ul>
+
+<p>Qual a carga total?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong> 8300 W (8,3 kW)</p>
+</details>
+
+<br>
+
+<p><strong>Questão 2:</strong>  
+Quantas tomadas devem ser instaladas em um quarto com perímetro de 12 metros?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong> 3 tomadas (1 a cada 5 m → mínimo 3 pontos)</p>
+</details>
+
+<br>
+
+<p><strong>Questão 3:</strong>  
+Qual a potência mínima de iluminação para um ambiente de 14 m²?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong>  
+100 VA (até 6 m²) + 60 VA + 60 VA = <strong>220 VA</strong>
+</p>
+</details>
+
+<br>
+
+<p><strong>Questão 4:</strong>  
+Uma cozinha possui 4 tomadas. Qual a carga total considerada?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong>  
+3 tomadas → 600 VA = 1800 VA  
+1 tomada → 100 VA  
+<strong>Total = 1900 VA</strong>
+</p>
+</details>
+
+<br>
+
+<p><strong>Questão 5:</strong>  
+Por que os equipamentos de uso específico (TUE) devem ter circuito exclusivo?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong>  
+Para evitar sobrecarga nos circuitos gerais, garantir segurança e permitir proteção adequada ao equipamento.
+</p>
+</details>
+
+<br>
+
+<p><strong>Questão 6:</strong>  
+Qual o tipo de padrão de entrada mais comum para uma instalação com carga de 12 kW?</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong> Bifásico</p>
+</details>
+
+<br>
+
+<p><strong>Questão 7:</strong>  
+Explique a diferença entre carga instalada e demanda.</p>
+
+<details>
+<summary>Ver resposta</summary>
+<p><strong>Resposta:</strong>  
+Carga instalada é a soma de todas as potências da instalação.  
+Demanda é a parcela dessa carga que é utilizada simultaneamente.
+</p>
+</details>
+
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 - Guia em Instalações Elétricas Residenciais - Aula 27</p>
+</footer>
+
+</body>
+</html>

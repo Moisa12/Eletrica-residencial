@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz: Projeto Elétrico Residencial (Revisão Avançada)</title>
+
+  <!-- Tailwind (mesmo padrão do Quiz_Dispositivos_de_proteção) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base (padrão claro do Quiz_Dispositivos_de_proteção) */
+    body{
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f4f8; /* fundo leve */
+      padding-top: 140px;        /* espaço para cabeçalho fixo */
+    }
+
+    header{
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background-color: #1e40af; /* azul escuro */
+      color: white;
+      padding: 1.5rem;
+      z-index: 50;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Opções em blocos (igual ao Quiz_Dispositivos_de_proteção) */
+    .option-label{
+      display: block;
+      padding: 1.25rem;
+      background-color: #ffffff;
+      border: 2px solid #cbd5e1;   /* gray-300 */
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .option-label:hover{
+      background-color: #eff6ff;   /* blue-50 */
+      border-color: #3b82f6;       /* blue-500 */
+    }
+    input[type="radio"]:checked + .option-label{
+      background-color: #dbeafe;   /* blue-100 */
+      border-color: #1e40af;       /* blue-800 */
+      font-weight: 700;
+      color: #1e40af;
+    }
+
+    /* Inputs (numérico/texto) com estética compatível */
+    .answer-input{
+      width: 100%;
+      padding: 1rem 1.1rem;
+      background: #fff;
+      border: 2px solid #cbd5e1;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .answer-input:focus{
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+
+    /* Feedback visual (igual ao Quiz_Dispositivos_de_proteção) */
+    .correct-answer{
+      background-color: #dcfce7 !important; /* green-100 */
+      border-color: #15803d !important;     /* green-700 */
+      color: #16a34a !important;            /* green-600 */
+    }
+    .wrong-answer{
+      background-color: #fee2e2 !important; /* red-100 */
+      border-color: #b91c1c !important;     /* red-700 */
+      color: #ef4444 !important;            /* red-500 */
+    }
+    .feedback-text{
+      display: none;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Caixa de dica/observação */
+    .hint-box{
+      background: #e3f2fd;
+      border-left: 6px solid #1976d2;
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Cabeçalho fixo (mesmo formato do Quiz_Dispositivos_de_proteção) -->
+  <header>
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Quiz: Projeto Elétrico Residencial</h1>
+      <p class="text-lg md:text-xl text-blue-200 font-light">
+        Revisão avançada: demanda, circuitos, IB, disjuntores, agrupamento e eletrodutos.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto p-4 sm:p-6">
+    <div class="hint-box mb-8">
+      <p class="text-gray-800 font-semibold mb-1">Orientação de uso</p>
+      <p class="text-gray-700">
+        Responda todas as questões e clique em <strong>“Verificar Respostas”</strong>.
+        Você verá feedback por questão e um resultado final com pontuação e orientação de estudo.
+      </p>
+    </div>
+
+    <form id="quizForm" class="space-y-10">
+      <!-- As questões serão injetadas aqui -->
+      <div id="quiz-container"></div>
+
+      <!-- Botão de enviar + resultado -->
+      <div class="text-center mt-12 mb-16">
+        <button type="button"
+                onclick="calcularResultado()"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full shadow-xl text-xl transition duration-300 transform hover:scale-105">
+          Verificar Respostas
+        </button>
+
+        <div id="resultado-final"
+             class="mt-8 p-5 bg-white rounded-xl shadow-inner text-xl font-bold text-gray-800 hidden">
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <footer class="py-6 bg-gray-800 text-white text-center text-sm">
+    <p>© 2026 - Guia em Instalações Elétricas Residenciais</p>
+  </footer>
+
+<script>
+/* =========================
+   QUESTÕES (Revisão Avançada)
+   Tipos:
+   - mcq: múltipla escolha (a,b,c,d)
+   - number: numérico com tolerância
+   - text: texto com palavras-chave (mínimo de acertos)
+   Pontos por questão: points
+   ========================= */
+
+const questions = [
+  {
+    id: "q1",
+    type: "number",
+    points: 1,
+    border: "border-blue-500",
+    question: "1. Uma residência possui carga instalada de 14 kW. Considerando fator de demanda = 0,70, qual é a demanda (em kW)?",
+    answerNumber: 9.8,
+    tolerance: 0.05,
+    explain: "Demanda = carga instalada × fator de demanda = 14 × 0,70 = 9,8 kW."
+  },
+  {
+    id: "q2",
+    type: "mcq",
+    points: 1,
+    border: "border-red-500",
+    question: "2. Qual alternativa representa uma divisão correta (boa prática) para uma residência?",
+    options: {
+      a: "Um único circuito para iluminação e tomadas de todos os ambientes",
+      b: "Iluminação separada de tomadas e TUE (ex.: chuveiro) em circuito exclusivo",
+      c: "Tomadas de cozinha junto com tomadas de quartos sempre no mesmo circuito",
+      d: "Todos os equipamentos ligados em TUG para simplificar o projeto"
+    },
+    answer: "b",
+    explain: "Boa prática: separar iluminação/tomadas e manter TUE em circuito próprio; áreas de serviço/cozinha devem ser separadas."
+  },
+  {
+    id: "q3",
+    type: "number",
+    points: 1,
+    border: "border-green-500",
+    question: "3. Um circuito de tomadas possui 2400 VA em 127 V. Qual a corrente IB aproximada (em A)?",
+    answerNumber: 18.9,
+    tolerance: 0.2,
+    explain: "IB = P/V → 2400/127 ≈ 18,9 A."
+  },
+  {
+    id: "q4",
+    type: "mcq",
+    points: 1,
+    border: "border-blue-500",
+    question: "4. Para um circuito com IB = 18 A e condutor com IZ = 21 A, qual disjuntor (IN) é o mais adequado dentre: 10 A, 16 A, 20 A, 25 A?",
+    options: {
+      a: "10 A",
+      b: "16 A",
+      c: "20 A",
+      d: "25 A"
+    },
+    answer: "c",
+    explain: "Critério: IB ≤ IN ≤ IZ. 18 ≤ 20 ≤ 21."
+  },
+  {
+    id: "q5",
+    type: "number",
+    points: 1,
+    border: "border-red-500",
+    question: "5. Fator de agrupamento = 0,70. Para IB = 18 A, qual a corrente corrigida Icorr = IB / fator (em A)?",
+    answerNumber: 25.71,
+    tolerance: 0.25,
+    explain: "Icorr = 18/0,70 ≈ 25,7 A. Agrupamento reduz dissipação térmica, exigindo correção."
+  },
+  {
+    id: "q6",
+    type: "number",
+    points: 1,
+    border: "border-green-500",
+    question: "6. Em um eletroduto passam 6 condutores de 7 mm² cada. Qual a seção mínima do eletroduto para ocupação de 40% (em mm²)?",
+    answerNumber: 105,
+    tolerance: 1,
+    explain: "STC = 6×7 = 42 mm²; Eletroduto = 42×100/40 = 105 mm²."
+  },
+  {
+    id: "q7",
+    type: "mcq",
+    points: 1,
+    border: "border-blue-500",
+    question: "7. Quando uma tomada é considerada de uso específico (TUE), o que deve acontecer no projeto?",
+    options: {
+      a: "Pode ser ligada em qualquer circuito de TUG",
+      b: "Deve ser atribuída potência padrão de 100 VA",
+      c: "Deve ter circuito independente e potência igual à nominal do equipamento",
+      d: "Deve ser instalada apenas em banheiros"
+    },
+    answer: "c",
+    explain: "TUE deve ser circuito dedicado e potência nominal do equipamento."
+  },
+  {
+    id: "q8",
+    type: "mcq",
+    points: 1,
+    border: "border-red-500",
+    question: "8. Uma residência tem demanda estimada de 9,8 kW. Qual fornecimento é mais coerente como ponto de partida (antes de validar com a concessionária)?",
+    options: {
+      a: "Monofásico",
+      b: "Bifásico",
+      c: "Trifásico",
+      d: "Não é possível estimar"
+    },
+    answer: "b",
+    explain: "Como regra prática, essa faixa normalmente aponta para bifásico (confirmar com a concessionária)."
+  },
+  {
+    id: "q9",
+    type: "text",
+    points: 1,
+    border: "border-green-500",
+    question: "9. Escreva 2 motivos (palavras-chave) que justificam separar iluminação de tomadas em circuitos distintos.",
+    keywords: ["segurança","manutenção","seletividade","sobrecarga","continuidade","organização"],
+    minHits: 2,
+    explain: "Separação melhora seletividade, facilita manutenção e reduz risco de sobrecarga."
+  },
+  {
+    id: "q10",
+    type: "mcq",
+    points: 1,
+    border: "border-blue-500",
+    question: "10. Qual situação é um erro típico e deve ser corrigida?",
+    options: {
+      a: "TUE (chuveiro) em circuito próprio",
+      b: "TUG de cozinha separada das TUG de quartos",
+      c: "Iluminação e tomadas do imóvel inteiro em um único circuito",
+      d: "Identificação dos circuitos no quadro"
+    },
+    answer: "c",
+    explain: "Erro: baixa seletividade e risco de sobrecarga. O correto é dividir circuitos."
+  }
+];
+
+function normalizeText(s){
+  return (s || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ");
+}
+
+function renderQuiz(){
+  const container = document.getElementById("quiz-container");
+  container.innerHTML = "";
+
+  questions.forEach((q) => {
+    const card = document.createElement("div");
+    card.className = `bg-white p-6 rounded-xl shadow-lg border-l-4 ${q.border}`;
+
+    // título
+    const h = document.createElement("h3");
+    h.className = "text-xl font-bold text-gray-800 mb-5";
+    h.textContent = q.question;
+    card.appendChild(h);
+
+    // opções
+    if(q.type === "mcq"){
+      const opts = document.createElement("div");
+      opts.className = "space-y-4";
+
+      Object.entries(q.options).forEach(([key, text]) => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+          <input type="radio" name="${q.id}" value="${key}" class="hidden">
+          <span class="option-label">${key}) ${text}</span>
+        `;
+        opts.appendChild(label);
+      });
+
+      card.appendChild(opts);
+    }
+
+    // numérico
+    if(q.type === "number"){
+      const input = document.createElement("input");
+      input.type = "number";
+      input.step = "any";
+      input.name = q.id;
+      input.placeholder = "Digite o valor";
+      input.className = "answer-input";
+
+      const hint = document.createElement("div");
+      hint.className = "text-sm text-gray-600 mt-2";
+      hint.textContent = "Dica: o sistema aceita pequena variação (tolerância).";
+
+      card.appendChild(input);
+      card.appendChild(hint);
+    }
+
+    // texto
+    if(q.type === "text"){
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = q.id;
+      input.placeholder = "Ex.: segurança, manutenção";
+      input.className = "answer-input";
+
+      const hint = document.createElement("div");
+      hint.className = "text-sm text-gray-600 mt-2";
+      hint.textContent = "Use palavras-chave separadas por vírgula ou espaço.";
+
+      card.appendChild(input);
+      card.appendChild(hint);
+    }
+
+    // feedback
+    const fb = document.createElement("div");
+    fb.id = `feedback-${q.id}`;
+    fb.className = "feedback-text";
+    card.appendChild(fb);
+
+    container.appendChild(card);
+  });
+}
+
+function calcularResultado(){
+  let pontos = 0;
+  const totalPontos = questions.reduce((s,q)=> s + (q.points ?? 1), 0);
+
+  // validar se tudo foi respondido
+  for(const q of questions){
+    if(q.type === "mcq"){
+      const marcado = document.querySelector(`input[name="${q.id}"]:checked`);
+      if(!marcado){
+        alert("Por favor, responda a todas as questões antes de verificar.");
+        return;
+      }
+    } else {
+      const input = document.querySelector(`[name="${q.id}"]`);
+      if(!input || String(input.value).trim() === ""){
+        alert("Por favor, responda a todas as questões antes de verificar.");
+        return;
+      }
+    }
+  }
+
+  // corrigir
+  questions.forEach(q => {
+    const fb = document.getElementById(`feedback-${q.id}`);
+    fb.style.display = "block";
+    fb.className = "feedback-text mt-3 p-3 rounded";
+
+    const pts = q.points ?? 1;
+
+    if(q.type === "mcq"){
+      const marcado = document.querySelector(`input[name="${q.id}"]:checked`);
+      const selecionado = marcado.value;
+
+      // limpar classes
+      document.querySelectorAll(`input[name="${q.id}"]`).forEach(inp=>{
+        const span = inp.nextElementSibling;
+        span.classList.remove("correct-answer","wrong-answer");
+      });
+
+      const spanSel = marcado.nextElementSibling;
+
+      if(selecionado === q.answer){
+        pontos += pts;
+        spanSel.classList.add("correct-answer");
+        fb.innerHTML = `✓ Correto! (+${pts})<div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-green-100","text-green-800");
+        fb.classList.remove("bg-red-100","text-red-800","bg-orange-100","text-orange-800");
+      } else {
+        spanSel.classList.add("wrong-answer");
+        const corretoInp = document.querySelector(`input[name="${q.id}"][value="${q.answer}"]`);
+        const spanCorreto = corretoInp.nextElementSibling;
+        spanCorreto.classList.add("correct-answer");
+
+        fb.innerHTML = `✗ Incorreto. (+0) A correta era: <span class="font-bold">${spanCorreto.textContent.trim()}</span>.
+                        <div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-red-100","text-red-800");
+        fb.classList.remove("bg-green-100","text-green-800","bg-orange-100","text-orange-800");
+      }
+    }
+
+    if(q.type === "number"){
+      const input = document.querySelector(`[name="${q.id}"]`);
+      const v = parseFloat(input.value);
+
+      if(!isNaN(v) && Math.abs(v - q.answerNumber) <= (q.tolerance ?? 0)){
+        pontos += pts;
+        fb.innerHTML = `✓ Correto! (+${pts})<div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-green-100","text-green-800");
+        fb.classList.remove("bg-red-100","text-red-800","bg-orange-100","text-orange-800");
+      } else {
+        fb.innerHTML = `✗ Incorreto. (+0) Gabarito: <span class="font-bold">${q.answerNumber}</span>.
+                        <div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-red-100","text-red-800");
+        fb.classList.remove("bg-green-100","text-green-800","bg-orange-100","text-orange-800");
+      }
+    }
+
+    if(q.type === "text"){
+      const input = document.querySelector(`[name="${q.id}"]`);
+      const txt = normalizeText(input.value);
+
+      let hits = 0;
+      q.keywords.forEach(k=>{
+        if(txt.includes(normalizeText(k))) hits++;
+      });
+
+      if(hits >= (q.minHits ?? 1)){
+        pontos += pts;
+        fb.innerHTML = `✓ Correto! (+${pts})<div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-green-100","text-green-800");
+        fb.classList.remove("bg-red-100","text-red-800","bg-orange-100","text-orange-800");
+      } else {
+        fb.innerHTML = `✗ Incorreto. (+0) Exemplo: <span class="font-bold">segurança</span> e <span class="font-bold">manutenção</span>.
+                        <div class="font-normal mt-1 text-gray-800">${q.explain}</div>`;
+        fb.classList.add("bg-red-100","text-red-800");
+        fb.classList.remove("bg-green-100","text-green-800","bg-orange-100","text-orange-800");
+      }
+    }
+  });
+
+  // Resultado final + feedback por pontuação
+  const percent = Math.round((pontos / totalPontos) * 100);
+
+  let faixaTitulo = "";
+  let faixaMsg = "";
+  let boxClass = "bg-white";
+  let txtClass = "text-gray-800";
+
+  if(percent < 50){
+    faixaTitulo = "Precisa revisar";
+    faixaMsg = "Revise previsão de cargas (iluminação/TUG/TUE), divisão de circuitos e cálculo de corrente (IB). Refaça o quiz após revisar.";
+    boxClass = "bg-red-50";
+    txtClass = "text-red-800";
+  } else if(percent < 75){
+    faixaTitulo = "Bom";
+    faixaMsg = "Você tem a base do projeto. Foque em: critérios de disjuntor (IB ≤ IN ≤ IZ), agrupamento e ocupação de eletrodutos.";
+    boxClass = "bg-yellow-50";
+    txtClass = "text-yellow-800";
+  } else if(percent < 90){
+    faixaTitulo = "Ótimo";
+    faixaMsg = "Muito bem. Refine tomada de decisão: padrão de entrada, demanda e justificativas técnicas (seletividade/manutenção).";
+    boxClass = "bg-blue-50";
+    txtClass = "text-blue-800";
+  } else {
+    faixaTitulo = "Excelente";
+    faixaMsg = "Nível consistente. Próximo passo: dimensionar condutores/disjuntores com tabelas, queda de tensão e diagrama do quadro.";
+    boxClass = "bg-green-50";
+    txtClass = "text-green-800";
+  }
+
+  const divResultado = document.getElementById("resultado-final");
+  divResultado.classList.remove("hidden");
+  divResultado.className = `mt-8 p-5 rounded-xl shadow-inner text-xl font-bold ${boxClass} ${txtClass}`;
+  divResultado.innerHTML =
+    `Você fez <span class="text-blue-600">${pontos}</span> de ${totalPontos} pontos (<span class="text-blue-600">${percent}%</span>).<br>
+     <span class="block mt-2 font-extrabold">Feedback: ${faixaTitulo}</span>
+     <span class="block mt-1 text-base font-semibold">${faixaMsg}</span>`;
+
+  divResultado.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+document.addEventListener("DOMContentLoaded", renderQuiz);
+</script>
+</body>
+</html>

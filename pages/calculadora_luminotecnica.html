@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia em Instalações Elétricas - Simulador Luminotécnico</title>
+  <style>
+    /* Identidade visual (mesmo padrão das aulas) */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f4f4f9;
+      padding-top: 110px;
+      font-size: 20px;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: #ffffff;
+      padding: 1rem 0;
+      text-align: center;
+      border-bottom: 5px solid #f1c40f;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-header {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      height: 50px;
+      width: auto;
+    }
+
+    header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; }
+    .subtitle { font-size: 1rem; color: #f1c40f; margin-top: 5px; }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 40px;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #2c3e50;
+      border-left: 6px solid #f1c40f;
+      padding-left: 15px;
+      margin-top: 20px;
+    }
+
+    p { text-align: justify; }
+
+    .alert {
+      padding: 20px;
+      background-color: #e3f2fd;
+      border-left: 6px solid #1976d2;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .formula-box {
+      background-color: #2c3e50;
+      color: #f1c40f;
+      padding: 18px;
+      font-size: 1.25rem;
+      text-align: center;
+      font-family: monospace;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+
+    .simulator-box {
+      background-color: #fef9e7;
+      border: 2px dashed #f1c40f;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 25px 0;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 10px 0;
+    }
+
+    .field {
+      text-align: left;
+      min-width: 190px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      background-color: #2c3e50;
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    button:hover { background-color: #34495e; }
+
+    button.secondary {
+      background-color: #7f8c8d;
+    }
+
+    button.secondary:hover {
+      background-color: #6c7a7b;
+    }
+
+    .resultado {
+      margin-top: 18px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 6px;
+      display: none;
+      border: 1px solid #f1c40f;
+      text-align: left;
+    }
+
+    .resultado strong { color: #2c3e50; }
+
+    footer {
+      background-color: #2c3e50;
+      color: #bdc3c7;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 50px;
+      border-top: 5px solid #f1c40f;
+    }
+
+    footer p { margin: 0; text-align: center; font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .container { padding: 20px; margin: 10px; }
+      .logo-header { display: none; }
+      .field { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Guia em Instalações Elétricas</h1>
+    <div class="subtitle">Calculadora de Fluxo Luminoso</div>
+    <img src="../images/logo-.png" alt="Logotipo" class="logo-header" />
+  </header>
+
+  <div class="container">
+
+    <div class="formula-box">
+      Φ<sub>total</sub> = (E × A) / (FU × FM)
+    </div>
+
+    <div class="simulator-box">
+
+      <div class="row">
+        <div class="field">
+          <label for="presetAmbiente">Preset de ambiente</label>
+          <select id="presetAmbiente">
+            <option value="">Selecione…</option>
+            <option value="sala">Sala / estar (residencial)</option>
+            <option value="quarto">Quarto (residencial)</option>
+            <option value="cozinha">Cozinha (residencial)</option>
+            <option value="banheiro">Banheiro (residencial)</option>
+            <option value="corredor">Corredor / escada</option>
+            <option value="escritorio">Escritório / estudo</option>
+            <option value="oficina">Oficina / bancada de manutenção</option>
+            <option value="externa">Área externa (circulação)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="presetSuperficie">Condição das superfícies</label>
+          <select id="presetSuperficie">
+            <option value="clara">Claras (maior refletância)</option>
+            <option value="media">Médias</option>
+            <option value="escura">Escuras (menor refletância)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="luxInput">Iluminância (E) – lux</label>
+          <input type="number" id="luxInput" placeholder="Ex.: 400" min="1" step="1" />
+        </div>
+
+        <div class="field">
+          <label for="areaInput">Área (A) – m²</label>
+          <input type="number" id="areaInput" placeholder="Ex.: 9" min="0.1" step="0.1" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="fuInput">FU (0,30 a 0,90)</label>
+          <input type="number" id="fuInput" placeholder="Ex.: 0,60" min="0.3" max="0.9" step="0.01" value="0.60" />
+        </div>
+
+        <div class="field">
+          <label for="fmInput">FM (0,60 a 0,90)</label>
+          <input type="number" id="fmInput" placeholder="Ex.: 0,80" min="0.6" max="0.9" step="0.01" value="0.80" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="luminariaLmInput">Fluxo por luminária (lm)</label>
+          <input type="number" id="luminariaLmInput" placeholder="Ex.: 2000" min="1" step="1" value="2000" />
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button onclick="calcular()">Calcular</button>
+        <button class="secondary" onclick="resetar()">Reset</button>
+      </div>
+
+      <div id="resultadoBox" class="resultado">
+        <div><strong>Φ<sub>total</sub> (lúmens):</strong> <span id="phiOut">0</span></div>
+        <div style="margin-top:8px;"><strong>Quantidade de luminárias:</strong> <span id="qtdOut">0</span></div>
+        <div style="margin-top:8px; font-size: 14px; color:#555;">
+          Regra: quantidade = arredondamento para cima de (Φ<sub>total</sub> / lm por luminária).
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert" style="margin-top: 10px;">
+      <p style="margin:0;"><strong>Dica: Conferir com <strong>luxímetro</strong> no <strong>plano de trabalho</strong>.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 - Guia em Instalações Elétricas</p>
+  </footer>
+
+  <script>
+    // Presets didáticos (valores típicos). Ajuste conforme o caso real.
+    const presets = {
+      sala:       { E: 200, FU: { clara: 0.70, media: 0.60, escura: 0.50 }, FM: 0.80 },
+      quarto:     { E: 150, FU: { clara: 0.70, media: 0.60, escura: 0.50 }, FM: 0.80 },
+      cozinha:    { E: 400, FU: { clara: 0.65, media: 0.60, escura: 0.50 }, FM: 0.80 },
+      banheiro:   { E: 250, FU: { clara: 0.65, media: 0.60, escura: 0.50 }, FM: 0.80 },
+      corredor:   { E: 100, FU: { clara: 0.75, media: 0.65, escura: 0.55 }, FM: 0.80 },
+      escritorio: { E: 500, FU: { clara: 0.65, media: 0.60, escura: 0.50 }, FM: 0.80 },
+      oficina:    { E: 750, FU: { clara: 0.55, media: 0.50, escura: 0.40 }, FM: 0.75 },
+      externa:    { E: 100, FU: { clara: 0.55, media: 0.50, escura: 0.40 }, FM: 0.70 }
+    };
+
+    function aplicarPreset() {
+      const amb = document.getElementById('presetAmbiente').value;
+      const sup = document.getElementById('presetSuperficie').value;
+      if (!amb) return;
+
+      const p = presets[amb];
+      document.getElementById('luxInput').value = p.E;
+      document.getElementById('fuInput').value = p.FU[sup].toFixed(2);
+      document.getElementById('fmInput').value = p.FM.toFixed(2);
+    }
+
+    document.getElementById('presetAmbiente').addEventListener('change', aplicarPreset);
+    document.getElementById('presetSuperficie').addEventListener('change', aplicarPreset);
+
+    function calcular() {
+      const E = parseFloat(document.getElementById('luxInput').value);
+      const A = parseFloat(document.getElementById('areaInput').value);
+      const FU = parseFloat(document.getElementById('fuInput').value);
+      const FM = parseFloat(document.getElementById('fmInput').value);
+      const lmLum = parseFloat(document.getElementById('luminariaLmInput').value);
+
+      const box = document.getElementById('resultadoBox');
+      const phiOut = document.getElementById('phiOut');
+      const qtdOut = document.getElementById('qtdOut');
+
+      const valid = (E > 0) && (A > 0) && (FU > 0 && FU < 1) && (FM > 0 && FM < 1) && (lmLum > 0);
+      if (!valid) {
+        alert('Preencha valores válidos: E>0, A>0, FU e FM entre 0 e 1, e lm por luminária > 0.');
+        box.style.display = 'none';
+        return;
+      }
+
+      const phiTotal = (E * A) / (FU * FM);
+      const qtdLum = Math.ceil(phiTotal / lmLum);
+
+      phiOut.innerText = Math.round(phiTotal).toLocaleString('pt-BR');
+      qtdOut.innerText = qtdLum.toLocaleString('pt-BR');
+      box.style.display = 'block';
+    }
+
+    function resetar() {
+      document.getElementById('presetAmbiente').value = '';
+      document.getElementById('presetSuperficie').value = 'clara';
+      document.getElementById('luxInput').value = '';
+      document.getElementById('areaInput').value = '';
+      document.getElementById('fuInput').value = '0.60';
+      document.getElementById('fmInput').value = '0.80';
+      document.getElementById('luminariaLmInput').value = '2000';
+      document.getElementById('resultadoBox').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

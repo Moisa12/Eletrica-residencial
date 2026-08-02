@@ -1,292 +1,436 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ: Interligação de componentes elétricos - V2</title>
+    <title>Quiz: Interligação de Componentes Elétricos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9ecef;
-            margin: 0;
-            padding: 20px;
-            color: #212529;
+            font-family: 'Inter', sans-serif;
         }
-        .container {
-            max-width: 850px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .option-card {
+            transition: all 0.15s ease-in-out;
         }
-        h1 {
-            color: #004085;
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 10px;
+        .option-card:not([disabled]):hover {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+            transform: translateY(-1px);
         }
-        h2 {
-            color: #6c757d;
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 15px;
+        .correct-answer {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
         }
-        .question-block {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
         }
-        .options-list {
-            list-style: none;
-            padding: 0;
+        .incorrect-answer {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            font-weight: 600;
         }
-        .option-item {
-            margin: 12px 0;
-            padding: 12px;
-            background: #fff;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s;
-        }
-        .option-item:hover {
-            background: #f1f3f5;
-        }
-        .option-item input {
-            margin-right: 15px;
-            transform: scale(1.2);
-        }
-        .correct {
-            background-color: #d4edda !important;
-            border-color: #c3e6cb !important;
-            color: #155724;
-            font-weight: bold;
-        }
-        .incorrect {
-            background-color: #f8d7da !important;
-            border-color: #f5c6cb !important;
-            color: #721c24;
-        }
-        .explanation {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #e2e3e5;
-            border-radius: 5px;
-            display: none;
-            font-size: 14px;
-            color: #383d41;
-        }
-        #btn-finish {
-            display: block;
-            width: 100%;
-            padding: 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        #btn-finish:hover {
-            background: #0056b3;
-        }
-        #score-summary {
-            margin-top: 25px;
-            padding: 20px;
-            display: none;
-            text-align: center;
-            border-radius: 10px;
-            font-size: 22px;
-            font-weight: bold;
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
         }
     </style>
 </head>
-<body>
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
-<div class="container">
-    <h1>Quiz: Ligação de componentes elétricos</h1>
-    <h2>Lâmpada, Sensores, Interruptores e Quadro de Distribuição</h2>
-    
-    <form id="quiz-form">
-        <div id="quiz-content"></div>
-        <button type="button" id="btn-finish" onclick="checkAnswers()">Finalizar Avaliação</button>
-    </form>
-
-    <div id="score-summary"></div>
-</div>
-
-<script>
-    const quizData = [
-        {
-            q: "Qual condutor deve ser obrigatoriamente ligado ao borne do interruptor simples para segurança?",
-            options: ["Neutro", "Fase", "Retorno", "Terra"],
-            correct: 1,
-            exp: "O condutor FASE deve ser interrompido para que a lâmpada não receba energia quando desligada."
-        },
-        {
-            q: "Quantos fios de RETORNO saem de um interruptor de dupla seção (duas teclas)?",
-            options: ["1 retorno", "2 retornos", "3 retornos", "4 retornos"],
-            correct: 1,
-            exp: "Cada tecla controla um circuito independente, logo, cada uma precisa de seu próprio retorno."
-        },
-        {
-            q: "Para controlar uma lâmpada de dois pontos diferentes, usamos interruptores do tipo:",
-            options: ["Simples", "Bipolares", "Paralelos (Three-way)", "Intermediários"],
-            correct: 2,
-            exp: "O paralelo permite alternar a passagem da corrente entre dois pontos distintos."
-        },
-        {
-            q: "No esquema paralelo, quantos fios conectam as laterais dos dois interruptores?",
-            options: ["1 fio", "2 fios", "3 fios", "4 fios"],
-            correct: 1,
-            exp: "São necessários 2 fios (ponte) para que o sistema de comutação funcione."
-        },
-        {
-            q: "Qual a função do Disjuntor Termomagnético (DTM) no Quadro de Distribuição?",
-            options: ["Evitar choque elétrico", "Proteger fios contra sobrecarga e curto-circuito", "Ligar e desligar a luz", "Economizar energia"],
-            correct: 1,
-            exp: "O disjuntor protege a fiação contra aquecimento excessivo (sobrecarga) e curtos."
-        },
-        {
-            q: "No QD, o barramento de NEUTRO deve ficar:",
-            options: ["Ligado no mesmo barramento do Terra", "Isolado eletricamente da carcaça do quadro", "Ligado diretamente na fase", "Fora do quadro"],
-            correct: 1,
-            exp: "O neutro é um condutor carregado e deve ser isolado do terra e da carcaça no quadro principal."
-        },
-        {
-            q: "Em um circuito paralelo, se a fase entra no centro do 1º interruptor, o retorno sai de onde?",
-            options: ["Da lateral do 1º interruptor", "Do centro do 2º interruptor", "Do barramento de neutro", "Direto do disjuntor"],
-            correct: 1,
-            exp: "A lógica do paralelo é: Fase no centro de um, Retorno no centro do outro."
-        },
-        {
-            q: "A NBR 5410 exige que a cor do condutor NEUTRO seja:",
-            options: ["Verde", "Preta", "Azul-claro", "Vermelha"],
-            correct: 2,
-            exp: "O azul-claro é a cor normativa para identificação do condutor Neutro."
-        },
-        {
-            q: "Como é feita a alimentação da Fase em um interruptor de duas teclas (dupla seção)?",
-            options: ["Uma fase para cada tecla", "Um 'jump' (ponte) de fase entre os dois bornes de entrada", "Fase e Neutro no mesmo interruptor", "A fase não vai no interruptor"],
-            correct: 1,
-            exp: "Utiliza-se uma ponte de fio para levar a mesma fase aos dois bornes de entrada das teclas."
-        },
-        {
-            q: "Qual dispositivo no QD protege pessoas contra choques e tem um botão de teste?",
-            options: ["Disjuntor Geral", "DPS", "Barramento de cobre", "DR (Diferencial Residual)"],
-            correct: 3,
-            exp: "O DR detecta fugas de corrente (choques) e desarma instantaneamente."
-        },
-        /* NOVAS QUESTÕES ADICIONADAS */
-        {
-            q: "O interruptor SIMPLES BIPOLAR é utilizado obrigatoriamente quando:",
-            options: ["A lâmpada é controlada de 3 pontos", "O circuito é alimentado por duas fases (220V entre fases)", "Queremos economizar fios", "A lâmpada é de LED"],
-            correct: 1,
-            exp: "Em circuitos bifásicos, ambas as fases devem ser seccionadas para garantir a segurança na manutenção da luminária."
-        },
-        {
-            q: "No Sensor de Presença de 3 fios, quais são as funções típicas de cada condutor?",
-            options: ["Fase, Neutro e Retorno", "Fase, Fase e Terra", "Fase, Neutro e Terra", "Retorno, Retorno e Neutro"],
-            correct: 0,
-            exp: "O sensor precisa de alimentação (Fase e Neutro) e fornece um Retorno para acionar a carga (lâmpada)."
-        },
-        {
-            q: "Para controlar uma lâmpada de TRÊS ou mais pontos diferentes, usamos o interruptor:",
-            options: ["Simples", "Bipolar", "Intermediário (Four-way)", "Diferencial"],
-            correct: 2,
-            exp: "O interruptor intermediário deve ser instalado obrigatoriamente entre dois interruptores paralelos."
-        },
-        {
-            q: "Na ligação do bocal (receptáculo) da lâmpada, o condutor NEUTRO deve ser ligado preferencialmente onde?",
-            options: ["No pino central (fundo)", "Na parte roscada (lateral)", "Em qualquer um dos bornes", "No fio terra"],
-            correct: 1,
-            exp: "Ligar o Neutro na rosca evita choques se alguém tocar na parte metálica da lâmpada durante a troca."
-        },
-        {
-            q: "Qual condutor deve ser conectado ao contato CENTRAL (fundo) do bocal da lâmpada?",
-            options: ["Neutro", "Terra", "Retorno", "Fase Direta"],
-            correct: 2,
-            exp: "O Retorno vai ao centro para garantir que, com o interruptor desligado, não haja energia em nenhum ponto do bocal."
-        }
-    ];
-
-    const quizContent = document.getElementById('quiz-content');
-
-    // Renderizar questões
-    quizData.forEach((item, qIdx) => {
-        let qBlock = document.createElement('div');
-        qBlock.className = 'question-block';
-        qBlock.id = `block-${qIdx}`;
+    <div class="max-w-3xl w-full space-y-6">
         
-        qBlock.innerHTML = `<p><strong>${qIdx + 1}. ${item.q}</strong></p>`;
-        
-        let uList = document.createElement('ul');
-        uList.className = 'options-list';
-        
-        item.options.forEach((opt, oIdx) => {
-            uList.innerHTML += `
-                <li class="option-item" id="opt-${qIdx}-${oIdx}">
-                    <input type="radio" name="q${qIdx}" value="${oIdx}"> ${opt}
-                </li>
-            `;
-        });
-        
-        qBlock.appendChild(uList);
-        qBlock.innerHTML += `<div class="explanation" id="exp-${qIdx}">${item.exp}</div>`;
-        quizContent.appendChild(qBlock);
-    });
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
+            
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Quiz: Interligação de Componentes Elétricos
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Avalie seus conhecimentos técnicos sobre ligações de lâmpadas, sensores de presença, interruptores simples/paralelos/intermediários e quadros de distribuição (QD).
+            </p>
 
-    function checkAnswers() {
-        let score = 0;
-        
-        quizData.forEach((item, qIdx) => {
-            const selected = document.querySelector(`input[name="q${qIdx}"]:checked`);
-            const explanation = document.getElementById(`exp-${qIdx}`);
-            explanation.style.display = 'block';
+            <!-- BARRA DE PROGRESSO -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span id="total-questions-count">15 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 15
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-blue-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </header>
 
-            // Resetar estilos
-            item.options.forEach((_, oIdx) => {
-                document.getElementById(`opt-${qIdx}-${oIdx}`).className = 'option-item';
+        <!-- ÁREA DOS CARDS DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div id="score-icon" class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Resultado Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-blue-600 text-2xl">0</span> de <span id="total-count-span">15</span> perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                tag: "Interruptores",
+                q: "1. Qual condutor deve ser obrigatoriamente ligado ao borne do interruptor simples para garantir a segurança da instalação?",
+                options: [
+                    "Neutro",
+                    "Fase",
+                    "Retorno",
+                    "Terra"
+                ],
+                answer: "Fase",
+                rationale: "O condutor FASE deve ser obrigatoriamente interrompido no interruptor para garantir que a lâmpada/bocal fique desenergizado quando a luz estiver desligada, prevenindo choques elétricos durante trocas de lâmpadas."
+            },
+            {
+                tag: "Interruptores",
+                q: "2. Quantos fios de RETORNO saem de um interruptor de dupla seção (duas teclas independentes)?",
+                options: [
+                    "1 retorno",
+                    "2 retornos",
+                    "3 retornos",
+                    "4 retornos"
+                ],
+                answer: "2 retornos",
+                rationale: "Cada tecla de um interruptor duplo comanda uma carga ou grupo de lâmpadas independente. Logo, cada tecla exige a conexão de seu próprio condutor de retorno."
+            },
+            {
+                tag: "Circuitos Paralelos",
+                q: "3. Para controlar uma mesma lâmpada a partir de dois pontos diferentes de um ambiente, utilizamos interruptores do tipo:",
+                options: [
+                    "Simples",
+                    "Bipolares",
+                    "Paralelos (Three-way)",
+                    "Intermediários"
+                ],
+                answer: "Paralelos (Three-way)",
+                rationale: "Os interruptores paralelos (Three-way) possuem 3 bornes de conexão cada, permitindo alternar a comutação do circuito de dois locais distintos."
+            },
+            {
+                tag: "Circuitos Paralelos",
+                q: "4. No esquema de ligação de interruptores paralelos (Three-way), quantos fios de ponte conectam as comutações entre os dois interruptores?",
+                options: [
+                    "1 fio",
+                    "2 fios",
+                    "3 fios",
+                    "4 fios"
+                ],
+                answer: "2 fios",
+                rationale: "São necessários exatamente 2 fios paralelos (pontes/balanços) conectando os bornes laterais dos dois interruptores para que a comutação alternada funcione corretamente."
+            },
+            {
+                tag: "Proteção e QD",
+                q: "5. Qual é a função principal do Disjuntor Termomagnético (DTM) instalado no Quadro de Distribuição?",
+                options: [
+                    "Evitar choque elétrico em pessoas.",
+                    "Proteger os condutores elétricos contra sobrecarga e curto-circuito.",
+                    "Ligar e desligar a iluminação automaticamente.",
+                    "Reduzir o consumo de energia elétrica da edificação."
+                ],
+                answer: "Proteger os condutores elétricos contra sobrecarga e curto-circuito.",
+                rationale: "O disjuntor termomagnético atua por princípio térmico (sobrecarga prolongada) e magnético (curto-circuito), protegendo o cabeamento contra sobreaquecimentos e incêndios."
+            },
+            {
+                tag: "Quadro de Distribuição",
+                q: "6. No Quadro de Distribuição (QD), como deve ser instalado o barramento de NEUTRO?",
+                options: [
+                    "Interligado no mesmo barramento do condutor de Proteção (Terra).",
+                    "Isolado eletricamente da carcaça metálica ou estrutura do quadro.",
+                    "Conectado diretamente na saída do disjuntor de fase.",
+                    "Fixado obrigatoriamente fora do quadro de distribuição."
+                ],
+                answer: "Isolado eletricamente da carcaça metálica ou estrutura do quadro.",
+                rationale: "O condutor neutro é um condutor de circuito ativo. No quadro de distribuição principal/secundário, seu barramento deve ser devidamente isolado do chassi/terra."
+            },
+            {
+                tag: "Circuitos Paralelos",
+                q: "7. Em um circuito paralelo padronizado, se a Fase entra no pino central do 1º interruptor, o condutor de Retorno para a lâmpada sai de onde?",
+                options: [
+                    "Da lateral do 1º interruptor.",
+                    "Do pino central (borne comum) do 2º interruptor.",
+                    "Do barramento de neutro do quadro.",
+                    "Direto da saída do disjuntor principal."
+                ],
+                answer: "Do pino central (borne comum) do 2º interruptor.",
+                rationale: "A regra de ouro do circuito paralelo é: Fase conectada no centro do 1º interruptor, as duas pontes interligando as laterais, e o Retorno saindo do centro do 2º interruptor em direção à carga."
+            },
+            {
+                tag: "Normas NBR 5410",
+                q: "8. A NBR 5410 estabelece que o condutor NEUTRO em uma instalação elétrica deve possuir obrigatoriamente a cor:",
+                options: [
+                    "Verde ou verde-amarelada.",
+                    "Preta.",
+                    "Azul-claro.",
+                    "Vermelha."
+                ],
+                answer: "Azul-claro.",
+                rationale: "A NBR 5410 especifica a cor Azul-claro exclusivamente para a identificação do condutor Neutro. A cor verde ou verde-amarelada é exclusiva do condutor de Proteção (Terra)."
+            },
+            {
+                tag: "Interruptores",
+                q: "9. Como é realizada a alimentação da Fase em um interruptor de duas teclas (dupla seção) alimentado por um único circuito?",
+                options: [
+                    "Passando uma fase diferente para cada tecla.",
+                    "Efetuando um 'jump' (ponte) do condutor de fase entre os dois bornes de entrada.",
+                    "Ligando Fase e Neutro juntos no mesmo interruptor.",
+                    "Não é necessário levar a fase até este tipo de interruptor."
+                ],
+                answer: "Efetuando um 'jump' (ponte) do condutor de fase entre os dois bornes de entrada.",
+                rationale: "Para alimentar ambas as teclas com o mesmo circuito, utiliza-se um pequeno pedaço de fio (ponte ou 'jump') derivando o condutor de Fase para o borne de entrada da segunda tecla."
+            },
+            {
+                tag: "Proteção e QD",
+                q: "10. Qual dispositivo do Quadro de Distribuição é responsável por proteger as pessoas contra choques elétricos e possui um botão de teste periódico?",
+                options: [
+                    "Disjuntor Geral Monofásico.",
+                    "Dispositivo de Proteção contra Surtos (DPS).",
+                    "Barramento de Cobre Nu.",
+                    "Interruptor Diferencial Residual (DR)."
+                ],
+                answer: "Interruptor Diferencial Residual (DR).",
+                rationale: "O dispositivo DR mede a diferença entre a corrente que entra e que sai. Se houver fuga (por exemplo, através do corpo humano), ele desarma em milissegundos, salvando vidas."
+            },
+            {
+                tag: "Interruptores Especializados",
+                q: "11. Em quais situações o uso do interruptor SIMPLES BIPOLAR é tecnicamente obrigatório?",
+                options: [
+                    "Quando a lâmpada é comandada a partir de 3 ou mais pontos.",
+                    "Quando a lâmpada é alimentada em 220V por duas Fases (circuito bifásico sem neutro).",
+                    "Quando se deseja economizar condutores na infraestrutura.",
+                    "Apenas para acionamento de lâmpadas com tecnologia LED."
+                ],
+                answer: "Quando a lâmpada é alimentada em 220V por duas Fases (circuito bifásico sem neutro).",
+                rationale: "Em sistemas bifásicos (Fase-Fase), ambas as fases possuem potencial elétrico. O interruptor bipolar secciona simultaneamente as duas fases, garantindo que a luminária fique completamente desenergizada."
+            },
+            {
+                tag: "Sensores e Automação",
+                q: "12. Em um Sensor de Presença residencial padrão de 3 fios, quais são as funções técnicas de cada condutor?",
+                options: [
+                    "Fase, Neutro e Retorno",
+                    "Fase, Fase e Terra",
+                    "Fase, Neutro e Terra",
+                    "Retorno, Retorno e Neutro"
+                ],
+                answer: "Fase, Neutro e Retorno",
+                rationale: "O sensor de 3 fios necessita de alimentação contínua para seu circuito eletrônico interno (Fase + Neutro) e disponibiliza um terceiro fio (Retorno) para acionar a lâmpada quando detecta movimento."
+            },
+            {
+                tag: "Circuitos Especiais",
+                q: "13. Para controlar uma mesma lâmpada a partir de TRÊS ou mais pontos diferentes, qual tipo de interruptor deve ser adicionado entre os dois paralelos?",
+                options: [
+                    "Simples",
+                    "Bipolar",
+                    "Intermediário (Four-way)",
+                    "Diferencial"
+                ],
+                answer: "Intermediário (Four-way)",
+                rationale: "O interruptor Intermediário (Four-way) é instalado obrigatoriamente entre dois interruptores paralelos (Three-way). Pode-se adicionar quantos intermediários forem necessários para criar $N$ pontos de comando."
+            },
+            {
+                tag: "Lâmpadas e Bocais",
+                q: "14. Na conexão do bocal/receptáculo da lâmpada, o condutor NEUTRO deve ser ligado preferencialmente em qual borne?",
+                options: [
+                    "No pino central (contato de fundo).",
+                    "Na parte roscada (contato lateral).",
+                    "Em qualquer um dos bornes, pois não há diferença.",
+                    "No conector de fiação de proteção (terra)."
+                ],
+                answer: "Na parte roscada (contato lateral).",
+                rationale: "Ligar o Neutro no contato rosqueado da rosca evita riscos de choque acidental se uma pessoa tocar a rosca metálica da lâmpada enquanto a rosqueia na tomada/bocal."
+            },
+            {
+                tag: "Lâmpadas e Bocais",
+                q: "15. Qual condutor deve ser obrigatoriamente conectado ao contato CENTRAL (pino de fundo) do bocal da lâmpada?",
+                options: [
+                    "Neutro",
+                    "Terra",
+                    "Retorno",
+                    "Fase Direta"
+                ],
+                answer: "Retorno",
+                rationale: "O condutor de Retorno é conectado ao pino central do bocal. Como ele só recebe energia quando o interruptor é acionado, garante maior segurança elétrica durante manutenções."
+            }
+        ];
+
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
+
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
+
+                qData.options.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText.replace(/"/g, '&quot;')}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-blue-100 group-hover:text-blue-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-blue-50 text-blue-600 font-semibold text-xs rounded-md uppercase tracking-wider">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de ${quizQuestions.length}</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
             });
 
-            // Mostrar a correta em verde sempre
-            document.getElementById(`opt-${qIdx}-${item.correct}`).classList.add('correct');
-
-            if (selected) {
-                const answer = parseInt(selected.value);
-                if (answer === item.correct) {
-                    score++;
-                } else {
-                    // Se errou, marca a selecionada de vermelho
-                    document.getElementById(`opt-${qIdx}-${answer}`).classList.add('incorrect');
-                }
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
             }
-        });
+        }
 
-        // Sumário final
-        const summary = document.getElementById('score-summary');
-        summary.style.display = 'block';
-        summary.innerHTML = `Resultado: Acertou ${score} de ${quizData.length}`;
-        summary.style.backgroundColor = score >= 11 ? '#d4edda' : '#f8d7da';
-        summary.style.color = score >= 11 ? '#155724' : '#721c24';
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
 
-        // Desativar botão após finalizar
-        document.getElementById('btn-finish').disabled = true;
-        document.getElementById('btn-finish').innerText = "Avaliação Concluída";
-        document.getElementById('btn-finish').style.background = "#6c757d";
-        
-        window.scrollTo(0, 0);
-    }
-</script>
+            // Desativar botões dessa questão
+            buttons.forEach(btn => { btn.disabled = true; });
+            
+            questionsAnswered++;
+            if (isCorrect) { correctAnswersCount++; }
+            updateProgressBar();
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
 
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
+            } else {
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
+                
+                // Destacar a resposta correta para o usuário aprender
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+            }
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([feedbackElement]);
+            }
+            
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
+            }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
+        }
+
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const totalCountSpan = document.getElementById('total-count-span');
+            const finalMessageDiv = document.getElementById('final-message');
+            const scoreIcon = document.getElementById('score-icon');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            totalCountSpan.textContent = quizQuestions.length;
+            scoreCard.classList.remove('hidden');
+
+            const percentage = (correctAnswersCount / quizQuestions.length) * 100;
+
+            if (percentage >= 85) {
+                scoreIcon.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Você domina completamente a interligação de componentes elétricos, normas NBR 5410 e dispositivos de proteção no QD.";
+            } else if (percentage >= 60) {
+                scoreIcon.className = "w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-blue-50 text-blue-800 border border-blue-200";
+                finalMessageDiv.textContent = "Bom trabalho! Você demonstra uma boa compreensão de diagramas e ligações práticas de interruptores e quadro de distribuição.";
+            } else {
+                scoreIcon.className = "w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Atenção necessária: Revise os conceitos sobre condutor de Fase no interruptor, função do DR/DTM e esquemas de ligação em paralelo/intermediário.";
+            }
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
 </body>
 </html>

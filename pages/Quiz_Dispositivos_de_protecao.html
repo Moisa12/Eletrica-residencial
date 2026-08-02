@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Dispositivos de Proteção Elétrica</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .option-card {
+            transition: all 0.15s ease-in-out;
+        }
+        .option-card:not([disabled]):hover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+            transform: translateY(-1px);
+        }
+        .correct-answer {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
+        }
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+        }
+        .incorrect-answer {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            font-weight: 600;
+        }
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+
+    <div class="max-w-3xl w-full space-y-6">
+        
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
+            
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Quiz: Dispositivos de Proteção
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Testes seus conhecimentos sobre a especificação e funcionamento de Disjuntores Termomagnéticos, DR e DPS.
+            </p>
+
+            <!-- BARRA DE PROGRESSO E STATUS -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span>10 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 10
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-blue-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </header>
+
+        <!-- ALERTA COM LINK PARA A IMAGEM -->
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start space-x-3 text-amber-900 shadow-sm">
+            <div class="p-1 bg-amber-100 rounded-lg text-amber-700 flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="text-xs sm:text-sm leading-relaxed">
+                <span class="font-bold text-amber-950 block mb-0.5">Apoio Visual & Esquema Técnico:</span>
+                Precisa de uma revisão antes de responder? Acesse a 
+                <a href="../images/dispositivos_protecao_quiz.png" target="_blank" class="font-semibold underline text-amber-800 hover:text-amber-950 inline-flex items-center gap-1">
+                    imagem ilustrativa dos dispositivos
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a> 
+                para reforçar os conceitos.
+            </div>
+        </div>
+
+        <!-- ÁREA DOS CARDS DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Resultado Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-blue-600 text-xl">0</span> de 10 perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                tag: "Disjuntor",
+                q: "1. Qual é a principal função de um Disjuntor Termomagnético em um circuito elétrico?",
+                options: [
+                    "Proteger contra choques elétricos por contato direto.",
+                    "Proteger os fios e cabos contra sobrecargas e curto-circuitos.",
+                    "Proteger equipamentos contra surtos atmosféricos (raios).",
+                    "Estabilizar a tensão da rede elétrica."
+                ],
+                answer: "Proteger os fios e cabos contra sobrecargas e curto-circuitos.",
+                rationale: "O disjuntor possui dois disparadores: o térmico (atua na sobrecarga lenta) e o magnético (atua no curto-circuito instantâneo)."
+            },
+            {
+                tag: "DR",
+                q: "2. O dispositivo DR (Diferencial Residual) de alta sensibilidade é obrigatório para:",
+                options: [
+                    "Apenas circuitos de iluminação de salas de estar.",
+                    "Circuitos que alimentam tomadas em áreas molhadas (cozinhas, banheiros, áreas externas).",
+                    "Proteção exclusiva de motores trifásicos contra falta de fase.",
+                    "Substituir o disjuntor termomagnético em todas as funções."
+                ],
+                answer: "Circuitos que alimentam tomadas em áreas molhadas (cozinhas, banheiros, áreas externas).",
+                rationale: "Segundo a NBR 5410, o DR é obrigatório em áreas onde o risco de choque elétrico é maior devido à presença de umidade."
+            },
+            {
+                tag: "DPS",
+                q: "3. O DPS (Dispositivo de Proteção contra Surtos) atua protegendo a instalação contra:",
+                options: [
+                    "Sobrecargas causadas por excesso de aparelhos ligados.",
+                    "Fugas de corrente para a terra.",
+                    "Picos de tensão (transientes) causados por raios ou manobras da rede.",
+                    "Quedas de energia (apagões)."
+                ],
+                answer: "Picos de tensão (transientes) causados por raios ou manobras da rede.",
+                rationale: "O DPS 'desvia' a energia excessiva de um surto para o sistema de aterramento, impedindo que ela queime os aparelhos eletrônicos."
+            },
+            {
+                tag: "Curvas de Disparo",
+                q: "4. Um Disjuntor de 'Curva B' é mais indicado para quais tipos de cargas?",
+                options: [
+                    "Cargas indutivas com alta corrente de partida, como motores.",
+                    "Cargas predominantemente resistivas, como chuveiros e lâmpadas incandescentes.",
+                    "Grandes transformadores industriais.",
+                    "Apenas para circuitos de baixa tensão contínua (VDC)."
+                ],
+                answer: "Cargas predominantemente resistivas, como chuveiros e lâmpadas incandescentes.",
+                rationale: "A Curva B dispara com correntes de curto-circuito entre 3 a 5 vezes a nominal, sendo ideal para cargas sem picos de partida."
+            },
+            {
+                tag: "DR",
+                q: "5. Para proteção de seres humanos contra choques elétricos perigosos, o DR deve ter uma corrente nominal residual ($I_{\\Delta n}$) de no máximo:",
+                options: [
+                    "10 mA",
+                    "30 mA",
+                    "300 mA",
+                    "500 mA"
+                ],
+                answer: "30 mA",
+                rationale: "O valor de 30 mA é o limite de segurança estabelecido para evitar a fibrilação ventricular no coração humano em caso de choque."
+            },
+            {
+                tag: "DPS",
+                q: "6. Qual a classe de um DPS instalado no quadro geral de entrada, em locais sujeitos a incidência direta de raios?",
+                options: [
+                    "Classe I",
+                    "Classe II",
+                    "Classe III",
+                    "Classe IV"
+                ],
+                answer: "Classe I",
+                rationale: "O DPS Classe I é projetado para drenar correntes parciais de raios diretos. A Classe II atua contra surtos indiretos e a Classe III é para proteção fina junto ao equipamento."
+            },
+            {
+                tag: "Segurança",
+                q: "7. O que acontece se um circuito tiver apenas Disjuntor e não tiver DR em caso de uma fuga de corrente (fio energizado na carcaça metálica)?",
+                options: [
+                    "O disjuntor sempre desliga imediatamente.",
+                    "O disjuntor só desligará se a fuga for grande o suficiente para ser um curto-circuito; caso contrário, a carcaça ficará energizada.",
+                    "O disjuntor detecta a fuga térmica e desarma por sobrecarga.",
+                    "O DPS assumirá a função de desligar o circuito."
+                ],
+                answer: "O disjuntor só desligará se a fuga for grande o suficiente para ser um curto-circuito; caso contrário, a carcaça ficará energizada.",
+                rationale: "O disjuntor comum não detecta pequenas fugas de corrente (como 100mA ou 500mA), que já são fatais para humanos. Por isso o DR é indispensável."
+            },
+            {
+                tag: "DPS",
+                q: "8. Em um DPS, o que indica que ele chegou ao fim de sua vida útil e precisa ser substituído?",
+                options: [
+                    "Ele começa a emitir um sinal sonoro.",
+                    "O disjuntor geral desarma toda vez que o DPS atua.",
+                    "A bandeirola ou sinalizador frontal muda de cor (geralmente de verde para vermelho).",
+                    "A tensão da casa sobe para 380V."
+                ],
+                answer: "A bandeirola ou sinalizador frontal muda de cor (geralmente de verde para vermelho).",
+                rationale: "O DPS possui componentes internos (varistores) que degradam após absorver picos de surto. O sinalizador mecânico indica visualmente sua queima."
+            },
+            {
+                tag: "Curvas de Disparo",
+                q: "9. Um Disjuntor de 'Curva C' é comumente aplicado em:",
+                options: [
+                    "Apenas iluminação LED simples.",
+                    "Circuitos com cargas indutivas médias, como motores de ar-condicionado e máquinas de lavar.",
+                    "Somente em subestações de alta tensão.",
+                    "Aparelhos hospitalares de emergência."
+                ],
+                answer: "Circuitos com cargas indutivas médias, como motores de ar-condicionado e máquinas de lavar.",
+                rationale: "A Curva C tolera picos de corrente moderados (5 a 10 vezes a nominal) sem desarmar indevidamente na partida de motores elétricos."
+            },
+            {
+                tag: "Instalação",
+                q: "10. Qual a forma correta de conectar um DPS na instalação elétrica?",
+                options: [
+                    "Em série com o disjuntor geral, antes da carga.",
+                    "Em paralelo entre a Fase e o Barramento de Terra (PE) ou Neutro.",
+                    "No lugar do condutor de proteção (fio terra).",
+                    "Diretamente dentro das tomadas de uso geral."
+                ],
+                answer: "Em paralelo entre a Fase e o Barramento de Terra (PE) ou Neutro.",
+                rationale: "O DPS funciona em paralelo como um divisor de alta impedância. Em condições normais é um circuito aberto, mas ao detectar o surto, cria um caminho direto à terra."
+            }
+        ];
+
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
+
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
+                const shuffledOptions = shuffleArray([...qData.options]);
+
+                shuffledOptions.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-blue-100 group-hover:text-blue-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 font-semibold text-xs rounded-md">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de 10</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
+            });
+
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([quizArea]);
+            }
+        }
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            buttons.forEach(btn => { btn.disabled = true; });
+            
+            if (!selectedButton.classList.contains('incorrect-answer') && !selectedButton.classList.contains('correct-answer')) {
+                questionsAnswered++;
+                if (isCorrect) { correctAnswersCount++; }
+                updateProgressBar();
+            }
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
+            } else {
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
+                
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+            }
+
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([feedbackElement, optionsContainer]);
+            }
+            
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
+            }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
+        }
+
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const finalMessageDiv = document.getElementById('final-message');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            scoreCard.classList.remove('hidden');
+
+            if (correctAnswersCount === 10) {
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Domínio completo dos dispositivos de proteção e especificações técnicas NBR 5410!";
+            } else if (correctAnswersCount >= 7) {
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-blue-50 text-blue-800 border border-blue-200";
+                finalMessageDiv.textContent = "Bom trabalho! Você compreende bem os fundamentos de disjuntores, DRs e DPS.";
+            } else {
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Atenção aos detalhes técnicos. Vale a pena revisar as funções de cada dispositivo antes de realizar novas instalações.";
+            }
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

@@ -1,441 +1,372 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz: Segurança em Eletricidade</title>
-    <!-- Incluindo Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
     <style>
-        /* Configuração de fonte global e cores base */
-        :root {
-            --primary-color: #ef4444; /* red-500 */
-            --text-color: #1f2937; /* gray-800 */
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* gray-100 */
-            color: var(--text-color);
         }
-        /* Estilos de Botão Personalizados */
-        .quiz-button {
-            transition: all 0.2s;
-            cursor: pointer;
-            border-width: 2px;
+        .option-card {
+            transition: all 0.15s ease-in-out;
         }
-        .quiz-button:hover:not([disabled]) {
+        .option-card:not([disabled]):hover {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
             transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        /* Estilo para opção correta/incorreta */
         .correct-answer {
-            background-color: #d1fae5 !important; /* green-100 */
-            border-color: #10b981 !important; /* green-500 */
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
             font-weight: 600;
+        }
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
         }
         .incorrect-answer {
-            background-color: #fee2e2 !important; /* red-100 */
-            border-color: #ef4444 !important; /* red-500 */
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
             font-weight: 600;
+        }
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
         }
     </style>
 </head>
-<body class="antialiased flex items-center justify-center min-h-screen p-4">
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
-    <!-- 1. Conteúdo Principal do Quiz (Card Centralizado) -->
-    <div id="quiz-container" class="w-full max-w-3xl bg-white p-6 sm:p-10 rounded-2xl shadow-xl border border-red-200">
+    <div class="max-w-3xl w-full space-y-6">
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
 
-        <!-- Título do Quiz -->
-        <header class="text-center mb-8 border-b pb-4">
-            <h1 class="text-3xl sm:text-4xl font-black text-red-600">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 Quiz: Segurança em Eletricidade
             </h1>
-            <p class="text-gray-500 text-sm mt-2">Teste seu conhecimento sobre NR10, DR e Boas Práticas.</p>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Teste seu conhecimento sobre a NR 10, Dispositivo DR, Procedimentos LOTO e Boas Práticas de Segurança.
+            </p>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                    <span id="total-questions-count">10 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 10
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
+            </div>
         </header>
 
-        <!-- Seção de Questões/Resultados -->
-        <div id="quiz-content">
-            <!-- As questões e o resultado final serão injetados aqui pelo JavaScript -->
-            <p class="text-center text-gray-500">Carregando quiz...</p>
-        </div>
+        <!-- ÁREA DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div id="score-icon" class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Desempenho Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-indigo-600 text-2xl">0</span> de <span id="total-count-span">10</span> perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
 
     </div>
 
-    <!-- 2. Estrutura de Dados e Lógica do Quiz (JavaScript) -->
     <script>
-        // Dados do Quiz
-        const quizData = [
+        const quizQuestions = [
             {
-                questionNumber: 1,
-                question: "Qual é a função principal do Dispositivo Diferencial Residual (DR) em uma instalação elétrica?",
-                hint: "Pense no que causa o choque elétrico e qual dispositivo foi criado especificamente para proteger contra isso.",
-                answerOptions: [
-                    { text: "Proteger os equipamentos contra sobrecargas e curtos-circuitos.", rationale: "Essa é a função primária do disjuntor termomagnético, e não do DR.", isCorrect: false },
-                    { text: "Proteger as pessoas contra choques elétricos por detectar fugas de corrente.", rationale: "O DR mede o desequilíbrio entre a corrente de entrada e saída, indicando uma fuga (geralmente através de uma pessoa), e desarma o circuito rapidamente.", isCorrect: true },
-                    { text: "Interromper o circuito apenas quando a tensão está muito alta.", rationale: "Dispositivos de proteção contra sobretensão são específicos para essa função.", isCorrect: false },
-                    { text: "Fornecer um caminho de baixa resistência para descargas atmosféricas.", rationale: "Essa é a função principal do sistema de aterramento (SPDA) e não do DR.", isCorrect: false }
-                ]
+                tag: "Proteção DR",
+                q: "1. Qual é a função principal do Dispositivo Diferencial Residual (DR) em uma instalação elétrica?",
+                options: [
+                    "Proteger os equipamentos contra sobrecargas e curtos-circuitos.",
+                    "Proteger as pessoas contra choques elétricos por detectar fugas de corrente.",
+                    "Interromper o circuito apenas quando a tensão está muito alta.",
+                    "Fornecer um caminho de baixa resistência para descargas atmosféricas."
+                ],
+                answer: "Proteger as pessoas contra choques elétricos por detectar fugas de corrente.",
+                rationale: "O DR mede o desequilíbrio entre a corrente de entrada e saída, indicando uma fuga (geralmente através de uma pessoa), e desarma o circuito rapidamente."
             },
             {
-                questionNumber: 2,
-                question: "De acordo com a NBR 5410, em qual dos locais listados abaixo o uso do DR é obrigatório?",
-                hint: "A obrigatoriedade do DR está ligada a ambientes com maior probabilidade de exposição à umidade ou áreas externas.",
-                answerOptions: [
-                    { text: "Apenas em circuitos de iluminação em salas de estar.", rationale: "Não é uma área molhada, portanto o uso do DR não é universalmente obrigatório aqui.", isCorrect: false },
-                    { text: "Em todos os circuitos de tomada de uso geral (TUG) em quartos.", rationale: "Embora seja recomendado, não é um requisito obrigatório para TUGs em áreas secas.", isCorrect: false },
-                    { text: "Circuitos que sirvam a pontos de utilização em banheiros, cozinhas e áreas de serviço.", rationale: "A NBR 5410 exige o DR em áreas molhadas (banheiros, cozinhas, áreas de serviço e externas) para proteção contra choques.", isCorrect: true },
-                    { text: "Circuitos que alimentam apenas motores de baixa potência (até 1 CV).", rationale: "A obrigatoriedade depende do local de instalação, não da potência ou tipo de carga.", isCorrect: false }
-                ]
+                tag: "NBR 5410",
+                q: "2. De acordo com a NBR 5410, em qual dos locais listados abaixo o uso do DR é obrigatório?",
+                options: [
+                    "Apenas em circuitos de iluminação em salas de estar.",
+                    "Em todos os circuitos de tomada de uso geral (TUG) em quartos.",
+                    "Circuitos que sirvam a pontos de utilização em banheiros, cozinhas e áreas de serviço.",
+                    "Circuitos que alimentam apenas motores de baixa potência (até 1 CV)."
+                ],
+                answer: "Circuitos que sirvam a pontos de utilização em banheiros, cozinhas e áreas de serviço.",
+                rationale: "A NBR 5410 exige o DR em áreas molhadas (banheiros, cozinhas, áreas de serviço e externas) para proteção contra choques."
             },
             {
-                questionNumber: 3,
-                question: "Qual é o principal objetivo da Norma Regulamentadora 10 (NR 10)?",
-                hint: "A NR 10 é uma norma do Ministério do Trabalho e Emprego, focada em um aspecto específico do ambiente de trabalho.",
-                answerOptions: [
-                    { text: "Apenas definir as especificações técnicas de cabos e disjuntores.", rationale: "Essa é a função das Normas Brasileiras (NBRs) da ABNT, como a NBR 5410.", isCorrect: false },
-                    { text: "Estabelecer requisitos e condições mínimas para garantir a segurança e saúde dos trabalhadores que interagem com eletricidade.", rationale: "A NR 10 foca em medidas de controle e sistemas preventivos para a segurança dos trabalhadores em serviços e instalações elétricas.", isCorrect: true },
-                    { text: "Regular a tensão máxima permitida em instalações industriais.", rationale: "Isso é definido por normas técnicas e concessionárias de energia.", isCorrect: false },
-                    { text: "Estabelecer as regras para construções civis e canteiros de obras.", rationale: "Essa é a função principal da Norma Regulamentadora 18 (NR 18).", isCorrect: false }
-                ]
+                tag: "Norma NR 10",
+                q: "3. Qual é o principal objetivo da Norma Regulamentadora 10 (NR 10)?",
+                options: [
+                    "Apenas definir as especificações técnicas de cabos e disjuntores.",
+                    "Estabelecer requisitos e condições mínimas para garantir a segurança e saúde dos trabalhadores que interagem com eletricidade.",
+                    "Regular a tensão máxima permitida em instalações industriais.",
+                    "Estabelecer as regras para construções civis e canteiros de obras."
+                ],
+                answer: "Estabelecer requisitos e condições mínimas para garantir a segurança e saúde dos trabalhadores que interagem com eletricidade.",
+                rationale: "A NR 10 foca em medidas de controle e sistemas preventivos para a segurança dos trabalhadores em serviços e instalações elétricas."
             },
             {
-                questionNumber: 4,
-                question: "Em relação à gravidade de um choque elétrico, qual fator é considerado o mais perigoso por afetar diretamente o coração?",
-                hint: "A fibrilação ventricular é o maior risco. Pense no que determina se a corrente passa por esse órgão vital.",
-                answerOptions: [
-                    { text: "A cor da vestimenta de segurança do trabalhador.", rationale: "A cor da vestimenta não tem influência na gravidade do choque elétrico.", isCorrect: false },
-                    { text: "O caminho da corrente elétrica que atravessa o corpo (ex: mão a mão ou mão a pé).", rationale: "O caminho da corrente é crucial, pois um trajeto que inclui o coração (como mão a mão) é o mais perigoso.", isCorrect: true },
-                    { text: "O volume de água ingerido pela pessoa no momento do choque.", rationale: "Não há relação direta entre a ingestão de água e a gravidade de um choque elétrico.", isCorrect: false },
-                    { text: "A espessura do isolamento da ferramenta utilizada.", rationale: "A espessura é importante para prevenção, mas não determina a gravidade do choque depois que ele ocorre.", isCorrect: false }
-                ]
+                tag: "Fisiologia do Choque",
+                q: "4. Em relação à gravidade de um choque elétrico, qual fator é considerado o mais perigoso por afetar diretamente o coração?",
+                options: [
+                    "A cor da vestimenta de segurança do trabalhador.",
+                    "O caminho da corrente elétrica que atravessa o corpo (ex: mão a mão ou mão a pé).",
+                    "O volume de água ingerido pela pessoa no momento do choque.",
+                    "A espessura do isolamento da ferramenta utilizada."
+                ],
+                answer: "O caminho da corrente elétrica que atravessa o corpo (ex: mão a mão ou mão a pé).",
+                rationale: "O caminho da corrente é crucial, pois um trajeto que inclui o coração (como mão a mão ou mão ao pé esquerdo) traz elevado risco de fibrilação ventricular."
             },
             {
-                questionNumber: 5,
-                question: "Quem é o trabalhador que, além de ser qualificado ou habilitado, recebeu autorização formal da empresa para intervir em instalações elétricas e passou pelo Curso Básico de NR 10?",
-                hint: "Este profissional possui o nível mais alto de formalização dentro da empresa para execução de serviços.",
-                answerOptions: [
-                    { text: "Trabalhador Qualificado.", rationale: "O qualificado apenas concluiu o curso específico, faltando a autorização formal da empresa e o treinamento NR 10.", isCorrect: false },
-                    { text: "Profissional Habilitado.", rationale: "O habilitado tem registro no conselho de classe, mas a autorização formal da empresa o eleva ao nível de Autorizado.", isCorrect: false },
-                    { text: "Eletricista Leigo.", rationale: "O leigo não possui treinamento ou autorização formal para intervir em instalações elétricas.", isCorrect: false },
-                    { text: "Trabalhador Autorizado.", rationale: "O Trabalhador Autorizado é o profissional que atende aos requisitos de qualificação/habilitação e recebe a permissão formal da empresa após o treinamento da NR 10.", isCorrect: true }
-                ]
+                tag: "Habilitação profissional",
+                q: "5. Quem é o trabalhador que, além de ser qualificado ou habilitado, recebeu autorização formal da empresa para intervir em instalações elétricas e passou pelo Curso Básico de NR 10?",
+                options: [
+                    "Trabalhador Qualificado.",
+                    "Profissional Habilitado.",
+                    "Eletricista Leigo.",
+                    "Trabalhador Autorizado."
+                ],
+                answer: "Trabalhador Autorizado.",
+                rationale: "O Trabalhador Autorizado é o profissional que atende aos requisitos de qualificação/habilitação e recebe a permissão formal da empresa após o treinamento da NR 10."
             },
             {
-                questionNumber: 6,
-                question: "Qual das seguintes ações representa uma prática segura no manuseio de eletrodomésticos no ambiente doméstico?",
-                hint: "Uma das práticas visa preservar a integridade física do cabo de alimentação e do isolamento.",
-                answerOptions: [
-                    { text: "Usar adaptadores (benjamins) para conectar múltiplos aparelhos em uma única tomada.", rationale: "O uso excessivo de benjamins pode sobrecarregar a tomada e a fiação, causando risco de incêndio.", isCorrect: false },
-                    { text: "Consertar fios descascados com fita isolante comum sem desligar o disjuntor.", rationale: "A improvisação e a falta de desenergização aumentam o risco de choque elétrico e incêndio.", isCorrect: false },
-                    { text: "Puxar o plugue pelo corpo plástico ao desconectá-lo da tomada.", rationale: "Puxar o plugue pelo corpo plástico previne danos aos fios internos e ao isolamento do cabo.", isCorrect: true },
-                    { text: "Utilizar ferramentas não isoladas para reparos simples na fiação.", rationale: "Mesmo para reparos simples, o uso de ferramentas isoladas e a desenergização do circuito são essenciais.", isCorrect: false }
-                ]
+                tag: "Uso Doméstico",
+                q: "6. Qual das seguintes ações representa uma prática segura no manuseio de eletrodomésticos no ambiente doméstico?",
+                options: [
+                    "Usar adaptadores (benjamins) para conectar múltiplos aparelhos em uma única tomada.",
+                    "Consertar fios descascados com fita isolante comum sem desligar o disjuntor.",
+                    "Puxar o plugue pelo corpo plástico ao desconectá-lo da tomada.",
+                    "Utilizar ferramentas não isoladas para reparos simples na fiação."
+                ],
+                answer: "Puxar o plugue pelo corpo plástico ao desconectá-lo da tomada.",
+                rationale: "Puxar o plugue pelo corpo plástico evita esforço mecânico sobre os fios internos e preserva a integridade do isolamento do cabo."
             },
             {
-                questionNumber: 7,
-                question: "Qual é o primeiro passo obrigatório no Procedimento de Desenergização (LOTO - Cinco Regras de Ouro) antes de iniciar um trabalho em uma instalação elétrica?",
-                hint: "Antes de qualquer verificação ou bloqueio, a fonte de energia deve ser removida.",
-                answerOptions: [
-                    { text: "Constatação da Ausência de Tensão (CAT).", rationale: "A CAT é o terceiro passo, realizado após o seccionamento e o impedimento de reenergização.", isCorrect: false },
-                    { text: "Seccionamento (Desligar ou abrir o circuito).", rationale: "O Seccionamento é a primeira e fundamental ação para isolar o circuito da fonte de energia.", isCorrect: true },
-                    { text: "Instalação do Aterramento Temporário.", rationale: "O aterramento temporário é o quarto passo, garantindo que o circuito permaneça em potencial zero.", isCorrect: false },
-                    { text: "Proteção dos Elementos Vivos Vizinhos.", rationale: "A proteção é um passo importante, mas não o primeiro no processo de desenergização.", isCorrect: false }
-                ]
+                tag: "Desenergização / LOTO",
+                q: "7. Qual é o primeiro passo obrigatório no Procedimento de Desenergização (Cinco Regras de Ouro da NR 10) antes de iniciar um trabalho em uma instalação elétrica?",
+                options: [
+                    "Constatação da Ausência de Tensão (CAT).",
+                    "Seccionamento (Desligar ou abrir o circuito).",
+                    "Instalação do Aterramento Temporário.",
+                    "Proteção dos Elementos Vivos Vizinhos."
+                ],
+                answer: "Seccionamento (Desligar ou abrir o circuito).",
+                rationale: "O Seccionamento é o primeiro passo e consiste em seccionar de forma efetiva o circuito ou equipamento das fontes de energia elétrica."
             },
             {
-                questionNumber: 8,
-                question: "Em relação à segurança elétrica em Canteiros de Obras (NR 18), qual prática é considerada um risco amplificado e deve ser evitada?",
-                hint: "Canteiros de obras frequentemente têm tráfego de pessoas e máquinas; pense no que torna a fiação vulnerável.",
-                answerOptions: [
-                    { text: "Deixar cabos ou extensões expostos no chão, sujeitos a danos.", rationale: "Cabos no chão aumentam o risco de danos mecânicos, curtos-circuitos e choques em um ambiente já perigoso.", isCorrect: true },
-                    { text: "Usar painéis de distribuição (QDC) identificados e trancados.", rationale: "Manter painéis fechados e trancados é uma boa prática de segurança.", isCorrect: false },
-                    { text: "Inspecionar o estado de cabos antes de usar ferramentas elétricas.", rationale: "A inspeção antes do uso é uma prática essencial de segurança.", isCorrect: false },
-                    { text: "Suspender eletrodutos para proteger a fiação.", rationale: "A suspensão ou o uso de eletrodutos é uma medida de proteção contra danos mecânicos.", isCorrect: false }
-                ]
+                tag: "Canteiro de Obras",
+                q: "8. Em relação à segurança elétrica em Canteiros de Obras (NR 18 / NR 10), qual prática é considerada um risco amplificado e deve ser evitada?",
+                options: [
+                    "Deixar cabos ou extensões expostos no chão, sujeitos a danos mecânicos e umidade.",
+                    "Usar painéis de distribuição (QDC) identificados e trancados.",
+                    "Inspecionar o estado de cabos antes de usar ferramentas elétricas.",
+                    "Suspender eletrodutos e cabos para proteger a fiação."
+                ],
+                answer: "Deixar cabos ou extensões expostos no chão, sujeitos a danos mecânicos e umidade.",
+                rationale: "Cabos no chão em canteiros de obras ficam expostos ao tráfego de máquinas, água e pisoteio, aumentando os riscos de curtos e choques."
             },
             {
-                questionNumber: 9,
-                question: "O que acontece com a resistência do corpo humano ao toque em condutores elétricos quando a pele está molhada ou ferida?",
-                hint: "Lembre-se que a água é um condutor, e a resistência da pele é a principal defesa do corpo.",
-                answerOptions: [
-                    { text: "A resistência aumenta, diminuindo o risco de choque elétrico.", rationale: "A umidade ou feridas na pele diminuem a resistência, aumentando o risco.", isCorrect: false },
-                    { text: "A resistência não se altera, pois depende apenas da tensão.", rationale: "A resistência depende da condição da pele, do caminho da corrente e da área de contato, não apenas da tensão.", isCorrect: false },
-                    { text: "A resistência diminui drasticamente, aumentando a intensidade da corrente e o perigo de lesão fatal.", rationale: "A pele molhada ou ferida oferece um caminho de baixa resistência, o que permite a passagem de uma corrente mais intensa, tornando o choque mais perigoso.", isCorrect: true },
-                    { text: "A resistência se torna infinita, interrompendo a corrente.", rationale: "Isso é impossível em contato com a eletricidade.", isCorrect: false }
-                ]
+                tag: "Resistência Corporal",
+                q: "9. O que acontece com a resistência elétrica do corpo humano ao toque em condutores quando a pele está molhada ou ferida?",
+                options: [
+                    "A resistência aumenta, diminuindo o risco de choque elétrico.",
+                    "A resistência não se altera, pois depende apenas da tensão aplicada.",
+                    "A resistência diminui drasticamente, aumentando a intensidade da corrente e o perigo de lesão fatal.",
+                    "A resistência se torna infinita, interrompendo a passagem de corrente."
+                ],
+                answer: "A resistência diminui drasticamente, aumentando a intensidade da corrente e o perigo de lesão fatal.",
+                rationale: "A umidade e ferimentos rompem a camada córnea da pele (maior barreira de isolamento do corpo), reduzindo a resistência elétrica corporal ($R$) e aumentando drasticamente a corrente ($I = U/R$)."
             },
             {
-                questionNumber: 10,
-                question: "Qual a diferença crucial entre um Trabalhador Qualificado e um Trabalhador Habilitado, conforme a NR 10?",
-                hint: "Pense na necessidade de formalização legal da profissão fora da empresa.",
-                answerOptions: [
-                    { text: "O Habilitado pode trabalhar com alta tensão, o Qualificado não.", rationale: "Ambos podem trabalhar em instalações elétricas, mas o trabalho com Alta Tensão (AT) exige o treinamento complementar do SEP.", isCorrect: false },
-                    { text: "O Habilitado deve ter registro no conselho de classe (CREA/CFT), o Qualificado apenas concluiu o curso específico.", rationale: "O Habilitado possui registro no conselho de classe (Engenheiro ou Técnico com registro), o que o distingue legalmente do Qualificado.", isCorrect: true },
-                    { text: "O Qualificado só pode atuar em áreas secas, o Habilitado em áreas molhadas.", rationale: "A área de atuação é definida pela autorização da empresa e procedimentos, não pela qualificação ou habilitação em si.", isCorrect: false },
-                    { text: "O Qualificado pode supervisionar, o Habilitado só executa.", rationale: "A responsabilidade de supervisão geralmente recai sobre o Habilitado, devido ao seu registro profissional.", isCorrect: false }
-                ]
+                tag: "Qualificação NR 10",
+                q: "10. Qual a diferença crucial entre um Trabalhador Qualificado e um Trabalhador Habilitado, conforme a NR 10?",
+                options: [
+                    "O Habilitado pode trabalhar com alta tensão, o Qualificado não.",
+                    "O Habilitado deve ter registro no conselho de classe (CREA/CFT), enquanto o Qualificado apenas concluiu o curso específico formal.",
+                    "O Qualificado só pode atuar em áreas secas, o Habilitado em áreas molhadas.",
+                    "O Qualificado pode supervisionar instalações, o Habilitado só executa."
+                ],
+                answer: "O Habilitado deve ter registro no conselho de classe (CREA/CFT), enquanto o Qualificado apenas concluiu o curso específico formal.",
+                rationale: "O profissional Habilitado é aquele previamente qualificado e que possui registro competente no conselho de classe profissional correspondente."
             }
         ];
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let quizCompleted = false;
-        let selectedOptionData = null; // Armazena o objeto de dados da opção selecionada
-        let selectedOptionElement = null; // Armazena o elemento DOM do botão selecionado
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
 
-        const quizContent = document.getElementById('quiz-content');
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
 
-        // Função para embaralhar um array (Fisher-Yates)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                qData.options.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText.replace(/"/g, '&quot;')}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-indigo-100 group-hover:text-indigo-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 font-semibold text-xs rounded-md uppercase tracking-wider">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de ${quizQuestions.length}</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
+            });
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
             }
         }
 
-        // Função principal para exibir a questão
-        function displayQuestion() {
-            if (quizCompleted) return;
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
 
-            const qData = quizData[currentQuestionIndex];
-            selectedOptionData = null; 
-            selectedOptionElement = null;
-
-            // Embaralha as opções para cada pergunta
-            // Criamos uma cópia do array para embaralhar
-            const currentOptions = [...qData.answerOptions]; 
-            shuffleArray(currentOptions);
-
-            const optionsHtml = currentOptions.map((option, index) => `
-                <button
-                    class="quiz-button w-full text-left p-4 mb-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 hover:bg-red-50"
-                    data-index="${index}"
-                    data-option-text="${option.text.replace(/"/g, '&quot;')}"
-                    onclick="selectOption(this)"
-                >
-                    ${option.text}
-                </button>
-            `).join('');
+            buttons.forEach(btn => { btn.disabled = true; });
             
-            // Define o texto do botão 'Próxima Questão' de volta ao padrão
-            const nextButtonText = currentQuestionIndex === quizData.length - 1 
-                ? 'Verifique sua pontuação!' 
-                : 'Próxima Questão';
+            questionsAnswered++;
+            if (isCorrect) { correctAnswersCount++; }
+            updateProgressBar();
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
 
-
-            quizContent.innerHTML = `
-                <div id="question-card" class="mb-6">
-                    <p class="text-sm font-semibold text-red-500 mb-2">
-                        Questão ${qData.questionNumber} de ${quizData.length}
-                    </p>
-                    <h2 class="text-xl font-bold mb-6 text-gray-800">
-                        ${qData.question}
-                    </h2>
-                </div>
-
-                <div id="options-container" class="space-y-3">
-                    ${optionsHtml}
-                </div>
-
-                <div id="feedback-area" class="mt-6 hidden">
-                    <p id="feedback-message" class="text-lg font-bold mb-3"></p>
-                    <div id="rationale-box" class="p-4 rounded-lg border-l-4">
-                        <p class="font-semibold mb-1">Explicação:</p>
-                        <p id="rationale-text" class="text-sm"></p>
-                    </div>
-                </div>
-
-                <div class="mt-8 flex justify-between items-center">
-                    <button id="hint-button" class="text-sm text-red-600 hover:text-red-800 transition duration-150" onclick="showHint('${qData.hint}')">
-                        Ver Dica
-                    </button>
-                    <button id="submit-button" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-150 opacity-50 cursor-not-allowed" onclick="submitAnswer()" disabled>
-                        Verificar Resposta
-                    </button>
-                    <button id="next-button" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-150 hidden" onclick="nextQuestion()">
-                        Próxima Questão
-                    </button>
-                </div>
-            `;
-            // Isso garante que, se voltarmos de um estado final, o texto do botão "Próxima Questão" esteja correto para a próxima pergunta.
-            if (currentQuestionIndex === quizData.length - 1) {
-                document.getElementById('next-button').textContent = 'Verifique sua pontuação!';
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
             } else {
-                document.getElementById('next-button').textContent = 'Próxima Questão';
-            }
-        }
-
-        // Seleção de opção
-        function selectOption(button) {
-            const submitButton = document.getElementById('submit-button');
-
-            // 1. Evita seleção se a resposta já foi submetida
-            if (submitButton.classList.contains('hidden')) {
-                return;
-            }
-
-            // 2. Remove seleção de todos os botões
-            document.querySelectorAll('#options-container button').forEach(btn => {
-                btn.classList.remove('ring-2', 'ring-red-500', 'border-red-500');
-            });
-            
-            // 3. Adiciona seleção ao botão clicado
-            button.classList.add('ring-2', 'ring-red-500', 'border-red-500');
-            selectedOptionElement = button;
-            
-            // 4. Determina a opção selecionada a partir dos dados (Texto é o identificador seguro)
-            const selectedText = button.getAttribute('data-option-text');
-            const qData = quizData[currentQuestionIndex];
-            selectedOptionData = qData.answerOptions.find(opt => opt.text === selectedText);
-
-            // 5. Ativa o botão de submissão
-            submitButton.disabled = false;
-            submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        }
-
-        // Submissão de resposta
-        function submitAnswer() {
-            if (!selectedOptionData || !selectedOptionElement) return;
-
-            const submitButton = document.getElementById('submit-button');
-            const nextButton = document.getElementById('next-button'); // Adicionado para referência fácil
-            const qData = quizData[currentQuestionIndex];
-            const options = document.querySelectorAll('#options-container button');
-            const feedbackArea = document.getElementById('feedback-area');
-            const rationaleBox = document.getElementById('rationale-box');
-            const feedbackMessage = document.getElementById('feedback-message');
-            const rationaleText = document.getElementById('rationale-text');
-
-            // Desativa o botão de submissão e todos os botões de opção
-            submitButton.disabled = true;
-            options.forEach(btn => {
-                btn.disabled = true;
-                btn.classList.remove('hover:bg-red-50');
-            });
-
-            // Encontrar o elemento DOM da opção correta
-            let correctOptionElement = null;
-            const correctOptionData = qData.answerOptions.find(opt => opt.isCorrect);
-
-            options.forEach(btn => {
-                if (btn.getAttribute('data-option-text') === correctOptionData.text) {
-                    correctOptionElement = btn;
-                }
-            });
-
-
-            // 1. Verifica se está correta
-            if (selectedOptionData.isCorrect) {
-                score++;
-                feedbackMessage.textContent = "Correto! Excelente trabalho.";
-                feedbackMessage.className = 'text-lg font-bold mb-3 text-green-600';
-                rationaleBox.className = 'p-4 rounded-lg border-l-4 bg-green-50 border-green-500';
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
                 
-                // Marca a resposta selecionada como correta (caso o usuário tenha acertado)
-                selectedOptionElement.classList.add('correct-answer');
-                selectedOptionElement.classList.remove('ring-2', 'ring-red-500', 'border-red-500');
-
-            } else {
-                feedbackMessage.textContent = "Incorreto. A revisão ajuda a fixar o conhecimento.";
-                feedbackMessage.className = 'text-lg font-bold mb-3 text-red-600';
-                rationaleBox.className = 'p-4 rounded-lg border-l-4 bg-red-50 border-red-500';
-                
-                // Marca a resposta selecionada como incorreta
-                selectedOptionElement.classList.add('incorrect-answer');
-                selectedOptionElement.classList.remove('ring-2', 'ring-red-500', 'border-red-500');
-
-                // Marca a resposta correta para visualização
-                if (correctOptionElement) {
-                    correctOptionElement.classList.add('correct-answer');
-                }
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
             }
 
-            // Exibe o feedback
-            rationaleText.textContent = selectedOptionData.rationale;
-            feedbackArea.classList.remove('hidden');
-
-            // Esconde o botão de verificar e mostra o próximo
-            submitButton.classList.add('hidden');
-            nextButton.classList.remove('hidden');
-            document.getElementById('hint-button').classList.add('hidden'); // Esconde a dica após a submissão
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([feedbackElement]);
+            }
             
-            // **CORREÇÃO APLICADA AQUI:**
-            // Se for a última pergunta, muda o texto do botão "Próxima Questão"
-            if (currentQuestionIndex === quizData.length - 1) {
-                nextButton.textContent = 'Verifique sua pontuação!';
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
             }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
         }
 
-        // Próxima questão ou fim do quiz
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                displayQuestion();
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const totalCountSpan = document.getElementById('total-count-span');
+            const finalMessageDiv = document.getElementById('final-message');
+            const scoreIcon = document.getElementById('score-icon');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            totalCountSpan.textContent = quizQuestions.length;
+            scoreCard.classList.remove('hidden');
+
+            const percentage = (correctAnswersCount / quizQuestions.length) * 100;
+
+            if (percentage >= 85) {
+                scoreIcon.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Você tem um ótimo conhecimento sobre as normas de segurança, aplicação de DR e regras da NR 10.";
+            } else if (percentage >= 60) {
+                scoreIcon.className = "w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200";
+                finalMessageDiv.textContent = "Bom resultado! Você compreende bem os princípios de proteção, mas vale a pena revisar os procedimentos de desenergização e habilitação.";
             } else {
-                showResults();
-            }
-        }
-
-        // Exibir a dica
-        function showHint(hintText) {
-            // Usando uma div modal ou alert simples (conforme restrição)
-            alert(`Dica: ${hintText}`);
-        }
-
-        // Exibir resultados
-        function showResults() {
-            quizCompleted = true;
-            const percentage = (score / quizData.length) * 100;
-            let resultMessage = '';
-            let emoji = '';
-
-            if (percentage === 100) {
-                resultMessage = 'Domínio Completo! Você é um especialista em Segurança Elétrica.';
-                emoji = '⚡️';
-            } else if (percentage >= 70) {
-                resultMessage = 'Ótimo Resultado! Você demonstrou um forte conhecimento dos princípios de segurança.';
-                emoji = '✅';
-            } else if (percentage >= 50) {
-                resultMessage = 'Bom Desempenho. Continue revisando os pontos fracos para melhorar.';
-                emoji = '💡';
-            } else {
-                resultMessage = 'Precisa de mais revisão. Concentre-se nos tópicos de NR 10 e DR.';
-                emoji = '📚';
+                scoreIcon.className = "w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Precisa revisar: Foque na leitura das regras de desenergização da NR 10, atuadores do DR e exigências de proteção pessoal.";
             }
 
-            quizContent.innerHTML = `
-                <div class="text-center p-8 bg-red-50 rounded-xl shadow-inner">
-                    <div class="text-6xl mb-4">${emoji}</div>
-                    <h2 class="text-3xl font-bold mb-4 text-red-600">Quiz Concluído!</h2>
-                    <p class="text-xl font-semibold mb-2 text-gray-800">Sua Pontuação Final: ${score} de ${quizData.length}</p>
-                    <p class="text-2xl font-extrabold text-red-700 mb-6">${percentage.toFixed(0)}% de Acerto</p>
-                    <p class="text-lg text-gray-600">${resultMessage}</p>
-
-                    <button class="mt-8 px-8 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-150 hover:bg-red-700" onclick="resetQuiz()">
-                        Refazer Quiz
-                    </button>
-                </div>
-            `;
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Reiniciar quiz
-        function resetQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            quizCompleted = false;
-            // Garante que o texto do botão seja resetado se o quiz for refeito
-            if (document.getElementById('next-button')) {
-                 document.getElementById('next-button').textContent = 'Próxima Questão';
-            }
-            displayQuestion();
-        }
-
-        // Inicia o quiz
-        document.addEventListener('DOMContentLoaded', displayQuestion);
-
-        // Desabilita o menu de contexto para evitar trapaça
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
+        window.onload = renderQuiz;
     </script>
 </body>
 </html>

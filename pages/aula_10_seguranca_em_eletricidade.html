@@ -3,127 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segurança Elétrica Avançada - Aula 10</title>
+    <title>Guia em Instalações Elétricas Residenciais - Aula 10</title>
+
+    <link rel="stylesheet" href="estilos.css">
     
     <style>
-        /* PADRÃO VISUAL UNIFICADO */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
-        }
-
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 950px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 15px; margin-top: 40px; text-transform: uppercase; font-size: 1.3rem; }
-        h3 { color: #2980b9; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        
-        .norma-box {
-            background-color: #e8f4fd;
-            border: 1px solid #2980b9;
-            padding: 15px;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        /* GRID DO GRÁFICO */
+       
+         /* ==========================================================================
+           Seção de Gráficos e Zonas (Flexbox)
+           ========================================================================== */
         .chart-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-            background: #fdfdfd;
+            gap: 25px;
+            margin: 25px 0;
+            background: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            border: 1px solid #eee;
+            box-shadow: var(--shadow);
         }
 
-        .chart-img-container { flex: 1; min-width: 320px; text-align: center; }
-        .chart-explanation { flex: 1; min-width: 320px; }
-
-        .zone-item { margin-bottom: 12px; padding: 12px; border-radius: 6px; font-size: 0.9rem; }
-        .z1 { background-color: #d4edda; border-left: 6px solid #28a745; }
-        .z2 { background-color: #fff3cd; border-left: 6px solid #ffc107; }
-        .z3 { background-color: #f8d7da; border-left: 6px solid #dc3545; }
-
-        .alert-box { background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; border-radius: 4px; }
-        .danger-box { background-color: #fdf2f2; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .chart-img-container { 
+            flex: 1; 
+            min-width: 300px; 
+            text-align: center; 
+        }
         
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
-        th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
-        td { padding: 12px; border-bottom: 1px solid #ddd; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        .safety-list { list-style-type: none; padding-left: 0; }
-        .safety-list li { margin-bottom: 12px; padding-left: 35px; position: relative; }
-        .safety-list li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: #27ae60; font-weight: bold; }
-
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 2rem 0; margin-top: 50px; }
-        .quiz-section {
-            background-color: #fcfcfc;
-            border: 2px dashed #2c3e50;
-            padding: 25px;
-            margin-top: 40px;
-            border-radius: 8px;
+        .chart-img-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
         }
+
+        .chart-explanation { 
+            flex: 1; 
+            min-width: 300px; 
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .zone-item { 
+            padding: 12px 15px; 
+            border-radius: 6px; 
+            font-size: 0.9rem; 
+        }
+        
+        .z1 { background-color: #f0fff4; border-left: 6px solid #38a169; color: #276749; }
+        .z2 { background-color: #fffaf0; border-left: 6px solid #dd6b20; color: #dd6b20; }
+        .z3 { background-color: #fff5f5; border-left: 6px solid #e53e3e; color: #9b2c2c; }
+        .z4 { background-color: #742a2a; border-left: 6px solid #9b2c2c; color: #fff; }
+
+
+        /* ==========================================================================
+           Seção de Quiz Interativo (Menu Suspenso)
+           ========================================================================== */
+        .quiz-section {
+            background-color: #ffffff;
+            border: 2px dashed var(--primary-color);
+            padding: 30px;
+            margin-top: 45px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
         .question {
             margin-bottom: 25px;
-            padding: 15px;
+            padding: 18px;
             border-radius: 6px;
-            transition: background 0.3s;
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            transition: background 0.3s, border-color 0.3s;
         }
-        .question strong { display: block; margin-bottom: 10px; color: #2c3e50; }
-        .options { list-style: none; padding-left: 0; }
-        .options li { margin-bottom: 8px; }
+        
+        .question strong { 
+            display: block; 
+            margin-bottom: 12px; 
+            color: var(--primary-color); 
+        }
+        
+        .quiz-select {
+            padding: 8px 12px; 
+            width: 100%; 
+            border-radius: 5px; 
+            border: 1px solid #cbd5e0; 
+            font-family: inherit;
+            background-color: #fff;
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        .quiz-select:focus {
+            border-color: var(--secondary-color);
+        }
         
         .btn-gabarito {
-            background-color: #2c3e50;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 1rem;
-            border-radius: 4px;
+            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.2s ease;
             display: block;
-            margin: 20px auto;
+            margin: 25px auto 0 auto;
         }
-        .btn-gabarito:hover { background-color: #34495e; }
         
-        /* Classes para o JavaScript */
-        .correct { background-color: #d4edda !important; border: 1px solid #c3e6cb; }
-        .wrong { background-color: #f8d7da !important; border: 1px solid #f5c6cb; }
+        .btn-gabarito:hover { 
+            background-color: var(--secondary-color); 
+        }
+        
+        /* Classes dinâmicas ativadas pelo JavaScript */
+        .correct { background-color: #c6f6d5 !important; border-color: #38a169 !important; }
+        .wrong { background-color: #fed7d7 !important; border-color: #e53e3e !important; }
+
     </style>
 </head>
 <body>
@@ -135,30 +131,36 @@
     </header>
 
     <div class="container">
+		<h2>1. O Choque Elétrico e os Efeitos da Corrente no Corpo</h2>
+       		<p>Ao contrário do que muitos pensam, a gravidade de um choque elétrico não é definida de forma isolada pela tensão (Volts) da rede, mas sim pela <strong>Intensidade da Corrente Resultante (calculada pela Lei de Ohm: I = U / R </strong> e pelo tempo em que ela circula pelo organismo.</p>
+        
+        	<p>A norma internacional <strong>NBR IEC 60479-1</strong> mapeia detalhadamente como o corpo humano reage à passagem da corrente alternada (CA), dividindo esses impactos em quatro zonas fisiológicas principais de intensidade:</p>
 
-        <h2>1. O Choque Elétrico e a NBR IEC 60479-1</h2>
-        <p>Segundo a norma técnica, a gravidade do choque não é determinada apenas pela tensão (V), mas pela <strong>Corrente Resultante   (I = U/R)</strong> e pelo tempo em que ela circula pelo corpo.</p>
-
-        <div class="chart-section">
-            <div class="chart-img-container">
-                <strong>Curva Tempo x Corrente (Zonas AC)</strong><br><br>
-                <img src="../images/tempo_corrente.jpg" alt="Gráfico NBR IEC 60479-1" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+       		 <!-- Grade de Cartões Textuais (Substitui o Gráfico) -->
+        	<div style="display: flex; flex-direction: column; gap: 15px; margin: 25px 0;">
+            
+           	 <div style="background-color: #f0fff4; border-left: 6px solid #38a169; padding: 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <strong style="color: #276749; font-size: 1.1rem; display: block; margin-bottom: 5px;">Zona AC-1: Até 0,5 mA (Limiar de Percepção)</strong>
+                <p style="margin: 0; font-size: 0.95rem; text-align: left;">A corrente elétrica encontra-se em níveis extremamente baixos. Neste estágio, a 			eletricidade é praticamente imperceptível para a maioria das pessoas. Não há qualquer tipo de reação muscular, espasmo ou dor involuntária.</p>
             </div>
 
-            <div class="chart-explanation">
-                <div class="zone-item z1">
-                    <strong>Zona AC-1:</strong> Até 0,5 mA. Limiar de percepção. Não causa reações musculares.
-                </div>
-                <div class="zone-item z2">
-                    <strong>Zona AC-2:</strong> De 0,5 mA até curva b. Percepção clara e contrações involuntárias, geralmente sem danos orgânicos permanentes.
-                </div>
-                <div class="zone-item z3">
-                    <strong>Zona AC-3:</strong> Entre curva b e c1. Risco de dificuldades respiratórias e contrações fortes (tetanização). 
-                </div>
-                <div class="zone-item z3" style="background-color: #721c24; color: white; border-left-color: #000;">
-                    <strong>Zona AC-4:</strong> Além da curva c1. Probabilidade de <strong>fibrilação ventricular</strong>, parada cardíaca e queimaduras graves.
-                </div>
+            <div style="background-color: #fffaf0; border-left: 6px solid #dd6b20; padding: 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <strong style="color: #dd6b20; font-size: 1.1rem; display: block; margin-bottom: 5px;">Zona AC-2: De 0,5 mA até o Limiar de Tetanização (10 mA - Percepção Clara)</strong>
+                <p style="margin: 0; font-size: 0.95rem; text-align: left;">O choque elétrico é sentido nitidamente e provoca um "susto". Ocorrem contrações musculares involuntárias nas mãos e nos braços, mas o indivíduo ainda consegue soltar a fonte de energia por conta própria. Geralmente não causa danos orgânicos ou sequelas permanentes.</p>
             </div>
+
+            <div style="background-color: #fff5f5; border-left: 6px solid #e53e3e; padding: 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <strong style="color: #9b2c2c; font-size: 1.1rem; display: block; margin-bottom: 5px;">Zona AC-3: De 10 mA até 30 mA (Limiar de Tetanização e Dificuldade Respiratória)</strong>
+                <p style="margin: 0; font-size: 0.95rem; text-align: left;">A intensidade da corrente atinge níveis críticos. A partir de <strong>10 mA</strong>, a eletricidade sobrecarrega os comandos do sistema nervoso sobre os músculos flexores, provocando a <strong>tetanização</strong> (o efeito de ficar "grudado", onde a vítima perde o controle motor e não consegue soltar o condutor). Próximo aos <strong>30 mA</strong>, surgem graves dificuldades respiratórias devido à contração violenta e prolongada dos músculos do tórax.</p>
+            </div>
+
+            <div style="background-color: #742a2a; border-left: 6px solid #9b2c2c; padding: 18px; border-radius: 6px; color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <strong style="color: #ecc94b; font-size: 1.1rem; display: block; margin-bottom: 5px;">Zona AC-4: Acima de 30 mA (Risco Letal - Fibrilação Ventricular)</strong>
+                <p style="margin: 0; font-size: 0.95rem; text-align: left; color: #f7fafc;">Zona de perigo extremo. Correntes superiores a **30 mA** perturbam diretamente os sinais elétricos do miocárdio. Há uma altíssima probabilidade de desencadear <strong>fibrilação ventricular</strong> (o coração perde o sincronismo, passa apenas a tremer e interrompe o bombeamento de sangue), provocando paradas cardiorrespiratórias imediatas e queimaduras internas graves.</p>
+            </div>
+
+        
+        
         </div>
 
         <h2>2. Desmistificando: 127V "Gruda" e 220V "Joga"?</h2>
@@ -170,211 +172,264 @@
         </ul>
 
         <div class="danger-box">
-            <strong>Nota Técnica:</strong> O perigo do "jogar" são os traumas secundários (quedas de escadas ou batidas de cabeça), enquanto o perigo do "grudar" é o tempo de exposição prolongado, que leva à fibrilação.
+            <h4>Nota Técnica de Campo:</h4>
+            <p style="margin-bottom:0;">O perigo do "jogar" são os traumas secundários (quedas de escadas ou batidas de cabeça), enquanto o perigo do "grudar" é o tempo de exposição prolongado, que leva diretamente à fibrilação.</p>
         </div>
 
+        <!-- ==========================================================================
+           3. Tensão Extra Baixa (SELV e PELV) - ATUALIZADO
+           ========================================================================== -->
         <h2>3. Tensão Extra Baixa (SELV e PELV)</h2>
-        <p>A NBR 5410 define limites de tensão tão baixos que, mesmo em contato direto, a corrente resultante não atinge níveis perigosos (Zona AC-1).</p>
-        <table>
-            <tr>
-                <th>Sistema</th>
-                <th>Descrição</th>
-                <th>Limite (CA)</th>
-            </tr>
-            <tr>
-                <td><strong>SELV</strong></td>
-                <td>Sistema de Extra Baixa Tensão de Segurança (isolado da terra).</td>
-                <td>&le; 50V</td>
-            </tr>
-            <tr>
-                <td><strong>PELV</strong></td>
-                <td>Sistema de Extra Baixa Tensão de Proteção (pode ser aterrado).</td>
-                <td>&le; 50V</td>
-            </tr>
-        </table>
+        <p>Como medida de proteção contra choques elétricos por contato direto e indireto, a norma <strong>NBR 5410</strong> especifica o uso de sistemas de extra-baixa tensão. Esses sistemas operam em níveis de tensão tão reduzidos que o fluxo de corrente resultante no corpo humano não atinge limiares perigosos (mantendo-se seguros na Zona AC-1, abaixo do limiar de percepção ou reação severa).</p>
+        
+        <h3>O que é o Sistema SELV (Safety Extra-Low Voltage)?</h3>
+        <p>O <strong>SELV</strong> (Sistema de Extra-Baixa Tensão de Segurança) é um circuito elétrico de extra-baixa tensão que apresenta duas características cruciais de segurança:</p>
+        <ul>
+            <li><strong>Isolamento de Proteção:</strong> É eletricamente separado de outros circuitos de tensões mais elevadas (como 127V ou 220V) por meio de uma isolação dupla ou reforçada, ou através de uma fonte de segurança (como um transformador de isolação de segurança conforme a NBR IEC 61558-2-6).</li>
+            <li><strong>Isolamento de Terra:</strong> Suas partes vivas (condutores ativos e equipamentos) <strong>não devem ser conectadas à terra</strong> sob nenhuma hipótese, e as massas do circuito SELV também não devem ser ligadas ao condutor de proteção (terra) de outros circuitos. Isso impede que uma falha de isolamento em outro ponto da instalação transfira uma tensão perigosa para o circuito SELV através do aterramento.</li>
+        </ul>
+        
+        <h3>O que é o Sistema PELV (Protective Extra-Low Voltage)?</h3>
+        <p>O <strong>PELV</strong> (Sistema de Extra-Baixa Tensão de Proteção) compartilha da mesma exigência de isolação galvânica de segurança em relação aos circuitos de maior tensão que o SELV. No entanto, possui uma diferença fundamental:</p>
+        <ul>
+            <li><strong>Conexão com a Terra:</strong> No sistema PELV, o circuito elétrico ou suas massas <strong>podem ser aterrados</strong> por motivos de operação técnica ou segurança funcional (por exemplo, em circuitos de controle industrial ou automação residencial onde uma referência de terra é necessária para o funcionamento de sensores e relés).</li>
+        </ul>
+        
+        <h3>Tabela Comparativa: SELV vs. PELV</h3>
+        <p>Abaixo apresenta-se um comparativo detalhado entre os sistemas de segurança SELV e PELV, destacando as suas características físicas, aplicações típicas e os limites normativos rígidos para as tensões de operação (em corrente alternada e corrente contínua sem ondulação):</p>
+        
+        <div class="table-responsive">
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; text-align: left;">
+                <thead>
+                    <tr style="background-color: var(--primary-color, #2b6cb0); color: white;">
+                        <th style="padding: 12px; border: 1px solid #cbd5e0;">Critério de Comparação</th>
+                        <th style="padding: 12px; border: 1px solid #cbd5e0;">Sistema SELV (Segurança)</th>
+                        <th style="padding: 12px; border: 1px solid #cbd5e0;">Sistema PELV (Proteção)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Significado da Sigla</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;"><em>Safety Extra-Low Voltage</em> (Extra-Baixa Tensão de Segurança)</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;"><em>Protective Extra-Low Voltage</em> (Extra-Baixa Tensão de Proteção)</td>
+                    </tr>
+                    <tr style="background-color: #f7fafc;">
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Aterramento do Circuito / Massas</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; color: #c53030; font-weight: bold;">Estritamente proibido. Circuito totalmente isolado da terra.</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; color: #2f855a; font-weight: bold;">Permitido (e frequentemente utilizado para referência de sinal).</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Separação de Circuitos de Tensão Maior</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;" colspan="2">Exigida isolação dupla ou reforçada (via transformador de segurança, baterias ou gerador independente).</td>
+                    </tr>
+                    <tr style="background-color: #f7fafc;">
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Limite de Tensão Alternada (CA)</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">&le; 50 V (valor eficaz)</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">&le; 50 V (valor eficaz)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Limite de Tensão Contínua (CC)</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">&le; 120 V (sem ondulação)</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">&le; 120 V (sem ondulação)</td>
+                    </tr>
+                    <tr style="background-color: #f7fafc;">
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Aplicações Comuns</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;">Brinquedos infantis, luminárias de piscinas, equipamentos médicos de monitoramento, barbeadores elétricos em áreas molhadas.</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;">Sistemas de automação predial, intertravamentos industriais, circuitos de controle e sinalização de painéis.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; font-weight: bold;">Grau de Proteção contra Choques</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0; color: #2b6cb0; font-weight: bold;">Máximo. Mesmo em falhas externas na terra, o circuito permanece seguro.</td>
+                        <td style="padding: 12px; border: 1px solid #cbd5e0;">Elevado. Contudo, correntes de falha de outros sistemas aterrados podem circular pelas massas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="danger-box" style="margin-top: 15px;">
+            <h4>Regra Fundamental de Instalação:</h4>
+            <p style="margin-bottom:0;">Os condutores dos circuitos SELV e PELV devem, preferencialmente, ser instalados em condutos (eletrodutos ou canaletas) separados dos condutores de circuitos de tensões mais elevadas, a menos que possuam isolamento adequado para a maior tensão presente ou sejam separados por barreiras físicas isolantes.</p>
+        </div>
 
         <h2>4. Procedimentos de Segurança (NR10)</h2>
-        <p>A NR10 estabelece que uma instalação só é considerada <strong>desenergizada</strong> após seguir esta sequência rigorosa:</p>
+        <p>A NR10 estabelece que uma instalação elétrica só é formalmente considerada <strong>desenergizada</strong> após seguir rigorosamente esta sequência cronológica:</p>
         <ol>
-            <li><strong>Seccionamento:</strong> Abertura física do circuito (disjuntor ou chave).</li>
-            <li><strong>Impedimento de Reenergização:</strong> Travamento com cadeados e etiquetas (LOTO - Lockout/Tagout).</li>
-            <li><strong>Constatação da Ausência de Tensão:</strong> Teste real com voltímetro ou detector de tensão.</li>
-            <li><strong>Instalação de Aterramento Temporário:</strong> Conectar as fases à terra para garantir segurança em caso de falha.</li>
-            <li><strong>Sinalização:</strong> Delimitar a área de trabalho para evitar acesso de terceiros.</li>
+            <li><strong>Seccionamento:</strong> Abertura física e mecânica do circuito (desarme do disjuntor ou abertura de chave).</li>
+            <li><strong>Impedimento de Reenergização:</strong> Travamento mecânico efetivo através de cadeados e etiquetas de aviso (Sistema LOTO - Lockout/Tagout).</li>
+            <li><strong>Constatação da Ausência de Tensão:</strong> Teste em tempo real utilizando voltímetro confiável ou detector de tensão adequado.</li>
+            <li><strong>Instalação de Aterramento Temporário:</strong> Conexão mecânica das fases à terra para garantir segurança plena contra falhas acidentais de rede.</li>
+            <li><strong>Sinalização:</strong> Delimitação visual e física da área de trabalho para bloquear o acesso de terceiros.</li>
         </ol>
         
         <h2>5. O Perigo Invisível: Adornos e Eletricidade</h2>
-        <p>Trabalhar com eletricidade exige que o corpo do profissional esteja o mais isolado possível no circuito. O uso de adornos (anéis, alianças, pulseiras, correntes, relógios, brincos e piercings) quebra essa premissa básica de segurança.</p>
+        <p>Trabalhar com circuitos elétricos exige que o corpo do profissional permaneça totalmente isolado. O porte de adornos pessoais destrói essa barreira de segurança mecânica e elétrica.</p>
 
         <div class="norma-box">
-            <strong>O que diz a NR-10 (item 10.2.9.3)?</strong><br>
-            "É vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades". Esta é uma medida de proteção que visa evitar caminhos para a corrente elétrica ou a formação de arcos elétricos.
+            <h4>O que determina a NR-10 (Item 10.2.9.3)?</h4>
+            <p style="margin-bottom:0;"><em>"É vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades".</em> Esta medida evita a criação de caminhos paralelos para correntes e a abertura violenta de arcos elétricos.</p>
         </div>
 
-        <h3>Riscos Associados ao Uso de Metais</h3>
-        <p>A NBR 5410 reforça que o uso de adornos anula as barreiras de isolamento, transformando o trabalhador em um "condutor móvel".</p>
+        <h3>Riscos Associados ao Uso de Elementos Metálicos</h3>
+        <p>A NBR 5410 alerta que o uso de adornos metálicos anula os isolamentos de proteção e transforma o eletricista em um condutor móvel de alta periculosidade:</p>
 
-        <div class="chart-section">
-            <div class="chart-explanation">
-                <ul class="safety-list">
-                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Curto-circuito Acidental:</strong> Um anel pode tocar simultaneamente partes energizadas e aterradas.</li>
-                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Arco Elétrico:</strong> Metais facilitam a abertura de arcos que podem ultrapassar os 5000<sup>0</sup> C.</li>
-                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Queimaduras Gravíssimas:</strong> O metal aquece instantaneamente e funde-se à pele.</li>
-                    <li style="list-style: none; padding-left: 0;">✔️ <strong>Efeito de Aprisionamento:</strong> A contração muscular pode prender o adorno à fonte de energia.</li>
-                </ul>
-            </div>
+        <ul class="safety-list">
+            <li><strong>Curto-circuito Acidental:</strong> Um anel ou aliança pode fechar o contato direto entre partes vivas energizadas e carcaças aterradas.</li>
+            <li><strong>Arco Elétrico:</strong> Metais facilitam o rompimento do isolamento do ar, gerando arcos elétricos que ultrapassam os 5000 °C.</li>
+            <li><strong>Queimaduras Gravíssimas:</strong> Sob efeito de indução ou condução, o metal se aquece instantaneamente e funde-se de forma traumática à pele.</li>
+            <li><strong>Efeito de Aprisionamento:</strong> A contração muscular gerada pelo choque impede a retirada do membro, travando o adorno junto à fonte.</li>
+        </ul>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Adorno Pessoal</th>
+                        <th>Risco Principal Associado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Alianças / Anéis</strong></td>
+                        <td>Curtos-circuitos diretos de baixa impedância e riscos severos de amputação.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relógios Metálicos</strong></td>
+                        <td>Ponte condutora direta entre a pele do braço e as partes vivas do painel.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Correntes / Colares</strong></td>
+                        <td>Podem pender por gravidade e tocar barramentos nus energizados.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Piercings</strong></td>
+                        <td>Pontos de concentração de campo que atraem arcos em zonas de alta indução.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <table>
-            <tr>
-                <th>Adorno</th>
-                <th>Risco Principal</th>
-            </tr>
-            <tr>
-                <td><strong>Alianças/Anéis</strong></td>
-                <td>Curtos-circuitos e risco de amputação.</td>
-            </tr>
-            <tr>
-                <td><strong>Relógios Metálicos</strong></td>
-                <td>Ponte de condução entre o braço e partes vivas.</td>
-            </tr>
-            <tr>
-                <td><strong>Correntes/Colares</strong></td>
-                <td>Podem pender e tocar barramentos energizados.</td>
-            </tr>
-            <tr>
-                <td><strong>Piercings</strong></td>
-                <td>Atração de arcos em áreas de alta indução.</td>
-            </tr>
-        </table>
 
         <div class="alert-box">
-            <strong>Nota Importante:</strong> Mesmo adornos de borracha ou silicone devem ser evitados, pois podem acumular sujeira condutora ou causar riscos mecânicos (enroscar em partes móveis).
-        </div>
-        
-        <div class="alert-box" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <strong>Fique esperto!</strong> A segurança em eletricidade começa na disciplina pessoal. Retirar esses objetos antes de iniciar a jornada é o passo mais simples para garantir que você volte para casa em segurança.
+            <strong>Nota Importante:</strong> Mesmo adornos confeccionados em borracha ou silicone devem ser removidos e evitados, pois acumulam poeira condutora e resíduos metalizados, além de oferecerem riscos de engate mecânico em partes móveis.
         </div>
 
         <h2>6. Canteiros de Obras e Riscos Ambientais</h2>
-        <p>Canteiros são ambientes de altíssimo risco devido à umidade e presença de superfícies metálicas (que reduzem a resistência do corpo).</p>
+        <p>Os canteiros de obras configuram ambientes de altíssima criticidade devido à constante umidade, intempéries e superfícies metálicas amplas que derrubam a resistência natural do corpo.</p>
         <ul class="safety-list">
-            <li><strong>Uso Obrigatório de DR:</strong> Todo circuito de tomadas em obras deve possuir proteção Diferencial Residual.</li>
-            <li><strong>Cabos Blindados:</strong> Utilizar cabos com proteção mecânica contra esmagamento por máquinas.</li>
-            <li><strong>Quadros Blindados:</strong> Invólucros com IP (Grau de Proteção) adequado contra jatos de água e poeira.</li>
+            <li><strong>Uso Obrigatório de DR:</strong> Absolutamente todos os circuitos de tomadas elétricas em canteiros devem passar por proteção Diferencial Residual.</li>
+            <li><strong>Cabos Mecanicamente Blindados:</strong> Utilização exclusiva de condutores com revestimento reforçado contra esmagamento mecânico de máquinas e veículos.</li>
+            <li><strong>Quadros de Distribuição Estanques:</strong> Invólucros com Grau de Proteção IP adequado contra infiltrações de jatos de água e poeiras suspensas.</li>
         </ul>
 
         <h2>7. Segurança no Lar e Proteção Adicional</h2>
-        <p>O conceito moderno de segurança residencial foca em camadas de proteção:</p>
+        <p>O conceito moderno de segurança residencial foca na aplicação inteligente de camadas sucessivas de proteção elétrica:</p>
 
         <ul class="safety-list">
-            <li><strong>Proteção contra Sobretensões (DPS):</strong> Protege equipamentos contra surtos de raios.</li>
-            <li><strong>Dimensionamento Correto:</strong> Evita o aquecimento excessivo de cabos (Efeito Joule), prevenindo incêndios.</li>
-            <li><strong>Manutenção de Contatos:</strong> Tomadas "frouxas" aumentam a resistência de contato, gerando pontos de ignição.</li>
-            <li><strong>Cuidado com áreas molhadas:</strong> A pele úmida reduz a resistência do corpo de 100.000&Omega; para menos de 1.000&Omega;, aumentando a corrente do choque em até 100 vezes.</li>
+            <li><strong>Proteção contra Sobretensões (DPS):</strong> Protege a eletrônica interna e os eletrodomésticos contra surtos gerados por raios.</li>
+            <li><strong>Dimensionamento Técnico de Bitolas:</strong> Impede o superaquecimento dos cabos por Efeito Joule, mitigando os riscos de incêndios embutidos nas alvenarias.</li>
+            <li><strong>Manutenção de Contatos Mecânicos:</strong> Tomadas folgadas elevam drasticamente a resistência de contato, operando como pontos perigosos de ignição.</li>
+            <li><strong>Cuidado Absoluto com Áreas Úmidas:</strong> A pele molhada derruba a resistência interna do corpo de 100.000&Omega; para menos de 1.000&Omega;, amplificando a corrente do choque elétrico em até 100 vezes.</li>
         </ul>
         
-        <p>Pequenos detalhes evitam grandes tragédias domésticas:</p>
-
-        
-
+        <p><strong>Boas Práticas para Evitar Tragédias Domésticas:</strong></p>
         <ul class="safety-list">
-            <li><strong>Evite o "Efeito Cascata":</strong> Nunca utilize adaptadores (benjamins) para ligar vários aparelhos potentes na mesma tomada.</li>
-            <li><strong>Isole os Cabos Danificados:</strong> Cabos ressecados ou descascados devem ser trocados, não apenas remendados.</li>
-            <li><strong>Atualize Tomadas Antigas:</strong> Tomadas folgadas geram calor excessivo e risco de fogo.</li>
-            <li><strong>Soquetes de Lâmpadas:</strong> Devem estar firmes. Soquetes soltos facilitam curtos-circuitos durante a troca.</li>
-            <li><strong>Emendas Mal Feitas:</strong> São pontos de aquecimento e perda financeira na conta de luz.</li>
-            <li><strong>Extensões Provisórias:</strong> Não devem ser usadas permanentemente por trás de móveis ou tapetes.</li>
-            <li><strong>Cuidado com Áreas Úmidas:</strong> Jamais use aparelhos ligados à rede elétrica perto de pias ou banheiras.</li>
-            <li><strong>Teste o seu DR:</strong> Aperte o botão "T" do DR mensalmente para garantir que o mecanismo está operante.</li>
-            <li><strong>Limite das Tomadas:</strong> Use tomadas de 20A para aparelhos potentes (micro-ondas, airfryer).</li>
+            <li><strong>Elimine o "Efeito Cascata":</strong> Jamais conecte múltiplos adaptadores (benjamins/tês) para alimentar eletrodomésticos de alta potência em um único ponto.</li>
+            <li><strong>Substitua Condutores Danificados:</strong> Cabos ressecados ou com isolamento rachado devem ser substituídos imediatamente por condutores novos.</li>
+            <li><strong>Atenção aos Soquetes de Lâmpadas:</strong> Conexões frouxas geram curtos-circuitos no momento da manutenção ou troca de lâmpadas.</li>
+            <li><strong>Teste Mensalmente o DR:</strong> Pressione deliberadamente o botão de teste "T" do módulo DR para certificar-se de que o gatilho mecânico de segurança está operacional.</li>
         </ul>
 
-        <div class="alert-box" style="background-color: #fff3e0; border-left-color: #ff9800;">
-            <strong>Fique atento!:</strong> O olfato ajuda! Se sentir cheiro de plástico queimado vindo das paredes ou tomadas, desligue o disjuntor imediatamente. Esse é um sinal claro de sobrecarga ou mau contato (arco elétrico).
+        <div class="alert-box">
+            <strong>O Sentido do Olfato Ajuda:</strong> Se notar cheiro característico de plástico ou baquelite queimado vindo de interruptores ou paredes, desarme o disjuntor de proteção imediatamente. Este é um sinal clássico de sobrecarga severa ou microarcos elétricos ativos.
         </div>
 
-        <div class="alert-box" style="background-color: #e8f5e9; border-left-color: #2e7d32;">
-            <strong>Dica de Ouro:</strong> O Dispositivo DR não é luxo, é lei! Ele é o único capaz de salvar vidas em caso de contato direto acidental, desligando o circuito antes que o coração entre em fibrilação, conforme as curvas da NBR IEC 60479-1.
+        <div class="alert-box" style="background-color: #e8f5e9; border-left-color: #2e7d32; color: #1b5e20;">
+            <strong>Dica de Ouro do Instrutor:</strong> O dispositivo DR de alta sensibilidade (30mA) não é opcional, é uma exigência legal da NBR 5410! Ele é o único componente técnico capaz de ler fugas de corrente milimétricas e desarmar a rede antes que o choque elétrico leve o coração do usuário à fibrilação letal.
         </div>
         
         <div class="quiz-section">
-            <h2 style="border-left-color: #2980b9; margin-top: 0;">7. Exercícios de Fixação</h2>
+            <h2 style="border-left-color: var(--secondary-color); margin-top: 0;">7. Exercícios de Fixação</h2>
+            <p>Selecione as alternativas corretas e clique no botão inferior para realizar a validação do gabarito:</p>
             
             <div class="question" id="q1">
                 <strong>1. Segundo a NBR IEC 60479-1, qual o principal fator que define a gravidade de um choque elétrico?</strong>
-                <select id="ans1" style="padding: 5px; width: 100%;">
+                <select id="ans1" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">Apenas a cor do isolamento do cabo.</option>
-                    <option value="correct">A combinação da intensidade da corrente (mA) e o tempo de exposição.</option>
-                    <option value="wrong">Somente a tensão (Volts) da rede elétrica.</option>
+                    <option value="wrong">Apenas a cor do isolamento externo do cabo condutor.</option>
+                    <option value="correct">A combinação exata entre a intensidade da corrente (mA) e o tempo de exposição do corpo.</option>
+                    <option value="wrong">Exclusivamente a tensão nominal (Volts) da rede de alimentação elétrica.</option>
                 </select>
             </div>
 
             <div class="question" id="q2">
-                <strong>2. Em qual zona da norma IEC 60479-1 o risco de fibrilação ventricular torna-se iminente?</strong>
-                <select id="ans2" style="padding: 5px; width: 100%;">
+                <strong>2. Em qual zona da norma IEC 60479-1 o risco de fibrilação ventricular torna-se iminente e fatal?</strong>
+                <select id="ans2" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">Zona AC-1 (Limiar de percepção).</option>
-                    <option value="wrong">Zona AC-2 (Reações musculares leves).</option>
-                    <option value="correct">Zona AC-4 (Risco letal de fibrilação).</option>
+                    <option value="wrong">Zona AC-1 (Limiar mínimo de percepção inicial).</option>
+                    <option value="wrong">Zona AC-2 (Reações musculares leves e contrações involuntárias).</option>
+                    <option value="correct">Zona AC-4 (Risco letal de fibrilação e paradas cardíacas).</option>
                 </select>
             </div>
 
             <div class="question" id="q3">
-                <strong>3. Qual a função técnica do Dispositivo DR (30mA) baseada no gráfico de zonas?</strong>
-                <select id="ans3" style="padding: 5px; width: 100%;">
+                <strong>3. Qual a função técnica do Dispositivo DR (30mA) baseada no gráfico de zonas de segurança?</strong>
+                <select id="ans3" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">Evitar que a conta de luz venha muito alta.</option>
-                    <option value="correct">Desligar o circuito antes que o choque atinja tempos e intensidades letais (Zona AC-4).</option>
-                    <option value="wrong">Apenas proteger contra curtos-circuitos entre fase e neutro.</option>
+                    <option value="wrong">Evitar desperdícios elétricos para baixar o valor da conta de luz.</option>
+                    <option value="correct">Interromper o circuito antes que o choque atinja tempos e intensidades letais da Zona AC-4.</option>
+                    <option value="wrong">Atuar exclusivamente contra curtos-circuitos francos entre os condutores de fase e neutro.</option>
                 </select>
             </div>
 
             <div class="question" id="q4">
-                <strong>4. O que caracteriza o fenômeno da "Tetanização"?</strong>
-                <select id="ans4" style="padding: 5px; width: 100%;">
+                <strong>4. O que caracteriza tecnicamente o fenômeno fisiológico da "Tetanização"?</strong>
+                <select id="ans4" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">O aquecimento dos cabos por efeito Joule.</option>
-                    <option value="correct">A contração muscular involuntária que impede a vítima de soltar o condutor vivo.</option>
-                    <option value="wrong">A queima instantânea do fusível de proteção.</option>
+                    <option value="wrong">O aquecimento excessivo de condutores por efeito Joule nas conexões.</option>
+                    <option value="correct">A contração muscular involuntária severa que impede a vítima de abrir as mãos e soltar o condutor.</option>
+                    <option value="wrong">A queima instantânea por sobrecorrente de fusíveis e minidisjuntores de proteção.</option>
                 </select>
             </div>
 
             <div class="question" id="q5">
-                <strong>5. De acordo com a NR10, qual o passo final obrigatório para garantir a desenergização?</strong>
-                <select id="ans5" style="padding: 5px; width: 100%;">
+                <strong>5. De acordo com os preceitos da NR10, qual o passo final obrigatório para garantir a desenergização segura?</strong>
+                <select id="ans5" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">Apenas desligar o disjuntor de entrada.</option>
-                    <option value="correct">Sinalização e instalação de aterramento temporário.</option>
-                    <option value="wrong">Verificar se os aparelhos eletrônicos pararam de funcionar.</option>
+                    <option value="wrong">Apenas realizar o desligamento manual do disjuntor termomagnético geral.</option>
+                    <option value="correct">Proceder com a devida sinalização e a instalação do aterramento elétrico temporário.</option>
+                    <option value="wrong">Verificar visualmente se os displays dos aparelhos eletrônicos locais apagaram.</option>
                 </select>
             </div>
             
             <div class="question" id="q6">
-                <strong>6. De acordo com a NR-10, o uso de adornos (anéis, relógios, etc) é:</strong>
-                <select id="ans6" style="padding: 5px; width: 100%;">
+                <strong>6. De acordo com a NR-10, o uso de adornos pessoais (como anéis e relógios) em atividades elétricas é:</strong>
+                <select id="ans6" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="wrong">Permitido se o adorno for de ouro puro.</option>
-                    <option value="correct">Vedado em trabalhos com instalações elétricas ou proximidades.</option>
-                    <option value="wrong">Opcional, dependendo da vontade do eletricista.</option>
+                    <option value="wrong">Totalmente liberado caso o adorno seja de ouro ou material nobre.</option>
+                    <option value="correct">Estritamente vedado em quaisquer trabalhos com instalações elétricas ou suas proximidades.</option>
+                    <option value="wrong">Considerado um item opcional, ficando a critério exclusivo da vontade do eletricista.</option>
                 </select>
             </div>
 
             <div class="question" id="q7">
-                <strong>7. Por que adornos de "silicone" também devem ser evitados?</strong>
-                <select id="ans7" style="padding: 5px; width: 100%;">
+                <strong>7. Por que adornos e acessórios de "silicone" ou borracha também devem ser evitados na prática?</strong>
+                <select id="ans7" class="quiz-select">
                     <option value="">Selecione uma resposta...</option>
-                    <option value="correct">Podem acumular sujeira condutora e oferecem riscos mecânicos.</option>
-                    <option value="wrong">Porque o silicone atrai raios.</option>
-                    <option value="wrong">Não precisam ser evitados, pois são isolantes.</option>
+                    <option value="correct">Podem acumular micropartículas de sujeiras condutoras e oferecem riscos mecânicos de engate.</option>
+                    <option value="wrong">Porque o composto químico do silicone atrai descargas atmosféricas (raios) de longa distância.</option>
+                    <option value="wrong">Não precisam ser evitados sob nenhuma hipótese, visto que polímeros são isolantes perfeitos.</option>
                 </select>
             </div>
 
             <button class="btn-gabarito" onclick="verificarQuiz()">Verificar Gabarito</button>
         </div>
 
-    </div> <script>
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Baseado em Normas Técnicas Nacionais e Internacionais</p>
+    </footer>
+
+    <script>
         function verificarQuiz() {
             for (let i = 1; i <= 7; i++) {
                 let res = document.getElementById('ans' + i).value;
@@ -390,12 +445,6 @@
             }
         }
     </script>
-
-    </div>
-
-    <footer>
-        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Baseado em Normas Internacionais</p>
-    </footer>
 
 </body>
 </html>

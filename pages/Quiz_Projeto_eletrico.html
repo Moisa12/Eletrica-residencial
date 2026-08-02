@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Projeto Elétrico Residencial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .option-card {
+            transition: all 0.15s ease-in-out;
+        }
+        .option-card:not([disabled]):hover {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+            transform: translateY(-1px);
+        }
+        .correct-answer {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
+        }
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+        }
+        .incorrect-answer {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            font-weight: 600;
+        }
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+
+    <div class="max-w-3xl w-full space-y-6">
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
+
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Quiz: Projeto Elétrico Residencial
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Revisão avançada: demanda, divisão de circuitos, corrente de projeto ($I_B$), disjuntores, agrupamento e eletrodutos.
+            </p>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                    <span id="total-questions-count">10 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 10
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </header>
+
+        <!-- ÁREA DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div id="score-icon" class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Desempenho Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-indigo-600 text-2xl">0</span> de <span id="total-count-span">10</span> perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                tag: "Demanda",
+                q: "1. Uma residência possui carga instalada de $14\\text{ kW}$. Considerando um fator de demanda igual a $0,70$, qual é a demanda estimada ($D$)?",
+                options: [
+                    "$9,8\\text{ kW}$",
+                    "$20,0\\text{ kW}$",
+                    "$7,0\\text{ kW}$",
+                    "$11,2\\text{ kW}$"
+                ],
+                answer: "$9,8\\text{ kW}$",
+                rationale: "A Demanda é calculada multiplicando a Carga Instalada pelo Fator de Demanda: $D = 14\\text{ kW} \\cdot 0,70 = 9,8\\text{ kW}$."
+            },
+            {
+                tag: "Divisão de Circuitos",
+                q: "2. Qual das alternativas representa uma divisão correta e considerada boa prática segundo a NBR 5410 para uma residência?",
+                options: [
+                    "Um único circuito para iluminação e tomadas de todos os ambientes.",
+                    "Iluminação separada de tomadas, e TUE (ex.: chuveiro) em circuito exclusivo.",
+                    "Tomadas de cozinha ligadas sempre no mesmo circuito das tomadas de quartos.",
+                    "Todos os equipamentos de alta potência ligados na rede de TUGs para simplificação."
+                ],
+                answer: "Iluminação separada de tomadas, e TUE (ex.: chuveiro) em circuito exclusivo.",
+                rationale: "Separação de cargas melhora a seletividade, reduz riscos de sobrecarga e facilita intervenções de manutenção."
+            },
+            {
+                tag: "Cálculo de $I_B$",
+                q: "3. Um circuito de tomadas possui potência de $2400\\text{ VA}$ operando em tensão de $127\\text{ V}$. Qual a corrente de projeto ($I_B$) aproximada?",
+                options: [
+                    "$18,9\\text{ A}$",
+                    "$12,0\\text{ A}$",
+                    "$25,4\\text{ A}$",
+                    "$304,8\\text{ A}$"
+                ],
+                answer: "$18,9\\text{ A}$",
+                rationale: "A corrente de projeto é calculada dividindo a potência pela tensão: $I_B = 2400\\text{ VA} / 127\\text{ V} \\approx 18,9\\text{ A}$."
+            },
+            {
+                tag: "Proteção",
+                q: "4. Para um circuito com corrente $I_B = 18\\text{ A}$ e condutor com capacidade $I_Z = 21\\text{ A}$, qual disjuntor ($I_N$) atende ao critério $I_B \\le I_N \\le I_Z$?",
+                options: [
+                    "$10\\text{ A}$",
+                    "$16\\text{ A}$",
+                    "$20\\text{ A}$",
+                    "$25\\text{ A}$"
+                ],
+                answer: "$20\\text{ A}$",
+                rationale: "O disjuntor comercial de $20\\text{ A}$ satisfaz rigorosamente a regra $18\\text{ A} \\le 20\\text{ A} \\le 21\\text{ A}$."
+            },
+            {
+                tag: "Agrupamento",
+                q: "5. Considerando um fator de agrupamento igual a $0,70$ para um circuito com $I_B = 18\\text{ A}$, qual será a corrente corrigida ($I_{corr} = I_B / f$)?",
+                options: [
+                    "$12,6\\text{ A}$",
+                    "$25,71\\text{ A}$",
+                    "$18,0\\text{ A}$",
+                    "$30,8\\text{ A}$"
+                ],
+                answer: "$25,71\\text{ A}$",
+                rationale: "A correção do aquecimento mútuo exige elevar a capacidade de condução calculada: $I_{corr} = 18 / 0,70 \\approx 25,71\\text{ A}$."
+            },
+            {
+                tag: "Eletrodutos",
+                q: "6. Em um eletroduto passam 6 condutores com área total de $7\\text{ mm}^2$ cada. Qual a área de seção interna mínima necessária do eletroduto para ocupação de 40%?",
+                options: [
+                    "$42\\text{ mm}^2$",
+                    "$105\\text{ mm}^2$",
+                    "$168\\text{ mm}^2$",
+                    "$84\\text{ mm}^2$"
+                ],
+                answer: "$105\\text{ mm}^2$",
+                rationale: "Área total dos condutores = $6 \\cdot 7 = 42\\text{ mm}^2$. Para taxa de 40%: $A_{min} = 42 / 0,40 = 105\\text{ mm}^2$."
+            },
+            {
+                tag: "Conceito TUE",
+                q: "7. Quando uma tomada é classificada como Tomada de Uso Específico (TUE), qual diretriz de projeto deve ser seguida?",
+                options: [
+                    "Pode ser derivada livremente de qualquer circuito de TUG.",
+                    "Deve ser atribuída uma potência padrão genérica de $100\\text{ VA}$.",
+                    "Deve ter circuito dedicado e potência atribuída igual à nominal do equipamento.",
+                    "Deve ser instalada exclusivamente na área externa do imóvel."
+                ],
+                answer: "Deve ter circuito dedicado e potência atribuída igual à nominal do equipamento.",
+                rationale: "Equipamentos com corrente elevada (como chuveiros e ar-condicionado) exigem proteção dedicada para evitar aquecimentos na rede genérica."
+            },
+            {
+                tag: "Padrão de Entrada",
+                q: "8. Uma residência possui demanda estimada de $19,8\\text{ kW}$. Qual costuma ser o tipo de fornecimento inicial recomendado?",
+                options: [
+                    "Monofásico",
+                    "Bifásico",
+                    "Trifásico",
+                    "Não é possível estimar sem rede trifásica industrial"
+                ],
+                answer: "Bifásico",
+                rationale: "Como regra prática das concessionárias de energia, cargas na faixa entre $12\\text{ kW}$ e $25\\text{ kW}$ enquadram-se no atendimento Bifásico."
+            },
+            {
+                tag: "Critérios Técnicos",
+                q: "9. Quais são os principais motivos técnicos para justificar a separação dos circuitos de iluminação e tomadas?",
+                options: [
+                    "Aumentar o consumo medido e a voltagem do imóvel.",
+                    "Garantir a continuidade de serviço, facilitando a manutenção e reduzindo riscos de sobrecarga.",
+                    "Permitir o uso de condutores de menor bitola para chuveiros elétricos.",
+                    "Eliminar a necessidade do uso de condutores de proteção (terra)."
+                ],
+                answer: "Garantir a continuidade de serviço, facilitando a manutenção e reduzindo riscos de sobrecarga.",
+                rationale: "Separar os circuitos evita que uma falha em uma tomada (curto-circuito) deixe o ambiente no escuro, além de aumentar a seletividade da instalação."
+            },
+            {
+                tag: "Erros de Projeto",
+                q: "10. Qual das alternativas abaixo representa uma falha de dimensionamento/projeto que deve ser corrigida imediatamente?",
+                options: [
+                    "Presença de TUE para chuveiro em circuito exclusivo.",
+                    "Separação das TUGs de cozinha das TUGs dos dormitórios.",
+                    "Ligação de toda a iluminação e de todas as tomadas da casa sob um único circuito.",
+                    "Identificação individualizada de cada circuito no painel de distribuição."
+                ],
+                answer: "Ligação de toda a iluminação e de todas as tomadas da casa sob um único circuito.",
+                rationale: "Concentrar todas as cargas em um único circuito gera grave risco de sobrecarga, desrespeita a NBR 5410 e compromete a segurança dos usuários."
+            }
+        ];
+
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
+
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
+
+                qData.options.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText.replace(/"/g, '&quot;')}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-indigo-100 group-hover:text-indigo-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 font-semibold text-xs rounded-md uppercase tracking-wider">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de ${quizQuestions.length}</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
+            });
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            buttons.forEach(btn => { btn.disabled = true; });
+            
+            questionsAnswered++;
+            if (isCorrect) { correctAnswersCount++; }
+            updateProgressBar();
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
+            } else {
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
+                
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+            }
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([feedbackElement]);
+            }
+            
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
+            }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
+        }
+
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const totalCountSpan = document.getElementById('total-count-span');
+            const finalMessageDiv = document.getElementById('final-message');
+            const scoreIcon = document.getElementById('score-icon');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            totalCountSpan.textContent = quizQuestions.length;
+            scoreCard.classList.remove('hidden');
+
+            const percentage = (correctAnswersCount / quizQuestions.length) * 100;
+
+            if (percentage >= 85) {
+                scoreIcon.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Você domina as diretrizes da NBR 5410 para projetos de instalações elétricas residenciais.";
+            } else if (percentage >= 60) {
+                scoreIcon.className = "w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200";
+                finalMessageDiv.textContent = "Bom resultado! Você tem boa compreensão sobre divisão de circuitos e dimensionamento básico.";
+            } else {
+                scoreIcon.className = "w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Precisa revisar: Foque na divisão de circuitos (TUG/TUE), cálculo de corrente de projeto e critérios de agrupamento/eletrodutos.";
+            }
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

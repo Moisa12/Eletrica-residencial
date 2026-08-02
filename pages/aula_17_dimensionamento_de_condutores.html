@@ -4,95 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 17</title>
+
+    <link rel="stylesheet" href="estilos.css">
     
     <style>
-        /* Estilos Globais Conforme Modelo Aula 04 */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 110px; 
-        }
-
-        /* Cabeçalho FIXO */
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
-
-        .logo-header {
-            position: absolute;
-            bottom: 10px; 
-            right: 20px;   
-            height: 50px;  
-            width: auto;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 20px; }
-        h4 { color: #2c3e50; margin-top: 10px; margin-bottom: 10px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        /* Estilo de Fórmulas */
-        .formula-box {
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.3rem;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.8;
-        }
-
-        /* Tabelas */
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: #fff; text-align: center; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        /* Destaques e Blocos de Exemplo */
-        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
-        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .result-highlight {font-weight: bold; color: #2563eb;}
         
-        .result-highlight {
-            font-weight: bold;
-            color: #2563eb;
-        }
+        /* Estilo para o Botão e Caixa de Gabarito */
+.gabarito-box {
+    margin-top: 15px;
+}
 
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
-        footer p { margin: 0; text-align: center; }
+.btn-gabarito {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+    list-style: none; /* Esconde a setinha padrão do details */
+}
+
+.btn-gabarito::-webkit-details-marker {
+    display: none; /* Esconde a setinha no Chrome/Safari */
+}
+
+.btn-gabarito:hover {
+    background-color: #1d4ed8;
+}
+
+.gabarito-conteudo {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.gabarito-conteudo ol {
+    margin: 0;
+    padding-left: 20px;
+}
     </style>
+
 </head>
+
 <body>
 
     <header>
@@ -108,17 +70,30 @@
         </p>
 
         <div class="alert">
-            <strong>Conceito Chave:</strong> "O disjuntor é o guarda-costas do cabo!". Ele deve atuar antes que o cabo atinja sua temperatura limite.
+            <strong>Conceito Chave:</strong> "O disjuntor é o guarda-costas do cabo!". Ele deve atuar antes que o cabo atinja sua temperatura limite de isolação.
         </div>
 
         <div class="example-box">
             <h4>⚡ Situação Problema: O Caso da Churrasqueira</h4>
-            <p>O Sr. João Oliveira deseja instalar uma <strong>churrasqueira elétrica de 4100W / 220V</strong> em sua área gourmet. A distância entre o quadro (QDLF) e o ponto é de <strong>18 metros</strong>. A temperatura ambiente é de <strong>30 °C</strong> e o eletroduto já possui outros 2 circuitos instalados (3 circuitos no total).</p>
-            <p><strong>Dados:</strong> P = 4100W | V = 220V | L = 18m | Temp = 30°C | Agrupamento = 3.</p>
+            <p>O Sr. João Oliveira deseja instalar uma <strong>churrasqueira elétrica de 4100W / 220V</strong> em sua área gourmet. A distância entre o quadro (QDLF) e o ponto é de <strong>18 metros</strong>. O eletroduto passará embutido em alvenaria sob uma temperatura ambiente de <strong>35 °C</strong> e já possui outros 2 circuitos instalados (3 circuitos no total).</p>
+            <p><strong>Dados:</strong> P = 4100W | V = 220V | L = 18m | Temp = 35°C | Agrupamento = 3 circuitos | Método = B1.</p>
         </div>
 
+        <!-- Seção Explicativa: Método B1 -->
+        <h2>O que é o Método de Referência B1?</h2>
+        <p>
+            A NBR 5410 classifica as formas de instalação dos condutores em "Métodos de Referência" (A1, A2, B1, B2, C, D, etc.), pois a capacidade de dissipação de calor do cabo muda dependendo de onde e como ele está instalado.
+        </p>
+        <p>
+            O <strong>Método B1</strong> refere-se especificamente a <strong>condutores isolados ou cabos unipolares contidos em eletroduto de seção circular embutido em alvenaria</strong> (muro, parede de tijolos ou bloco).
+        </p>
+        <ul>
+            <li><strong>Por que ele é tão importante?</strong> É o método padrão utilizado na grande maioria das residências e comércios no Brasil.</li>
+            <li><strong>Comportamento térmico:</strong> Como a alvenaria envolve o eletroduto, o calor gerado pela corrente elétrica tem certa dificuldade para dissipar. Por isso, a capacidade de condução de corrente no Método B1 é menor do que em instalações ao ar livre (Método C).</li>
+        </ul>
+
         <h2>Pilar 1: Seção Mínima Normativa</h2>
-        <p>A norma estabelece seções mínimas por razões mecânicas e de durabilidade, independente da carga:</p>
+        <p>A norma estabelece seções mínimas por razões de resistência mecânica e durabilidade, independentemente do cálculo de carga:</p>
         
         <div class="table-container">
             <table>
@@ -136,7 +111,7 @@
                         <td>1,5 mm²</td>
                     </tr>
                     <tr>
-                        <td><strong>Circuitos de Força (Tomadas)</strong></td>
+                        <td><strong>Circuitos de Força (Tomadas TUG/TUE)</strong></td>
                         <td><strong>Cobre</strong></td>
                         <td><strong>2,5 mm²</strong></td>
                     </tr>
@@ -144,51 +119,307 @@
             </table>
         </div>
 
-        <h2>Pilar 2: Capacidade de Condução de Corrente</h2>
-        <p>Calculamos a corrente de projeto (IB) e aplicamos os fatores de correção para temperatura e agrupamento (IB'):</p>
+        <h2>Pilar 2: Capacidade de Condução de Corrente e Fatores de Correção</h2>
+        <p>Primeiro, determinamos a corrente nominal de projeto (<strong>I<sub>B</sub></strong>) e aplicamos os fatores de correção para temperatura (<strong>F<sub>ct</sub></strong>) e agrupamento (<strong>F<sub>ca</sub></strong>):</p>
         
         <div class="formula-box">
-            IB = 4100W / 220V = 18,64 A <br>
-            IB' = IB / (Fator Agrupamento × Fator Temp) <br>
-            IB' = 18,64 / (0,70 × 1,0) = <strong>26,63 A</strong>
+            I<sub>B</sub> = 4100W / 220V = <strong>18,64 A</strong> <br>
+            I<sub>B</sub>' = I<sub>B</sub> / (<strong>F<sub>ct</sub></strong> × <strong>F<sub>ca</sub></strong>) <br>
+            I<sub>B</sub>' = 18,64 / (0,70 × 0,94) = <strong>28,32 A</strong>
         </div>
 
-        <p>Consultando as tabelas da NBR 5410:</p>
+        <h3>Tabelas de Referência Normativa (NBR 5410)</h3>
+
+        <!-- Tabela 36 - NBR 5410 (Capacidade de Condução B1) -->
+        <h4>Tabela 36 (NBR 5410) — Capacidade de Condução de Corrente (A)</h4>
+        <p><em>Condutores isolados/cabos unipolares em eletroduto embutido em alvenaria (<strong>Método B1</strong>) — Cobre / PVC 70 °C / Temp. de Referência 30 °C</em></p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Seção Nominal (mm²)</th>
+                        <th>2 Condutores Carregados (Monofásico / Bifásico)</th>
+                        <th>3 Condutores Carregados (Trifásico)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1,5</td>
+                        <td>17,5 A</td>
+                        <td>15,5 A</td>
+                    </tr>
+                    <tr>
+                        <td>2,5</td>
+                        <td>24,0 A</td>
+                        <td>21,0 A</td>
+                    </tr>
+                    <tr style="background-color: #fef08a;">
+                        <td><strong>4,0</strong></td>
+                        <td><strong>32,0 A</strong></td>
+                        <td><strong>28,0 A</strong></td>
+                    </tr>
+                    <tr>
+                        <td>6,0</td>
+                        <td>41,0 A</td>
+                        <td>36,0 A</td>
+                    </tr>
+                    <tr>
+                        <td>10,0</td>
+                        <td>57,0 A</td>
+                        <td>50,0 A</td>
+                    </tr>
+                    <tr>
+                        <td>16,0</td>
+                        <td>76,0 A</td>
+                        <td>68,0 A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabela 40 - NBR 5410 (Temperatura) -->
+        <h4>Tabela 40 (NBR 5410) — Fatores de Correção para Temperatura Ambiente (<strong>F<sub>ct</sub></strong>)</h4>
+        <p><em>Fatores de correção para temperaturas ambientes diferentes de 30 °C (Isolação de PVC)</em></p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Temperatura Ambiente (°C)</th>
+                        <th>Fator de Correção (<strong>F<sub>ct</sub></strong>)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20 °C</td>
+                        <td>1,08</td>
+                    </tr>
+                    <tr>
+                        <td>25 °C</td>
+                        <td>1,04</td>
+                    </tr>
+                    <tr>
+                        <td>30 °C (Referência)</td>
+                        <td>1,00</td>
+                    </tr>
+                    <tr style="background-color: #fef08a;">
+                        <td><strong>35 °C</strong></td>
+                        <td><strong>0,94</strong></td>
+                    </tr>
+                    <tr>
+                        <td>40 °C</td>
+                        <td>0,87</td>
+                    </tr>
+                    <tr>
+                        <td>45 °C</td>
+                        <td>0,79</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabela 42 - NBR 5410 (Agrupamento) -->
+        <h4>Tabela 42 (NBR 5410) — Fatores de Correção para Agrupamento de Circuitos (<strong>F<sub>ca</sub></strong>)</h4>
+        <p><em>Fatores aplicáveis a circuitos agrupados no mesmo eletroduto fechado embutido</em></p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Número de Circuitos Agrupados</th>
+                        <th>Fator de Correção (<strong>F<sub>ca</sub></strong>)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 circuito</td>
+                        <td>1,00</td>
+                    </tr>
+                    <tr>
+                        <td>2 circuitos</td>
+                        <td>0,80</td>
+                    </tr>
+                    <tr style="background-color: #fef08a;">
+                        <td><strong>3 circuitos</strong></td>
+                        <td><strong>0,70</strong></td>
+                    </tr>
+                    <tr>
+                        <td>4 circuitos</td>
+                        <td>0,65</td>
+                    </tr>
+                    <tr>
+                        <td>5 circuitos</td>
+                        <td>0,60</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>Analizando o resultado corrigido para o nosso exemplo (I<sub>B'</sub> = 28,32 A):</p>
         <ul>
-            <li>Cabo de 2,5 mm² suporta 24A (Insuficiente para Ib' de 26,63A).</li>
-            <li>Cabo de <strong>4,0 mm²</strong> suporta 32A. <span class="result-highlight">Selecionado: 4,0 mm²</span>.</li>
+            <li>Cabo de 2,5 mm² suporta até 24A (Insuficiente).</li>
+            <li>Cabo de <strong>4,0 mm²</strong> suporta até 32A em B1. <span class="result-highlight">Selecionado: 4,0 mm²</span>.</li>
         </ul>
 
         <h2>Pilar 3: Limite de Queda de Tensão</h2>
-        <p>Garante que os equipamentos funcionem na voltagem correta. Para residências, o limite comum é de 2% no circuito terminal:</p>
+        <p>Garante que a tensão na carga seja suficiente para seu funcionamento nominal (limite padrão de 2% para circuitos terminais):</p>
 
         <div class="formula-box">
-            Smin = (0,0206 × 2 × L × Ib) / (V × Queda%) <br>
+            Smin = (0,0206 × 2 × L × I<sub>B</sub>) / (V × Queda%) <br>
             Smin = (0,0206 × 2 × 18 × 18,64) / (220 × 0,02) <br>
             <strong>Smin ≈ 3,14 mm²</strong>
         </div>
-        <p>Como 3,14 mm² não é comercial, adotamos o próximo padrão: <strong>4,0 mm²</strong>.</p>
+        <p>Como 3,14 mm² não é comercial, adotamos a seção comercial superior: <strong>4,0 mm²</strong>.</p>
 
-        <h2>Resolução Final e Escolha do Disjuntor</h2>
-        <p>A proteção deve ser escolhida seguindo a regra: <strong>Ib ≤ In ≤ Iz</strong>.</p>
+        <h2>Seleção dos Disjuntores (Proteção do Circuito)</h2>
+                
+        <p>A escolha da proteção deve obedecer estritamente à regra fundamental da NBR 5410:</p>
 
-	<P>Onde:<strong> IB</strong> é a corrente de projeto,<strong> In</strong> é a corrente nominal do disjuntor e <strong>Iz</strong> é a corrente máxima do condutor a ser utilizado.</p>
-	
+      <div class="formula-box" style="text-align: center;">
+          <strong>I<sub>B</sub> ≤ I<sub>n</sub> ≤ I<sub>z(real)</sub></strong>
+      </div>
+
+<p>Onde:</p>
+<ul>
+    <li><strong>I<sub>B</sub> (Corrente de projeto):</strong> 18,64 A (consumo da carga).</li>
+    <li><strong>I<sub>z(real)</sub> (Capacidade real do cabo):</strong> 32 A × 0,70 × 0,94 = <strong>21,05 A</strong>.</li>
+    <li><strong>I<sub>n</sub> (Disjuntor comercial):</strong> Deve estar entre 18,64 A e 21,05 A.</li>
+</ul>
+
+<p>
+    Portanto, a escolha correta é o disjuntor de <strong>20 A</strong>. 
+    Se usássemos um disjuntor de 25 A, ele estaria acima da capacidade real de condução do cabo (21,05 A), deixando a instalação desprotegida contra sobrecargas contínuas.
+</p>
         
+
+        <!-- Tabela Comercial de Disjuntores -->
+        <h3>Tabela de Correntes Nominais Comerciais de Disjuntores</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Corrente Nominal (I<sub>n</sub>)</th>
+                        <th>Aplicações Típicas Residenciais</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>10 A</strong></td>
+                        <td>Iluminação de baixa potência</td>
+                    </tr>
+                    <tr>
+                        <td><strong>16 A</strong></td>
+                        <td>Iluminação e tomadas gerais de baixo consumo</td>
+                    </tr>
+                    <tr style="background-color: #fef08a;">
+                        <td><strong>20 A</strong></td>
+                        <td>Tomadas de uso geral (TUG - 10A) e lavanderia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>25 A</strong></td>
+                        <td><strong>TUE's médios (Torneiras elétricas, churrasqueiras)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>32 A</strong></td>
+                        <td>Chuveiros elétricos (até 6800W / 220V)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>40 A</strong></td>
+                        <td>Chuveiros de alta potência (7500W+), Geral QDF</td>
+                    </tr>
+                    <tr>
+                        <td><strong>50 A / 63 A</strong></td>
+                        <td>Entrada de serviço e quadros gerais</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <div class="alert" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <h4>Especificação Técnica Final:</h4>
+            <h4>Especificação Técnica Final do Circuito:</h4>
             <ul>
-                <li><strong>Cabo (Fase/Neutro/Terra):</strong> 4,0 mm²</li>
-                <li><strong>Disjuntor Termomagnético:</strong> 25 A (Curva B)</li>
-                <li><strong>Justificativa:</strong> 18,64A (Carga) ≤ 25A (Disjuntor) ≤ 32A (Capacidade do Cabo).</li>
+                <li><strong>Método de Instalação:</strong> B1 (Eletroduto embutido em alvenaria)</li>
+                <li><strong>Cabo Recomendado (Fase / Neutro / Terra):</strong> 4,0 mm²</li>
+                <li><strong>Disjuntor Termomagnético:</strong> 20 A (Curva B / Padrão DIN)</li>
+                <li><strong>Verificação da Regra:</strong> 18,64 A (Carga) ≤ 20 A (Disjuntor) ≤ 21,05 A (Capacidade Real do Cabo em B1).</li>
             </ul>
+        </div>
+        
+<!-- Seção Prática: Agora Tente Você -->
+        <h2>Agora Tente Você! 🛠️</h2>
+        <p>
+            Aplique os conceitos de dimensionamento aprendidos nesta aula para resolver os dois casos abaixo. 
+            Considere a instalação pelo <strong>Método B1</strong> (eletroduto em alvenaria) com condutores de cobre e isolação de PVC (70 °C).
+        </p>
+
+        <!-- Desafio 1 -->
+        <div class="example-box" style="border-left-color: #10b981;">
+            <h4>Desafio 1: Torneira Elétrica da Cozinha</h4>
+            <p>
+                O cliente solicitou a instalação de uma torneira elétrica com potência de <strong>5500 W em 220 V</strong>. 
+                O eletroduto passa por uma parede externa sujeita a uma temperatura ambiente de <strong>35 °C</strong> e compartilha o espaço com <strong>mais 1 circuito</strong> (total de 2 circuitos no eletroduto).
+            </p>
+            <ul>
+                <li><strong>Passo 1:</strong> Calcule a corrente de projeto (<strong>I<sub>B</sub></strong>).</li>
+                <li><strong>Passo 2:</strong> Encontre os fatores <strong>F<sub>ca</sub></strong> e <strong>F<sub>ct</sub></strong> nas tabelas e calcule <strong>I<sub>B'</sub></strong>.</li>
+                <li><strong>Passo 3:</strong> Escolha a seção do cabo (<strong>mm<sup>2</sup></strong>) na Tabela do B1.</li>
+                <li><strong>Passo 4:</strong> Calcule a capacidade real do cabo, onde: <strong>I<sub>z(real)</sub></strong> = <strong>I<sub>z(cabo)</sub></strong> * <strong>F<sub>ca</sub></strong> * <strong>F<sub>ct</sub></strong>.</li>     
+                <li><strong>Passo 5:</strong> Selecione o disjuntor comercial (<strong>I<sub>n</sub></strong>) aplicando <strong>I<sub>B</sub> ≤ I<sub>n</sub> ≤ I<sub>z(real)</sub></strong>.</li>
+            </ul>
+
+
+            <!-- Botão de Gabarito do Desafio 1 -->
+          <details class="gabarito-box">
+            <summary class="btn-gabarito">🔍 Ver Gabarito Comentado</summary>
+              <div class="gabarito-conteudo">
+                <ol>
+                  <li><strong>I<sub>B</sub>:</strong> 5500 W / 220 V = <strong>25,0 A</strong></li>
+                  <li><strong>Fatores:</strong> F<sub>ca</sub> = 0,80 (2 circuitos) e F<sub>ct</sub> = 0,94 (35 °C) <br>
+                &rarr; <strong>I<sub>B'</sub></strong> = 25,0 / (0,80 &times; 0,94) = <strong>33,24 A</strong>
+                  </li>
+                  <li><strong>Seção do Cabo:</strong> O cabo de 4,0 mm<sup>2</sup> suporta 32 A (insuficiente para I<sub>B'</sub> = 33,24 A). Adota-se o cabo de <strong>6,0 mm<sup>2</sup></strong> (41 A nominal em B1).</li>
+                  <li><strong>I<sub>z(real)</sub>:</strong> 41 A &times; 0,80 &times; 0,94 = <strong>30,83 A</strong></li>
+                  <li><strong>Disjuntor (I<sub>n</sub>):</strong> Aplica-se 25,0 A &le; I<sub>n</sub> &le; 30,83 A. O disjuntor comercial adequado é o de <strong>25 A</strong>.</li>
+            </ol>
+          </div>
+</details>
+        </div>
+
+        <!-- Desafio 2 -->
+        <div class="example-box" style="border-left-color: #8b5cf6;">
+            <h4>Desafio 2: Chuveiro Elétrico em Região Quente</h4>
+            <p>
+                Dimensionar o circuito para um chuveiro de <strong>7500 W em 220 V</strong>. 
+                O circuito é <strong>exclusivo</strong> (1 único circuito no eletroduto), porém o eletroduto passa pelo forro de uma residência onde a temperatura atinge <strong>40 °C</strong>.
+            </p>
+            <ul>
+                  <li><strong>Passo 1:</strong> Calcule a corrente de projeto (<strong>I<sub>B</sub></strong>).</li>
+                  <li><strong>Passo 2:</strong> Identifique os fatores de correção (<strong>F<sub>ca</sub></strong> para 1 circuito e <strong>F<sub>ct</sub></strong> para 40 °C) e determine <strong>I<sub>B'</sub></strong>.</li>
+                  <li><strong>Passo 3:</strong> Escolha a seção do cabo (<strong>mm<sup>2</sup></strong>) na Tabela do B1.</li>
+                  <li><strong>Passo 4:</strong> Calcule a capacidade real do cabo, onde: <strong>I<sub>z(real)</sub></strong> = <strong>I<sub>z(cabo)</sub></strong> * <strong>F<sub>ca</sub></strong> * <strong>F<sub>ct</sub></strong>.</li>
+                  <li><strong>Passo 5:</strong> Selecione o disjuntor comercial (<strong>I<sub>n</sub></strong>) aplicando <strong>I<sub>B</sub> ≤ I<sub>n</sub> ≤ I<sub>z(real)</sub></strong>.</li>
+</ul>
+
+            <!-- Botão de Gabarito do Desafio 2 -->
+<details class="gabarito-box">
+    <summary class="btn-gabarito">🔍 Ver Gabarito Comentado</summary>
+    <div class="gabarito-conteudo">
+        <ol>
+            <li><strong>I<sub>B</sub>:</strong> 7500 W / 220 V = <strong>34,09 A</strong></li>
+            <li><strong>Fatores:</strong> F<sub>ca</sub> = 1,00 (1 circuito) e F<sub>ct</sub> = 0,87 (40 °C) <br>
+                &rarr; <strong>I<sub>B'</sub></strong> = 34,09 / (1,00 &times; 0,87) = <strong>39,18 A</strong>
+            </li>
+            <li><strong>Seção do Cabo:</strong> O cabo de 6,0 mm<sup>2</sup> suporta 41 A nominal em B1, mas sua capacidade real cai para 35,67 A a 40 °C. Para permitir o uso do disjuntor padrão comercial de 40 A, adota-se o cabo de <strong>10,0 mm<sup>2</sup></strong> (57 A nominal em B1).</li>
+            <li><strong>I<sub>z(real)</sub>:</strong> 57 A &times; 1,00 &times; 0,87 = <strong>49,59 A</strong></li>
+            <li><strong>Disjuntor (I<sub>n</sub>):</strong> Aplica-se 34,09 A &le; I<sub>n</sub> &le; 49,59 A. O disjuntor comercial ideal é o de <strong>40 A</strong>.</li>
+        </ol>
+    </div>
+</details>
         </div>
 
     </div>
 
     <footer>
         <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 17</p>
-        <p style="font-size: 0.8rem; opacity: 0.7;">Dimensionamento baseado na NBR 5410 para Churrasqueira Elétrica 4100W</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">Dimensionamento baseado na ABNT NBR 5410 — Churrasqueira Elétrica 4100W em Método B1</p>
     </footer>
 
 </body>

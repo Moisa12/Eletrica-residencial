@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 7</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    
+    <style>
+       
+         /* ==========================================================================
+           Comparativo Grid (Responsivo)
+           ========================================================================== */
+        .comparativo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .card-tipo {
+            flex: 1;
+            min-width: 280px;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .card-tipo.serie { border-top: 6px solid #e53e3e; }
+        .card-tipo.paralelo { border-top: 6px solid #38a169; }
+     
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 7</h1>
+        <div class="subtitle">Circuitos Série e Paralelo</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+        <h2>Associação de Componentes</h2>
+        <p>Na prática das instalações elétricas, raramente conectamos apenas um componente solitário a uma fonte de alimentação. Os dispositivos são organizados em circuitos agrupados de duas formas primordiais, modificando diretamente o comportamento das grandezas de tensão e corrente.</p>
+
+        <div class="comparativo-grid">
+            <!-- Circuito Série -->
+            <div class="card-tipo serie">
+                <h3 style="color: #c53030; margin-top: 0;">Circuito Série</h3>
+                <p>Os componentes são interligados um após o outro, de forma sequencial, criando apenas um único caminho possível para o fluxo da corrente elétrica.</p>
+                <ul>
+                    <li><strong>Corrente:</strong> É rigorosamente idêntica em todos os pontos do circuito.</li>
+                    <li><strong>Tensão:</strong> Divide-se proporcionalmente entre os componentes conectados.</li>
+                    <li><strong>Dependência:</strong> Se qualquer elemento falhar ou quebrar, o circuito inteiro interrompe o funcionamento.</li>
+                </ul>
+                <div class="formula-box">Req = R1 + R2 + ... + Rn</div>
+            </div>
+
+            <!-- Circuito Paralelo -->
+            <div class="card-tipo paralelo">
+                <h3 style="color: #2f855a; margin-top: 0;">Circuito Paralelo</h3>
+                <p>Os componentes são conectados individualmente e de forma direta à fonte, abrindo múltiplos caminhos independentes para a energia passar.</p>
+                <ul>
+                    <li><strong>Corrente:</strong> Divide-se entre as ramificações de acordo com a carga de cada uma.</li>
+                    <li><strong>Tensão:</strong> É exatamente a mesma para todos os dispositivos.</li>
+                    <li><strong>Independência:</strong> Se um componente for desligado ou queimar, os outros continuam funcionando normalmente.</li>
+                </ul>
+                <div class="formula-box">V_fonte = V1 = V2 = V3</div>
+            </div>
+        </div>
+
+        <h2>Aplicações Práticas no Dia a Dia</h2>
+        
+        <div class="example-box" style="background-color: #fff5f5; border-left-color: #e53e3e;">
+            <h4>Onde utilizamos ligações em Série?</h4>
+            <p>O exemplo mais clássico de circuito série é o <strong>interruptor residencial</strong>. Ele é instalado de forma sequencial (em série) com o fio de fase da lâmpada, funcionando como uma comporta para interromper ou liberar o tráfego da corrente. Também é visível em circuitos eletrónicos e luzes decorativas antigas de Natal.</p>
+        </div>
+
+        <div class="example-box">
+            <h4>Onde utilizamos ligações em Paralelo?</h4>
+            <p><strong>Em praticamente toda a infraestrutura da sua residência!</strong> Todas as tomadas elétricas, pontos de luz e eletrodomésticos são conectados em paralelo. Isso garante que não importa o que seja ligado, cada aparelho receberá de forma estável a tensão nominal da distribuidora (127V ou 220V) operando de forma autônoma.</p>
+        </div>
+
+        <h2>Entendendo a Resistência Equivalente (Req)</h2>
+        <p>A <strong>Resistência Equivalente</strong> representa o valor de um resistor fictício único que seria capaz de substituir todas as resistências associadas de um circuito sem alterar a intensidade da corrente total drenada.</p>
+        <ul>
+            <li>No circuito <strong>Série</strong>: Como somamos os resistores diretamente, a resistência equivalente total <strong>sempre aumenta</strong>.</li>
+            <li>No circuito <strong>Paralelo</strong>: Como abrimos mais vias para a corrente escoar, a resistência total combinada <strong>sempre diminui</strong>.</li>
+        </ul>
+
+        <h2>Exemplos de Cálculo Passo a Passo</h2>
+
+        <!-- Cálculo Série -->
+        <div class="example-box" style="border-left-color: #e53e3e; background-color: #ffffff;">
+            <h3 style="color: #e53e3e; margin-top: 0;">Exemplo A: Circuito em Série</h3>
+            <p>Imagine duas cargas resistivas ligadas em série, a primeira medindo 20 Ω e a segunda medindo 30 Ω, sob uma fonte de alimentação constante de 100 V.</p>
+            
+            <p><strong>Passo 1: Encontrar a Resistência Total (Req)</strong><br>
+            Req = 20 + 30 = <strong>50 Ω</strong></p>
+
+            <p><strong>Passo 2: Encontrar a Corrente do Circuito (I)</strong><br>
+            I = V / Req &rarr; I = 100 / 50 = <strong>2 A</strong><br>
+            <em>(Em circuitos em série, esses 2 A circulam obrigatoriamente por ambos os componentes!)</em></p>
+
+            <p><strong>Passo 3: Encontrar as Quedas de Tensão individuais (V = R * I)</strong><br>
+            V1 = 20 * 2 = <strong>40 V</strong><br>
+            V2 = 30 * 2 = <strong>60 V</strong><br>
+            <small style="color: #555;">🔍 Prova Real: 40 V + 60 V = 100 V (A tensão dividida condiz com o total da fonte).</small></p>
+        </div>
+
+        <!-- Cálculo Paralelo -->
+        <div class="example-box" style="border-left-color: #38a169; background-color: #ffffff;">
+            <h3 style="color: #38a169; margin-top: 0;">Exemplo B: Circuito em Paralelo</h3>
+            <p>Imagine duas lâmpadas em paralelo (L1 e L2) ligadas em uma rede elétrica estável de 120 V. A resistência da lâmpada L1 é 60 Ω e a da L2 é 30 Ω.</p>
+            
+            <p><strong>Passo 1: Definir a Tensão Elétrica</strong><br>
+            Por estarem em paralelo, a tensão é comum a ambas. Portanto, as duas recebem exatamente os mesmos <strong>120 V</strong>.</p>
+
+            <p><strong>Passo 2: Calcular a Corrente de cada lâmpada (I = V / R)</strong><br>
+            I1 = 120 / 60 = <strong>2 A</strong><br>
+            I2 = 120 / 30 = <strong>4 A</strong></p>
+
+            <p><strong>Passo 3: Calcular a Corrente Total do Circuito</strong><br>
+            I_total = I1 + I2 &rarr; 2 A + 4 A = <strong>6 A</strong><br>
+            <em>(Note que quanto menor é a resistência do filamento do componente, mais corrente ele puxa da rede!)</em></p>
+        </div>
+
+        <h2>Exercícios de Fixação: Conceitos e Características</h2>
+        <p>Clique abaixo para conferir as soluções das questões conceituais:</p>
+
+        <div class="exercicios-grid">
+            <div class="exercicios-coluna">
+                <div class="exercise-card">
+                    <div class="exercise-title">a) Resistores em Série</div>
+                    <p>Duas resistências elétricas puras de 10 Ohms cada uma associadas em SÉRIE resultam em qual valor de resistência equivalente?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-conc-a')">🔍 Visualizar Resposta</button>
+                    <div id="q-conc-a" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: 20 Ohms.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 No circuito série, as resistências somam-se de forma direta: 10 + 10 = 20 Ω.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-title">b) Falha no Circuito Paralelo</div>
+                    <p>Se uma lâmpada residencial queimar completamente em um circuito montado em paralelo, o que acontece com as demais lâmpadas da rede?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-conc-b')">🔍 Visualizar Resposta</button>
+                    <div id="q-conc-b" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: Continuam acesas normalmente.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Como as ligações em paralelo fornecem caminhos independentes para a corrente, a interrupção de um ramal não afeta os outros.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercicios-coluna">
+                <div class="exercise-card">
+                    <div class="exercise-title">c) Tomadas Residenciais</div>
+                    <p>Por que as tomadas de uma habitação não podem ser ligadas em uma grande configuração em série sob hipótese alguma?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-conc-c')">🔍 Visualizar Resposta</button>
+                    <div id="q-conc-c" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: A tensão se dividiria e os aparelhos não funcionariam.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Se estivessem em série, a tensão total seria dividida entre as cargas. Além disso, todos os eletrodomésticos da casa teriam que estar ligados juntos para fechar o circuito e permitir a passagem da corrente.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-title">d) Ligação do Interruptor</div>
+                    <p>Ao realizar a conexão física de um interruptor simples para ligar uma lâmpada, esse mecanismo encontra-se em série ou em paralelo?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-conc-d')">🔍 Visualizar Resposta</button>
+                    <div id="q-conc-d" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: Em série.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Ele atua bloqueando fisicamente a linha de passagem da fase em direção à lâmpada, funcionando exatamente como uma chave de bloqueio em série.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Exercícios Práticos: Cálculos de Corrente e Tensão</h2>
+        <div class="exercicios-grid">
+            <div class="exercicios-coluna">
+                <div class="exercise-card">
+                    <div class="exercise-title">e) Corrente Total em Série</div>
+                    <p>Um circuito em série é alimentado por uma fonte de 24 V e possui dois resistores em linha medindo 4 Ω e 8 Ω. Qual é o valor da corrente total?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-calc-e')">🔍 Visualizar Resposta</button>
+                    <div id="q-calc-e" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: 2 A.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Primeiro, somamos as resistências: Req = 4 + 8 = 12 Ω. Na sequência, aplicamos a Lei de Ohm: I = 24 V / 12 Ω = 2 A.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-title">f) Queda de Tensão Localizada</div>
+                    <p>Utilizando o mesmo circuito da questão anterior (e), determine qual é a queda de tensão (V) específica que fica retida sobre o resistor de 8 Ω.</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-calc-f')">🔍 Visualizar Resposta</button>
+                    <div id="q-calc-f" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: 16 V.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Aplicando a fórmula local: V = R * I. Substituindo os valores do componente: V = 8 Ω * 2 A = 16 V.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercicios-coluna">
+                <div class="exercise-card">
+                    <div class="exercise-title">g) Fio Principal em Paralelo</div>
+                    <p>Duas lâmpadas estão em paralelo numa rede de 220 V. Uma consome 2 A de corrente e a outra consome 3 A. Qual a intensidade de corrente no fio principal de alimentação?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-calc-g')">🔍 Visualizar Resposta</button>
+                    <div id="q-calc-g" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Gabarito: 5 A.</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 De acordo com a Lei dos Nós de Kirchhoff, a corrente total de entrada do circuito é a soma direta das correntes dos ramais em paralelo: I_total = 2 A + 3 A = 5 A.</p>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-title">h) Ferro e Chuveiro em Paralelo</div>
+                    <p>Se um ferro de engomar (12 Ω) e um chuveiro elétrico (8 Ω) forem associados em PARALELO sob uma tensão de 127 V, qual será a corrente individual de cada aparelho?</p>
+                    <button class="btn-feedback" onclick="toggleFeedback('q-calc-h')">🔍 Visualizar Resposta</button>
+                    <div id="q-calc-h" class="feedback-box" style="display: none;">
+                        <span class="feedback-badge">Resposta Correta</span>
+                        <p><strong>Ferro: ~10,58 A | Chuveiro: ~15,87 A</strong></p>
+                        <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Em paralelo, a tensão de 127 V aplica-se igualmente a ambos. <br>Ferro: I = 127 / 12 = 10,58 A. <br>Chuveiro: I = 127 / 8 = 15,87 A.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desafio Final Modificado -->
+        <div class="alert" style="margin-top: 30px;">
+            <h4 style="margin: 0 0 10px 0; color: #5d4037;">⚡ Desafio Rápido de Raciocínio</h4>
+            <p>Se você acoplar um equipamento projetado exclusivamente para 110 V em uma rede elétrica de 220 V, porém ligando-o rigorosamente <strong>em série</strong> com outro aparelho perfeitamente idêntico, ele vai queimar?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('q-desafio')" style="background-color: var(--primary-color); color: white;">🔍 Revelar Análise do Desafio</button>
+            <div id="q-desafio" class="feedback-box" style="display: none; background-color: #fffdf5; border-left-color: var(--accent-color);">
+                <p><strong>Resposta: Não queima!</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">Como os dois aparelhos possuem exatamente a mesma especificação e resistência interna, a tensão total da malha (220 V) divide-se de forma perfeitamente igual entre eles de acordo com a Segunda Lei de Kirchhoff. Cada um operará recebendo exatamente os 110 V exigidos para o seu correto funcionamento.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 7</p>
+    </footer>
+
+    <script>
+        function toggleFeedback(id) {
+            var box = document.getElementById(id);
+            var btn = box.previousElementSibling;
+            
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                if(id === 'q-desafio') {
+                    btn.innerHTML = '🔍 Revelar Análise do Desafio';
+                } else {
+                    btn.innerHTML = btn.innerHTML.includes('Resposta') ? '🔍 Resposta' : '🔍 Visualizar Resposta';
+                }
+                btn.style.backgroundColor = id === 'q-desafio' ? 'var(--primary-color)' : 'var(--accent-color)';
+                btn.style.color = id === 'q-desafio' ? 'white' : 'var(--text-dark)';
+            } else {
+                box.style.display = 'block';
+                btn.innerHTML = '🙈 Ocultar Explicação';
+                btn.style.backgroundColor = '#e67e22'; // Tom laranja de atenção para fechar
+                btn.style.color = '#fff';
+            }
+        }
+    </script>
+
+</body>
+</html>

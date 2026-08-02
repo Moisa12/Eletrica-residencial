@@ -1,0 +1,437 @@
+/* ==========================================================================
+   1. Configurações Globais e Variáveis (Identidade Unificada)
+   ========================================================================== */
+:root {
+    --primary-color: /* Azul escuro */ #1a365d;    /* Azul escuro (Confiança/Segurança) */
+    --secondary-color: /* Azul intermediário */ #2b6cb0;  /* Azul intermediário */
+    --accent-color: /* Amarelo */ #ecc94b;     /* Amarelo Eletrizante (Destaques) */
+    --accent-hover: /* Amarelo escuro */ #d69e2e;     /* Amarelo escuro para hover */
+    --text-dark: /* Cinza escuro */ #2d3748;        /* Cinza escuro para textos */
+    --text-light: /* Branco acinzentado */ #f7fafc;       /* Texto claro */
+    --bg-main: /* Cinza claro */ #edf2f7;          /* Cinza claro para o fundo global */
+    --bg-card: /* Marfim suave */ #fdfaf2;          /* Tom marfim suave (Descanso Visual) */
+    --shadow: 0 4px 6px -1px /* Preto transparente */ rgba(0, 0, 0, 0.1), 0 2px 4px -1px /* Preto transparente */ rgba(0, 0, 0, 0.06);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+    background-color: var(--bg-main);
+}
+
+.container {
+    width: 100%;       
+    max-width: 100%;   
+    margin: 0 auto;    
+    padding: 40px 60px; 
+    background: var(--bg-card);
+    box-shadow: none;  
+    border-radius: 0;  
+    box-sizing: border-box;
+}
+
+.container-exer {
+    width: 50%;       
+    max-width: 50%;   
+    margin: 0 auto;    
+    padding: 40px 60px; 
+    background-color: #e2e8f0;
+    box-shadow: none;  
+    border-radius: 0;  
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. Cabeçalho (Header)
+   ========================================================================== */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    padding: 1.2rem 2rem;
+    border-bottom: 4px solid var(--accent-color);
+    z-index: 1000;
+    box-shadow: 0 4px 10px /* Preto transparente */ rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+header h1 { 
+    margin: 0; 
+    font-size: 1.5rem; 
+    max-width: 80%;
+}
+
+.logo-header {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 45px;
+    width: auto;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    font-weight: normal;
+    color: var(--accent-color);
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   3. Tipografia Base
+   ========================================================================== */
+h2 {
+    color: var(--primary-color);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 12px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: var(--secondary-color);
+    margin-top: 25px;
+    margin-bottom: 12px;
+}
+
+h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
+ul {
+    margin-bottom: 1.2rem;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   4. Elementos de Mídia e Listas Especiais
+   ========================================================================== */
+.img-container {
+    display: table; /* Faz o contêiner "abraçar" o tamanho da imagem */
+    max-width: 850px; /* Garante que o bloco tenha o mesmo limite da foto */
+    margin: 30px auto; /* O 'auto' centraliza o bloco na tela */
+    padding: 15px;
+    background-color: /* Branco acinzentado */ #f7fafc;
+    border-radius: 8px;
+    border: 1px solid /* Cinza claro */ #e2e8f0;
+    box-sizing: border-box;
+}
+
+.img-container img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px /* Preto transparente */ rgba(0, 0, 0, 0.05);
+}
+
+.caption { 
+    font-size: 0.85rem; 
+    color: /* Cinza intermediário */ #718096; 
+    margin-top: 12px; 
+    font-style: italic; 
+}
+
+.safety-list { 
+    list-style-type: none; 
+    padding-left: 0; 
+}
+
+.safety-list li { 
+    margin-bottom: 12px; 
+    padding-left: 30px; 
+    position: relative; 
+}
+
+.safety-list li::before { 
+    content: '✔️'; 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+}
+
+.torque-list {
+    background-color: /* Cinza bem claro */ #f8f9fa;
+    border: 1px solid /* Cinza claro */ #e9ecef;
+    padding: 15px 15px 15px 35px;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+/* ==========================================================================
+   5. Tabelas
+   ========================================================================== */
+
+/* Container responsivo com visual de cartão */
+.table-container { 
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden; 
+    margin: 25px 0; 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px /* Preto transparente */ rgba(0, 0, 0, 0.08);
+    border: 1px solid /* Cinza claro */ #e2e8f0;
+}
+
+/* Estrutura base da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: /* Branco */ #ffffff;
+}
+
+/* Células: Borda, espaçamento e alinhamento centralizado */
+th, td { 
+    border: 1px solid /* Cinza médio */ #cbd5e0;
+    padding: 14px; 
+    text-align: center;     /* Centraliza na horizontal */
+    vertical-align: middle; /* Centraliza na vertical */
+}
+
+/* Estilo do Cabeçalho */
+th { 
+    background-color: var(--primary-color); 
+    color: var(--text-light); 
+    font-weight: 600;
+}
+
+/* Efeito Zebrado nas Linhas */
+tr:nth-child(even) { 
+    background-color: /* Branco acinzentado */ #f7fafc; 
+}
+
+/* ==========================================================================
+   6. Boxes, Alertas, Fórmulas e Destaques
+   ========================================================================== */
+.formula-box {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    margin: 25px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    box-shadow: inset 0 2px 6px /* Preto transparente */ rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.link-box-container {
+    margin: 25px 0; 
+    padding: 20px; 
+    border: 2px dashed /* Cinza médio */ #cbd5e0; 
+    border-radius: 8px;
+    text-align: center;
+    background-color: /* Branco */ #ffffff;
+}
+
+.highlight-box {
+    background-color: /* Cinza-esverdeado claro */ #f0f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+/* Variações de Boxes e Alertas */
+.example-box { 
+    background-color: /* Azul muito claro */ #eef7ff; 
+    border-left: 5px solid /* Verde escuro */ #2e7d32; 
+    padding: 20px; 
+    margin: 25px 0; 
+    border-radius: 6px; 
+    box-shadow: 0 2px 4px /* Preto transparente */ rgba(0, 0, 0, 0.02);
+}
+
+.example-box.blue-box {
+    background-color: /* Azul claro */ #e3f2fd;
+    border-left-color: /* Azul médio */ #1976d2;
+}
+
+.example-box.orange-box {
+    background-color: /* Laranja muito claro */ #fff3e0;
+    border-left-color: /* Laranja escuro */ #ef6c00;
+}
+
+.norma-box {
+    background-color: /* Azul pastel */ #ebf8ff;
+    border-left: 5px solid var(--secondary-color);
+    padding: 20px;
+    margin: 25px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px /* Preto transparente */ rgba(0, 0, 0, 0.02);
+}
+
+.info-box {
+    background-color: /* Azul claro */ #e3f2fd;
+    border-left: 5px solid /* Azul vivo */ #2196f3;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.info-box h4 {
+    margin-top: 0;
+    color: /* Azul marinho escuro */ #0d47a1;
+}
+
+.alert { 
+    padding: 15px; 
+    background-color: /* Rosa Claro pastel / Salmão suave */ #fdecea; 
+    border-left: 5px solid /* Vermelho */ #e74c3c;  
+    margin: 25px 0; 
+    border-radius: 6px; 
+    color: /* Castanho/Marrom escuro */ #5d4037;
+    box-shadow: 0 2px 4px /* Preto transparente */ rgba(0, 0, 0, 0.02);
+}
+
+.alert-box { 
+    background-color: /* Amarelo/Creme claro */ #fff9e6; 
+    border-left: 5px solid /* Vermelho */ #e74c3c; 
+    padding: 20px; 
+    margin: 25px 0; 
+    border-radius: 6px; 
+    color: /* Castanho/Marrom escuro */ #5d4037;
+}
+        
+.danger-box { 
+    background-color: /* Vermelho muito claro */ #fff5f5; 
+    border-left: 5px solid /* Vermelho vivo */ #e53e3e; 
+    padding: 20px; 
+    margin: 25px 0; 
+    border-radius: 6px; 
+    color: /* Cinza escuro */ #2d3748;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.badge-norma { background-color: /* Azul */ #2980b9; }
+.badge-pratica { background-color: /* Verde */ #27ae60; }
+.badge-alerta { background-color: /* Vermelho escuro */ #c0392b; }
+
+/* ==========================================================================
+   7. Grelha de Exercícios Dinâmica
+   ========================================================================== */
+.exercicios-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.exercise-box {
+    background-color: /* Azul-acinzentado claro */ #f0f4f8;
+    border: 1px solid /* Cinza-azul suave */ #d9e2ec;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+        
+.exercicios-coluna { 
+    flex: 1; 
+    min-width: 300px; 
+}
+
+.exercise-card {
+    border-left: 5px solid var(--secondary-color); 
+    background: /* Branco */ #ffffff; 
+    padding: 22px; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    border-radius: 6px; 
+    box-shadow: var(--shadow);
+}
+
+.exercise-title {
+    font-weight: bold; 
+    color: var(--secondary-color); 
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+.btn-feedback {
+    background-color: var(--accent-color); 
+    color: var(--text-dark); 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-top: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-feedback:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-feedback:active {
+    transform: scale(0.98);
+}
+        
+.feedback-box {
+    margin-top: 12px; 
+    padding: 15px; 
+    background-color: /* Verde claro */ #f0fff4; 
+    border-left: 4px solid /* Verde médio */ #38a169; 
+    border-radius: 6px;
+}
+
+.feedback-badge {
+    display: inline-block;
+    background-color: /* Verde folha */ #48bb78; 
+    color: /* Branco */ #fff; 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   8. Rodapé (Footer)
+   ========================================================================== */
+footer {
+    background-color: /* Grafite / Cinza quase preto */ #1a202c;
+    color: /* Cinza claro */ #a0aec0;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 50px;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    text-align: center;
+    font-size: 0.9rem;
+}

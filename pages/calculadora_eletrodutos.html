@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="estilos.css">
+
+    <title>Dimensionamento de Eletrodutos - NBR 5410</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+
+        .container{
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 750px;
+            width: 100%;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+
+        p.subtitle {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .table-ref {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .input-group label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .input-group input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #2563eb;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-calc {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-calc:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-clear {
+            background-color: #e2e8f0;
+            color: #475569;
+        }
+
+        .btn-clear:hover {
+            background-color: #cbd5e1;
+        }
+
+        .results {
+            margin-top: 24px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .result-item.highlight {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px dashed #cbd5e1;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .highlight span:last-child {
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-4 border-b pb-2 text-amber-600">Calculadora Dimensionamento de Eletrodutos</h1>
+
+       <h2>Parâmetros e Tabelas de Referência</h2>
+
+       <p style="font-size: 1.0 rem; font-weight: 600; color: #475569; margin-bottom: 4px;">Cabos PVC 750V (Seção Ext. Total)</p>
+       <table class="table-ref">
+        <thead>
+            <tr>
+                <th>Nominal</th>
+                <th>1,5 mm²</th>
+                <th>2,5 mm²</th>
+                <th>4,0 mm²</th>
+                <th>6,0 mm²</th>
+                <th>10,0 mm²</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Ext. Total</strong></td>
+                <td>7,10 mm²</td>
+                <td>10,20 mm²</td>
+                <td>13,20 mm²</td>
+                <td>17,30 mm²</td>
+                <td>29,20 mm²</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="font-size: 1.0 rem; font-weight: 600; color: #475569; margin-bottom: 4px;">Eletrodutos (Seção Útil Permitida - 40%)</p>
+    <table class="table-ref">
+        <thead>
+            <tr>
+                <th>DN</th>
+                <th>Diâmetro Int.</th>
+                <th>Área Total (100%)</th>
+                <th>Área Útil (40%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>16 mm (3/8")</td><td>11,80 mm</td><td>109,36 mm²</td><td>43,76 mm²</td></tr>
+            <tr><td>20 mm (1/2")</td><td>15,40 mm</td><td>186,27 mm²</td><td>74,52 mm²</td></tr>
+            <tr><td>25 mm (3/4")</td><td>19,00 mm</td><td>113,40 mm²</td><td>113,40 mm²</td></tr>
+            <tr><td>32 mm (1")</td><td>25,00 mm</td><td>490,87 mm²</td><td>196,30 mm²</td></tr>
+            <tr><td>40 mm (1.1/4")</td><td>30,00 mm</td><td>706,86 mm²</td><td>282,70 mm²</td></tr>
+            <tr><td>50 mm (1.1/2")</td><td>38,00 mm</td><td>1134,11 mm²</td><td>453,60 mm²</td></tr>
+        </tbody>
+    </table>
+
+    
+
+    <h1 style="text-align:center;">Dimensionamento de eletrodutos</h1>
+
+    <p class="subtitle">Taxa de Ocupação Máxima: 40% (NBR 5410)</p>
+
+    <div class="calculator-body">
+        <div class="input-group">
+            <label for="c15">Cabos de 1,5 mm²</label>
+            <input type="number" id="c15" min="0" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label for="c25">Cabos de 2,5 mm²</label>
+            <input type="number" id="c25" min="0" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label for="c40">Cabos de 4,0 mm²</label>
+            <input type="number" id="c40" min="0" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label for="c60">Cabos de 6,0 mm²</label>
+            <input type="number" id="c60" min="0" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label for="c100">Cabos de 10,0 mm²</label>
+            <input type="number" id="c100" min="0" placeholder="0">
+        </div>
+
+        <div class="button-group">
+            <button type="button" id="btnCalcular" class="btn-calc">Calcular</button>
+            <button type="button" id="btnLimpar" class="btn-clear">Limpar</button>
+        </div>
+    </div>
+
+    <div class="results">
+        <div class="result-item">
+            <span>Total de Condutores:</span>
+            <span id="resQtd">0</span>
+        </div>
+        <div class="result-item">
+            <span>Seção total dos Cabos:</span>
+            <span id="resAreaCabos">0.00 mm²</span>
+        </div>
+        <div class="result-item">
+            <span>Seção Mín. do Eletroduto (100%):</span>
+            <span id="resAreaEletroduto">0.00 mm²</span>
+        </div>
+        <div class="result-item highlight">
+            <span>Eletroduto Recomendado:</span>
+            <span id="resNominal">-</span>
+        </div>
+    </div>
+</div>
+
+
+ <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Calculadora de Eletrodutos</p>
+    </footer>
+
+<script>
+    // Diâmetros externos típicos para cabos PVC 750V (NBR NM 247-3)
+    const cabos = {
+        c15:  { area: 7.1 },
+        c25:  { area: 10.2 },
+        c40:  { area: 13.20 },
+        c60:  { area: 17.30 },
+        c100: { area: 29.20 }
+    };
+
+    // Áreas úteis considerando 40% de ocupação interna eletroduto corrugado  (Tigreflex®)
+    const eletrodutos = [
+    { nominal: "DN 16 mm (3/8\")",  areaUtil40: 43.76 },   // Di = 12.8 mm
+    { nominal: "DN 20 mm (1/2\")",  areaUtil40: 74.52 },   // Di = 16.0 mm
+    { nominal: "DN 25 mm (3/4\")",  areaUtil40: 113.40 },  // Di = 21.0 mm
+    { nominal: "DN 32 mm (1\")",    areaUtil40: 196.30 },  // Di = 27.0 mm
+    { nominal: "DN 40 mm (1.1/4\")", areaUtil40: 282.70 }, // Di = 36.1 mm PEAD Duto Flexível (Subterrâneo)
+    { nominal: "DN 50 mm (1.1/2\")", areaUtil40: 453.60 }  // Di = 41.4 mm PEAD Duto Flexível (Subterrâneo)
+];
+
+function calcular() {
+    let qtdTotal = 0;
+    let areaTotalCabos = 0;
+
+    for (const key in cabos) {
+        const input = document.getElementById(key);
+        const val = parseInt(input.value) || 0;
+        qtdTotal += val;
+        areaTotalCabos += val * cabos[key].area;
+    }
+
+    if (qtdTotal === 0) {
+        limpar();
+        return;
+    }
+
+    const areaMinimaEletroduto = areaTotalCabos / 0.40;
+
+    let recomendado = "Acima de DN 50 mm";
+    for (const e of eletrodutos) {
+        if (areaTotalCabos <= e.areaUtil40) {
+            recomendado = e.nominal;
+            break;
+        }
+    }
+
+    document.getElementById("resQtd").innerText = qtdTotal;
+    document.getElementById("resAreaCabos").innerText = areaTotalCabos.toFixed(2).replace('.', ',') + " mm²";
+    document.getElementById("resAreaEletroduto").innerText = areaMinimaEletroduto.toFixed(2).replace('.', ',') + " mm²";
+    document.getElementById("resNominal").innerText = recomendado;
+}
+
+function limpar() {
+    const inputs = document.querySelectorAll('.input-group input');
+    inputs.forEach(input => input.value = '');
+
+    document.getElementById("resQtd").innerText = "0";
+    document.getElementById("resAreaCabos").innerText = "0,00 mm²";
+    document.getElementById("resAreaEletroduto").innerText = "0,00 mm²";
+    document.getElementById("resNominal").innerText = "-";
+}
+
+    // Atribuição direta dos eventos no DOM
+document.getElementById("btnCalcular").addEventListener("click", calcular);
+document.getElementById("btnLimpar").addEventListener("click", limpar);
+
+    // Permite disparar o cálculo ao apertar Enter em qualquer input
+document.querySelectorAll('.input-group input').forEach(input => {
+    input.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            calcular();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

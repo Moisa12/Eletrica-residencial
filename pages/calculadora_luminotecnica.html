@@ -4,47 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guia em Instalações Elétricas - Simulador Luminotécnico</title>
+
+  <link rel="stylesheet" href="estilos.css">
+
   <style>
-    /* Identidade visual (mesmo padrão das aulas) */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      background-color: #f4f4f9;
-      padding-top: 110px;
-      font-size: 20px;
-    }
+   
 
-    header {
-      background-color: #2c3e50;
-      color: #ffffff;
-      padding: 1rem 0;
-      text-align: center;
-      border-bottom: 5px solid #f1c40f;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .logo-header {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      height: 50px;
-      width: auto;
-    }
-
-    header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; }
-    .subtitle { font-size: 1rem; color: #f1c40f; margin-top: 5px; }
-
+    
     .container {
       max-width: 900px;
       margin: 20px auto;
@@ -54,33 +20,7 @@
       border-radius: 12px;
     }
 
-    h2 {
-      color: #2c3e50;
-      border-left: 6px solid #f1c40f;
-      padding-left: 15px;
-      margin-top: 20px;
-    }
-
-    p { text-align: justify; }
-
-    .alert {
-      padding: 20px;
-      background-color: #e3f2fd;
-      border-left: 6px solid #1976d2;
-      margin: 20px 0;
-      border-radius: 4px;
-    }
-
-    .formula-box {
-      background-color: #2c3e50;
-      color: #f1c40f;
-      padding: 18px;
-      font-size: 1.25rem;
-      text-align: center;
-      font-family: monospace;
-      border-radius: 8px;
-      margin: 18px 0;
-    }
+    
 
     .simulator-box {
       background-color: #fef9e7;
@@ -162,33 +102,17 @@
 
     .resultado strong { color: #2c3e50; }
 
-    footer {
-      background-color: #2c3e50;
-      color: #bdc3c7;
-      text-align: center;
-      padding: 25px 0;
-      margin-top: 50px;
-      border-top: 5px solid #f1c40f;
-    }
 
-    footer p { margin: 0; text-align: center; font-size: 0.9rem; }
-
-    @media (max-width: 768px) {
-      .container { padding: 20px; margin: 10px; }
-      .logo-header { display: none; }
-      .field { min-width: 100%; }
-    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Guia em Instalações Elétricas</h1>
-    <div class="subtitle">Calculadora de Fluxo Luminoso</div>
-    <img src="../images/logo-.png" alt="Logotipo" class="logo-header" />
-  </header>
-
   <div class="container">
+
+
+    <h2 class="text-2xl font-bold text-indigo-700 mb-4">
+      Calculadora Fluxo Luminoso
+    </h2>
 
     <div class="formula-box">
       Φ<sub>total</sub> = (E × A) / (FU × FM)
@@ -275,8 +199,9 @@
   </div>
 
   <footer>
-    <p>© 2026 - Guia em Instalações Elétricas</p>
+    <p>© 2026 - Guia em Instalações Elétricas Residenciais | Calculadora Fluxo Luminoso</p>
   </footer>
+
 
   <script>
     // Presets didáticos (valores típicos). Ajuste conforme o caso real.

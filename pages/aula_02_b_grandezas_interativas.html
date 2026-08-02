@@ -3,132 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quadro Interativo de Grandezas Elétricas</title>
-    <!-- Carrega o Tailwind CSS para estilização moderna e responsiva -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 4</title>
+    
+    <link rel="stylesheet" href="estilos.css">
+    
     <style>
-        /* Estilos personalizados */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+     
+        .subtitle {
+            font-size: 0.95rem;
+            font-weight: normal;
+            color: var(--accent-color);
+            margin-top: 5px;
+            letter-spacing: 0.5px;
         }
+
+        .main-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .main-description {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        /* ==========================================================================
+           Tabelas Interativas (Baseada na estrutura da Aula 1)
+           ========================================================================== */
+        .table-container { 
+            overflow-x: auto; 
+            margin: 30px 0; 
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Efeito interativo nas células clicáveis */
         .interactive-cell {
             cursor: pointer;
             transition: all 0.2s ease;
         }
+
         .interactive-cell:hover {
-            background-color: #dbeafe; /* Light blue on hover */
-            transform: scale(1.02);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background-color: #ebf8ff !important;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
-        .modal-background {
-            background-color: rgba(0, 0, 0, 0.7);
+
+
+        /* ==========================================================================
+           Grid de Resistividade
+           ========================================================================== */
+        .grid-resistividade {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
-        /* Estilo para as fórmulas sem LaTeX */
-        .formula-text {
-            font-family: 'Consolas', 'Courier New', monospace;
+
+        @media (min-width: 640px) {
+            .grid-resistividade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-resistividade { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+
+        .card-material {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid #cbd5e0;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .card-material.prata { border-top-color: #a0aec0; }
+        .card-material.cobre { border-top-color: #38a169; }
+        .card-material.ouro { border-top-color: #ecc94b; }
+        .card-material.aluminio { border-top-color: #ed8936; }
+
+        .card-tag {
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+        }
+        .cobre .card-tag { color: #2f855a; }
+        .ouro .card-tag { color: #b7791f; }
+        .aluminio .card-tag { color: #dd6b20; }
+
+        .card-material h3 {
+            margin: 5px 0;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
+        .card-value {
+            font-family: monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin: 10px 0;
+        }
+
+        .card-desc {
+            font-size: 1.0rem;
+            color: #718096;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* ==========================================================================
+           Lista de Cientistas
+           ========================================================================== */
+        .scientists-list {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 15px;
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .scientists-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        .scientists-list li {
             font-size: 1.1rem;
-            color: #1e40af;
+            margin-bottom: 0;
         }
+
+        .highlight-name {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* ==========================================================================
+           Janela Modal (Janela de Detalhes Dinâmicos)
+           ========================================================================== */
+        .modal-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-background.flex {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            margin: 20px;
+            box-sizing: border-box;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal-content.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .btn-close-x {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #a0aec0;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .btn-close-x:hover { color: #2d3748; }
+
+        .modal-body-text {
+            color: #4a5568;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .modal-context-box {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #2b6cb0;
+            margin-bottom: 20px;
+        }
+
+        .modal-formula-box {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn-modal-close {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-modal-close:hover {
+            background-color: var(--primary-color);
+        }
+
+ 
     </style>
 </head>
 <body>
 
-    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white rounded-2xl shadow-2xl">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-blue-800 mb-2">
-            Grandezas Elétricas Fundamentais
-        </h1>
-        <p class="text-center text-gray-600 mb-8">
-            Clique em qualquer célula para ver detalhes, definição e contexto de aplicação.
-        </p>
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 2_b:</h1>
+        <div class="subtitle">Quadro Interativo de Grandezas Elétricas</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
 
-        <!-- Tabela Interativa -->
-        <div class="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-blue-600">
+    <div class="container">
+        <h1 class="main-title">Grandezas Elétricas Fundamentais</h1>
+        <p> Clique em qualquer célula para ver detalhes, definição e contexto de aplicação.</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
                     <tr>
-                        <th scope="col" class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-white uppercase tracking-wider rounded-tl-xl">
-                            Grandeza Elétrica
-                        </th>
-                        <th scope="col" class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Letra/Símbolo (Circuito)
-                        </th>
-                        <th scope="col" class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Unidade de Medida
-                        </th>
-                        <th scope="col" class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-white uppercase tracking-wider rounded-tr-xl">
-                            Equação (Lei de Ohm)
-                        </th>
+                        <th style="width: 30%;">Grandeza Elétrica</th>
+                        <th style="width: 20%;">Letra/Símbolo (Circuito)</th>
+                        <th style="width: 25%;">Unidade de Medida</th>
+                        <th style="width: 25%;">Equação (Lei de Ohm)</th>
                     </tr>
                 </thead>
-                <tbody id="grandezas-table" class="bg-white divide-y divide-gray-200">
-                    <!-- O conteúdo da tabela será preenchido via JavaScript -->
-                </tbody>
+                <tbody id="grandezas-table" >
+                    </tbody>
             </table>
         </div>
         
-        <!-- Nova seção de Cientistas com Datas -->
-        <div class="mt-12 p-6 bg-gray-100 rounded-xl border border-gray-200">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">
-                Conexões Históricas: Matemáticos e Cientistas da Eletricidade
-            </h2>
-            <p class="text-gray-600 text-sm text-center mb-4">
-                As unidades de medida das grandezas elétricas homenageiam cientistas que foram fundamentais para a descoberta e o desenvolvimento da eletricidade:
-            </p>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm list-disc list-inside px-4">
-                <li><span class="font-semibold text-blue-700">Alessandro Volta (Volt - V):</span> (1745–1827) Inventou a primeira bateria elétrica (Pilha de Volta).</li>
-                <li><span class="font-semibold text-blue-700">André-Marie Ampère (Ampère - A):</span> (1775–1836) Pai do eletromagnetismo, definiu a corrente elétrica.</li>
-                <li><span class="font-semibold text-blue-700">Georg Simon Ohm (Ohm - &Omega;):</span> (1789–1854) Estabeleceu a relação entre Tensão, Corrente e Resistência (Lei de Ohm).</li>
-                <li><span class="font-semibold text-blue-700">James Watt (Watt - W):</span> (1736–1819) Contribuiu para a medição da Potência (embora ligado ao motor a vapor, seu nome é usado para potência elétrica e mecânica).</li>
-                <li><span class="font-semibold text-blue-700">Charles-Augustin de Coulomb (Coulomb - C):</span> (1736–1806) Unidade de medida da carga elétrica.</li>
-                <li><span class="font-semibold text-blue-700">Michael Faraday (Farad - F):</span> (1791–1867) Contribuiu fundamentalmente para a eletroquímica e o eletromagnetismo.</li>
-            </ul>
+        <h2>Resistividade Específica dos Materiais (&rho;)</h2>
+        <p>
+            Valores de referência calculados a 20°C na unidade prática para instalações:
+        </p>
+            
+        <div class="grid-resistividade">
+            <div class="card-material prata">
+                <span class="card-tag">1º Melhor Condutor</span>
+                <h3>Prata</h3>
+                <p class="card-value">0,0159 &Omega;·mm²/m</p>
+                <p class="card-desc">Excelente condução, mas custo comercial proibitivo.</p>
+            </div>
+            
+            <div class="card-material cobre">
+                <span class="card-tag">Padrão Residencial</span>
+                <h3>Cobre</h3>
+                <p class="card-value">0,0172 &Omega;·mm²/m</p>
+                <p class="card-desc">O melhor equilíbrio entre preço e alta condutividade.</p>
+            </div>
+            
+            <div class="card-material ouro">
+                <span class="card-tag">Não Oxida</span>
+                <h3>Ouro</h3>
+                <p class="card-value">0,0244 &Omega;·mm²/m</p>
+                <p class="card-desc">Perfeito para conectores eletrônicos sensíveis e áudio.</p>
+            </div>
+            
+            <div class="card-material aluminio">
+                <span class="card-tag">Redes Aéreas</span>
+                <h3>Alumínio</h3>
+                <p class="card-value">0,0282 &Omega;·mm²/m</p>
+                <p class="card-desc">Mais leve e barato, ideal para linhas de transmissão externas.</p>
+            </div>
         </div>
+
+        <h2>Conexões Históricas: Matemáticos e Cientistas da Eletricidade</h2>
+        <p> As unidades de medida das grandezas elétricas homenageiam cientistas que foram fundamentais para a descoberta e o desenvolvimento da eletricidade:</p>
+        <ul class="scientists-list">
+            <li><span class="highlight-name">Alessandro Volta (Volt - V):</span> (1745–1827) Inventou a primeira bateria elétrica (Pilha de Volta).</li>
+            <li><span class="highlight-name">André-Marie Ampère (Ampère - A):</span> (1775–1836) Pai do eletromagnetismo, definiu a corrente elétrica.</li>
+            <li><span class="highlight-name">Georg Simon Ohm (Ohm - &Omega;):</span> (1789–1854) Estabeleceu a relação entre Tensão, Corrente e Resistência (Lei de Ohm).</li>
+            <li><span class="highlight-name">James Watt (Watt - W):</span> (1736–1819) Contribuiu para a medição da Potência (embora ligado ao motor a vapor, seu nome é usado para potência elétrica).</li>
+            <li><span class="highlight-name">Charles-Augustin de Coulomb (Coulomb - C):</span> (1736–1806) Unidade de medida da carga elétrica.</li>
+            <li><span class="highlight-name">Michael Faraday (Farad - F):</span> (1791–1867) Contribuiu fundamentalmente para a eletroquímica e o eletromagnetismo.</li>
+        </ul>
     </div>
 
-    <!-- Modal para Detalhes Interativos -->
-    <div id="info-modal" class="fixed inset-0 hidden items-center justify-center z-50 modal-background">
-        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl max-w-lg w-full m-4 transform transition-all duration-300 scale-95 opacity-0" id="modal-content-container">
-            <div class="flex justify-between items-center mb-4 border-b pb-2">
-                <h3 id="modal-title" class="text-2xl font-bold text-gray-800">Detalhes</h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-900 text-3xl leading-none">
-                    &times;
-                </button>
+    <div id="info-modal" class="modal-background">
+        <div class="modal-content" id="modal-content-container">
+            <div class="modal-header">
+                <h3 id="modal-title">Detalhes</h3>
+                <button onclick="closeModal()" class="btn-close-x">&times;</button>
             </div>
-            <p id="modal-definition" class="text-gray-700 mb-4"></p>
-            <div id="modal-context" class="bg-blue-50 p-3 rounded-lg border border-blue-200 text-sm text-gray-600"></div>
+            <p id="modal-definition" class="modal-body-text"></p>
+            <div id="modal-context" class="modal-context-box"></div>
             
-            <!-- Exibição da fórmula (opcional) -->
-            <div id="modal-formula-container" class="mt-4 hidden">
-                <p class="text-lg font-semibold text-gray-800 mb-2">Fórmula Relacionada:</p>
-                <div id="modal-formula" class="bg-gray-100 p-3 rounded-lg text-center text-xl formula-text"></div>
+            <div id="modal-formula-container" style="display: none;">
+                <p style="font-weight: 600; margin-bottom: 5px; color: var(--text-dark);">Fórmula Relacionada:</p>
+                <div id="modal-formula" class="modal-formula-box formula-text"></div>
             </div>
 
-            <div class="mt-6 flex justify-end">
-                <button onclick="closeModal()" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-150">
-                    Fechar
-                </button>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="btn-modal-close">Fechar</button>
             </div>
         </div>
     </div>
     
-    <!-- Rodapé -->
-    <footer class="mt-8 py-4 text-center text-sm text-gray-500">
-        <© 2026 - Guia em Instalações Elétricas Residenciais | Aula 2_b
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 2_b</p>
     </footer>
 
     <script>
-        // Dados do Quadro, com as fórmulas em formato de texto simples
         const grandezasData = [
             {
                 grandeza: "Tensão Elétrica (Voltagem)",
                 letra: "U ou V",
                 unidade: "Volt",
                 simbolo: "V",
-                equacao: "U = R x I", // Corrigido para texto simples
+                equacao: "U = R x I",
                 definicao: "É a força ou pressão que impulsiona os elétrons através de um condutor. É a diferença de potencial (DDP) entre dois pontos.",
                 contexto: "Medida em paralelo. Fontes comuns são pilhas, baterias e tomadas. Também é chamada de Força Eletromotriz (E)."
             },
@@ -137,7 +372,7 @@
                 letra: "I",
                 unidade: "Ampère",
                 simbolo: "A",
-                equacao: "I = U / R", // Corrigido para texto simples
+                equacao: "I = U / R",
                 definicao: "É o fluxo ordenado de elétrons através de um condutor. É a taxa de fluxo de carga elétrica por unidade de tempo.",
                 contexto: "Medida em série. Pode ser contínua (CC ou DC) ou alternada (CA ou AC). Corrente excessiva causa superaquecimento."
             },
@@ -145,8 +380,8 @@
                 grandeza: "Resistência Elétrica",
                 letra: "R",
                 unidade: "Ohm",
-                simbolo: "&Omega;", // Mantido o símbolo &Omega; (Unicode/HTML Entity) para melhor visualização
-                equacao: "R = U / I", // Corrigido para texto simples
+                simbolo: "&Omega;",
+                equacao: "R = U / I",
                 definicao: "É a oposição que o material condutor oferece à passagem da corrente elétrica. Ela converte energia elétrica em calor (Efeito Joule).",
                 contexto: "Medida em paralelo (usando ohmímetro). Materiais com alta resistência são isolantes, e com baixa resistência, condutores."
             },
@@ -155,7 +390,7 @@
                 letra: "P",
                 unidade: "Watt",
                 simbolo: "W",
-                equacao: "P = U x I", // Corrigido para texto simples
+                equacao: "P = U x I",
                 definicao: "É a taxa na qual a energia elétrica é consumida ou transferida em um circuito. Indica a 'força de trabalho' do equipamento.",
                 contexto: "A potência é o que define o consumo de energia (kWh). É crucial para o dimensionamento de disjuntores e fiação."
             }
@@ -170,77 +405,59 @@
         const modalFormula = document.getElementById('modal-formula');
         const modalFormulaContainer = document.getElementById('modal-formula-container');
 
-        // Função para preencher a tabela com os dados
         function renderTable() {
             grandezasData.forEach(item => {
                 const row = tableBody.insertRow();
-                row.className = 'hover:bg-gray-50 transition duration-150 ease-in-out';
                 
-                // Célula Grandeza
-                createCell(row, item.grandeza, 'font-medium text-gray-900', item);
+                // Aplica a classe interativa em todas as células da linha
+                createCell(row, item.grandeza, 'font-weight: 600; color: var(--text-dark);', item);
+                createCell(row, item.letra, '', item);
                 
-                // Célula Letra/Símbolo (Circuito)
-                createCell(row, item.letra, 'text-gray-700', item);
-                
-                // Célula Unidade e Símbolo
-                // Usando HTML Entity para Omega, se aplicável
-                const unidadeContent = item.unidade + ' (' + (item.simbolo === '&Omega;' ? item.simbolo : item.simbolo) + ')';
-                createCell(row, unidadeContent, 'text-gray-700', item);
+                const unidadeContent = item.unidade + ' (' + item.simbolo + ')';
+                createCell(row, unidadeContent, '', item);
 
-                // Célula Equação (Texto Simples)
-                const eqText = item.equacao;
-                const eqCell = createCell(row, `<span class="formula-text">${eqText}</span>`, 'text-blue-600 font-bold', item);
+                const eqText = `<span class="formula-text">${item.equacao}</span>`;
+                createCell(row, eqText, '', item);
             });
         }
 
-        // Função auxiliar para criar células clicáveis
-        function createCell(row, content, baseClasses, data) {
+        function createCell(row, content, inlineStyle, data) {
             const cell = row.insertCell();
-            cell.className = `px-3 py-4 sm:px-6 whitespace-nowrap text-sm interactive-cell ${baseClasses}`;
+            cell.className = 'interactive-cell';
+            if(inlineStyle) cell.style.cssText = inlineStyle;
             cell.innerHTML = content;
             cell.onclick = () => showModal(data);
             return cell;
         }
 
-        // Função para exibir o Modal
         function showModal(data) {
             modalTitle.textContent = data.grandeza;
             modalDefinition.textContent = data.definicao;
-            modalContext.innerHTML = `<span class="font-bold text-blue-700">Contexto:</span> ${data.contexto}`;
+            modalContext.innerHTML = `<strong style="color: var(--primary-color)">Contexto:</strong> ${data.contexto}`;
             
-            // Atualiza a fórmula e mostra o container (usando a classe formula-text)
-            modalFormula.innerHTML = `<span class="formula-text">${data.equacao}</span>`;
-            modalFormulaContainer.classList.remove('hidden');
+            modalFormula.innerHTML = data.equacao;
+            modalFormulaContainer.style.display = 'block';
 
-            // Exibe o modal com animação
-            modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => {
-                modalContentContainer.classList.remove('scale-95', 'opacity-0');
-                modalContentContainer.classList.add('scale-100', 'opacity-100');
+                modalContentContainer.classList.add('show');
             }, 10);
         }
 
-        // Função para fechar o Modal
         function closeModal() {
-            modalContentContainer.classList.remove('scale-100', 'opacity-100');
-            modalContentContainer.classList.add('scale-95', 'opacity-0');
+            modalContentContainer.classList.remove('show');
             setTimeout(() => {
-                modal.classList.add('hidden');
                 modal.classList.remove('flex');
-            }, 300); // Aguarda o fim da transição
+            }, 300);
         }
 
-        // Inicialização
         document.addEventListener('DOMContentLoaded', renderTable);
         
-        // Fechar modal ao clicar fora
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
             }
         });
     </script>
-
 </body>
 </html>

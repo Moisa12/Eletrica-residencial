@@ -4,110 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 21</title>
+
+    <link rel="stylesheet" href="estilos.css">  
     
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 110px; 
-        }
-
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 20px; }
-        
+        /* Grid das ferramentas manuais */
         .tool-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         .tool-card {
-            border: 1px solid #ddd;
+            border: 1px solid #cbd5e1;
             padding: 15px;
             border-radius: 8px;
-            background-color: #eee;
-            transition: transform 0.2s;
+            background-color: #f8fafc;
+            transition: transform 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: #f1c40f;
+            transform: translateY(-4px);
+            border-color: #2563eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .tool-card h4 {
+            margin-top: 0;
+            color: #1e293b;
         }
 
         .safety-box { 
-            background-color: #ffebee; 
-            border-left: 5px solid #d32f2f; 
+            background-color: #fef2f2; 
+            border-left: 5px solid #ef4444; 
             padding: 20px; 
-            margin: 20px 0; 
-            border-radius: 4px; 
+            margin: 25px 0; 
+            border-radius: 6px; 
         }
 
         .instrument-box { 
-            background-color: #eeee; 
-            border-left: 5px solid #2196f3; 
+            background-color: #f0f9ff; 
+            border-left: 5px solid #0284c7; 
             padding: 20px; 
             margin: 20px 0; 
-            border-radius: 4px; 
+            border-radius: 6px; 
         }
 
         .cat-tag {
             display: inline-block;
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 2px 8px;
+            background-color: #0f172a;
+            color: #facc15;
+            padding: 3px 10px;
             border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
         .img-placeholder {
-            background-color: #fff;
-            border: 1px dashed #ccc;
-            padding: 15px;
+            background-color: #ffffff;
+            border: 1px dashed #cbd5e1;
+            padding: 10px;
             text-align: center;
-            margin: 10px 0;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: #666;
+            margin: 12px 0;
+            border-radius: 6px;
             min-height: 120px;
             display: flex;
             align-items: center;
@@ -117,26 +81,27 @@
 
         .img-placeholder img {
             max-width: 100%;
-            max-height: 120px;
+            max-height: 110px;
             object-fit: contain;
         }
 
         .btn-search {
-            display: inline-block;
+            display: block;
             margin-top: 10px;
             padding: 8px 12px;
-            background-color: #2c3e50;
-            color: white;
+            background-color: #1e293b;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.85rem;
             text-align: center;
-            transition: background 0.3s;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
         }
 
         .btn-search:hover {
-            background-color: #34495e;
-            color: #f1c40f;
+            background-color: #2563eb;
+            color: #ffffff;
         }
 
         .list-items {
@@ -145,10 +110,10 @@
         }
 
         .list-items li {
-            background: #fff;
-            margin-bottom: 10px;
+            background: #ffffff;
+            margin-bottom: 12px;
             padding: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
@@ -156,70 +121,139 @@
             gap: 15px;
         }
 
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
-        footer p { text-align: center; margin: 0; }
+        /* Estilização para as Categorias de Sobretensão */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+
+        /* Estilo do Botão do Gabarito */
+        .gabarito-box {
+            margin-top: 15px;
+        }
+
+        .btn-gabarito {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+
+        .btn-gabarito::-webkit-details-marker {
+            display: none;
+        }
+
+        .btn-gabarito:hover {
+            background-color: #1d4ed8;
+        }
+
+        .gabarito-conteudo {
+            margin-top: 12px;
+            padding: 14px 18px;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Guia em Instalações Elétricas Residenciais | Aula 21</h1>
-        <div class="subtitle">Ferramentas e Instrumentos Essenciais</div>
+        <h1>Guia em Instalações Elétricas Residenciais</h1>
+        <div class="subtitle">Aula 21: Ferramentas, Instrumentos de Medição e Equipamentos de Segurança</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
 
     <div class="container">
         <h2>O Arsenal do Eletricista Profissional</h2>
         <p>
-            Trabalhar com eletricidade exige precisão. Utilizar ferramentas inadequadas pode danificar os componentes e colocar a sua vida em risco. Toda ferramenta manual deve possuir <strong>isolamento para 1000V</strong> conforme a norma NR-10.
+            Trabalhar com eletricidade exige precisão e responsabilidade. Utilizar ferramentas inadequadas ou sem isolamento pode danificar componentes e colocar sua vida em risco de choque elétrico ou arco elétrico. Toda ferramenta manual de contato direto deve possuir <strong>isolamento para 1000 V (Norma NR-10 e IEC 60900)</strong>.
         </p>
 
-        <h3>1. Ferramentas Manuais Básicas</h3>
+        <h3>1. Ferramentas Manuais Isoladas (NBR IEC 60900 / NR-10)</h3>
         <div class="tool-grid">
             <div class="tool-card">
                 <div>
-                    <h4>Alicate Universal (Isolado)</h4>
-                    <p>A ferramenta mais versátil. Serve para apertar, dobrar e cortar fios e cabos.</p>
+                    <h4>Alicate Universal (1000V)</h4>
+                    <p>A ferramenta mais versátil. Serve para segurar, dobrar, torcer e cortar condutores rígidos e flexíveis.</p>
                 </div>
                 <div class="img-placeholder">
                     <img src="../images/universal.png" alt="Alicate Universal"> 
                 </div>
                 <a href="https://www.google.com/search?q=alicate+universal+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
             </div>
+
             <div class="tool-card">
                 <div>
                     <h4>Alicate de Corte Diagonal</h4>
-                    <p>Específico para cortar condutores. Sua ponta fina permite cortes rentes.</p>
+                    <p>Específico para decapagem e corte de condutores. Sua ponta permite cortes rentes nas caixas de passagem.</p>
                 </div>
                 <div class="img-placeholder">
-                    <img src="../images/lateral.png" alt="Alicate corte lateral"> 
+                    <img src="../images/lateral.png" alt="Alicate de corte diagonal"> 
                 </div>
                 <a href="https://www.google.com/search?q=alicate+de+corte+diagonal+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
             </div>
+
             <div class="tool-card">
                 <div>
                     <h4>Alicate de Bico Meia-Cana</h4>
-                    <p>Essencial para alcançar locais apertados e fazer "olhais" em bornes de parafuso.</p>
+                    <p>Essencial para alcançar locais de difícil acesso no interior de quadros e caixas de tomada.</p>
                 </div>
                 <div class="img-placeholder">
                     <img src="../images/bico.png" alt="Alicate de Bico Meia-Cana">
                 </div>
                 <a href="https://www.google.com/search?q=alicate+de+bico+meia+cana+isolado+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
             </div>
+
             <div class="tool-card">
                 <div>
-                    <h4>Jogos de Chaves Isoladas</h4>
-                    <p>Devem ter a haste isolada para evitar curtos ao trabalhar em quadros energizados.</p>
+                    <h4>Jogo de Chaves Isoladas</h4>
+                    <p>Fenda e Philips com haste revestida de isolamento até a ponta para evitar curtos-circuitos acidentais.</p>
                 </div>
                 <div class="img-placeholder">
                     <img src="../images/chaves.png" alt="Jogo de chaves isoladas"> 
                 </div>
                 <a href="https://www.google.com/search?q=jogo+de+chaves+fenda+philips+isoladas+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
             </div>
+
             <div class="tool-card">
                 <div>
-                    <h4>Alicate Decapador</h4>
-                    <p>Aumenta a velocidade do trabalho e preserva os filamentos do cabo.</p>
+                    <h4>Alicate Prensa-Terminais</h4>
+                    <p>Indispensável para crimpar terminais ilhós (tubulares) em cabos flexíveis antes da conexão nos disjuntores.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="../images/crimpador.png" alt="Alicate Prensa Terminais"> 
+                </div>
+                <a href="https://www.google.com/search?q=alicate+crimpador+ilhos+tubular&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <h4>Alicate Decapador Automático</h4>
+                    <p>Aumenta a produtividade na montagem do quadro e remove a isolação de PVC sem ferir os filamentos de cobre.</p>
                 </div>
                 <div class="img-placeholder">
                     <img src="../images/decapador.png" alt="Alicate decapador"> 
@@ -229,75 +263,253 @@
         </div>
 
         <div class="safety-box">
-            <h4>🚨 Regra Crítica de Segurança</h4>
-            <p>Nunca utilize ferramentas com o cabo rachado. O isolamento de fábrica é testado em laboratório; o improviso não garante proteção contra choque.</p>
+            <h4>🚨 Regra Crítica de Segurança (NR-10)</h4>
+            <p><strong>Inspeção Visual Obrigatória:</strong> Antes de iniciar qualquer serviço, verifique a integridade do isolamento das ferramentas. Se o cabo emborrachado apresentar trincas, cortes ou desgaste aparente, a ferramenta deve ser descartada imediatamente. O improviso com fita isolante comum não substitui o isolamento de fábrica testado para 1000 V.</p>
         </div>
 
-        <h2>Instrumentos de Medição e Categorias</h2>
-        <p>A escolha do instrumento depende do local onde você vai medir. Isso é determinado pela <strong>Categoria de Sobretensão (CAT)</strong>.</p>
+        <h2>Categorias de Sobretensão dos Instrumentos (IEC 61010)</h2>
+        <p>
+            Não basta apenas comprar um multímetro; é preciso verificar a sua <strong>Categoria de Sobretensão (CAT)</strong>. A categoria indica a capacidade do instrumento de suportar transientes e picos de tensão indutivos vindos da rede sem explodir na mão do operador.
+        </p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Nível de Energia e Transientes</th>
+                        <th>Locais de Aplicação Típicos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CAT I</strong></td>
+                        <td>Baixa energia</td>
+                        <td>Equipamentos eletrônicos protegidos, circuitos impressos de baixa tensão.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CAT II</strong></td>
+                        <td>Média/Baixa energia</td>
+                        <td>Tomadas residenciais e cargas monofásicas conectadas por plugue (eletrodomésticos).</td>
+                    </tr>
+                    <tr style="background-color: #fef08a;">
+                        <td><strong>CAT III</strong></td>
+                        <td><strong>Alta energia (Residencial / Predial)</strong></td>
+                        <td><strong>Quadros de Distribuição (QDF), disjuntores, barramentos, alimentadores e motores.</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>CAT IV</strong></td>
+                        <td>Altíssima energia</td>
+                        <td>Origem da instalação elétrica: Padrão de Entrada da concessionária, ramal de serviço e transformadores.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Instrumentos de Medição Fundamentais</h2>
 
         <div class="instrument-box">
-            <span class="cat-tag">CAT III 600V ou CAT IV</span>
+            <span class="cat-tag">Exigência Mínima: CAT III 600V</span>
             <h3>2. Multímetro Digital</h3>
-            <p>Essencial para medir Tensão, Resistência e Continuidade.</p>
-            <p><strong>Segurança:</strong> Para uso residencial em quadros de distribuição, o multímetro deve ser no mínimo <strong>CAT III</strong>.</p>
+            <p>Instrumento utilizado para verificar Tensão Alternada (V<sub>AC</sub> e Contínua (V<sub>DC</sub>), Resistência (&Omega;), Continuidade sonora (teste de cabos interrompidos) e Corrente em baixa escala.</p>
+            <p><strong>Aplicação no QDF:</strong> Medição da tensão fornecida pela concessionária e verificação de circuitos abertos.</p>
             <a href="https://www.google.com/search?q=multimetro+digital+cat+iii+600v&tbm=shop" target="_blank" class="btn-search">Pesquisar Multímetros CAT III</a>
         </div>
 
-        <div class="instrument-box" style="background-color: #f0f4c3; border-left-color: #afb42b;">
-            <span class="cat-tag">CAT III ou IV</span>
+        <div class="instrument-box" style="background-color: #f0fdf4; border-left-color: #22c55e;">
+            <span class="cat-tag">Exigência Mínima: CAT III 600V</span>
             <h3>3. Alicate Amperímetro</h3>
-            <p>Mede a corrente elétrica sem precisar abrir o circuito.</p>
-            <p><strong>Segurança:</strong> Fundamental para identificar balanceamento de fases e sobrecargas.</p>
+            <p>Mede a corrente elétrica (A) em tempo real por indução eletromagnética através da garra, <strong>sem a necessidade de seccionar ou abrir o circuito</strong>.  Mede também Tensão Alternada (V<sub>AC</sub>, Contínua (V<sub>DC</sub>), Resistência (&Omega;) e Continuidade sonora (teste de cabos interrompidos). </p>
+            <p><strong>Aplicação Prática:</strong> Verificação do balanceamento de fases, diagnóstico de sobrecargas em disjuntores e teste de consumo de aparelhos específicos (chuveiros, ar-condicionado).</p>
             <a href="https://www.google.com/search?q=alicate+amperimetro+digital+cat+iii&tbm=shop" target="_blank" class="btn-search">Pesquisar Amperímetros</a>
         </div>
 
-        <div class="instrument-box" style="background-color: #fff9c4; border-left-color: #fbc02d;">
-            <h3>4. Detector de Tensão (Caneta)</h3>
-            <p>Identifica o fio Fase sem contato metálico. É a primeira ferramenta a ser usada.</p>
-            <a href="https://www.google.com/search?q=detector+de+tensão+tipo+caneta+sonoro&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
+        <div class="instrument-box" style="background-color: #fefce8; border-left-color: #eab308;">
+            <span class="cat-tag">Verificação Sem Contato (NCV)</span>
+            <h3>4. Detector de Tensão por Aproximalidade (Caneta NCV)</h3>
+            <p>Identifica a presença do campo elétrico do condutor Fase sem necessidade de contato metálico com a parte viva.</p>
+            <p><strong>Regra de Ouro:</strong> Deve ser a primeira ferramenta utilizada após o desligamento do disjuntor para realizar o teste de ausência de tensão antes de tocar em qualquer cabo.</p>
+            <a href="https://www.google.com/search?q=detector+de+tensao+tipo+caneta+sonoro+cat+iii&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
         </div>
 
-        <h3>5. Itens Complementares e Organização</h3>
-        <p>Para uma instalação bem feita e produtiva, estes itens não podem faltar na sua mala:</p>
-        
+        <!-- Seção 4: Equipamentos de Proteção (EPIs e EPCs) -->
+        <h2>4. Equipamentos de Proteção (NR-10 e NR-6)</h2>
+        <p>
+            A segurança no trabalho elétrico não depende apenas de ferramentas isoladas, mas da proteção direta do corpo do profissional contra <strong>choques elétricos, arcos voltaicos, queimaduras e impactos</strong>. A utilização dos EPIs adequados é obrigatória em qualquer intervenção, inclusive no teste de ausência de tensão.
+        </p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">NR-6 / NR-10</span>
+                    <h4>Óculos de Proteção Contra Arco Elétrico</h4>
+                    <p>Protegem os olhos contra projeção de partículas, poeira de alvenaria e, principalmente, contra a radiação UV e projeções de metal derretido em um eventual curto-circuito/arco elétrico.</p>
+                </div>
+                <a href="https://www.google.com/search?q=oculos+de+seguranca+incolor+uv&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Até 1000V (Classe 0)</span>
+                    <h4>Luvas Isolantes de Borracha + Luva de Cobertura</h4>
+                    <p>Indispensáveis em intervenções energizadas ou testes. A luva de borracha garante o isolamento elétrico e a sobreluva de couro protege contra perfurações e rasgos mecânicos.</p>
+                </div>
+                <a href="https://www.google.com/search?q=luva+isolante+de+borracha+classe+0+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Proteção Mecânica</span>
+                    <h4>Luva de Vaqueta ou Pigmentada</h4>
+                    <p>Ideal para a etapa de infraestrutura bruta: passagem de cabos, rasgo em paredes, fixação de eletrodutos e manuseio de caixas de passagem, evitando cortes e bolhas.</p>
+                </div>
+                <a href="https://www.google.com/search?q=luva+de+vaqueta+misto+eletricista&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Isolamento Elétrico</span>
+                    <h4>Calçado de Segurança Sem Biqueira Metálica</h4>
+                    <p>Botina com solado isolante de poliuretano (PU) sem partes metálicas expostas. Evita o fechamento de circuito para a terra em caso de toque acidental em condutor energizado.</p>
+                </div>
+                <a href="https://www.google.com/search?q=botina+de+seguranca+eletricista+sem+biqueira+de+aco&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Sinalização / EPC</span>
+                    <h4>Cadeado e Garra de Bloqueio (LOTO)</h4>
+                    <p>Equipamento de Proteção Coletiva (EPC) para travamento do disjuntor geral durante a manutenção. Impede que outra pessoa religue o circuito acidentalmente enquanto você trabalha.</p>
+                </div>
+                 <a href="https://www.google.com/search?q=trava+bloqueio+disjuntor+lockout+tagout&tbm=shop" target="_blank" class="btn-search">Ver Kits LOTO</a>
+            </div>
+        </div>
+
+        <!-- Seção 5: Ferramentas e Instrumentos Complementares (Avançados) -->
+        <h2>5. Ferramentas e Instrumentos Avançados (Complementares)</h2>
+        <p>
+            Estes equipamentos não são obrigatórios para o início da carreira, mas representam um salto de produtividade, sofisticação e precisão técnica. São excelentes investimentos conforme o volume de serviços do profissional aumenta. 
+        </p>
+        <p><strong>Trazem alta produtividade, precisão de diagnóstico e valor agregado ao serviço.</strong></p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Avançado / Diagnóstico</span>
+                    <h4>Megômetro Digital (Testador de Isolação)</h4>
+                    <p>Aplica tensões elevadas (250V, 500V, 1000V) para medir a resistência de isolação dos cabos. Indispensável para localizar fuga de corrente que faz o disjuntor DR (IDR) armar sem motivo aparente.</p>
+                </div>
+                <a href="https://www.google.com/search?q=megometro+digital+1000v&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Avançado / Rastreamento</span>
+                    <h4>Localizador/Rasteador de Cabos e Eletrodutos</h4>
+                    <p>Injeta um sinal de rádio no circuito e permite rastrear a rota exata de tubulações escondidas dentro da alvenaria ou forro, sem precisar quebrar paredes no escuro.</p>
+                </div>
+                <a href="https://www.google.com/search?q=localizador+rastreador+de+cabos+e+tubulacoes&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Avançado / Termografia</span>
+                    <h4>Câmera Térmica (Termocâmera)</h4>
+                    <p>Permite enxergar o aquecimento excessivo em conexões e disjuntores do quadro de distribuição em segundos, antes mesmo de ocorrer uma falha grave ou incêndio.</p>
+                </div>
+                <a href="https://www.google.com/search?q=camera+termica+para+eletricista&tbm=shop" target="_blank" class="btn-search">Ver Modelos</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Produtividade</span>
+                    <h4>Parafusadeira/Furadeira à Bateria (12V / 18V)</h4>
+                    <p>Acelera drasticamente o tempo de montagem de caixas de passagem, espelhos de tomada e fixação de quadros de distribuição em comparação ao uso de chaves manuais.</p>
+                </div>
+                <a href="https://www.google.com/search?q=parafusadeira+furadeira+12v+bateria&tbm=shop" target="_blank" class="btn-search">Ver Opções</a>
+            </div>
+
+            <div class="tool-card">
+                <div>
+                    <span class="cat-tag">Medição Prática</span>
+                    <h4>Trena a Laser (Medidor de Distância)</h4>
+                    <p>Permite calcular a metragem de cômodos inteiros e comprimentos de circuitos longos sozinho, sem precisar de auxílio de ajudante para segurar a ponta da trena.</p>
+                </div>
+                <a href="https://www.google.com/search?q=trena+a+laser+40m&tbm=shop" target="_blank" class="btn-search">Ver Preços</a>
+            </div>
+        </div>
+
+        <h3>6. Organização e Infraestrutura</h3>
+        <p>Para manter um alto nível de produtividade e transmitir confiança ao cliente, a organização dos insumos é indispensável:</p>
+
         <ul class="list-items">
             <li>
                 <div>
-                    <strong>Trena de 5 metros:</strong> Essencial para medições de infraestrutura e altura de tomadas.
+                    <strong>Trena com Trava e Corpo Emborrachado (5m):</strong> Essencial para marcação de altura de caixas de tomada (30 cm, 110 cm e 200 cm) e corte de eletrodutos.
                 </div>
                 <a href="https://www.google.com/search?q=trena+5m+emborrachada+profissional&tbm=shop" target="_blank" class="btn-search">Ver Trena</a>
             </li>
             <li>
                 <div>
-                    <strong>Fita Isolante Profissional:</strong> Prefira as de classe A para garantir boa adesão e isolamento térmico.
+                    <strong>Fita Isolante de Classe A (3M Scotch 33+ ou similar):</strong> Garante aderência duradoura, retardância a chamas e isolamento térmico adequado nas emendas e derivações.
                 </div>
                 <a href="https://www.google.com/search?q=fita+isolante+profissional+3m+scotch+33&tbm=shop" target="_blank" class="btn-search">Ver Fitas</a>
             </li>
             <li>
                 <div>
-                    <strong>Bolsa ou Mala de Ferramentas:</strong> Mantém seu material organizado e passa uma imagem de profissionalismo.
-                </div>
-                <a href="https://www.google.com/search?q=bolsa+para+ferramentas+de+eletricista+reforçada&tbm=shop" target="_blank" class="btn-search">Ver Bolsas</a>
-            </li>
-            <li>
-                <div>
-                    <strong>Guia Passa-fio Profissional:</strong> Com alma de aço para tubulações longas.
+                    <strong>Guia Passa-fio Profissional (Alma de Aço / Poliester):</strong> Utilizada para transpor curvas acentuadas em eletrodutos sem deformar ou prender.
                 </div>
                 <a href="https://www.google.com/search?q=passa+fio+profissional+nylon+alma+de+aço&tbm=shop" target="_blank" class="btn-search">Ver Guia</a>
             </li>
             <li>
                 <div>
-                    <strong>Nível de Bolha Magnético:</strong> Para alinhamento perfeito de caixas e quadros.
+                    <strong>Nível de Bolha Magnético:</strong> Garante o alinhamento perfeito de caixas 4x2", 4x4" e quadros de distribuição aparentes/embutidos.
                 </div>
                 <a href="https://www.google.com/search?q=nivel+de+bolha+magnetico+pequeno&tbm=shop" target="_blank" class="btn-search">Ver Níveis</a>
             </li>
+            <li>
+                <div>
+                    <strong>Bolsa / Mala de Ferramentas Reforçada:</strong> Mantém todo o ferramental protegido do impacto e facilita o transporte.
+                </div>
+                <a href="https://www.google.com/search?q=bolsa+para+ferramentas+de+eletricista+reforçada&tbm=shop" target="_blank" class="btn-search">Ver Bolsas</a>
+            </li>
         </ul>
+
+        <!-- Seção Prática Interativa -->
+        <h2>Agora Tente Você! 🛠️</h2>
+        <p>Avalie os cenários abaixo e determine qual é a conduta correta sobre ferramentas e instrumentos:</p>
+
+        <div class="tool-card" style="margin-bottom: 20px;">
+            <h4>Desafio 1: Seleção de Instrumento no Quadro Principal</h4>
+            <p>Você precisa medir a tensão na saída do barramento do Quadro de Distribuição Principal de uma residência. Qual instrumento você deve escolher quanto à Categoria CAT?</p>
+            
+            <details class="gabarito-box">
+                <summary class="btn-gabarito">🔍 Ver Resposta Comentada</summary>
+                <div class="gabarito-conteudo">
+                    <p><strong>Resposta Correta:</strong> Deve-se utilizar um multímetro ou alicate amperímetro classificado como <strong>no mínimo CAT III 600V</strong>.</p>
+                    <p><em>Justificativa:</em> O Quadro de Distribuição é considerado o ponto de painel de circuitos centrais da edificação, local sujeito a picos de sobretensão elevados. Utilizar um instrumento CAT II nesse ponto representa sério risco de explosão e arco elétrico.</p>
+                </div>
+            </details>
+        </div>
+
+        <div class="tool-card">
+            <h4>Desafio 2: Medição de Corrente sem Interrupção</h4>
+            <p>O cliente reclama que o disjuntor do circuito de tomadas da cozinha está armando esporadicamente. Como você deve medir a corrente que está passando pelo cabo do disjuntor sem ter que seccionar o circuito?</p>
+            
+            <details class="gabarito-box">
+                <summary class="btn-gabarito">🔍 Ver Resposta Comentada</summary>
+                <div class="gabarito-conteudo">
+                    <p><strong>Resposta Correta:</strong> Deve-se utilizar o <strong>Alicate Amperímetro</strong>envolvendo individualmente o condutor Fase do circuito dentro da garra do instrumento.</p>
+                    <p><em>Atenção Prática:</em> Nunca envolva o cabo Fase e o Neutro juntos na garra do amperímetro, pois a soma dos campos magnéticos opostos resultará em uma leitura zero!</p>
+                </div>
+            </details>
+        </div>
 
     </div>
 
     <footer>
         <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 21</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">Conforme normas ABNT NBR 5410, NR-10 e IEC 61010</p>
     </footer>
 
 </body>

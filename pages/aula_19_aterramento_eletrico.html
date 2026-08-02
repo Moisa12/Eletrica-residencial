@@ -5,299 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 19</title>
     
+    <link rel="stylesheet" href="estilos.css">tle>
+
     <style>
-        /* Estilos mantidos conforme o modelo original */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
+
+        /* ESTILOS DOS CARDS VISUAIS DE COMPONENTES */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0 40px 0;
         }
 
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        .card-componente {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #2980b9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-componente:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-componente h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .card-componente p {
+            font-size: 0.92rem;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .btn-google-img {
+            display: inline-flex;
             align-items: center;
-         }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            text-align: center;
         }
 
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 20px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: #fff; text-align: center; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
-        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
-        
-        .img-container { text-align: center; margin: 25px 0; }
-        .img-container img { max-width: 600px; width: 100%; height: auto; border-radius: 8px; }
-        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
-
-        footer { 
-            background-color: #2c3e50; 
-            color: #bdc3c7; 
-            text-align: center; 
-            padding: 2rem 0; 
-            margin-top: 40px;
-            width: 100%;
+        .btn-google-img:hover {
+            background-color: #f1c40f;
+            color: #2c3e50;
         }
-        footer p { text-align: center; margin: 0; }
-        .img-container a {
-    text-decoration: none;
-    color: #2980b9;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-}
-.img-container a:hover {
-    color: #f1c40f;
-    text-decoration: underline;
-}
-        
     </style>
 </head>
-<body>
 
+<body>
     <header>
-        <h1>Guia em Instalações Elétricas Residenciais | Aula 19:</h1>
-        <div class="subtitle">Aterramento Elétrico: Conceitos e Normas</div>
+        <h1>Guia em Instalações Elétricas Residenciais e Prediais | Aula 19</h1>
+        <div class="subtitle">Aterramento Elétrico, SPDA e Proteção contra Descargas Atmosféricas</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
 
     <div class="container">
-        <h2>O que é o Aterramento?</h2>
-        <p>
-            O aterramento elétrico é a ligação intencional de um sistema (carcaças e pontos neutros) à terra. Segundo a <strong>NBR 5410</strong>, sua função principal é garantir a segurança das pessoas contra choques elétricos por contatos indiretos e oferecer um caminho seguro para correntes de falta e surtos.
-        </p>
-
         
-        <h2>1. Funções Principais do Aterramento</h2>
-        <ul>
-            <li><strong>Proteção Pessoal:</strong> Escoar correntes de fuga das carcaças metálicas para a terra, evitando choques.</li>
-            <li><strong>Proteção de Equipamentos:</strong> Em conjunto com o DPS, desvia surtos atmosféricos (Raios - NBR 5419).</li>
-            <li><strong>Estabilização de Tensão:</strong> Mantém o potencial do neutro próximo a zero.</li>
+        <div class="alert" style="background-color: #e3f2fd; border-left-color: #1976d2;">
+            <p style="margin: 0;">
+                O aterramento elétrico é a ligação intencional de um sistema à terra. Segundo a <strong>NBR 5410</strong> e a <strong>NBR 5419</strong>, sua função principal é garantir a segurança das pessoas contra choques por contato indireto, oferecer um caminho de escoamento seguro para surtos e desviar descargas atmosféricas (raios).
+            </p>
+        </div>
+
+        <h2>1. Funções Principais e Diretrizes de Aterramento</h2>
+        <ul class="list-standard">
+            <li><strong>Proteção Pessoal:</strong> Escoar correntes de fuga de carcaças metálicas para a terra, evitando choques elétricos.</li>
+            <li><strong>Proteção de Equipamentos:</strong> Em conjunto com o DPS, desvia sobretensões provocadas por manobras na rede ou raios.</li>
+            <li><strong>Estabilização de Tensão:</strong> Mantém o potencial do condutor neutro próximo a zero volts em relação ao solo.</li>
         </ul>
 
         <div class="alert">
-            <strong>Importante:</strong> Nunca utilize o fio Neutro como Terra (o famoso "aterramento de tomada"). Isso é perigoso e proibido pela NBR 5410 na maioria dos casos residenciais comuns.
+            <strong>Regra Proibitiva (NBR 5410):</strong> Nunca utilize o fio Neutro como Terra no ponto final das tomadas (o chamado "aterramento de tomada"). Isso é perigoso, pois o rompimento do neutro energizará todas as carcaças metálicas conectadas a ele.
         </div>
-
-        <hr>
 
         <h2>2. Componentes de um Sistema de Aterramento</h2>
-        <p>
-            Um sistema eficiente é composto por três partes fundamentais:
-        </p>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Componente</th>
-                        <th>Função</th>
-                        <th>Identificação Visual</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Haste de Aterramento</strong></td>
-                        <td>Faz o contato direto com o solo para dispersar a corrente.</td>
-                        <td>Cobre ou aço cobreado enterrado.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Condutor de Proteção (PE)</strong></td>
-                        <td>Liga as tomadas e carcaças ao barramento de terra.</td>
-                        <td>Cor <strong>Verde</strong> ou Verde-Amarela.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>BEP (Barramento de Equipotencialização Principal)</strong></td>
-                        <td>Ponto onde se conectam todos os aterramentos da edificação.</td>
-                        <td>Barra de cobre no QDC ou caixa separada.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <p>Conheça os principais elementos que compõem a infraestrutura de aterramento no solo e no interior das edificações:</p>
 
-        <hr>
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #e67e22;">
+                <div>
+                    <h4>Haste de Aterramento (Copperweld)</h4>
+                    <p>Núcleo de aço revestido por uma camada de cobre por eletrodeposição. É cravada verticalmente no solo para fazer o contato elétrico e dispersar as correntes.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=haste+de+aterramento+copperweld+alta+camada" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #f1c40f;">
+                <div>
+                    <h4>Caixa de Inspeção de Aterramento</h4>
+                    <p>Caixa em PVC, polietileno ou concreto com tampa para abrigar o topo da haste. Permite acessar a conexão para medições periódicas de resistência e inspeção visual.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=caixa+de+inspecao+de+aterramento+pvc+concreto" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #d35400;">
+                <div>
+                    <h4>Conectores de Aterramento e Solda Exotérmica</h4>
+                    <p>Conectores de pressão (grampo grampo / grampo haste) ou conexões moleculares por solda exotérmica (fusão irreversível de cobre sem resistência de contato).</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=solda+exotermica+grampo+haste+aterramento" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #27ae60;">
+                <div>
+                    <h4>Condutor de Proteção (PE) e Condutor PEN</h4>
+                    <p>Cabo PE identificado obrigatoriamente pela cor <strong>Verde</strong> ou <strong>Verde-Amarela</strong>. Caso seja utilizado esquema TN-C, o condutor <strong>PEN</strong> deve ser identificado na cor <strong>Azul-claro com anilhas/fitas verde-amarelas nas extremidades</strong>.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=condutor+de+protecao+pe+verde+amarelo+pen" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #2980b9;">
+                <div>
+                    <h4>BEP (Barramento de Equipotencialização Principal)</h4>
+                    <p>Barra de cobre situada próxima ao quadro principal ou entrada da edificação onde se interligam todos os aterramentos, neutro da entrada e estruturas metálicas.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=barramento+de+equipotencializacao+principal+bep" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #8e44ad;">
+                <div>
+                    <h4>Caixa de Equipotencialização Secundária (BES)</h4>
+                    <p>Ponto de equalização local instalado em salas técnicas, centros de medição ou subsolos para interligar tubulações metálicas de água e gás ao aterramento elétrico.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=caixa+bes+equipotencializacao+secundaria" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
 
         <h2>3. Esquemas de Aterramento (NBR 5410)</h2>
-        <p>A norma define siglas onde a primeira letra indica a situação da fonte (T-Terra) e a segunda a situação das massas do equipamento:</p>
+        <p>A NBR 5410 classifica os esquemas utilizando siglas padronizadas em que a primeira letra indica a relação da fonte com a terra e a segunda a relação das massas:</p>
 
-        <ul>
-            <li><strong>TN-S:</strong> O condutor Neutro (N) e o de Proteção (PE - Terra) são distintos em toda a instalação. É o mais seguro.</li>
-            <li><strong>TN-C:</strong> Neutro e Terra são o mesmo condutor (PEN). Não permitido para circuitos terminais de residências modernas.</li>
-            <li><strong>TT:</strong> O aterramento da residência é eletricamente independente do aterramento da concessionária.</li>
+        <ul class="list-standard">
+            <li><strong>TN-S:</strong> O condutor Neutro (N) e o de Proteção (PE) são separados desde a origem até as tomadas. É o esquema mais recomendado para instalações residenciais e prediais.</li>
+            <li><strong>TN-C:</strong> O Neutro e o Terra funcionam no mesmo condutor (PEN). É proibido em circuitos terminais residenciais modernos.</li>
+            <li>
+                <strong>TT:</strong> A edificação possui uma haste de aterramento independente, sem ligação metálica direta com o neutro da concessionária. 
+                <br><em>Nota Normativa (item 6.3.5.2):</em> Exige obrigatoriamente <strong>DR em todos os circuitos</strong> para secionamento de faltas e requer <strong>DPS na topologia 3+1</strong> (três varistores Fase-Neutro e um centelhador/GDT entre Neutro-PE) para assegurar o isolamento galvânico do neutro em regime permanente.
+            </li>
         </ul>
-        
-        <p>No esquema <strong>TN-S</strong>, o condutor Neutro e o de Proteção (Terra) são conectados no mesmo ponto de origem, mas seguem independentes por toda a instalação.</p>
 
-	<div class="img-container">
-    		<a href="../images/aterramento_TN_S.png" target="_blank">
-        
-        <br>
-        <strong>🔍 Clique aqui para abrir o Diagrama TN-S em alta resolução</strong>
-    	</a>
-    	<div class="caption">Esquema TN-S: Recomendado pela NBR 5410 para maior segurança contra choques.</div>
-	</div>
-
-<p>No esquema <strong>TT</strong>, a proteção da residência possui sua própria haste de aterramento, sem ligação metálica com o neutro da concessionária.</p>
-
-<div class="img-container">
-    <a href="../images/aterramento_TT.png" target="_blank">
-        
-        <br>
-        <strong>🔍 Clique aqui para abrir o Diagrama TT em alta resolução</strong>
-    </a>
-    <div class="caption">Esquema TT: Exige obrigatoriamente o uso de DR para garantir a proteção.</div>
-</div>
-        
-        <hr>
-
-        <h2>4. Barramento de Equipotencialização (BEP)</h2>
-        <p>
-            O <strong>BEP</strong> é o elemento central de segurança de uma edificação. Ele consiste em uma barra de cobre onde todos os sistemas de aterramento e elementos metálicos da casa devem ser interconectados.
-        </p>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>O que ligar ao BEP?</th>
-                        <th>Por que?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Hastes de Aterramento</strong></td>
-                        <td>Para dispersar correntes de falta no solo.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Armaduras do Prédio</strong></td>
-                        <td>Aproveita a fundação como reforço de aterramento.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tubulações Metálicas</strong></td>
-                        <td>Evita que canos de água ou gás fiquem com potenciais diferentes.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Para-raios (SPDA)</strong></td>
-                        <td>Obrigatório pela NBR 5419 para evitar centelhamentos.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        
-        <div class="example-box" style="background-color: #fdecea; border-left-color: #e74c3c;">
-            <strong>NBR 5419 (Para-raios):</strong> Se a residência possuir um SPDA (Sistema de Proteção contra Descargas Atmosféricas), o aterramento do para-raios <strong>deve</strong> estar interligado ao aterramento elétrico da casa para evitar centelhamento perigoso.
-        </div>
-        
-        <h2>5. O Terrômetro: Como Medir a Eficiência</h2>
-        <p>
-            Não basta enterrar uma haste; é preciso garantir que ela tenha uma baixa <strong>resistência de aterramento</strong>. O <strong>Terrômetro</strong> é o instrumento específico utilizado para essa medição.
-        </p>
-        
         <div class="img-container">
-    		<img src="../images/terrometro.png" alt="Terrômetro Digital" style="max-width: 200px;">
-    		<div class="caption">Figura: Terrômetro digital utilizado para medição da resistência de aterramento.</div>
-	</div>
-
-        <h3>Método de Queda de Potencial (3 Pontos)</h3>
-        <p>
-            É o método mais comum, onde se utilizam três estacas:
-        </p>
-        <ul>
-            <li><strong>E (Eletrodo):</strong> Conectado à haste que se deseja medir.</li>
-            <li><strong>P (Potencial):</strong> Estaca auxiliar cravada a uma distância intermediária.</li>
-            <li><strong>C (Corrente):</strong> Estaca auxiliar cravada mais distante para fechar o circuito de teste.</li>
-        </ul>
-
-        <div class="alert" style="background-color: #e3f2fd; border-left-color: #2196f3;">
-            <strong>Dica de Profissional:</strong> A medição deve ser feita preferencialmente em períodos secos, pois a umidade mascara a resistência real do solo. Valores abaixo de 10 Ohms são comumente buscados para SPDA, embora a NBR 5410 priorize a continuidade e equipotencialização.
-        </div>
-        
-        <div class="alert">
-            O <strong>DPS (Dispositivo de Proteção contra Surtos)</strong> protege os equipamentos desviando picos de tensão (raios ou manobras) para a terra. A eficácia do DPS é <strong>diretamente dependente</strong> de um aterramento de baixa resistência. Um aterramento ruim torna o DPS ineficaz, pois ele não consegue descarregar a energia rapidamente.
+            <a href="../images/aterramento_TN_S.png" target="_blank">
+                <strong>🔍 Clique aqui para abrir o Diagrama TN-S em alta resolução</strong>
+            </a>
+            <div class="caption">Esquema TN-S: Separação total de Neutro e PE para máxima segurança contra choques e ruído.</div>
         </div>
 
-        <hr>
+        <h2>4. Terrômetro: Medição de Resistência e Resistividade</h2>
+        <p>A eficiência de um eletrodo depende da resistência elétrica do contato com o solo. O instrumento técnico dedicado a essa análise é o <strong>Terrômetro</strong>.</p>
 
-        <h2>Exercícios de Avaliação - Aula 19</h2>
-
-        <p><strong>Questão 1:</strong> Qual é a cor obrigatoriamente definida pela NBR 5410 para o condutor de proteção (fio terra)?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <div class="example-box">
-                <p><strong>Resposta:</strong> Verde ou Verde-Amarela (conhecido popularmente como "brasileirinho").</p>
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #16a085;">
+                <div>
+                    <h4>Terrômetro Digital de Hastes Auxiliares</h4>
+                    <p>Mede a resistência de aterramento através do Método de Queda de Potencial (3 Pontos: Eletrodo, Estaca P e Estaca C) e a resistividade do solo (Método Wenner / 4 hastes).</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=terrometro+digital+3+hastes+queda+de+potencial" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
             </div>
-        </details>
 
-        <br>
-
-        <p><strong>Questão 2:</strong> Em uma instalação onde o Neutro e o Terra são separados desde a origem até as tomadas, qual o nome desse esquema de aterramento?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <div class="example-box">
-                <p><strong>Resposta:</strong> Esquema <strong>TN-S</strong>.</p>
+            <div class="card-componente" style="border-top-color: #2c3e50;">
+                <div>
+                    <h4>Alicate Terrômetro (Medição por Malha Fechada)</h4>
+                    <p>Permite medir a resistência de aterramento sem a necessidade de desconectar o eletrodo ou cravar estacas auxiliares no solo, ideal para centros urbanos e prédios.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=alicate+terrometro+alicate+de+aterramento" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
             </div>
-        </details>
 
-        <br>
+        </div>
 
-        <p><strong>Questão 3:</strong> Um cliente reclama que sente "formigamento" ao tocar na carcaça da geladeira. O que isso indica tecnicamente e como o aterramento resolveria?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <div class="example-box">
-                <p><strong>Resposta:</strong> Indica uma fuga de corrente para a massa (carcaça). O aterramento resolveria oferecendo um caminho de menor resistência para a terra, provocando a atuação do DR ou disjuntor e eliminando o potencial de choque na pessoa.</p>
+        <h2>5. Para-Raios e SPDA: Proteção Contra Descargas Atmosféricas (NBR 5419)</h2>
+        <p>Em edificações prediais, comerciais e residências de grande porte, é exigida a instalação de um <strong>SPDA (Sistema de Proteção contra Descargas Atmosféricas)</strong> conforme as diretrizes da <strong>NBR 5419</strong>. O SPDA é dividido em três subsistemas: <strong>Captação, Descida e Aterramento</strong>.</p>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #c0392b;">
+                <div>
+                    <h4>Captor Tipo Franklin e Hastes de Topo</h4>
+                    <p>Instalado no ponto mais elevado do prédio. Captura a descarga atmosférica direta e a canaliza com segurança para os condutores de descida.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=captor+franklin+para+raios+topo+predio" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
             </div>
-        </details>
 
-        <br>
-
-        <p><strong>Questão 4:</strong> Segundo a NBR 5419, é correto isolar o aterramento do para-raios do aterramento da rede elétrica interna?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <div class="example-box">
-                <p><strong>Resposta:</strong> Não. As normas exigem a <strong>equipotencialização</strong> (interligação) de todos os sistemas de aterramento da edificação para evitar diferenças de potencial perigosas entre as massas durante um raio.</p>
+            <div class="card-componente" style="border-top-color: #d35400;">
+                <div>
+                    <h4>Gaiola de Faraday / Malha de Cobertura</h4>
+                    <p>Rede de condutores de alumínio ou cobre instalada no topo do edifício formando quadriculados no telhado para interceptar os raios em grandes superfícies.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=spda+gaiola+de+faraday+cobertura+predio" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
             </div>
-        </details>
+
+            <div class="card-componente" style="border-top-color: #7f8c8d;">
+                <div>
+                    <h4>Condutores de Descida e Caixas de Medição</h4>
+                    <p>Fitas de alumínio ou cabos de cobre que conduzem a corrente do raio pelas fachadas até o solo. Incluem a caixa de medição com junta de desconexão para ensaios.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=descida+spda+fita+de+aluminio+caixa+de+medicao" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #27ae60;">
+                <div>
+                    <h4>Anel / Malha de Aterramento do SPDA</h4>
+                    <p>Anel fechado de condutores enterrados ao redor do prédio, interligando os eletrodos de aterramento para rápida dispersão da energia do raio no solo.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=anel+de+aterramento+spda+nbr+5419" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #f39c12;">
+                <div>
+                    <h4>DPS Classe I (Ensaio $10/350\ \mu\text{s}$)</h4>
+                    <p>Instalado no QDC de entrada da edificação equipada com SPDA. Suporta impulsos de raios diretos ($I_{imp}$) e drena correntes parciais para o BEP antes que atinjam a rede interna.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=dps+classe+1+raios+diretos+qdc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #2980b9;">
+                <div>
+                    <h4>DPS Classe II (Ensaio $8/20\ \mu\text{s}$)</h4>
+                    <p>Instalado em quadros de distribuição para suportar sobretensões induzidas (raios indiretos e manobras da rede). Essencial em residências urbanas padrão sem SPDA direto.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=dps+classe+2+sobretensao+quadro+de+distribuicao" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <div class="alert" style="background-color: #fdecea; border-left-color: #e74c3c;">
+            <strong>⚠️ Regra de Equipotencialização Crucial (NBR 5419 / NBR 5410):</strong><br>
+            Se uma edificação possui um sistema de para-raios (SPDA), <strong>o aterramento do para-raios DEVE obrigatoriamente estar interligado ao BEP e ao aterramento elétrico da edificação</strong>. Criar aterramentos separados entre o para-raios e a rede elétrica interna gera diferenças de potencial fatais durante um raio, provocando arcos elétricos e incêndios dentro da estrutura.
+        </div>
+
+        <div class="alert" style="background-color: #fff3cd; border-left-color: #e67e22;">
+            <strong>⚠️ Distância de Segurança ($S$) e Segurança de Pessoas (NBR 5419-3):</strong>
+            <ul style="margin-top: 10px; margin-bottom: 0;">
+                <li><strong>Proibição de Compartilhamento:</strong> Os condutores de descida do SPDA nunca devem passar nos mesmos eletrodos ou eletrodutos de fiações elétricas ou de dados. Deve-se respeitar a distância de isolamento de segurança ($S$) para evitar centelhamento e arcos por indução.</li>
+                <li><strong>Tensão de Toque e Passo:</strong> Para mitigar o risco de choques em pedestres na área externa próxima às descidas durante uma tempestade, recomenda-se cobrir a superfície do solo ao redor das hastes com uma camada de brita/asfalto de no mínimo $5\text{ cm}$ de espessura.</li>
+            </ul>
+        </div>
+
+        <h2>6. Soluções Práticas de Campo e Diretrizes da NBR 7117</h2>
+
+        <h3>Efeito de Sombra e Cravação Profunda (Vertical)</h3>
+        <p>A NBR 5410 exige que ao cravar hastes paralelas na horizontal, a distância entre elas seja no mínimo igual ao comprimento de uma haste (ex: 2,40m) para evitar o <em>efeito de sombra</em> (sobreposição dos campos de dissipação).</p>
+        <p>Em locais urbanos com calçadas estreitas, a solução normativa é o <strong>prolongamento vertical (cravação profunda)</strong>, unindo hastes rosqueáveis com luvas de bronze para atingir camadas mais úmidas e estáveis do solo.</p>
+
+        <h3>A Hierarquia dos Eletrodos (NBR 5410)</h3>
+        <ol class="list-standard">
+            <li><strong>1ª Opção (Preferencial):</strong> Utilizar as <strong>próprias armaduras de aço integradas ao concreto das fundações</strong> (estacas, blocos e vigas baldrame).</li>
+            <li><strong>2ª Opção:</strong> Fita ou cabo de cobre nu imerso no concreto da fundação.</li>
+            <li><strong>3ª Opção:</strong> Anel/malha de condutores enterrados no perímetro.</li>
+            <li><strong>4ª Opção (Reformas):</strong> Hastes verticais cravadas diretamente no solo.</li>
+        </ol>
+
+        <h2>7. Exercícios de Avaliação - Aula 19</h2>
+
+        <div class="exercise-box">
+            <h4>Exercício 1: Identificação de Esquemas</h4>
+            <p>Em uma instalação elétrica predial onde o Neutro e o Terra (PE) seguem em condutores separados por toda a rede a partir da origem, qual o esquema de aterramento adotado?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>Esquema <strong>TN-S</strong>.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 2: Equipotencialização em SPDA</h4>
+            <p>De acordo com a NBR 5419, é permitido manter o aterramento do para-raios totalmente isolado do aterramento do quadro elétrico (QDC) da edificação?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p><strong>Não.</strong> Todos os sistemas de aterramento da edificação (SPDA, elétrico, tubulações metálicas e telefonia) devem ser rigorosamente equipotencializados no BEP para evitar centelhamentos e diferenças de potencial perigosas.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 3: Dispositivos de Proteção contra Surtos (DPS)</h4>
+            <p>Qual a diferença principal entre um DPS Classe I e um Classe II no contexto do ensaio de laboratório e aplicação em quadros?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>O <strong>DPS Classe I</strong> é ensaiado com forma de onda $10/350\ \mu\text{s}$ para suportar o impacto de raios diretos ($I_{imp}$), sendo instalado no quadro principal quando há SPDA. O <strong>DPS Classe II</strong> é ensaiado com onda $8/20\ \mu\text{s}$ para suportar sobretensões induzidas na rede elétrica.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 4: Hierarquia de Eletrodos</h4>
+            <p>Segundo a NBR 5410, qual é a primeira opção e mais recomendada para ser utilizada como eletrodo de aterramento em uma nova construção?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>As <strong>próprias armaduras de aço integradas ao concreto das fundações</strong> (vigas baldrame, estacas e blocos).</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 5: Diagnóstico de Campo e Distância de Segurança</h4>
+            <p>É permitido passar o cabo de descida do SPDA do telhado até o solo pelo mesmo eletroduto que alimenta as luminárias da fachada? Por quê?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p><strong>Não.</strong> A NBR 5419-3 proíbe expressamente o compartilhamento do eletroduto e exige manter uma Distância de Segurança ($S$) entre a descida do SPDA e condutores da instalação para evitar que a alta tensão induzida pelo raio pule para a rede de iluminação (arco elétrico).</p>
+            </details>
+        </div>
 
     </div>
 
     <footer>
-        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 19</p>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais e Prediais | Aula 19</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script>
+        MathJax.Hub.Config({
+            tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        });
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Grandezas Elétricas - Estático</title>
+    <title>Quiz: Conversão de Unidades</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -22,12 +22,11 @@
     </script>
 
     <style>
-        /* Define a fonte Inter como padrão */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7fafc; /* Fundo claro */
-            color: #2d3748; /* Texto escuro */
+            background-color: #f7fafc;
+            color: #2d3748;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,13 +53,13 @@
             border-color: #4299e1;
         }
         .correct-answer {
-            background-color: #48bb78 !important; /* Verde */
+            background-color: #48bb78 !important;
             color: white !important;
             border-color: #38a169 !important;
             font-weight: bold;
         }
         .incorrect-answer {
-            background-color: #f56565 !important; /* Vermelho */
+            background-color: #f56565 !important;
             color: white !important;
             border-color: #e53e3e !important;
             font-weight: bold;
@@ -71,16 +70,33 @@
 
     <div class="quiz-container p-6 sm:p-10">
         <h1 class="text-3xl font-extrabold text-blue-600 mb-6 text-center border-b pb-3">
-            Quiz: Grandezas Elétricas
+            Quiz: Conversão de Unidades
         </h1>
-        <p class="text-center text-gray-600 mb-8">Teste seu conhecimento com estas 8 perguntas.</p>
+        <p class="text-center text-gray-600 mb-6">Teste seus conhecimentos em conversão de múltiplos e submúltiplos elétricos.</p>
 
-        <div id="quiz-area">
+        <!-- ALERTA COM LINK PARA A IMAGEM -->
+        <div class="mb-8 p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg flex items-start space-x-3 text-amber-900 shadow-sm">
+            <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+                <p class="font-bold text-sm sm:text-base">Dica de Estudo / Apoio Visual:</p>
+                <p class="text-xs sm:text-sm mt-1">
+                    Dúvidas na regra da escala? Veja a 
+                    <a href="../images/conversao.png" target="_blank" class="font-bold underline text-amber-700 hover:text-amber-900 inline-flex items-center gap-1">
+                        ilustração explicativa de conversão de unidades
+                        <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a> 
+                    antes de responder às perguntas.
+                </p>
             </div>
+        </div>
+
+        <div id="quiz-area"></div>
 
         <div id="score-card" class="mt-8 p-6 bg-gray-100 rounded-lg hidden">
             <h2 class="text-2xl font-bold text-center text-gray-700">Resultados Finais</h2>
-            <p class="text-xl text-center mt-3">Você acertou <span id="correct-count" class="font-extrabold text-blue-600"></span> de 8 perguntas!</p>
+            <p class="text-xl text-center mt-3">Você acertou <span id="correct-count" class="font-extrabold text-blue-600"></span> de 10 perguntas!</p>
             <div id="final-message" class="text-lg font-semibold text-center mt-4"></div>
         </div>
     </div>
@@ -88,79 +104,73 @@
     <script>
         const quizQuestions = [
             {
-                q: "1. Qual grandeza elétrica é definida como a 'pressão' que impulsiona os elétrons e qual é sua unidade?",
-                options: ["Corrente (Ampere)", "Resistência (Ohm)", "Tensão (Volt)", "Potência Ativa (Watt)"],
-                answer: "Tensão (Volt)",
-                rationale: "A tensão elétrica (ou diferença de potencial) é a força motriz que impulsiona as cargas elétricas, medida em Volts."
+                q: "1. Um motor elétrico consome uma potência de 1.5 kW. Quanto vale essa potência em Watts (unidade base)?",
+                options: ["0.0015 W", "15 W", "1500 W", "150000 W"],
+                answer: "1500 W",
+                rationale: "Kilo para a base desce 1 degrau, multiplicamos por 1000. $1.5 \\times 1000 = 1500\\text{ W}$."
             },
             {
-                q: "2. Um chuveiro elétrico de $5500\\ W$ é ligado em uma tensão de $220\\ V$ (DC ou carga puramente resistiva). Qual é a corrente ($I$) que ele consome? (Use $P = U \\cdot I$)",
-                options: ["$20\\ A$", "$25\\ A$", "$12.1\\ A$", "$55\\ A$"],
-                answer: "$25\\ A$",
-                rationale: "Dividindo a potência pela tensão ($5500 / 220$), encontramos a corrente exata de $25\\ A$."
+                q: "2. Um resistor possui resistência de 4700 kΩ. Qual é esse valor expresso em Megaohms (MΩ)?",
+                options: ["4.7 MΩ", "47 MΩ", "0.47 MΩ", "4700000 MΩ"],
+                answer: "4.7 MΩ",
+                rationale: "Kilo para Mega sobe 1 degrau, dividimos por 1000. $4700 \\div 1000 = 4.7\\text{ M}\\Omega$."
             },
             {
-                q: "3. Em um circuito AC, se a Potência Aparente ($S$) é de $1000\\ VA$ e a Potência Ativa ($P$) é de $800\\ W$, qual é o Fator de Potência ($\\text{FP}$)?",
-                options: ["$0.8$", "$1.25$", "$0.6$", "$1.0$"],
-                answer: "$0.8$",
-                rationale: "O Fator de Potência é a razão entre a potência ativa e a aparente ($\\text{FP} = P / S$), resultando em $800 / 1000 = 0.8$."
+                q: "3. Uma corrente elétrica lida no multímetro foi de 0.25 A. Como representá-la em miliampères (mA)?",
+                options: ["2.5 mA", "25 mA", "250 mA", "0.00025 mA"],
+                answer: "250 mA",
+                rationale: "Da base para mili desce 1 degrau, multiplicamos por 1000. $0.25 \\times 1000 = 250\\text{ mA}$."
             },
             {
-                q: "4. A Potência Reativa Q é medida em qual unidade e qual sua principal função no circuito?",
-                options: [
-                    "Watt ($W$); Realiza trabalho útil",
-                    "Volt-Ampere ($VA$); É a potência total",
-                    "Volt-Ampere Reativo ($\\text{VAR}$); Cria campos magnéticos (motores)",
-                    "Ohm ($\\Omega$); Oferece oposição à corrente"
-                ],
-                answer: "Volt-Ampere Reativo ($\\text{VAR}$); Cria campos magnéticos (motores)",
-                rationale: "A potência reativa não produz trabalho direto, mas é fundamental para estabelecer os campos magnéticos indispensáveis em motores e transformadores."
+                q: "4. Um sensor eletrônico opera com uma tensão extremamente baixa de 500 μV. Qual é o valor dessa tensão em milivolts (mV)?",
+                options: ["0.5 mV", "5 mV", "50 mV", "500000 mV"],
+                answer: "0.5 mV",
+                rationale: "De micro para mili ao subir 1 degrau, dividimos por 1000. $500 \\div 1000 = 0.5\\text{ mV}$."
             },
             {
-                q: "5. Qual é a principal diferença entre Tensão Contínua (V<sub>DC</sub>) e Tensão Alternada (V<sub>AC</sub>)?",
-                options: [
-                    "V<sub>DC</sub> é medida em Ampere e V<sub>AC</sub> em Volt.",
-                    "V<sub>DC</sub> é usada em indústrias e V<sub>AC</sub> em residências.",
-                    "V<sub>DC</sub> tem fluxo constante, V<sub>AC</sub> muda de sentido periodicamente.",
-                    "V<sub>AC</sub> só é gerada por painéis fotovoltaicos."
-                ],
-                answer: "V<sub>DC</sub> tem fluxo constante, V<sub>AC</sub> muda de sentido periodicamente.",
-                rationale: "A corrente contínua mantém seu sentido de circulação fixo, enquanto a alternada varia ciclicamente ao longo do tempo."
+                q: "5. A isolação de um cabo elétrico suporta uma tensão máxima de 0.035 MV. Qual é esse valor em kilovolts (kV)?",
+                options: ["3.5 kV", "35 kV", "350 kV", "3500 kV"],
+                answer: "35 kV",
+                rationale: "De Mega para kilo desce 1 degrau, multiplicamos por 1000. $0.035 \\times 1000 = 35\\text{ kV}$."
             },
             {
-                q: "6. Segundo a Lei de Ohm ($U = R \\cdot I$), se a Resistência ($R$) de um circuito é $44\\ \\Omega$ e a Corrente ($I$) é $5\\ A$, qual é a Tensão ($U$) aplicada?",
-                options: ["$8.8\\ V$", "$220\\ V$", "$49\\ V$", "$5\\ V$"],
-                answer: "$220\\ V$",
-                rationale: "Multiplicando a resistência pela corrente ($44 \\cdot 5$), obtemos a tensão resultante de $220\\ V$."
+                q: "6. Uma lâmpada LED consome míseros 8 mA de corrente. Qual o valor dessa corrente na unidade base, em Ampères (A)?",
+                options: ["0.8 A", "0.08 A", "0.008 A", "8000 A"],
+                answer: "0.008 A",
+                rationale: "De mili para a base sobe 1 degrau, dividimos por 1000. $8 \\div 1000 = 0.008\\text{ A}$."
             },
             {
-                q: "7. Se o Fator de Potência ($\\text{FP}$) de uma instalação é $0.5$, isso indica que:",
-                options: [
-                    "A instalação é puramente resistiva.",
-                    "Metade da Potência Aparente está sendo convertida em trabalho útil.",
-                    "A Potência Ativa é o dobro da Potência Aparente.",
-                    "A instalação está com a eficiência máxima ($100\\%$)."
-                ],
-                answer: "Metade da Potência Aparente está sendo convertida em trabalho útil.",
-                rationale: "Um $\\text{FP}$ de $0.5$ significa que apenas $50\\%$ da energia total entregue à instalação está gerando de fato trabalho útil (conversão em luz, calor ou movimento)."
+                q: "7. O chuveiro de uma residência possui potência de 5500 W. Representando esse valor em kW, temos:",
+                options: ["5.5 kW", "55 kW", "0.55 kW", "550 kW"],
+                answer: "5.5 kW",
+                rationale: "Da base para kilo sobe 1 degrau, dividimos por 1000. $5500 \\div 1000 = 5.5\\text{ kW}$."
             },
             {
-                q: "8. Qual componente do Triângulo de Potências (P, Q, S) é a hipotenusa e representa a potência total (mais não necessariamente útil) que o gerador precisa fornecer?",
-                options: ["Potência Ativa ($P$)", "Potência Reativa ($Q$)", "Potência Média", "Potência Aparente ($S$)"],
-                answer: "Potência Aparente ($S$)",
-                rationale: "No triângulo de potências, a potência aparente ($S$) é a hipotenusa, representando a combinação geométrica das potências ativa e reativa."
+                q: "8. Um pequeníssimo capacitor descarrega uma corrente de 1200 μA. Qual o equivalente dessa corrente em Ampères (A)?",
+                options: ["1.2 A", "0.12 A", "0.012 A", "0.0012 A"],
+                answer: "0.0012 A",
+                rationale: "De micro para a base sobem 2 degraus. Dividimos por 1.000.000. $1200 \\div 1000000 = 0.0012\\text{ A}$."
+            },
+            {
+                q: "9. Um rádio transmissor opera na potência de 0.002 MW. Qual é a sua potência expressa em Watts (W)?",
+                options: ["2 W", "20 W", "200 W", "2000 W"],
+                answer: "2000 W",
+                rationale: "De Mega para a base descem 2 degraus. Multiplicamos por 1.000.000. $0.002 \\times 1000000 = 2000\\text{ W}$."
+            },
+            {
+                q: "10. Um técnico mediu uma resistência de 0.68 MΩ. Para registrar o valor em kΩ na planilha, ele anotará:",
+                options: ["6.8 kΩ", "68 kΩ", "680 kΩ", "6800 kΩ"],
+                answer: "680 kΩ",
+                rationale: "De Mega para kilo desce 1 degrau, multiplicamos por 1000. $0.68 \\times 1000 = 680\\text{ k}\\Omega$."
             }
         ];
 
         let questionsAnswered = 0;
         let correctAnswersCount = 0;
 
-        /**
-         * Gera a estrutura de cards para cada pergunta.
-         */
         function renderQuiz() {
             const quizArea = document.getElementById('quiz-area');
-            quizArea.innerHTML = ''; 
+            quizArea.innerHTML = '';
             
             quizQuestions.forEach((qData, index) => {
                 let optionsHtml = '';
@@ -187,15 +197,11 @@
                 quizArea.innerHTML += questionHtml;
             });
 
-            // Re-renderiza o MathJax para processar as fórmulas inseridas no DOM
             if (typeof MathJax !== 'undefined') {
                 MathJax.typesetPromise([quizArea]);
             }
         }
         
-        /**
-         * Função de embaralhamento de arrays (Fisher-Yates)
-         */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -204,9 +210,6 @@
             return array;
         }
 
-        /**
-         * Verifica a resposta selecionada.
-         */
         window.checkAnswer = function(selectedButton, qIndex) {
             const qData = quizQuestions[qIndex];
             const selectedText = selectedButton.getAttribute('data-option-text').trim();
@@ -215,23 +218,15 @@
             const feedbackElement = document.getElementById(`feedback-${qIndex}`);
             const buttons = optionsContainer.querySelectorAll('button');
 
-            // 1. Desabilita todos os botões da pergunta
-            buttons.forEach(btn => {
-                btn.disabled = true;
-            });
+            buttons.forEach(btn => { btn.disabled = true; });
             
-            // 2. Conta a resposta
             if (!selectedButton.classList.contains('incorrect-answer') && !selectedButton.classList.contains('correct-answer')) {
                 questionsAnswered++;
-                if (isCorrect) {
-                    correctAnswersCount++;
-                }
+                if (isCorrect) { correctAnswersCount++; }
             }
             
-            // 3. Aplica o estilo de feedback
             selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
 
-            // 4. Exibe a mensagem de feedback
             feedbackElement.classList.remove('hidden');
             if (isCorrect) {
                 feedbackElement.classList.add('bg-green-100', 'text-green-800');
@@ -240,29 +235,20 @@
                 feedbackElement.classList.add('bg-red-100', 'text-red-800');
                 feedbackElement.innerHTML = `Incorreto. A resposta correta é: "${qData.answer}". (${qData.rationale})`;
                 
-                // Destaca a resposta correta
                 buttons.forEach(btn => {
-                    const btnText = btn.getAttribute('data-option-text').trim();
-                    if (btnText === qData.answer) {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
                         btn.classList.add('correct-answer');
                     }
                 });
             }
 
-            // Garante a correta renderização das fórmulas dentro do feedback
             if (typeof MathJax !== 'undefined') {
                 MathJax.typesetPromise([feedbackElement, optionsContainer]);
             }
             
-            // 5. Verifica se o quiz terminou
-            if (questionsAnswered === quizQuestions.length) {
-                displayFinalScore();
-            }
+            if (questionsAnswered === quizQuestions.length) { displayFinalScore(); }
         };
 
-        /**
-         * Exibe o placar final.
-         */
         function displayFinalScore() {
             const scoreCard = document.getElementById('score-card');
             const correctCountSpan = document.getElementById('correct-count');
@@ -272,23 +258,20 @@
             scoreCard.classList.remove('hidden');
 
             let message = '';
-            if (correctAnswersCount === quizQuestions.length) {
-                message = "Excelente! Você demonstrou total domínio sobre as grandezas elétricas fundamentais.";
+            if (correctAnswersCount === 10) {
+                message = "Excelente! Você domina perfeitamente as conversões de unidades!";
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-green-600";
-            } else if (correctAnswersCount >= 5) {
-                message = "Muito bom! Você fixou muito bem a maioria dos conceitos estruturais.";
+            } else if (correctAnswersCount >= 7) {
+                message = "Muito bom! Você compreendeu bem a lógica de conversão.";
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-blue-600";
             } else {
-                message = "Continue estudando! Revise os triângulos de potências e a Lei de Ohm para consolidar a base teórica.";
+                message = "Continue estudando! Revise as regras da escada de conversão para melhorar.";
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-red-600";
             }
             finalMessageDiv.textContent = message;
-
-            // Rola suavemente até o score card final
             scoreCard.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Inicia o quiz ao carregar a página
         window.onload = renderQuiz;
     </script>
 </body>

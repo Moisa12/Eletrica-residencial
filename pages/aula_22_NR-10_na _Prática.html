@@ -3,81 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NR-10 na Prática: Habilitação, Autorização e Controle</title>
-    
+    <title>Guia em Instalações Elétricas Residenciais - Aula 22</title>
+
+    <link rel="stylesheet" href="estilos.css">
+
     <style>
-        /* PADRÃO VISUAL UNIFICADO */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
+        /* Estilos complementares integrados */
+        .highlight-box {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-weight: bold;
         }
 
-        header {
+        .badge {
             background-color: #2c3e50;
             color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 950px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 15px; margin-top: 40px; text-transform: uppercase; font-size: 1.3rem; }
-        h3 { color: #2980b9; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        
-        .norma-box {
-            background-color: #e8f4fd;
-            border: 1px solid #2980b9;
-            padding: 15px;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
+            padding: 0.2rem 0.6rem;
             border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
 
-        .alert-box { background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 15px; margin: 20px 0; border-radius: 4px; }
-        
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
-        th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
-        td { padding: 12px; border-bottom: 1px solid #ddd; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
+        .badge-danger {
+            background-color: #c0392b;
+        }
 
-        .safety-list { list-style-type: none; padding-left: 0; }
-        .safety-list li { margin-bottom: 12px; padding-left: 35px; position: relative; }
-        .safety-list li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: #27ae60; font-weight: bold; }
-
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 2rem 0; margin-top: 50px; }
-
-        .highlight { color: #e74c3c; font-weight: bold; }
+        .badge-success {
+            background-color: #27ae60;
+        }
     </style>
+
 </head>
 <body>
 
     <header>
         <h1>Guia em Instalações Elétricas Residenciais | Aula 22</h1>
-        <div class="subtitle">NR-10 na Prática: Habilitação, Autorização e Controle de Risco</div>
+        <div class="subtitle">NR-10 na Prática: Habilitação, Autorização, Modalidades de Trabalho e Controle de Risco</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
 
@@ -116,10 +79,31 @@
             </tr>
         </table>
 
-        <h2>3. Medidas de Controle do Risco Elétrico</h2>
+        <h2>3. Modalidades de Trabalho: O Eletricista Pode Trabalhar Sozinho?</h2>
+        <p>De acordo com a <strong>NR 10</strong> (Segurança em Instalações e Serviços em Eletricidade), a resposta depende estritamente do <strong>nível de tensão</strong> e do tipo de sistema elétrico.</p>
+        
+        <div class="highlight-box">
+            Direto ao ponto: Em Baixa Tensão (BT) a lei permite o trabalho individual. Em Alta Tensão (AT) ou no Sistema Elétrico de Potência (SEP), o trabalho em dupla é obrigatório.
+        </div>
+
+        <h3>Regras por Nível de Tensão:</h3>
+        <ul>
+            <li>
+                <span class="badge badge-success">Permitido Sozinho</span> 
+                <strong>Baixa Tensão (BT):</strong> Tensões entre 50V e 1000V em corrente alternada. A norma não proíbe explicitamente o trabalho individual, embora a análise de risco possa recomendar uma dupla para maior segurança.
+            </li>
+            <li>
+                <span class="badge badge-danger">Proibido Sozinho</span> 
+                <strong>Alta Tensão (AT) e SEP:</strong> Tensões acima de 1000V. Conforme o item 10.7.3 da NR 10, os serviços devem ser realizados obrigatoriamente em equipe (no mínimo duas pessoas).
+            </li>
+        </ul>
+
+        <p><strong>Por que trabalhar em dupla mesmo na Baixa Tensão?</strong> Em caso de choque elétrico ou arco voltaico, o ajudante ou segundo eletricista treinado é fundamental para realizar o desligamento de emergência, prestar os primeiros socorros e acionar o resgate médico.</p>
+
+        <h2>4. Medidas de Controle do Risco Elétrico</h2>
         <p>Para controlar os riscos, a NR-10 exige a adoção de medidas preventivas de caráter coletivo e individual:</p>
 
-        <h3>3.1. Medidas de Proteção Coletiva (EPC)</h3>
+        <h3>4.1. Medidas de Proteção Coletiva (EPC)</h3>
         <p>Prioridade absoluta na norma. Devem ser integradas aos projetos de instalações elétricas:</p>
         <ul class="safety-list">
             <li><strong>Desenergização:</strong> Conjunto de procedimentos ordenados (seccionamento, travamento, verificação e aterramento) que garante a ausência de tensão.</li>
@@ -128,17 +112,39 @@
             <li><strong>Sinalização:</strong> Identificação clara de circuitos e áreas de risco para evitar erros humanos.</li>
         </ul>
 
-        <h3>3.2. Medidas de Proteção Individual (EPI)</h3>
+        <h3>4.2. As 5 Regras de Ouro para Desenergização</h3>
+        <p>Antes de tocar em qualquer circuito para manutenção, garanta a desenergização segura seguindo estes passos sequenciais:</p>
+        <ol>
+            <li><strong>Seccionar:</strong> Desligar a fonte de energia.</li>
+            <li><strong>Bloquear:</strong> Impedir a reenergização acidental (usar cadeados e etiquetas de bloqueio LOTO).</li>
+            <li><strong>Constatar:</strong> Verificar a ausência de tensão com detector apropriado.</li>
+            <li><strong>Aterrar:</strong> Instalar aterramento temporário.</li>
+            <li><strong>Sinalizar:</strong> Delimitar e identificar a área de trabalho.</li>
+        </ol>
+
+        <h3>4.3. Medidas de Proteção Individual (EPI)</h3>
         <p>Utilizadas quando as medidas coletivas são inviáveis ou insuficientes para completar a proteção:</p>
         <ul class="safety-list">
             <li>Vestimentas de trabalho adequadas à inflamabilidade e proteção contra arco elétrico (não podem ser combustíveis).</li>
             <li>Uso obrigatório de calçados isolantes, luvas de borracha e proteção facial/ocular conforme o risco.</li>
-            <li><span class="highlight">Proibição de Adornos:</span> É estritamente vedado o uso de pulseiras, anéis, correntes ou relógios durante o trabalho, pois estes itens podem causar curtos-circuitos ou arcos elétricos letais.</li>
+            <li><span style="color: red; font-weight: bold;">Proibição de Adornos:</span> É estritamente vedado o uso de pulseiras, anéis, correntes ou relógios durante o trabalho, pois estes itens podem causar curtos-circuitos ou arcos elétricos letais.</li>
         </ul>
 
         <div class="alert-box">
             <strong>Quem deve fazer o treinamento?</strong> Todos os trabalhadores autorizados a intervir em instalações elétricas devem possuir treinamento específico sobre os riscos decorrentes do emprego da energia elétrica e as medidas de prevenção, conforme o Anexo II da norma.
         </div>
+
+        <h2>5. O Eletricista no Canteiro de Obras (NR 10 e NR 18)</h2>
+        <p>O ambiente de um canteiro de obras é dinâmico e apresenta riscos ampliados. Aqui, o eletricista deve responder tanto à <strong>NR 10</strong> quanto à <strong>NR 18</strong> (Segurança e Saúde no Trabalho na Indústria da Construção).</p>
+        
+        <h3>Principais Cuidados e Exigências Técnicas:</h3>
+        <ul>
+            <li><strong>Instalações Provisórias:</strong> Toda a fiação temporária do canteiro deve ser protegida contra impactos mecânicos (passagem de pedestres e veículos) e intempéries (chuva e umidade).</li>
+            <li><strong>Uso Obrigatório de Dispositivos DR:</strong> Os circuitos elétricos do canteiro devem, obrigatoriamente, possuir Disjuntores Diferenciais Residuais (DR) para desarmar o sistema instantaneamente em caso de fuga de corrente.</li>
+            <li><strong>Quadros de Distribuição:</strong> Devem ser mantidos trancados, construídos em material resistente, sinalizados contra riscos elétricos e operados apenas por profissionais autorizados.</li>
+            <li><strong>Ferramentas Isoladas:</strong> Todas as ferramentas manuais utilizadas pelo profissional devem possuir isolamento adequado e compatível com a classe de tensão do trabalho.</li>
+            <li><strong>Equipamentos de Proteção (EPI/EPC):</strong> É obrigatório o uso de capacete com isolamento elétrico, calçado sem componentes metálicos, óculos de proteção, luvas isolantes de borracha e vestimentas contra arco elétrico (ATP).</li>
+        </ul>
         
         <div class="norma-box" style="border-style: dashed; background-color: #f9f9f9; margin-top: 40px;">
             <h3 style="margin-top: 0; border: none;">📚 Material Complementar</h3>
@@ -226,8 +232,6 @@
                 }
             }
         </script>
-        
-        
 
     </div>
 

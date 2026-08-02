@@ -4,80 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 14</title>
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
-        }
 
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
-
-        header h1 { margin: 0; font-size: 1.9rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 30px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: #fff; text-align: center; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
-        .img-container { text-align: center; margin: 25px 0; display: flex; flex-direction: column; align-items: center; }
-        .img-container img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px; }
-        .caption { font-size: 0.85rem; color: #666; font-style: italic; }
-
-        footer { 
-            background-color: #2c3e50; 
-            color: #bdc3c7; 
-            text-align: center; 
-            padding: 2rem 0; 
-            margin-top: 40px;
-        }
-        footer p { text-align: center; margin: 0; }
-        .example-box {
-    	background-color: #e8f5e9;
-    	border-left: 5px solid #2e7d32;
-    	padding: 20px 20px 20px 35px; /* Ordem: Topo, Direita, Baixo, Esquerda */
-    	margin: 20px 0;
-    	border-radius: 4px;
-	}
-    </style>
+    <link rel="stylesheet" href="estilos.css">     
 </head>
+
 <body>
 
     <header>
@@ -100,32 +30,41 @@
         <p>É o modelo mais básico, possuindo dois bornes de conexão (Fase e Retorno). Ele comanda um ou mais pontos de luz a partir de um único local.</p>
         <p><strong>Aplicação:</strong> Quartos pequenos, banheiros e áreas de serviço.</p>
         
+	        <div class="example-box" style="background-color: #f0f4f8; border-left: 5px solid #2980b9;">
+	          <h4> Esquema de Ligação:</h4>
+	            <p> A regra de ouro da iluminação.</p>
+	            <p>A <strong>Fase</strong> é conectada diretamente no interruptor, o <strong>Neutro</strong> é conectado à lâmpada e o <strong>Retorno</strong> interliga o interruptor à lâmpada. </p>
 
-	<div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
-    		<img src="../images/interruptor_simples.png" 
-         alt="Esquema de ligação interruptor simples" 
-         style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-    	<div class="caption" style="margin-top: 10px; font-weight: bold;">Esquema de ligação: Fase no interruptor, Neutro na lâmpada.</div>
-</div>
+	        <div class="img-container">
+    		    <img src="../images/interruptor_simples.png" alt="Esquema de ligação interruptor simples" 
+         	        style="max-width: 450px;width: 100%; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+    		    <div class="caption">Esquema de ligação: Fase no interruptor, Neutro na lâmpada.</div>
+	      </div>
+	      
+	      	<div class="alert">
+	            <p>Nota de padronização: O fio de retorno costuma ser amarelo, mas pode ser de qualquer outra cor, desde que não seja azul-claro (Neutro) nem verde/verde-amarelo (Terra).</p>
+	        </div>
+  </div>
 
 
-        <h3>2. Interruptor Simples de Dupla Seção</h3>
-        <p>Possui duas teclas no mesmo conjunto. Permite comandar grupos de lâmpadas diferentes de forma independente no mesmo ambiente.</p>
-        <p><strong>Aplicação:</strong> Salas onde se deseja acender o lustre central e as dicroicas separadamente.</p>
-        
+        <h3>2. Interruptor Simples de Duas teclas (Dupla Seção)</h3>
+	        <p><strong>O que é:</strong> Um conjunto com dois botões independentes que permite controlar duas lâmpadas (ou dois grupos de luzes) diferentes a partir do mesmo ponto.</p>
+	        <p><strong>Exemplos de uso:</strong> Perfeito para salas onde você quer acender o lustre principal em uma tecla e as luzes de apoio (como dicroicas ou fita de LED) na outra.</p>
 
-	<div class="example-box" style="background-color: #f4f6f7; border-left: 5px solid #7f8c8d;">
-    		<h4> Esquema de Ligação: Dupla Seção (Duas Teclas)</h4><p>
-        		Utilizado para controlar duas lâmpadas independentes no mesmo ponto. 
-        		A <span style="color: red; font-weight: bold;">Fase</span> entra no borne comum (ou faz-se um "jumper" entre os dois bornes de entrada) e saem dois <span style="color: #f1c40f; font-weight: bold;">Retornos</span> independentes, um para cada lâmpada.</p>
-    
-    		<div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
-        <img src="../images/interruptor_dupla_secao.png" 
-             alt="Diagrama Interruptor Dupla Seção" 
-             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Esquema de ligação para duas lâmpadas independentes.</div>
+	<div class="example-box" style="background-color: #f0f4f8; border-left: 5px solid #2980b9;">
+    	<h4> Esquema de Ligação:</h4>
+	<p><strong>Entrada (Fase):</strong> A Fase principal conecta no borne de entrada. Se o modelo do interruptor não tiver conexão interna entre os botões, faz-se uma ponte (jumper) para alimentar a segunda tecla. </p>
+	<p><strong>Saídas (Retornos):</strong> De cada tecla sai um fio de <strong>Retorno</strong> independente, indo cada um para o seu respectivo grupo de lâmpadas. </p>
+
+
+    	<div class="img-container">
+        	<img src="../images/interruptor_dupla_secao.png" 
+             	alt="Diagrama Interruptor Dupla Seção" 
+             	style="max-width: 550px; width: 100%; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        	<div class="caption">Esquema de ligação para duas lâmpadas independentes.</div>
     </div>
 </div>
+
 
 
         <h3>3. Interruptor Paralelo (Three-Way)</h3>
@@ -142,12 +81,12 @@
         <span style="color: #00bfff; font-weight: bold;">Neutro</span> vai sempre direto para a lâmpada.
     </p>
     
-    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 30px 0;">
-        <img src="../images/interruptor_paralelo.png" 
-             alt="Diagrama Interruptor Paralelo" 
-             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Diagrama multifilar de uma ligação em paralelo (Three-Way).</div>
-    </div>
+    <div class="img-container">
+    <img src="../images/interruptor_paralelo.png" 
+         alt="Diagrama Interruptor Paralelo" 
+         style="max-width: 550px; width: 100%; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+    <div class="caption">Esquema de ligação do interruptor paralelo (Three-Way).</div>
+</div>
 </div>
 
 
@@ -157,7 +96,7 @@
         
 
 <div class="example-box" style="background-color: #fdfefe; border-left: 5px solid #16a085;">
-    <h4>Esquema Avançado: Interruptor Intermediário (Four-Way)</h4>
+    <h4>Esquema de Ligação: Interruptor Intermediário (Four-Way)</h4>
     <p>
         Este sistema permite adicionar infinitos pontos de comando. Se quiser controlar de 5 pontos, por exemplo, usará 2 paralelos nas pontas e 3 intermediários entre eles.
     </p>
@@ -165,11 +104,11 @@
         <strong>Dica de Montagem:</strong> No interruptor intermediário, os fios vêm sempre em pares. O par que vem do interruptor anterior entra em um lado, e o par que vai para o próximo interruptor sai pelo outro. 
     </p>
     
-    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+    <div class="img-container">
         <img src="../images/interruptor_intermediario.png" 
              alt="Diagrama Interruptor Intermediário" 
-             style="max-width: 600px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Diagrama multifilar para comando de 3 pontos (Paralelo + Intermediário + Paralelo).</div>
+             style="max-width: 550px;width: 100%; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption">Esquema de ligação dos intrruptores Paralelo e Intermediário.</div>
     </div>
 </div>
 
@@ -191,17 +130,17 @@
         <span style="color: #f1c40f; font-weight: bold;">Retornos</span> saem do outro em direção à lâmpada.
     </p>
     
-    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+    <div class="img-container"">
         <img src="../images/interruptor_bipolar.png" 
              alt="Diagrama multifilar Interruptor Bipolar" 
-             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Figura: Instalação Bipolar para proteção total em circuitos bifásicos.</div>
+             style="max-width: 550px; width: 100%;  height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption">Esquema de ligação do interruptor Bipolar para proteção total em circuitos bifásicos.</div>
     </div>
 </div>
 
         <h3>6. Interruptor Pulsador</h3>
         <p>É um interruptor que retorna à posição original após ser pressionado (possui mola interna). Ele apenas envia um sinal elétrico temporário.</p>
-        <p><strong>Aplicação:</strong> Campainhas e sistemas de automação ou minuteria.</p>
+        <p><strong>Aplicação:</strong> Campainhas, minuteria e sistemas de automação.</p>
         
         <div class="example-box" style="background-color: #f4fdf4; border-left: 5px solid #27ae60;">
     <h4>Esquema de Ligação: Pulsador (Campainha ou Minuteria)</h4>
@@ -209,11 +148,11 @@
         O pulsador funciona enviando um "pulso" de energia. A <span style="color: red; font-weight: bold;">Fase</span> entra no primeiro borne e o <span style="color: #f1c40f; font-weight: bold;">Retorno</span> sai do segundo borne em direção à campainha (ou relé de minuteria). O <span style="color: #00bfff; font-weight: bold;">Neutro</span> é ligado diretamente ao dispositivo sonoro ou de iluminação.
     </p>
     
-    <div class="img-container" style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
+    <div class="img-container">
         <img src="../images/interruptor_pulsador.png" 
              alt="Diagrama Interruptor Pulsador Campainha" 
-             style="max-width: 400px; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
-        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Ligação de campainha utilizando interruptor tipo pulsador.</div>
+             style="max-width: 550px; width: 100%; height: auto; border: 2px solid #2c3e50; padding: 10px; border-radius: 8px;">
+        <div class="caption" style ="margin-top: 10px; font-weight: bold;">Esquema de ligação de campainha utilizando interruptor tipo pulsador.</div>
     </div>
 </div>
 

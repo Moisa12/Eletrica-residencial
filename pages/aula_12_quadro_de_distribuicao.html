@@ -4,75 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 12</title>
+
+    <link rel="stylesheet" href="estilos.css">
     
     <style>
-        /* Mantendo seus estilos globais para consistência */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
-        }
+        /* Estilos do Questionário Dinâmico */
+        .quiz-section { background-color: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; margin-top: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 6px; background-color: #f8fafc; border: 1px solid #f1f5f9; }
+        .question-block p { font-weight: bold; margin-top: 0; color: #1e293b; }
+       
+        .options-list { list-style: none; padding: 0; margin: 10px 0 0 0; }
+        .options-list li { padding: 10px 12px; margin-bottom: 6px; border-radius: 4px; background-color: #fff; border: 1px solid #e2e8f0; cursor: pointer; transition: background-color 0.2s; }
+        .options-list li:hover { background-color: #f1f5f9; }
+        .options-list input { margin-right: 8px; cursor: pointer; }
+        .quiz-btn { display: block; width: 100%; padding: 15px; background-color: #e67e22; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.2s; margin-top: 15px; }
+        .quiz-btn:hover { background-color: #d35400; }
+        .correct-answer { background-color: #d4edda !important; color: #155724; border-color: #c3e6cb !important; font-weight: bold; }
+        .wrong-answer { background-color: #f8d7da !important; color: #721c24; border-color: #f5c6cb !important; }
+        .feedback-box { margin-top: 10px; padding: 10px 15px; background-color: #e2e8f0; border-left: 4px solid #64748b; font-size: 13px; color: #334155; display: none; border-radius: 0 4px 4px 0; }
+        #quizResult { margin-top: 20px; padding: 20px; background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; text-align: center; font-size: 18px; font-weight: bold; color: #166534; display: none; }
 
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
 
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-        .logo-header { position: absolute; bottom: 10px; right: 20px; height: 50px; width: auto; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 20px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: #fff; text-align: center; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
-        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
-        
-        .img-container { text-align: center; margin: 25px 0; }
-        .img-container img { max-width: 600px; width: 100%; height: auto; border-radius: 8px; }
-        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
-
-        footer { 
-            background-color: #2c3e50; 
-            color: #bdc3c7; 
-            text-align: center; 
-            padding: 2rem 0; 
-            margin-top: 40px;
-            width: 100%;
-        }
-        footer p { text-align: center; margin: 0; }
     </style>
 </head>
 <body>
@@ -89,8 +41,6 @@
             O <strong>Quadro de Distribuição de Circuitos (QDC)</strong> é o centro de controle de toda a fiação interna. É nele que os cabos vindos do padrão de entrada se conectam aos barramentos e se dividem para alimentar os circuitos da casa.
         </p>
 
-        
-
         <h2>1. Disjuntores Termomagnéticos (DTM)</h2>
         <p>
             A função principal do disjuntor é proteger os <strong>cabos</strong> da instalação contra dois problemas graves:
@@ -100,7 +50,7 @@
             <li><strong>Curto-circuito:</strong> Quando ocorre um contato direto entre Fase e Neutro ou entre Fases.</li>
         </ul>
 
-        <div class="alert">
+        <div class="example-box">
             <strong>Dica Técnica:</strong> Atualmente utilizamos o padrão <strong>DIN</strong> (trilho europeu), que é mais moderno e seguro que o antigo padrão NEMA (disjuntor preto americano).
         </div>
 
@@ -111,8 +61,7 @@
             Enquanto o disjuntor protege os fios, o <strong>IDR (Interruptor Diferencial Residual)</strong> protege as <strong>pessoas</strong>. Ele detecta fugas de corrente (como uma criança colocando o dedo na tomada ou um chuveiro com resistência furada) e desliga o circuito instantaneamente para evitar um choque fatal.
         </p>
 
-
-        <div class="example-box" style="background-color: #fdecea; border-left-color: #e74c3c;">
+        <div class="danger-box">
             <strong>Obrigação por Norma:</strong> Segundo a NBR 5410, o uso do DR é obrigatório em áreas molhadas (banheiros, cozinhas, áreas externas e lavanderias).
         </div>
 
@@ -165,11 +114,99 @@
             <li><strong>Barramento de Terra:</strong> Local onde todos os cabos verdes se conectam. Ele é conectado diretamente à estrutura do quadro e à haste de aterramento.</li>
         </ul>
 
-        <div class="alert" style="background-color: #e8f5e9; border-left: 5px solid #2e7d32;">
-            
+        <div class="info-box">
             <strong>Dicas de Montagem:</strong> 
         	<p>1 - No barramento de neutro, deve haver apenas um fio por borne (parafuso). Nunca amontoe vários fios no mesmo ponto!</p>
-        	<p>2 - Sempre instale primeiro um disjuntor geral seguido do DPS e depois o DR, e então os disjuntores dos circuito de iluminação, tomadas, chuveiro, etc... Essa é a sequência correta de prioridade de proteção dentro do Quadro de Distribuição.</P>
+        	<p>2 - Sempre instale primeiro um disjuntor geral seguido do DPS e depois o DR, e então os disjuntores dos circuito de iluminação, tomadas, chuveiro, etc... Essa é a sequência correta de prioridade de proteção dentro do Quadro de Distribuição.</p>
+        </div>
+
+        <hr>
+
+        <h2>Montagem Profissional de Quadros de Distribuição</h2>
+        <p>
+            A montagem do quadro de distribuição deve seguir critérios técnicos que garantam segurança, organização e facilidade de manutenção. Não basta apenas conectar os cabos — é necessário respeitar padrões de organização, identificação e sequência dos dispositivos de proteção.
+        </p>
+
+        <hr>
+
+        <h2>Organização Física e Layout dos Componentes</h2>
+
+        <p>
+            A organização interna do quadro deve seguir uma sequência lógica de proteção e distribuição:
+        </p>
+        <div class="highlight-box">
+            <ul>
+                <li><strong>Disjuntor geral:</strong> ponto de entrada da instalação;</li>
+                <li><strong>DPS:</strong> proteção contra surtos elétricos;</li>
+                <li><strong>DR:</strong> proteção contra choques elétricos;</li>
+                <li><strong>Disjuntores:</strong> distribuição dos circuitos finais.</li>
+            </ul>
+        </div>
+
+        <div class="img-container">
+            <img src="../images/quadro-de-distribuicao1.jpg" alt="Quadro de distribuição organizado">
+
+        </div>
+
+            <div class="info-box">
+                <strong>Análise técnica do padrão de montagem:</strong><br>
+                Observe que os cabos estão organizados lateralmente, sem cruzamentos excessivos, com cores padronizadas e dispositivos alinhados no trilho DIN. Essa organização facilita a manutenção, reduz erros de ligação e melhora a dissipação de calor dentro do quadro.
+                <br><br>
+
+                👉 Em um ambiente profissional, esse nível de organização não é estética — é requisito de segurança e qualidade.
+            </div>
+        
+
+        <hr>
+
+        <h2>Técnicas de Conexão</h2>
+
+        <div class="highlight-box">
+            <ul>
+                <li>Utilizar barramento tipo pente para alimentação dos disjuntores;</li>
+                <li>Utilizar terminais (ilhós) em cabos flexíveis;</li>
+                <li>Evitar emendas dentro do quadro;</li>
+                <li>Realizar aperto correto dos bornes.</li>
+            </ul>
+        </div>
+
+        <div class="alert">
+            <strong>Atenção:</strong> conexões mal apertadas geram aquecimento e podem causar falhas ou incêndios.
+        </div>
+
+        <hr>
+
+        <h2>Organização dos Condutores</h2>
+
+        <div class="highlight-box">
+        <ul>
+            <li>Fase: preto, vermelho ou marrom;</li>
+            <li>Neutro: azul claro;</li>
+            <li>Terra: verde ou verde-amarelo;</li>
+            <li>Manter alinhamento e padrão visual dos cabos;</li>
+            <li>Evitar cruzamentos desnecessários.</li>
+        </ul>
+        </div>
+
+        <div class="example-box">
+            <strong>Boa prática:</strong> um quadro organizado reduz tempo de diagnóstico e manutenção.
+        </div>
+
+        <hr>
+
+        <h2>Testes após Montagem</h2>
+
+        <div class="highlight-box">
+        <ul>
+            <li>Teste do DR (botão TEST);</li>
+            <li>Verificação das tensões;</li>
+            <li>Inspeção visual das conexões;</li>
+            <li>Funcionamento dos circuitos.</li>
+        </ul>
+        </div>
+
+        <div class="alert">
+            <strong>Importante:</strong> nunca energizar o quadro sem revisão completa.
         </div>
 
         <hr>
@@ -228,25 +265,104 @@
         <div class="example-box">
             <strong>Local Ideal:</strong> O centro de carga da residência (geralmente corredores ou salas), em local iluminado, ventilado e com altura média de 1,50m para facilitar a operação dos disjuntores em emergências.
         </div>
+
         <hr>
+
+        <h2>Entrega Operacional: Comissionamento do QDC</h2>
+        <p>O <strong>comissionamento</strong> de um Quadro de Distribuição de Circuitos constitui a etapa de verificação final e ensaios que assegura a conformidade da montagem com as prescrições de projeto e normativas. Abaixo, apresentamos o paralelo indispensável entre os procedimentos rigorosos definidos pelas normas técnicas (como a ABNT NBR 5410) e as práticas simplificadas adotadas no cotidiano dos canteiros de obras.</p>
+
+        <h3>1. O Comissionamento Normativo (Conforme a ABNT NBR 5410)</h3>
+        <p>A seção de verificação final da norma exige instrumentação calibrada e relatórios técnicos formais:</p>
         
-              			
-       		<h2>Fabricantes de Quadros de Distribuição de Energia Elétrica</h2>
-                <p>Aqui, você encontrará uma seleção de fabricantes renomados de quadros de distribuição de energia elétrica. Esses fornecedores são reconhecidos por sua qualidade, inovação e compromisso com a segurança em instalações elétricas. Ao clicar nos links abaixo, você poderá explorar as soluções oferecidas por cada um deles, desde quadros residenciais até opções industriais, garantindo que você encontre o produto ideal para suas necessidades.</p>
-                
-                <ul>
-                	<li><a href="https://www.se.com/br/pt/product-category/4000-pain%C3%A9is-e-quadros-de-distribui%C3%A7%C3%A3o/?filter=business-5-residencial-e-pequenos-neg%C3%B3cios" target="_blank" rel="noopener">Painéis e Quadros de Distribuição Schneider Electric</a></li>
-                	<li><a href="https://www.strahl.com/linhas/quadros-de-distribuicao" target="_blank" rel="noopener">Quadros de Distribuição Strahl</a> </li>
-                	<li><a href="https://www.steck.com.br/produtos/residencial/caixas" target="_blank" rel="noopener">Caixas Residenciais Steck</a></li>
-                	<li><a href="https://www.tigre.com.br/produtos/obras-e-reformas/eletrica?q=quadro+de+distribui%C3%A7%C3%A3o" target="_blank" rel="noopener">Quadros de Distribuição Tigre</a></li>
-                </ul>
+        <h4>Etapa A: Exame Visual Completo</h4>
+        <ul>
+            <li><strong>Identificação dos condutores:</strong> Verificação da padronização de cores (Azul-claro para Neutro, Verde ou Verde-Amarelo para Terra, e cores distintas para Fases).</li>
+            <li><strong>Elementos de sinalização:</strong> Presença de diagramas unifilares acessíveis e etiquetas de identificação de circuitos no espelho do quadro.</li>
+            <li><strong>Verificação mecânica de aperto (Torque Oficial):</strong> Utilização compulsória de <em>torquímetros</em> para conferência do torque nominal especificado pelos fabricantes:</li>
+        </ul>
+
+        <div class="torque-list">
+            <strong>Valores Referenciais de Torque (Disjuntores DIN até 63A):</strong>
+            <ul>
+                <li><strong>Siemens (Linhas 5SX2 / 5SL):</strong> Aperto nominal entre <strong>2,0 N.m e 2,5 N.m</strong>.</li>
+                <li><strong>Schneider Electric (Easy9 / Acti9):</strong> Recomenda de <strong>2,0 N.m</strong> a <strong>3,5 N.m</strong>.</li>
+                <li><strong>ABB (Linhas SH200 / S200):</strong> Faixa de aperto de <strong>2,0 N.m a 2,8 N.m</strong>.</li>
+                <li><strong>WEG (Linha MDW / MDWH):</strong> Recomendação técnica em <strong>2,0 N.m</strong>.</li>
+            </ul>
+        </div>
+
+        <h4>Etapa B: Ensaios e Testes Instrumentais</h4>
+        <ul>
+            <li><span class="badge badge-norma">Ensaio de Continuidade</span> Certifica com ohmímetro se os condutores de proteção (PE) estão eletricamente vinculados a todas as massas metálicas.</li>
+            <li><span class="badge badge-norma">Resistência de Isolamento</span> Executado com um <strong>Megômetro</strong> (aplicando 500 Vcc com o circuito desenergizado). O valor mínimo admissível é de <strong>1 MΩ</strong> entre condutores vivos e terra.</li>
+            <li><span class="badge badge-norma">Ensaio de Atuação de DRs</span> Realizado com um <strong>Analisador de DR</strong> para registrar o tempo exato de desarme em milissegundos.</li>
+        </ul>
+
+        <h3>2. O Dia a Dia no Canteiro de Obras (A Versão Simplificada)</h3>
+        <p>Na prática de campo, a ausência de instrumentos laboratoriais complexos exige do profissional testes expeditos operados com ferramentas comuns:</p>
+
+        <ul>
+            <li><span class="badge badge-pratica">Verificação de Aperto Manual</span> Substitui-se o torquímetro pelo aperto mecânico tátil ("no sentimento") e ensaios manuais de tração puxando os cabos.</li>
+            <li><span class="badge badge-pratica">Teste de Curto-Circuito por Continuidade</span> Avalia-se a isolação através da <strong>escala de continuidade (o "bipe")</strong> do multímetro básico antes de energizar o quadro.</li>
+            <li><span class="badge badge-pratica">Teste de Sensibilidade do DR</span> Atribui-se o teste ao acionamento do <em>botão de teste integrado ("T")</em> ou provocando uma fuga rápida com uma lâmpada comum entre Fase e Terra.</li>
+        </ul>
+
+        <h3>3. Análise Comparativa das Práticas</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Verificado</th>
+                        <th>Método Normativo (NBR 5410)</th>
+                        <th>Prática Corrente em Campo</th>
+                        <th>Risco Técnico da Simplificação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Aperto de Terminais</strong></td>
+                        <td>Torquímetro com escala calibrada em N.m.</td>
+                        <td>Chave manual comum (tato/sentimento).</td>
+                        <td><strong>Subtorque:</strong> gera alta resistência de contato e pontos quentes (incêndio).<br><strong>Sobretorque:</strong> espana os bornes ou esmaga os fios.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Isolação Elétrica</strong></td>
+                        <td>Megômetro (Injeção de 500 Vcc).</td>
+                        <td>Multímetro comum (Teste de Bipe).</td>
+                        <td>A bateria de 9V do multímetro não detecta microfissuras que só falham sob as tensões comerciais de 220V.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proteção Antichoque</strong></td>
+                        <td>Analisador de DR (Tempo/Corrente).</td>
+                        <td>Botão de Teste "T" ou teste de lâmpada.</td>
+                        <td>O botão prova que o gatilho mecânico funciona, mas não garante se o tempo de resposta é rápido o suficiente (&lt; 40ms) para salvar vidas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert">
+            <h4>💡 Alerta Técnico</h4>
+            <p>Embora os métodos práticos de campo sirvam para uma triagem rápida na rotina do canteiro, <strong>apenas o comissionamento instrumental rigoroso</strong> fornece lastro legal protegendo o profissional habilitado e garantindo a segurança real da instalação.</p>
+        </div>
 
         <hr>
 
-        <h2>Exercícios de Fixação - Aula 12</h2>
+        <h2>Fabricantes de Quadros de Distribuição de Energia Elétrica</h2>
+        <p>Aqui, você encontrará uma seleção de fabricantes renomados de quadros de distribuição de energia elétrica. Esses fornecedores são reconhecidos por sua qualidade, inovação e compromisso com a segurança em instalações elétricas.</p>
+        
+        <ul>
+        	<li><a href="https://www.se.com/br/pt/product-category/4000-pain%C3%A9is-e-quadros-de-distribui%C3%A7%C3%A3o/?filter=business-5-residencial-e-pequenos-neg%C3%B3cios" target="_blank" rel="noopener">Painéis e Quadros de Distribuição Schneider Electric</a></li>
+        	<li><a href="https://www.strahl.com/linhas/quadros-de-distribuicao" target="_blank" rel="noopener">Quadros de Distribuição Strahl</a> </li>
+        	<li><a href="https://www.steck.com.br/produtos/residencial/caixas" target="_blank" rel="noopener">Caixas Residenciais Steck</a></li>
+        	<li><a href="https://www.tigre.com.br/produtos/obras-e-reformas/eletrica?q=quadro+de+distribui%C3%A7%C3%A3o" target="_blank" rel="noopener">Quadros de Distribuição Tigre</a></li>
+        </ul>
+
+        <hr>
+
+        <h2>Exercícios de Fixação</h2>
 
         <p><strong>Questão 1:</strong> Se um disjuntor de 20A está "desarmando" constantemente quando você liga o micro-ondas e a fritadeira elétrica ao mesmo tempo, qual é o problema provável e qual a solução correta?</p>
-
         <details>
             <summary>Ver resposta e explicação</summary>
             <div class="example-box">
@@ -258,7 +374,6 @@
         <br>
 
         <p><strong>Questão 2:</strong> Qual a diferença básica entre a proteção oferecida por um Disjuntor e por um IDR?</p>
-
         <details>
             <summary>Ver resposta e explicação</summary>
             <div class="example-box">
@@ -266,11 +381,159 @@
             </div>
         </details>
 
+        <br>
+
+        <!-- EXERCÍCIOS ADICIONADOS DA AULA 26 -->
+        <p><strong>Questão 3:</strong> Qual a sequência correta de montagem dos dispositivos no quadro?</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="example-box">
+                Disjuntor geral → DPS → DR → Disjuntores dos circuitos.
+            </div>
+        </details>
+
+        <br>
+
+        <p><strong>Questão 4:</strong> Cite duas vantagens de um quadro bem organizado.</p>
+        <details>
+            <summary>Ver resposta</summary>
+            <div class="example-box">
+                Facilidade de manutenção e maior segurança da instalação.
+            </div>
+        </details>
+
+        <hr>
+
+        <h2>Questionário Interativo: Comissionamento e Prática de Campo</h2>
+        <p>Responda às questões abaixo para testar os conhecimentos adquiridos sobre os procedimentos de entrega de quadros elétricos.</p>
+        
+        <form id="studentQuiz">
+            
+            <!-- Questão 1 -->
+            <div class="question-block" id="block_ev1">
+                <p>1. Qual o risco técnico direto de aplicar um aperto insuficiente (subtorque) nas conexões elétricas dos disjuntores de um QDC?</p>
+                <ul class="options-list">
+                    <li id="opt_ev1a"><input type="radio" name="ev1" id="ev1a" value="a"> <label for="ev1a">Aumento da vida útil do disjuntor devido ao alívio mecânico.</label></li>
+                    <li id="opt_ev1b"><input type="radio" name="ev1" id="ev1b" value="b"> <label for="ev1b">Surgimento de alta resistência de contato, gerando pontos quentes e risco de incêndio.</label></li>
+                    <li id="opt_ev1c"><input type="radio" name="ev1" id="ev1c" value="c"> <label for="ev1c">Cisalhamento e rompimento imediato dos filamentos de cobre do condutor flexível.</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev1"><strong>Feedback:</strong> O subtorque gera folgas que aumentam a resistência de contato local, provocando aquecimento por Efeito Joule (pontos quentes), que é uma das principais causas de sinistros em quadros elétricos.</div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block" id="block_ev2">
+                <p>2. No comissionamento oficial conforme a NBR 5410, qual o instrumento obrigatório para o ensaio de resistência de isolamento e a condição do circuito?</p>
+                <ul class="options-list">
+                    <li id="opt_ev2a"><input type="radio" name="ev2" id="ev2a" value="a"> <label for="ev2a">Multímetro comum na escala de Ohms com o circuito energizado.</label></li>
+                    <li id="opt_ev2b"><input type="radio" name="ev2" id="ev2b" value="b"> <label for="ev2b">Alicate Amperímetro com o circuito em vazio operando sob carga nominal.</label></li>
+                    <li id="opt_ev2c"><input type="radio" name="ev2" id="ev2c" value="c"> <label for="ev2c">Megômetro (injetando tensão contínua) com a rede completamente desenergizada.</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev2"><strong>Feedback:</strong> O ensaio de isolação exige a aplicação de uma tensão elevada contínua (como 500 Vcc) gerada apenas por um Megômetro, com a instalação desligada e sem cargas conectadas.</div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block" id="block_ev3">
+                <p>3. Qual o valor mínimo de resistência de isolamento aceitável pela norma NBR 5410 para circuitos com tensão nominal até 500 V?</p>
+                <ul class="options-list">
+                    <li id="opt_ev3a"><input type="radio" name="ev3" id="ev3a" value="a"> <label for="ev3a">0,5 kΩ</label></li>
+                    <li id="opt_ev3b"><input type="radio" name="ev3" id="ev3b" value="b"> <label for="ev3b">1 MΩ</label></li>
+                    <li id="opt_ev3c"><input type="radio" name="ev3" id="ev3c" value="c"> <label for="ev3c">10 GΩ</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev3"><strong>Feedback:</strong> Segundo as especificações da NBR 5410, o limite mínimo regulamentar tolerado para que a isolação seja considerada segura contra fugas perigosas é de 1 Megaohm (1 MΩ).</div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block" id="block_ev4">
+                <p>4. Por que o teste de isolamento simplificado feito com a escala de "bipe" do multímetro é considerado incompleto e insuficiente?</p>
+                <ul class="options-list">
+                    <li id="opt_ev4a"><input type="radio" name="ev4" id="ev4a" value="a"> <label for="ev4a">Porque o bipe do multímetro só funciona se o circuito estiver alimentado pela concessionária.</label></li>
+                    <li id="opt_ev4b"><input type="radio" name="ev4" id="ev4b" value="b"> <label for="ev4b">Porque a baixa tensão da bateria interna do multímetro (3V a 9V) não tensiona o cabo e não detecta microfissuras na isolação.</label></li>
+                    <li id="opt_ev4c"><input type="radio" name="ev4" id="ev4c" value="c"> <label for="ev4c">Porque a escala de continuidade só consegue medir condutores de proteção (Terra).</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev4"><strong>Feedback:</strong> O multímetro detecta apenas curtos-circuitos francos (fios se tocando diretamente). Ele não simula o estresse elétrico operacional da rede; logo, cabos úmidos ou com microfissuras na isolação passam batidos no teste de continuidade.</div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block" id="block_ev5">
+                <p>5. O que o acionamento do botão "T" (Teste) integrado na carcaça do IDR comprova tecnicamente?</p>
+                <ul class="options-list">
+                    <li id="opt_ev5a"><input type="radio" name="ev5" id="ev5a" value="a"> <label for="ev5a">O tempo exato de resposta eletrônica em milissegundos diante de um choque elétrico real.</label></li>
+                    <li id="opt_ev5b"><input type="radio" name="ev5" id="ev5b" value="b"> <label for="ev5b">A perfeita integridade e continuidade física de todo o condutor de aterramento da obra.</label></li>
+                    <li id="opt_ev5c"><input type="radio" name="ev5" id="ev5c" value="c"> <label for="ev5c">O funcionamento puramente mecânico do mecanismo de disparo interno do próprio dispositivo.</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev5"><strong>Feedback:</strong> O botão "T" serve para o usuário final verificar se o mecanismo mecânico de disparo do gatilho interno está desimpedindo e operando, mas não substitui o testador de DR, que analisa o tempo elétrico real de desligamento em milissegundos.</div>
+            </div>
+
+            <!-- Questão 6 -->
+            <div class="question-block" id="block_ev6">
+                <p>6. Onde o profissional eletricista localiza, de forma rápida no campo, a especificação exata de torque recomendada para os bornes de um disjuntor?</p>
+                <ul class="options-list">
+                    <li id="opt_ev6a"><input type="radio" name="ev6" id="ev6a" value="a"> <label for="ev6a">Gravado em alto-relevo ou impresso diretamente no corpo/invólucro do próprio disjuntor.</label></li>
+                    <li id="opt_ev6b"><input type="radio" name="ev6" id="ev6b" value="b"> <label for="ev6b">Na tabela geral de cores da norma NBR 5410.</label></li>
+                    <li id="opt_ev6c"><input type="radio" name="ev6" id="ev6c" value="c"> <label for="ev6c">No visor digital do alicate amperímetro usado durante a fixação.</label></li>
+                </ul>
+                <div class="feedback-box" id="feedback_ev6"><strong>Feedback:</strong> Os fabricantes de qualidade gravam o valor do torque (geralmente em N.m ou lb-in) em alto-relevo ou impressão nas laterais ou na face frontal do invólucro plástico do disjuntor para consulta imediata do instalador.</div>
+            </div>
+
+            <button type="button" class="quiz-btn" id="btnSubmitQuiz" onclick="corrigirQuestionarioAlunos()">Corrigir Respostas</button>
+        </form>
+        
+        <div id="quizResult"></div>
+
     </div>
 
     <footer>
         <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 12</p>
     </footer>
 
+    <!-- Script de correção unificado -->
+    <script>
+        const gabaritoQuiz = {
+            ev1: 'b',
+            ev2: 'c',
+            ev3: 'b',
+            ev4: 'b',
+            ev5: 'c',
+            ev6: 'a'
+        };
+
+        function corrigirQuestionarioAlunos() {
+            let acertos = 0;
+            const total = Object.keys(gabaritoQuiz).length;
+
+            const allItems = document.querySelectorAll('.options-list li');
+            allItems.forEach(li => {
+                li.classList.remove('correct-answer', 'wrong-answer');
+            });
+
+            for (let q in gabaritoQuiz) {
+                const correta = gabaritoQuiz[q];
+                const selecionado = document.querySelector(`input[name="${q}"]:checked`);
+                
+                document.getElementById(`feedback_${q}`).style.display = 'block';
+                document.getElementById(`opt_${q}${correta}`).classList.add('correct-answer');
+
+                if (selecionado) {
+                    if (selecionado.value === correta) {
+                        acertos++;
+                    } else {
+                        document.getElementById(`opt_${q}${selecionado.value}`).classList.add('wrong-answer');
+                    }
+                }
+            }
+
+            const resultDiv = document.getElementById('quizResult');
+            const percentual = ((acertos / total) * 100).toFixed(0);
+            resultDiv.innerHTML = `Resultado da Avaliação: Você acertou ${acertos} de ${total} questões. Rendimento: ${percentual}%`;
+            resultDiv.style.display = 'block';
+
+            const btn = document.getElementById('btnSubmitQuiz');
+            btn.disabled = true;
+            btn.style.backgroundColor = '#94a3b8';
+            btn.innerText = 'Avaliação Finalizada';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>

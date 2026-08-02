@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Eletricidade Básica - Estático</title>
-    <!-- Carrega o Tailwind CSS para estilização moderna e responsiva -->
+    <title>Quiz: Fundamentos da Eletricidade</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
     <style>
-        /* Define a fonte Inter como padrão */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7fafc; /* Fundo claro */
-            color: #2d3748; /* Texto escuro */
+            background-color: #f7fafc;
+            color: #2d3748;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,13 +53,13 @@
             border-color: #4299e1;
         }
         .correct-answer {
-            background-color: #48bb78 !important; /* Verde */
+            background-color: #48bb78 !important;
             color: white !important;
             border-color: #38a169 !important;
             font-weight: bold;
         }
         .incorrect-answer {
-            background-color: #f56565 !important; /* Vermelho */
+            background-color: #f56565 !important;
             color: white !important;
             border-color: #e53e3e !important;
             font-weight: bold;
@@ -58,106 +72,111 @@
         <h1 class="text-3xl font-extrabold text-blue-600 mb-6 text-center border-b pb-3">
             Quiz: Fundamentos da Eletricidade
         </h1>
-        <p class="text-center text-gray-600 mb-8">Teste seu conhecimento com estas 6 perguntas.</p>
+        <p class="text-center text-gray-600 mb-8">Teste seu conhecimento com estas 10 perguntas.</p>
 
-        <div id="quiz-area">
-            <!-- As perguntas serão geradas aqui pelo JS -->
-        </div>
+        <div id="quiz-area"></div>
 
         <div id="score-card" class="mt-8 p-6 bg-gray-100 rounded-lg hidden">
             <h2 class="text-2xl font-bold text-center text-gray-700">Resultados Finais</h2>
-            <p class="text-xl text-center mt-3">Você acertou <span id="correct-count" class="font-extrabold text-blue-600"></span> de 6 perguntas!</p>
+            <p class="text-xl text-center mt-3">Você acertou <span id="correct-count" class="font-extrabold text-blue-600"></span> de 10 perguntas!</p>
             <div id="final-message" class="text-lg font-semibold text-center mt-4"></div>
         </div>
     </div>
 
     <script>
-        // Lista de perguntas estáticas (sem necessidade de API)
         const quizQuestions = [
             {
                 q: "1. O que, em sua essência, a Corrente Elétrica representa?",
-                options: [
-                    "A carga total de um material",
-                    "A força que move os átomos",
-                    "O fluxo ordenado de elétrons através de um condutor", // Correct
-                    "A resistência de um circuito"
-                ],
+                options: ["A carga total de um material", "A força que move os átomos", "O fluxo ordenado de elétrons através de um condutor", "A resistência de um circuito"],
                 answer: "O fluxo ordenado de elétrons através de um condutor",
                 rationale: "A corrente elétrica é a medição do movimento contínuo e ordenado de partículas carregadas (elétrons) através de um caminho."
             },
             {
                 q: "2. Qual partícula subatômica, ao se mover, é diretamente responsável pela eletricidade?",
-                options: [
-                    "Próton",
-                    "Nêutron",
-                    "Elétron", // Correct
-                    "Núcleo"
-                ],
+                options: ["Próton", "Nêutron", "Elétron", "Núcleo"],
                 answer: "Elétron",
                 rationale: "Os elétrons, por possuírem carga negativa e estarem na camada externa (valência), são as partículas que se movem nos condutores, criando o fenômeno elétrico."
             },
             {
                 q: "3. Qual é a principal característica dos elétrons de valência em materiais considerados bons condutores?",
-                options: [
-                    "Eles possuem carga positiva",
-                    "Eles estão firmemente presos ao núcleo",
-                    "Eles se movem de forma caótica",
-                    "Eles estão fracamente ligados ao núcleo e são fáceis de mover", // Correct
-                ],
+                options: ["Eles possuem carga positiva", "Eles estão firmemente presos ao núcleo", "Eles se movem de forma caótica", "Eles estão fracamente ligados ao núcleo e são fáceis de mover"],
                 answer: "Eles estão fracamente ligados ao núcleo e são fáceis de mover",
                 rationale: "Essa fraca ligação é o que permite que os elétrons se movam livremente de átomo para átomo, facilitando o fluxo de corrente."
             },
             {
                 q: "4. Qual dos seguintes materiais é mais usado como isolante em cabos residenciais, devido à sua alta resistividade?",
-                options: [
-                    "Alumínio",
-                    "Borracha ou PVC", // Correct
-                    "Prata",
-                    "Água pura"
-                ],
+                options: ["Alumínio", "Borracha ou PVC", "Prata", "Água pura"],
                 answer: "Borracha ou PVC",
                 rationale: "Materiais como Borracha e PVC (Cloreto de Polivinila) têm altíssima resistividade, impedindo que os elétrons escapem dos condutores de cobre ou alumínio."
             },
             {
                 q: "5. A unidade de medida 'Ampere' (A) é utilizada para quantificar qual grandeza elétrica?",
-                options: [
-                    "Resistência",
-                    "Corrente Elétrica", // Correct
-                    "Tensão (Voltagem)",
-                    "Potência"
-                ],
+                options: ["Resistência", "Corrente Elétrica", "Tensão (Voltagem)", "Potência"],
                 answer: "Corrente Elétrica",
                 rationale: "O Ampere mede o fluxo de elétrons (Corrente Elétrica) por unidade de tempo, sendo a unidade padrão desta grandeza."
             },
             {
                 q: "6. Em termos de resistividade, qual metal é o melhor condutor (possui a menor resistividade)?",
-                options: [
-                    "Alumínio",
-                    "Cobre",
-                    "Ouro",
-                    "Prata", // Correct
-                ],
+                options: ["Alumínio", "Cobre", "Ouro", "Prata"],
                 answer: "Prata",
                 rationale: "A Prata é o metal com a menor resistividade, tornando-o o melhor condutor elétrico, embora o Cobre seja o mais comum devido ao custo-benefício."
             },
+            {
+                q: "7. Como ocorre o acúmulo de cargas na eletricidade estática e como ela se difere da corrente elétrica?",
+                options: [
+                    "Ocorre por movimento contínuo de elétrons em um circuito fechado.",
+                    "Ocorre pelo acúmulo de cargas elétricas em repouso na superfície de um corpo por atrito.",
+                    "Ocorre pela fusão do núcleo atômico quando submetido a altas temperaturas.",
+                    "Ocorre exclusivamente através do aquecimento de materiais condutores."
+                ],
+                answer: "Ocorre pelo acúmulo de cargas elétricas em repouso na superfície de um corpo por atrito.",
+                rationale: "Diferente da corrente (elétrons em movimento), a eletricidade estática é o acúmulo de cargas em repouso, geralmente gerado por atrito entre materiais."
+            },
+            {
+                q: "8. Embora a Prata possua menor resistividade que o Cobre, por que o Cobre é o metal escolhido para fiações residenciais?",
+                options: [
+                    "Porque o Cobre não conduz eletricidade e previne choques.",
+                    "Porque a Prata derrete em contato com o ar ambiente.",
+                    "Pelo excelente equilíbrio entre alta condutividade e custo acessível (custo-benefício).",
+                    "Porque o Cobre tem resistividade zero em temperatura ambiente."
+                ],
+                answer: "Pelo excelente equilíbrio entre alta condutividade e custo acessível (custo-benefício).",
+                rationale: "A prata é um metal precioso muito caro. O cobre oferece uma condução elétrica excelente por um preço drasticamente menor, viabilizando as instalações."
+            },
+            {
+                q: "9. O que acontece com a resistividade ($\\rho$) de um condutor metálico quando sua temperatura aumenta?",
+                options: [
+                    "A resistividade diminui drasticamente.",
+                    "A resistividade aumenta, devido à maior agitação dos átomos que dificulta a passagem dos elétrons.",
+                    "A resistividade permanece inalterada independente da temperatura.",
+                    "O condutor se transforma instantaneamente em um isolante perfeito."
+                ],
+                answer: "A resistividade aumenta, devido à maior agitação dos átomos que dificulta a passagem dos elétrons.",
+                rationale: "Com o aumento da temperatura, os átomos do metal agitam-se mais, gerando mais obstáculos para a passagem ordenada dos elétrons e aumentando a resistividade."
+            },
+            {
+                q: "10. Qual é um exemplo prático do dia a dia citado no estudo da eletricidade estática?",
+                options: [
+                    "O funcionamento de uma lâmpada LED ligada à tomada.",
+                    "O carregamento da bateria de um celular no carregador.",
+                    "A atração de pedacinhos de papel por um pente plástico eletrizado por atrito no cabelo.",
+                    "A rotação de um motor elétrico trifásico."
+                ],
+                answer: "A atração de pedacinhos de papel por um pente plástico eletrizado por atrito no cabelo.",
+                rationale: "Ao friccionar o pente plástico no cabelo seco, ele se carrega eletrostaticamente por atrito, conseguindo atrair pequenos pedaços de papel sem tocá-los."
+            }
         ];
 
         let questionsAnswered = 0;
         let correctAnswersCount = 0;
 
-        /**
-         * Gera a estrutura de cards para cada pergunta.
-         */
         function renderQuiz() {
             const quizArea = document.getElementById('quiz-area');
-            quizArea.innerHTML = ''; // Limpa a área
+            quizArea.innerHTML = '';
             
             quizQuestions.forEach((qData, index) => {
-                const qNum = index + 1;
                 let optionsHtml = '';
-                
-                // Embaralha as opções (opcional, mas bom para evitar padrões)
-                const shuffledOptions = shuffleArray(qData.options);
+                const shuffledOptions = shuffleArray([...qData.options]);
 
                 shuffledOptions.forEach((optionText, optIndex) => {
                     optionsHtml += `
@@ -179,11 +198,12 @@
                 `;
                 quizArea.innerHTML += questionHtml;
             });
+
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([quizArea]);
+            }
         }
         
-        /**
-         * Função de embaralhamento de arrays (Fisher-Yates)
-         */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -192,11 +212,6 @@
             return array;
         }
 
-        /**
-         * Verifica a resposta selecionada.
-         * @param {HTMLElement} selectedButton O botão que foi clicado.
-         * @param {number} qIndex O índice da pergunta no array.
-         */
         window.checkAnswer = function(selectedButton, qIndex) {
             const qData = quizQuestions[qIndex];
             const selectedText = selectedButton.getAttribute('data-option-text').trim();
@@ -205,53 +220,37 @@
             const feedbackElement = document.getElementById(`feedback-${qIndex}`);
             const buttons = optionsContainer.querySelectorAll('button');
 
-            // 1. Desabilita todos os botões da pergunta
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                btn.classList.remove('hover:bg-gray-600');
-            });
+            buttons.forEach(btn => { btn.disabled = true; });
             
-            // 2. Conta a resposta se esta for a primeira vez
             if (!selectedButton.classList.contains('incorrect-answer') && !selectedButton.classList.contains('correct-answer')) {
                 questionsAnswered++;
-                if (isCorrect) {
-                    correctAnswersCount++;
-                }
+                if (isCorrect) { correctAnswersCount++; }
             }
             
-            // 3. Aplica o estilo de feedback
             selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
 
-            // 4. Exibe a mensagem de feedback
             feedbackElement.classList.remove('hidden');
             if (isCorrect) {
-                // Mensagem de sucesso
                 feedbackElement.classList.add('bg-green-100', 'text-green-800');
-                feedbackElement.textContent = `Parabéns, você acertou! (${qData.rationale})`;
+                feedbackElement.innerHTML = `Parabéns, você acertou! (${qData.rationale})`;
             } else {
-                // Mensagem de erro e revela a correta
                 feedbackElement.classList.add('bg-red-100', 'text-red-800');
-                feedbackElement.textContent = `Incorreto. A resposta correta é: "${qData.answer}". (${qData.rationale})`;
+                feedbackElement.innerHTML = `Incorreto. A resposta correta é: "${qData.answer}". (${qData.rationale})`;
                 
-                // Destaca a resposta correta
                 buttons.forEach(btn => {
-                    const btnText = btn.getAttribute('data-option-text').trim();
-                    if (btnText === qData.answer) {
-                        btn.classList.remove('bg-gray-100');
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
                         btn.classList.add('correct-answer');
                     }
                 });
             }
-            
-            // 5. Verifica se o quiz terminou
-            if (questionsAnswered === quizQuestions.length) {
-                displayFinalScore();
+
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([feedbackElement, optionsContainer]);
             }
+            
+            if (questionsAnswered === quizQuestions.length) { displayFinalScore(); }
         };
 
-        /**
-         * Exibe o placar final.
-         */
         function displayFinalScore() {
             const scoreCard = document.getElementById('score-card');
             const correctCountSpan = document.getElementById('correct-count');
@@ -261,10 +260,10 @@
             scoreCard.classList.remove('hidden');
 
             let message = '';
-            if (correctAnswersCount === 6) {
+            if (correctAnswersCount === 10) {
                 message = "Excelente! Você demonstrou total domínio dos fundamentos de eletricidade.";
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-green-600";
-            } else if (correctAnswersCount >= 4) {
+            } else if (correctAnswersCount >= 7) {
                 message = "Muito bom! Você acertou a maioria das questões. Revise os pontos fracos.";
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-blue-600";
             } else {
@@ -272,9 +271,9 @@
                 finalMessageDiv.className = "text-lg font-semibold text-center mt-4 text-red-600";
             }
             finalMessageDiv.textContent = message;
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Inicia o quiz ao carregar a página
         window.onload = renderQuiz;
     </script>
 </body>

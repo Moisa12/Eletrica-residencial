@@ -4,98 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia em Instalações Elétricas Residenciais - Aula 4</title>
+
+    <link rel="stylesheet" href="estilos.css">
     
     <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; 
-        }
-
-        /* Cabeçalho FIXO */
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
-
-        .logo-header {
-            position: absolute;
-            bottom: 10px; 
-            right: 20px;   
-            height: 50px;  
-            width: auto;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        h3 { color: #2980b9; margin-top: 20px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        /* Estilo de Fórmulas */
-        .formula-box {
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Tabelas */
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: #fff; text-align: center; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        /* Destaques e Exercícios */
-        .alert { padding: 15px; background-color: #fff3cd; border-left: 5px solid #f1c40f; margin: 20px 0; border-radius: 4px; }
-        .example-box { background-color: #e8f5e9; border-left: 5px solid #2e7d32; padding: 20px; margin: 20px 0; border-radius: 4px; }
         
-        details { background: #f1f1f1; padding: 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        /* ==========================================================================
+           Cards de Exercícios (Igual à Aula 1)
+           ========================================================================== */
+        .exercise-card {
+            border-left: 5px solid var(--secondary-color); 
+            background: #ffffff; 
+            padding: 25px; 
+            margin-top: 25px;
+            margin-bottom: 25px; 
+            border-radius: 6px; 
+            box-shadow: var(--shadow);
+        }
 
-        .img-container { text-align: center; margin: 25px 0; }
-        .img-container img { max-width: 450px; width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd; }
-        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
+        .exercise-title {
+            font-weight: bold; 
+            color: var(--secondary-color); 
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
 
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 1.5rem 0; margin-top: 40px; width: 100%; }
-        footer p { margin: 0; text-align: center; }
+        .btn-feedback {
+            background-color: var(--accent-color); 
+            color: var(--text-dark); 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 10px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-feedback:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-feedback:active {
+            transform: scale(0.98);
+        }
+        
+        .feedback-box {
+            margin-top: 15px; 
+            padding: 20px; 
+            background-color: #f0fff4; 
+            border-left: 4px solid #38a169; 
+            border-radius: 6px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .feedback-badge {
+            background-color: #48bb78; 
+            color: #fff; 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+       
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Guia em Instalações Elétricas Residenciais | Aula 4:</h1>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 4</h1>
         <div class="subtitle">Potência Elétrica e Fator de Potência</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
@@ -147,33 +127,24 @@
             O Triângulo das Potências é a representação gráfica dessa relação. A Potência Aparente (S) é a hipotenusa, enquanto a Ativa (P) e a Reativa (Q) são os catetos.
         </p>
 
-         <!-- SVG do Triângulo de Potências -->
-            <div class="flex justify-center my-6">
-		<svg width="250" height="200" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg" class="text-white">
-		    <!-- Linha P (Ativa) - Horizontal (Vermelho) -->
-		    <line x1="50" y1="150" x2="200" y2="150" stroke="#EF4444" stroke-width="4"/>
-		    <text x="125" y="175" fill="#EF4444" font-size="16" font-weight="bold" text-anchor="middle">P (Ativa, W)</text>
-		    
-		    <!-- Linha Q (Reativa) - Vertical (Roxo) -->
-		    <line x1="50" y1="150" x2="50" y2="50" stroke="#A855F7" stroke-width="4"/>
-		    <text x="40" y="100" fill="#A855F7" font-size="16" font-weight="bold" text-anchor="end" transform="rotate(-90 5,75)">Q (Reativa, VAR)</text>
-		    
-		    <!-- Linha S (Aparente) - Hipotenusa (Índigo) -->
-		    <line x1="50" y1="50" x2="200" y2="150" stroke="#4F46E5" stroke-width="4"/>
-		    <text x="145" y="80" fill="#4F46E5" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(33 130 65)">S (Aparente, VA)</text>
+        <div class="img-container">
+            <svg width="250" height="200" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+                <line x1="50" y1="150" x2="200" y2="150" stroke="#EF4444" stroke-width="4"/>
+                <text x="125" y="175" fill="#EF4444" font-size="16" font-weight="bold" text-anchor="middle">P (Ativa, W)</text>
+                
+                <line x1="50" y1="150" x2="50" y2="50" stroke="#A855F7" stroke-width="4"/>
+                <text x="35" y="100" fill="#A855F7" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(-90 35,100)">Q (Reativa, VAr)</text>
+                
+                <line x1="50" y1="50" x2="200" y2="150" stroke="#4F46E5" stroke-width="4"/>
+                <text x="145" y="80" fill="#4F46E5" font-size="16" font-weight="bold" text-anchor="middle" transform="rotate(33 145 80)">S (Aparente, VA)</text>
 
-		    <!-- Símbolo do ângulo reto -->
-		    <rect x="50" y="140" width="10" height="10" fill="none" stroke="#6B7280" stroke-width="1.5"/>
-		    
-		    <!-- Arco cos φ CORRIGIDO: entre hipotenusa (160,150) e cateto P horizontal -->
-		    <path d="M 160 150 A 25 25 0 0 1 170 125" stroke="#10B981" fill="none" stroke-width="3"/>
-		    
-		    <!-- Letra φ grega próxima ao arco (verde para destacar cos φ) -->
-		    <text x="145" y="135" fill="#10B981" font-size="18" font-weight="bold" text-anchor="middle">φ</text>
-		</svg>
-
-            </div>
-            <!-- Fim do SVG -->
+                <rect x="50" y="140" width="10" height="10" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+                
+                <path d="M 160 150 A 25 25 0 0 1 170 125" stroke="#10B981" fill="none" stroke-width="3"/>
+                
+                <text x="145" y="135" fill="#10B981" font-size="18" font-weight="bold" text-anchor="middle">φ</text>
+            </svg>
+        </div>
 
         <h2>Cosseno Phi (cos φ) e o Fator de Potência</h2>
         <p>
@@ -191,9 +162,9 @@
         <div class="example-box">
             <h4>Exemplo 1: Dimensionamento de Tomada (VA)</h4>
             <p>Um micro-ondas consome 1200W de potência ativa e possui um fator de potência de 0.8. Qual a potência aparente para dimensionar o fio?</p>
-            <p><strong>Cálculo:</strong> S = P / FP -> S = 1200 / 0.8</p>
+            <p><strong>Cálculo:</strong> S = P / FP → S = 1200 / 0.8</p>
             <p><strong>Resultado:</strong> 1500 VA</p>
-            <small>*Lembre-se: Disjuntores e fios são dimensionados pela potência em VA (Aparente).</small>
+            <p style="margin-bottom: 0;"><small style="color: #4b5563;">*Lembre-se: Disjuntores e fios são dimensionados pela potência em VA (Aparente).</small></p>
         </div>
 
         <div class="example-box" style="background-color: #e3f2fd; border-left-color: #1976d2;">
@@ -206,26 +177,78 @@
             <strong>Dica de Ouro:</strong> Equipamentos que apenas aquecem (chuveiro, ferro de passar, lâmpada incandescente) são cargas resistivas e possuem FP = 1. Equipamentos com motores (geladeira, ar-condicionado) possuem FP menor que 1.
         </div>
 
-        <hr>
-        <h2>Exercícios de Fixação</h2>
+        <h2>Exercícios de Fixação (Teste seu Conhecimento!)</h2>
         
-        <p><strong>Questão 1:</strong> Um motor de piscina tem uma potência aparente de 2000 VA e um fator de potência de 0.85. Qual a potência ativa (em Watts) que ele consome?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <p>P = S * FP -> P = 2000 * 0.85 = <strong>1700 Watts</strong>.</p>
-        </details>
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 1: Cálculo de Potência Ativa</div>
+            <p>Um motor de piscina tem uma potência aparente de 2000 VA e um fator de potência de 0.85. Qual a potência ativa (em Watts) que ele consome?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex1')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex1" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: 1700 Watts.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Para encontrar a potência ativa (P), multiplicamos a potência aparente (S) pelo fator de potência (FP). <br>Cálculo: P = 2000 * 0.85 = 1700 W.</p>
+            </div>
+        </div>
 
-        <p><strong>Questão 2:</strong> Se uma instalação residencial soma 8000W de carga ativa e 10000VA de carga aparente, qual o Fator de Potência (cos φ) dessa casa?</p>
-        <details>
-            <summary>Ver resposta</summary>
-            <p>FP = P / S -> FP = 8000 / 10000 = <strong>0.8</strong>.</p>
-        </details>
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 2: Descobrindo o Fator de Potência</div>
+            <p>Se uma instalação residencial soma 8000W de carga ativa e 10000VA de carga aparente, qual o Fator de Potência (cos φ) dessa casa?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex2')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex2" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: 0.8.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 O fator de potência é a razão entre a potência ativa e a aparente. <br>Cálculo: FP = P / S → FP = 8000 / 10000 = 0.8.</p>
+            </div>
+        </div>
+	<div class="exercise-card">
+            <div class="exercise-title">Exercício 3: Dimensionamento de Equipamento Comercial</div>
+            <p>Um pequeno motor monofásico utilizado num portão eletrônico possui uma potência ativa de 840 W e opera com um fator de potência de 0,70. Qual é a potência aparente (em VA) que a rede elétrica precisa fornecer e que deve ser considerada para o dimensionamento dos condutores desse circuito?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex3')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex3" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: 1200 VA.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Para encontrar a potência aparente (S), dividimos a potência ativa (P) pelo fator de potência (FP). <br>Cálculo: S = P / FP → S = 840 / 0,70 = 1200 VA. <br>Isso demonstra que, devido ao baixo fator de potência (0,70), a rede precisa entregar uma corrente maior (equivalente a 1200 VA) para que o motor realize um trabalho de apenas 840 W.</p>
+            </div>
+        </div>
 
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 4: Análise de Eficiência Elétrica</div>
+            <p>Duas residências, "Casa A" e "Casa B", solicitam exatamente a mesma quantidade de potência ativa da concessionária de energia (ambas consomem 5000 W). No entanto, a Casa A opera com um Fator de Potência de 0,95, enquanto a Casa B possui muitas cargas indutivas antigas e opera com um Fator de Potência de 0,65. Qual das duas residências sobrecarrega mais os fios da instalação e exige transformadores maiores na rua? Justifique.</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex4')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex4" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: A Casa B sobrecarrega mais a instalação elétrica.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Embora o consumo em Watts (energia que realiza trabalho) seja igual, a Casa B exige uma potência aparente muito maior da rede. <br>• Casa A: S = 5000 / 0,95 = 5263 VA <br>• Casa B: S = 5000 / 0,65 = 7692 VA <br>O baixo fator de potência da Casa B faz com que circule uma corrente muito maior ("energia reativa") pelos fios, gerando mais aquecimento por efeito Joule, queda de tensão e a necessidade de cabos e disjuntores mais robustos para transportar a mesma energia útil.</p>
+            </div>
+        </div>
     </div>
 
     <footer>
         <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 4</p>
     </footer>
+
+    <script>
+        function toggleFeedback(id) {
+            var box = document.getElementById(id);
+            var btn = box.previousElementSibling;
+            
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                btn.innerHTML = '🔍 Visualizar Resposta';
+                btn.style.backgroundColor = 'var(--accent-color)';
+                btn.style.color = 'var(--text-dark)';
+            } else {
+                box.style.display = 'block';
+                btn.innerHTML = '🙈 Ocultar Resposta';
+                btn.style.backgroundColor = '#e67e22'; // Laranja de atenção para ocultar
+                btn.style.color = '#fff';
+            }
+        }
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia em Instalações Elétricas Residenciais - Aula 27</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    
+    <style>
+        .chart-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            background: #fdfdfd;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .chart-img-container { flex: 1; min-width: 320px; text-align: center; }
+        .chart-explanation { flex: 1; min-width: 320px; }
+
+        .zone-item { margin-bottom: 12px; padding: 12px; border-radius: 6px; font-size: 0.9rem; }
+        .z1 { background-color: #d4edda; border-left: 6px solid #28a745; }
+        .z2 { background-color: #fff3cd; border-left: 6px solid #ffc107; }
+        .z3 { background-color: #f8d7da; border-left: 6px solid #dc3545; }
+
+        .safety-list { list-style-type: none; padding-left: 0; }
+        .safety-list li { margin-bottom: 12px; padding-left: 35px; position: relative; }
+        .safety-list li::before { content: '✔️'; position: absolute; left: 0; top: 0; color: #27ae60; font-weight: bold; }
+
+        .quiz-section {
+            background-color: #fcfcfc;
+            border: 2px dashed #2c3e50;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .question strong { display: block; margin-bottom: 10px; color: #2c3e50; }
+        
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: none; 
+        }
+        
+        .btn-gabarito {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+        .btn-gabarito:hover { background-color: #34495e; }
+        
+        .correct { background-color: #d4edda !important; border: 1px solid #c3e6cb; }
+        .wrong { background-color: #f8d7da !important; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 27</h1>
+        <div class="subtitle">Comissionamento Sem Tensão: Ensaios Práticos e Checklist Pré-Energização</div>
+        <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
+    </header>
+
+    <div class="container">
+
+        <h2>1. O que é o Comissionamento Sem Tensão?</h2>
+        <p>A montagem mecânica e a conexão dos cabos no Quadro de Distribuição (QD) e nas caixas de passagem são apenas uma parte do trabalho. Antes de ligar o disjuntor geral pela primeira vez, é obrigatório realizar o <strong>comissionamento sem tensão</strong>.</p>
+        
+        <p>Esse procedimento consiste em uma série de verificações visuais e ensaios instrumentais para garantir que a instalação está segura, os circuitos isolados e que nenhum erro de conexão causará um curto-circuito ou acionará as proteções (Disjuntores e DR) de forma violenta.</p>
+
+        <div class="norma-box">
+            <strong>O que diz a NBR 5410 (Capítulo 7 - Verificação Final)?</strong><br>
+            A norma prescreve que as instalações devem ser inspecionadas e ensaiadas antes de serem colocadas em serviço pelo usuário, a fim de verificar se foram executadas corretamente e se atendem às exigências de segurança. Os ensaios devem incluir a continuidade dos condutores de proteção e a resistência de isolamento.
+        </div>
+
+        <h2>2. Uso do Multímetro e Equipamentos de Ensaio</h2>
+        <p>Com a instalação <strong>completamente desenergizada</strong>, os instrumentos tornam-se nossa principal ferramenta de diagnóstico.</p>
+
+        
+        <div class="chart-img-container">
+            <img src="../images/multimetro_continuidade.PNG" alt="Multímetro na escala de continuidade" width="15%">
+        </div>
+
+        <div class="chart-explanation">
+            <div class="zone-item z3">
+                <strong>Aviso Crítico:</strong> Nunca utilize a escala de continuidade ou resistência se houver qualquer possibilidade de a rede estar energizada. Isso destruirá o fusível interno do instrumento ou o próprio aparelho.
+            </div>
+            <div class="zone-item z1">
+                <strong>Teste de Continuidade (Bip):</strong> Utilizado para checar se o caminho do cabo está íntegro do QD até a ponta do circuito, e para garantir que o condutor de proteção (PE) está perfeitamente interligado.
+            </div>
+            <div class="zone-item z2">
+                <strong>Teste de Isolamento Prático:</strong> Utilizado para buscar curtos-circuitos diretos entre condutores distintos antes de aplicar tensão.
+            </div>
+        </div>
+        
+
+        <h3>Ensaio de Resistência de Isolamento (Megômetro)</h3>
+        <p>Para uma verificação mais precisa da integridade dos condutores, utiliza-se o <strong>megômetro</strong>, instrumento que aplica uma tensão contínua elevada (geralmente 500V) para medir a resistência de isolamento entre condutores.</p>
+
+        <table>
+            <tr>
+                <th>Ensaio</th>
+                <th>Tensão de Teste</th>
+                <th>Valor Mínimo Aceitável</th>
+            </tr>
+            <tr>
+                <td>Instalações até 300V</td>
+                <td>500 Vcc</td>
+                <td>&gt; 1 MΩ</td>
+            </tr>
+        </table>
+
+        <div class="alert-box">
+            <strong>Importante:</strong> Nunca realizar este ensaio com equipamentos conectados à instalação, pois a tensão pode danificar aparelhos eletrônicos.
+        </div>
+
+        <h3>Verificação da Continuidade do Condutor de Proteção (PE)</h3>
+        <p>O condutor de proteção deve garantir caminho seguro para correntes de falha.</p>
+        <ul class="safety-list">
+            <li>Testar entre o barramento de terra e os pontos de utilização.</li>
+            <li>Valor esperado: próximo de 0 Ω.</li>
+            <li>Valores elevados indicam mau contato ou interrupção.</li>
+        </ul>
+
+        <h3>Teste Funcional do DR (Diferencial Residual)</h3>
+        <p>O DR deve ser testado não apenas pelo botão "T", mas também considerando seu comportamento elétrico.</p>
+        <ul class="safety-list">
+            <li>Sensibilidade típica: 30 mA.</li>
+            <li>Tempo de atuação: deve ser inferior a 300 ms.</li>
+            <li>Desarma ao detectar fuga de corrente.</li>
+        </ul>
+
+        <div class="norma-box">
+            A NBR 5410 exige verificação do funcionamento dos dispositivos DR antes da liberação da instalação.
+        </div>
+
+        <h3>Medição de Tensão sob Carga</h3>
+        <p>Após energização, deve-se medir a tensão com cargas em funcionamento.</p>
+        <table>
+            <tr>
+                <th>Situação</th>
+                <th>Interpretação</th>
+            </tr>
+            <tr>
+                <td>Queda de tensão pequena</td>
+                <td>Instalação adequada.</td>
+            </tr>
+            <tr>
+                <td>Queda elevada</td>
+                <td>Possível mau contato ou condutor subdimensionado.</td>
+            </tr>
+        </table>
+
+        <h3>Como Realizar os Ensaios Instrumentais com Multímetro no QD</h3>
+        <p>Antes de iniciar, certifique-se de que <strong>todas as lâmpadas foram retiradas dos bocais e nenhum eletrodoméstico está plugado nas tomadas</strong>.</p>
+        <p>Deixe todos os disjuntores do QD na posição <strong>LIGADO (ON)</strong> para unificar os caminhos dos barramentos.</p>
+
+        <table>
+            <tr>
+                <th>Onde colocar as pontas de prova</th>
+                <th>Resultado Esperado</th>
+                <th>O que significa se der o contrário?</th>
+            </tr>
+            <tr>
+                <td><strong>Fase (Saída do disjuntor) e Neutro (Barramento)</strong></td>
+                <td><strong>Sem Bip</strong> (Circuito Aberto / OL)</td>
+                <td><strong>Bip ou Resistência Baixa:</strong> Curto-circuito direto ou há alguma carga (lâmpada/aparelho) esquecida no circuito.</td>
+            </tr>
+            <tr>
+                <td><strong>Fase (Saída do disjuntor) e Terra (Barramento PE)</strong></td>
+                <td><strong>Sem Bip</strong> (Circuito Aberto / OL)</td>
+                <td><strong>Bip:</strong> Cabo de fase prensado na estrutura metálica, parafuso perfurando a isolação ou erro de conexão. Risco de choque ou atuação do DR.</td>
+            </tr>
+            <tr>
+                <td><strong>Neutro (Barramento) e Terra (Barramento PE)</strong></td>
+                <td><strong>Sem Bip</strong> (Se o sistema for TT ou TN-S isolado a montante)</td>
+                <td><strong>Bip:</strong> Se o ponto de separação TN-C-S não for bem definido ou se houver inversão/fechamento acidental entre neutro e terra nas caixas de passagem. Fará o DR desarmar instantaneamente ao ligar qualquer carga.</td>
+            </tr>
+        </table>
+
+        <div class="danger-box">
+            <strong>Atenção ao Dispositivo DR:</strong> Se houver qualquer contato mecânico acidental entre o condutor Neutro e o Terra (PE) após a saída do DR, o circuito pode até não "estourar" ao ligar o disjuntor, mas o DR disparará imediatamente assim que a primeira lâmpada da casa for acesa.
+        </div>
+
+        <h2>3. Checklist Visual e Mecânico (Inspeção Visual)</h2>
+        <p>Antes mesmo de encostar o instrumento, os olhos do eletricista devem fazer uma varredura minuciosa na montagem do QD e dos pontos de consumo:</p>
+
+        <ul class="safety-list">
+            <li><strong>Reaperto de Bornes:</strong> Chaves de fenda/fenda cruzada isoladas em todos os parafusos de disjuntores, DR, DPS e barramentos. Conexões frouxas geram efeito Joule (aquecimento) e quedas de tensão.</li>
+            <li><strong>Identificação das Cores (NBR 5410):</strong> Conferir se Azul Claro foi usado estritamente para Neutro, Verde ou Verde/Amarelo para Proteção (Terra), e cores como Preto, Vermelho ou Marrom para as Fases.</li>
+            <li><strong>Alinhamento dos Pentes de Conexão:</strong> Verificar se os pentes de fase bifásicos ou trifásicos estão perfeitamente encaixados nos disjuntores, sem rebarbas de cobre expostas para fora do isolamento plástico.</li>
+            <li><strong>Ausência de Sobras de Cobre:</strong> Conferir se decupagens de fios não deixaram "pelos" de cobre para fora dos bornes dos disjuntores, gerando risco de arcos elétricos entre fases vizinhas.</li>
+            <li><strong>Limpeza do Invólucro:</strong> Garantir que nenhuma limalha de metal, pedaço de decapagem de cabo ou poeira de alvenaria ficou depositada no fundo da caixa do QD.</li>
+        </ul>
+
+        <h2>4. Roteiro Passo a Passo para a Energização Segura</h2>
+        <p>Se todos os testes visuais e de continuidade com o multímetro deram 100% corretos, o procedimento de energização deve seguir a seguinte ordem hierárquica e segura:</p>
+
+        <ol>
+            <li><strong>Desligue tudo:</strong> Coloque o disjuntor geral, o DR e todos os disjuntores parciais (circuitos terminais) na posição **DESLIGADO (OFF)**.</li>
+            <li><strong>Energize o Geral:</strong> Ligue o disjuntor geral da residência.</li>
+            <li><strong>Meça a Entrada:</strong> Com o multímetro na escala de Tensão Alternada (V~), verifique se as tensões de entrada estão corretas (Ex: Fase-Neutro = 127V / Fase-Fase = 220V).</li>
+            <li><strong>Arme o DR:</strong> Se houver IDR geral ou parcial, acione a alavanca. (Ela deve permanecer armada).</li>
+            <li><strong>Suba um por um:</strong> Ligue os disjuntores dos circuitos terminais individualmente (Circuitos de iluminação, depois TUGs, depois TUEs).</li>
+            <li><strong>Teste de Carga e do DR:</strong> Conecte as lâmpadas e aperte o botão de teste "T" do DR para garantir o funcionamento mecânico do disparo.</li>
+        </ol>
+
+        <div class="alert-box">
+            <strong>Dica de Ouro:</strong> Durante o passo 5, mantenha o ouvido atento. Se ao ligar um disjuntor específico você ouvir um estalo ou o disjuntor retornar imediatamente para a posição <strong>Desligado</strong>, não force a alavanca para cima. Existe um curto-circuito ativo que passou despercebido. Desligue a energia e reinicie os testes com o multímetro.
+        </div>
+
+
+        <h3>Ficha de Registro de Medições do Quadro de Distribuição (QD)</h3>
+        <p>Utilize a tabela abaixo para realizar as medições instrumentais e registrar os valores na documentação técnica da instalação. **Certifique-se de que a rede está desenergizada ao medir as resistências e energizada apenas ao medir as tensões.**</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Grandeza / Ensaio</th>
+                    <th style="width: 25%;">Ponto de Medição</th>
+                    <th style="width: 25%;">Valor Esperado</th>
+                    <th style="width: 20%;">Valor Medido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #f2f4f4; font-weight: bold;">
+                    <td colspan="4" style="color: #2c3e50; border-bottom: 2px solid #2c3e50;">1. Ensaios com a Rede DESENERGIZADA (Resistência Ôhmica)</td>
+                </tr>
+                <tr>
+                    <td><strong>Resistência entre Fase e Neutro</strong></td>
+                    <td>Saída do Disjuntor / Barramento N</td>
+                    <td>Circuito Aberto (OL ou &gt; 1 MΩ)<br><small>*(Sem lâmpadas/cargas plugadas)*</small></td>
+                    <td><span style="color: #95a5a6;">__________ Ω</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Resistência entre Fase e Fase</strong></td>
+                    <td>Saídas dos Disjuntores (Se Bifásico)</td>
+                    <td>Circuito Aberto (OL ou &gt; 1 MΩ)</td>
+                    <td><span style="color: #95a5a6;">__________ Ω</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Resistência entre Fase e Terra (PE)</strong></td>
+                    <td>Saída do Disjuntor / Barramento PE</td>
+                    <td>Circuito Aberto (OL ou &gt; 1 MΩ)</td>
+                    <td><span style="color: #95a5a6;">__________ Ω</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Resistência entre Neutro e Terra (PE)</strong></td>
+                    <td>Barramento N / Barramento PE</td>
+                    <td>Circuito Aberto (OL)<br><small>*(Após a saída do DR)*</small></td>
+                    <td><span style="color: #95a5a6;">__________ Ω</span></td>
+                </tr>
+
+                <tr style="background-color: #f2f4f4; font-weight: bold;">
+                    <td colspan="4" style="color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-top: 20px;">2. Ensaios com a Rede ENERGIZADA (Tensões de Entrada)</td>
+                </tr>
+                <tr>
+                    <td><strong>Tensão Fase - Neutro</strong></td>
+                    <td>Entrada do Disjuntor Geral / Neutro</td>
+                    <td>127 Vca <small>(ou 220 Vca dependendo da região)</small> +/- 5%</td>
+                    <td><span style="color: #95a5a6;">__________ V</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Tensão Fase - Fase</strong></td>
+                    <td>Entrada do Disjuntor Geral (F1 e F2)</td>
+                    <td>220 Vca <small>(ou 380 Vca dependendo da região)</small> +/- 5%</td>
+                    <td><span style="color: #95a5a6;">__________ V</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Tensão Fase - Terra (PE)</strong></td>
+                    <td>Entrada do Disjuntor Geral / Barramento PE</td>
+                    <td>Mesmo valor da leitura Fase-Neutro</td>
+                    <td><span style="color: #95a5a6;">__________ V</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Tensão Neutro - Terra (PE)</strong></td>
+                    <td>Barramento N / Barramento PE</td>
+                    <td>Próximo de 0 Vca <small>(Máximo tolerável: 2 Vca)</small></td>
+                    <td><span style="color: #95a5a6;">__________ V</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert-box">
+            <strong>Dica para a Aula Prática:</strong> Ensine os alunos que o registro desses valores em uma folha de comissionamento protege o eletricista legalmente, comprovando que a entrega da obra foi feita com a isolação perfeita e as tensões em conformidade com as metas da concessionária.
+        </div>
+
+        <h2>5. Conceito de Seletividade na Proteção</h2>
+        <p>A seletividade garante que apenas o dispositivo de proteção mais próximo da falha seja acionado.</p>
+        <ul class="safety-list">
+            <li>Evita desligamento geral da instalação.</li>
+            <li>Facilita manutenção.</li>
+            <li>Aumenta confiabilidade do sistema.</li>
+        </ul>
+        <div class="alert-box">
+            <strong>Exemplo:</strong> um curto em tomada deve desligar apenas o disjuntor do circuito, e não o geral.
+        </div>
+
+        <h2>6. Estudo de Caso Prático</h2>
+        <p>Durante o comissionamento, o DR desarma imediatamente ao ligar qualquer circuito.</p>
+        <strong>Possíveis causas:</strong>
+        <ul class="safety-list">
+            <li>Contato entre neutro e terra após o DR.</li>
+            <li>Equipamento com fuga de corrente.</li>
+            <li>Erro de ligação no Quadro de Distribuição.</li>
+        </ul>
+        <div class="danger-box">
+            <strong>Diagnóstico:</strong> Desligar todos os circuitos, ligar um por vez e identificar o circuito defeituoso.
+        </div>
+
+        <div class="quiz-section">
+            <h2>7. Exercícios de Fixação</h2>
+            
+            <div class="question" id="q1">
+                <strong>1. Qual escala do multímetro DEVE ser utilizada para identificar um curto-circuito entre fase e neutro com a instalação totalmente desenergizada?</strong>
+                <select id="ans1" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Tensão Alternada (V~), medindo nos barramentos principais.</option>
+                    <option value="correct">Resistência Ôhmica (&Omega;) ou Teste de Continuidade (Bip).</option>
+                    <option value="wrong">Corrente Alternada (A~), em série com o circuito terminal.</option>
+                </select>
+                <div id="fb1" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q2">
+                <strong>2. Durante o ensaio com o multímetro no QD, o circuito acusa "Bip" sonoro contínuo entre a saída do disjuntor de tomadas e o barramento de Neutro. O que isso indica?</strong>
+                <select id="ans2" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Que o circuito está perfeito e pronto para receber energia.</option>
+                    <option value="wrong">Que o condutor de aterramento está cumprindo seu papel.</option>
+                    <option value="correct">Que há um curto-circuito direto entre fase e neutro ou uma carga ligada na tomada fechando o caminho.</option>
+                </select>
+                <div id="fb2" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q3">
+                <strong>3. Qual o problema de deixar parafusos de disjuntores ou barramentos frouxos no Quadro de Distribuição?</strong>
+                <select id="ans3" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="correct">Gera alta resistência de contato, provocando aquecimento por Efeito Joule e risco de incêndio.</option>
+                    <option value="wrong">O disjuntor desarma por sobrecarga magnética instantaneamente.</option>
+                    <option value="wrong">Nenhum, pois a corrente elétrica preenche os espaços vazios do borne.</option>
+                </select>
+                <div id="fb3" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q4">
+                <strong>4. Se houver um contato acidental oculto entre o fio de Neutro e o fio de Terra (PE) na caixinha de um circuito residencial, o que acontecerá ao acionar as cargas pós-DR?</strong>
+                <select id="ans4" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">O disjuntor termomagnético explodirá devido à corrente de curto-circuito.</option>
+                    <option value="correct">O Dispositivo DR (Diferencial Residual) desarmará imediatamente devido ao desequilíbrio das correntes.</option>
+                    <option value="wrong">A conta de energia virá mais barata por desvio de corrente.</option>
+                </select>
+                <div id="fb4" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q5">
+                <strong>5. Qual deve ser o estado inicial de todos os disjuntores do QD no momento exato em que a energia da concessionária é conectada pela primeira vez na entrada geral?</strong>
+                <select id="ans5" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Todos devem estar ligados (ON) para testar a robustez do sistema.</option>
+                    <option value="correct">Todos devem estar completamente desligados (OFF), procedendo com a energização em etapas.</option>
+                    <option value="wrong">Apenas os disjuntores de chuveiro devem estar ligados para drenar a sobretensão.</option>
+                </select>
+                <div id="fb5" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q6">
+                <strong>6. No ensaio de resistência de isolamento feito com um megômetro em redes de até 300V, qual a tensão aplicada pelo instrumento e o valor mínimo aceitável segundo a NBR 5410?</strong>
+                <select id="ans6" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="correct">Aplicação de 500 Vcc com isolamento mínimo maior que 1 MΩ.</option>
+                    <option value="wrong">Aplicação de 127 Vca com isolamento mínimo igual a 0 Ω.</option>
+                    <option value="wrong">Aplicação de 50 Vcc com isolamento mínimo de no máximo 100 kΩ.</option>
+                </select>
+                <div id="fb6" class="feedback"></div>
+            </div>
+
+            <div class="question" id="q7">
+                <strong>7. O que caracteriza o princípio da seletividade em um projeto elétrico residencial?</strong>
+                <select id="ans7" style="padding: 5px; width: 100%;">
+                    <option value="">Selecione uma resposta...</option>
+                    <option value="wrong">Garantir que o disjuntor geral caia antes de qualquer disjuntor de circuito terminal.</option>
+                    <option value="correct">Garantir que apenas o dispositivo de proteção mais próximo da falha atue, mantendo o restante da instalação ligada.</option>
+                    <option value="wrong">Permitir que o usuário selecione manualmente qual tomada deseja proteger no dia a dia.</option>
+                </select>
+                <div id="fb7" class="feedback"></div>
+            </div>
+
+            <button class="btn-gabarito" onclick="verificarQuiz()">Verificar Gabarito</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Objeto contendo os feedbacks detalhados para cada questão (Atualizado para as 7 questões)
+        const feedbacks = {
+            1: {
+                correct: "Correto! Com o circuito sem energia, usamos a escala de resistência ou o teste de continuidade (bip). Se der continuidade onde não deveria (Fase e Neutro), temos um curto-circuito.",
+                wrong: "Incorreto. Tentar medir tensão sem energia resultará em 0V (não aponta curtos). E tentar usar a escala de corrente (Ampères) direto nos barramentos causará a queima do fusível do seu multímetro."
+            },
+            2: {
+                correct: "Correto! O 'bip' contínuo indica caminho fechado de baixa resistência. Se as lâmpadas e aparelhos foram removidos, isso é um curto-circuito direto. Se esqueceu algo plugado, a carga fecha esse caminho.",
+                wrong: "Incorreto. Entre Fase e Neutro o esperado é circuito aberto (sem bip) quando não há cargas ligadas. Se bipar, ligar o disjuntor causará um curto-circuito franco."
+            },
+            3: {
+                correct: "Correto! O mau contato reduz a área efetiva de condução, gerando um ponto de altíssima resistência elétrica. Pelo Efeito Joule, essa resistência dissipa calor, derretendo componentes e iniciando incêndios.",
+                wrong: "Incorreto. Bornes frouxos não geram sobrecarga magnética imediata (curto) e a corrente não pula espaços vazios com segurança; ela gera arcos e calor destrutivo."
+            },
+            4: {
+                correct: "Correto! O DR compara a corrente que sai pela Fase com a que retorna pelo Neutro. Se o Neutro encostar no Terra, parte da corrente de retorno desvia pelo PE. O DR nota a diferença e desarma para proteger a instalação.",
+                wrong: "Incorreto. O disjuntor termomagnético não atua porque não há uma corrente de curto-circuito massiva (Fase-Fase ou Fase-Neutro), mas sim uma fuga de corrente do Neutro para o Terra que afeta apenas o DR."
+            },
+            5: {
+                correct: "Correto! Deixar tudo em OFF protege os equipamentos e circuitos terminais. Energizamos primeiro o geral, validamos as tensões com o multímetro e só então ligamos um circuito terminal por vez.",
+                wrong: "Incorreto. Ligar tudo de uma vez pode expor a instalação a transientes de partida violentos e, caso haja um curto-circuito não detectado em algum ponto, tornará o diagnóstico muito mais difícil e perigoso."
+            },
+            6: {
+                correct: "Correto! Segundo a NBR 5410, para circuitos com tensão nominal até 300V, aplica-se uma tensão contínua de 500 Vcc com o megômetro, e o isolamento deve ser superior a 1 MΩ para ser considerado seguro.",
+                wrong: "Incorreto. O ensaio de isolamento requer tensão contínua (Vcc) superior à da rede para forçar pequenas correntes de fuga através do dielétrico. Um valor de 0 Ω indicaria um curto direto."
+            },
+            7: {
+                correct: "Correto! A seletividade dita que a proteção a montante (geral) deve ser coordenada com a de jusante (parcial), de forma que apenas o disjuntor do circuito afetado desarme, preservando o fornecimento nos demais pontos.",
+                wrong: "Incorreto. Se o disjuntor geral cair antes do parcial, o sistema não é seletivo, causando o desligamento desnecessário de toda a residência devido a uma falha localizada."
+            }
+        };
+
+        function verificarQuiz() {
+            for (let i = 1; i <= 7; i++) { // Laço estendido para cobrir as 7 questões
+                let res = document.getElementById('ans' + i).value;
+                let questionBox = document.getElementById('q' + i);
+                let feedbackBox = document.getElementById('fb' + i);
+                
+                // Exibe a div de feedback
+                feedbackBox.style.display = "block";
+                
+                if (res === "correct") {
+                    questionBox.className = "question correct";
+                    feedbackBox.textContent = feedbacks[i].correct;
+                    feedbackBox.style.color = "#155724"; // Verde escuro
+                } else if (res === "wrong") {
+                    questionBox.className = "question wrong";
+                    feedbackBox.textContent = feedbacks[i].wrong;
+                    feedbackBox.style.color = "#721c24"; // Vermelho escuro
+                } else {
+                    // Caso o aluno clique sem selecionar nada
+                    questionBox.className = "question";
+                    feedbackBox.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+    <footer>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais - Aula 27</p></p>
+    </footer>
+
+</body>
+</html>

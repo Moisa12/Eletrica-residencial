@@ -1,115 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia em Instalações Elétricas Residenciais - Aula 1</title>
+    <title>Guia em Instalações Elétricas Residenciais - Aula 4</title>
     
-    <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 100px; /* Espaço para o cabeçalho fixo */
-        }
-
-        /* Cabeçalho FIXO */
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: fixed;
-         }
-        .logo-header {
-            position: absolute;
-            bottom: 10px;  /* Distância do fundo do cabeçalho */
-            right: 20px;   /* Distância da borda direita */
-            height: 50px;  /* Ajuste o tamanho conforme sua necessidade */
-            width: auto;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; }
-        
-        .subtitle {
-        font-size: 1rem;
-        font-weight: normal;
-        color: #f1c40f;
-        margin-top: 5px;
-    }
-
-        /* Container Principal */
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-
-        /* Títulos e Parágrafos */
-        h2 { color: #2c3e50; border-left: 5px solid #f1c40f; padding-left: 10px; margin-top: 30px; }
-        p { margin-bottom: 1.2rem; text-align: justify; }
-
-        /* Estilo de Tabelas */
-        .table-container { overflow-x: auto; margin: 25px 0; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        th { background-color: #2c3e50; color: #fff; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        /* Estilo das Imagens (Ajuste de tamanho aqui) */
-        .img-container {
-            text-align: center;
-            margin: 25px 0;
-        }
-        .img-container img {
-            max-width: 350px; /* Altere este valor para diminuir ou aumentar a imagem */
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-        .caption { font-size: 0.85rem; color: #666; margin-top: 10px; font-style: italic; }
-
-        /* Rodapé */
-        footer {
-            background-color: #2c3e50;
-            color: #bdc3c7;
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 40px;
-            width: 100%; /* Garante que ele ocupe toda a largura para poder centralizar */
-        }
-        footer p {
-            margin: 0;
-            text-align: center; /* Reforça a centralização para a tag P */
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
-<body>
 
+<body>
     <header>
-        <h1>Guia em Instalações Elétricas Residenciais | Aula 1: Fundamentos em Eletricidade. </h1>
+        <h1>Guia em Instalações Elétricas Residenciais | Aula 1: Fundamentos em Eletricidade</h1>
         <div class="subtitle">O Princípio, Átomos, e Materiais Elétricos</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
@@ -129,6 +31,27 @@
             <img src="../images/atomo.png" alt="Estrutura do Átomo">
             <p class="caption">Figura 1: Representação de um átomo e seus elétrons.</p>
         </div>
+        
+        <h2>Eletricidade Estática: O que é?</h2>
+        <p>
+            Diferente da eletricidade que usamos nas tomadas — onde os elétrons estão em movimento constante (corrente elétrica) —, a <strong>eletricidade estática</strong> ocorre quando há um acúmulo de cargas elétricas em repouso na superfície de um corpo. 
+        </p>
+        <p>
+            Esse fenômeno acontece principalmente por <strong>atrito</strong>. Quando dois materiais diferentes entram em contato e são esfregados, um deles costuma perder elétrons (ficando carregado positivamente) enquanto o outro ganha elétrons (ficando carregado negativamente). Como esses materiais geralmente são isolantes, as cargas não conseguem circular e ficam "presas" na superfície até encontrarem um caminho para se descarregar.
+        </p>
+
+        <h2>Onde encontramos a Eletricidade Estática no Dia a Dia?</h2>
+        <ul>
+            <li><strong>O "Choque" ao sair do carro:</strong> Ao dirigir, o atrito do seu corpo com o estofamento do banco transfere elétrons. Quando você sai e toca na lataria de metal do veículo, ocorre uma descarga rápida em direção à terra, gerando aquele pequeno estalo ou faísca na ponta dos dedos.</li>
+            <li><strong>Cabelos arrepiados ao tirar o agasalho:</strong> Roupas de lã ou tecidos sintéticos acumulam muita carga por atrito. Ao retirar uma blusa de frio rapidamente, a eletricidade estática faz com que os fios de cabelo se repelam mútua e temporariamente, deixando-os arrepiados.</li>
+            <li><strong>Tela da TV ou Monitor atraindo poeira:</strong> Aparelhos eletroeletrônicos geram campos eletrostáticos ao redor de suas telas. É por isso que, mesmo limpando constantemente, a poeira do ambiente é rapidamente atraída e gruda no visor.</li>
+            <li><strong>O Pente e os pedacinhos de papel:</strong> Um clássico experimento prático: ao passar um pente plástico várias vezes no cabelo seco e aproximá-lo de pequenos pedaços de papel, o pente (agora eletrizado) consegue atraí-los sem sequer tocá-los.</li>
+            <li><strong>Os Raios na atmosfera:</strong> Na natureza, o atrito severo entre cristais de gelo e gotas de água dentro das nuvens de tempestade gera um acúmulo gigantesco de eletricidade estática. Quando essa carga supera a capacidade isolante do ar, ela se descarrega violentamente até o solo ou entre nuvens, criando os relâmpagos.</li>
+        </ul>
+
+        <div class="alert" style="background-color: #f4ecf7; border-left: 5px solid #8e44ad; color: #4a235a; padding: 15px; margin: 20px 0;">
+            <strong>Aviso de Segurança Industrial:</strong> Embora no dia a dia a eletricidade estática pareça apenas uma distração inofensiva, em ambientes industriais com presença de gases inflamáveis ou poeiras combustíveis, uma única faísca eletrostática pode provocar explosões. Por isso, técnicos utilizam calçados e pulseiras de aterramento para descarregar o corpo constantemente.
+        </div>
 
         <h2>Materiais Condutores e Isolantes</h2>
         <p>
@@ -141,50 +64,50 @@
                     <tr>
                         <th>Classificação</th>
                         <th>Material</th>
-                        <th>Resistividade (ρ) em Ω·m</th>
+                        <th>Resistividade (ρ)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td rowspan="4"><strong>Condutores</strong></td>
                         <td>Prata</td>
-                        <td>1,59 x 10<sup>-8</sup></td>
+                        <td>0,0159 Ω·m/mm<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td>Cobre</td>
-                        <td>1,72 x 10<sup>-8</sup></td>
+                        <td>0,0172 Ω·m/mm<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td>Ouro</td>
-                        <td>2,44 x 10<sup>-8</sup></td>
+                        <td>0,0244 Ω·m/mm<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td>Alumínio</td>
-                        <td>2,82 x 10<sup>-8</sup></td>
+                        <td>0,0282 Ω·m/mm<sup>2</sup></td>
                     </tr>
                     <tr>
                         <td rowspan="4"><strong>Isolantes</strong></td>
                         <td>Vidro</td>
-                        <td>10<sup>10</sup> a 10<sup>14</sup></td>
+                        <td>10<sup>10</sup> Ω·m a 10<sup>14</sup> Ω·m</td>
                     </tr>
                     <tr>
                         <td>Borracha</td>
-                        <td>10<sup>13</sup></td>
+                        <td>10<sup>13</sup> Ω·m</td>
                     </tr>
                     <tr>
                         <td>Cerâmica</td>
-                        <td>10<sup>14</sup></td>
+                        <td>10<sup>14</sup> Ω·m</td>
                     </tr>
                     <tr>
                         <td>PVC</td>
-                        <td>10<sup>14</sup></td>
+                        <td>10<sup>14</sup> Ω·m</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="img-container">
-            <img src="../images/cabo.jpg" alt="Cabo Elétrico">
+            <img src="../images/cabo.png" alt="Cabo Elétrico">
             <p class="caption">Figura 2: Cabo de cobre com isolação em PVC.</p>
         </div>
         
@@ -193,16 +116,96 @@
             Ao observar nossa tabela de resistividade, vemos que a <strong>Prata</strong> é o melhor condutor que existe. No entanto, usamos o <strong>Cobre</strong> nas instalações residenciais por um equilíbrio entre excelente condução e custo acessível. O alumínio é usado apenas em casos específicos (como redes de alta tensão na rua) por ser mais leve e barato, apesar de ter maior resistividade que o cobre.
         </p>
 
-        <div class="alert" style="background-color: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin: 20px 0;">
+        <div class="alert">
             <strong>Analogia para facilitar:</strong> Pense na eletricidade como uma rodovia. Os <strong>Condutores</strong> são estradas asfaltadas e livres. Os <strong>Isolantes</strong> são como grandes bloqueios ou muros que impedem os carros (elétrons) de seguir caminho.
         </div>
+        
+        <h2>Exercícios de Fixação (Teste seu Conhecimento!)</h2>
+            
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 1: Estrutura Atômica</div>
+            <p>Qual é a partícula do átomo que possui carga elétrica negativa, localiza-se na região externa (órbita) e cuja movimentação ordenada dá origem à corrente elétrica que utilizamos nas residências?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex1')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex1" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: Os Elétrons.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Enquanto os prótons (positivos) e nêutrons (neutros) ficam rigidamente presos no núcleo do átomo, os elétrons possuem liberdade de órbita e, nos materiais condutores, conseguem se desprender para formar o fluxo elétrico.</p>
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 2: Análise de Condutividade</div>
+            <p>Consultando a tabela de resistividade apresentada nesta aula, a prata possui uma resistividade menor que a do cobre (ρ_prata = 1,59 x 10⁻⁸ Ω·m vs ρ_cobre = 1,72 x 10⁻⁸ Ω·m). Por que, então, as instalações elétricas das nossas casas são feitas com fios de cobre e não de prata?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex2')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex2" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: Devido ao fator econômico (relação Custo-Benefício).</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 Embora a prata seja ligeiramente superior na condução, ela é um metal precioso extremamente caro. O cobre oferece uma condutividade excelente a uma fração minúscula do custo da prata, tornando viável o cabeamento em larga escala de uma habitação.</p>
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 3: Propriedades dos Isolantes</div>
+            <p>O PVC (Policloreto de Vinila) é largamente utilizado na fabricação de cabos elétricos residenciais. Qual é a principal função física do PVC nesse componente e qual propriedade da tabela justifica seu uso?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex3')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex3" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: Isolar eletricamente o condutor metálico; justificado por sua altíssima resistividade (10¹⁴ Ω·m).</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 O PVC atua como uma barreira física que bloqueia a saída dos elétrons para fora do fio. Devido à sua resistência colossal, ele impede curtos-circuitos e protege os usuários contra choques elétricos fatais ao manusearem os cabos.</p>
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 4: Fenômenos Eletrostáticos</div>
+            <p>Ao caminhar de meias sobre um tapete de material sintético num dia seco e, em seguida, tocar na maçaneta metálica de uma porta, você sente um pequeno estalo. Explique resumidamente o mecanismo que causou esse evento.</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex4')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex4" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: Ocorreu uma eletrização por atrito seguida de uma descarga eletrostática rápida.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 O atrito contínuo entre a meia e o tapete "arrancou" ou transferiu elétrons para o seu corpo, acumulando eletricidade estática. Ao aproximar a mão da maçaneta (um material condutor metálico), esse excesso de carga saltou rapidamente pelo ar, gerando a faísca e a sensação do pequeno choque.</p>
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-title">Exercício 5: Conceito de Resistividade</div>
+            <p>Se aumentarmos a temperatura de um pedaço de fio metálico condutor, a agitação dos seus átomos internos aumenta, criando mais obstáculos para a passagem dos elétrons livres. Baseado nisso, o que acontecerá com o valor da sua resistividade (ρ)?</p>
+            <button class="btn-feedback" onclick="toggleFeedback('ex5')">🔍 Visualizar Resposta</button>
+            
+            <div id="ex5" class="feedback-box" style="display: none;">
+                <span class="feedback-badge">Resposta Correta</span>
+                <p><strong>Gabarito: O valor da resistividade (ρ) irá aumentar.</strong></p>
+                <p style="margin-bottom:0; font-size:0.9rem; color:#555;">💡 A resistividade não é totalmente fixa; ela varia com a temperatura. Quanto mais quente o metal condutor fica, maior é a oposição interna ao fluxo ordenado de elétrons, o que significa que materiais superaquecidos conduzem pior a eletricidade (reforçando a importância de não sobrecarregar fiações!).</p>
+            </div>
+        </div>
+        
     </div>
-    
-    
 
     <footer>
-        <p>© 2026 - Guia em Instalações Elétricas Residenciais | aula 1</p>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 1</p>
     </footer>
+
+    <script>
+        function toggleFeedback(id) {
+            var box = document.getElementById(id);
+            var btn = box.previousElementSibling;
+            
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                btn.innerHTML = '🔍 Visualizar Resposta';
+                btn.style.backgroundColor = 'var(--accent-color)';
+                btn.style.color = 'var(--text-dark)';
+            } else {
+                box.style.display = 'block';
+                btn.innerHTML = '🙈 Ocultar Resposta';
+                btn.style.backgroundColor = '#e67e22'; // Laranja de atenção para ocultar
+                btn.style.color = '#fff';
+            }
+        }
+    </script>
 
 </body>
 </html>

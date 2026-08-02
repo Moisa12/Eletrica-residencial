@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Manutenção e Gestão de Riscos - Eletrotécnica</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .option-card {
+            transition: all 0.15s ease-in-out;
+        }
+        .option-card:not([disabled]):hover {
+            border-color: #0284c7;
+            background-color: #f0f9ff;
+            transform: translateY(-1px);
+        }
+        .correct-answer {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
+        }
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+        }
+        .incorrect-answer {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            font-weight: 600;
+        }
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+
+    <div class="max-w-3xl w-full space-y-6">
+        
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
+
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Quiz: Manutenção e Gestão de Riscos
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Teste seus conhecimentos sobre APR, diagnósticos preditivos/detectivos, instrumentos de teste e gestão profissional na eletrotécnica.
+            </p>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-sky-600 animate-pulse"></span>
+                    <span id="total-questions-count">10 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 10
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-sky-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </header>
+
+        <!-- ÁREA DOS CARDS DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div id="score-icon" class="w-16 h-16 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Resultado Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-sky-600 text-2xl">0</span> de <span id="total-count-span">10</span> perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                tag: "Segurança & NR-10",
+                q: "1. Qual é o principal objetivo da Análise Preliminar de Risco (APR) antes de iniciar qualquer serviço elétrico?",
+                options: [
+                    "Reduzir o tempo total de execução da obra.",
+                    "Identificar perigos e estabelecer medidas de controle e prevenção.",
+                    "Substituir a necessidade de utilizar EPIs e EPCs.",
+                    "Documentar o estoque de materiais no canteiro de obras."
+                ],
+                answer: "Identificar perigos e estabelecer medidas de controle e prevenção.",
+                rationale: "A APR é uma ferramenta essencial para antecipar riscos, avaliar ameaças no ambiente de trabalho e planejar ações preventivas, garantindo a integridade física da equipe."
+            },
+            {
+                tag: "Instrumentação",
+                q: "2. Qual instrumento de medição é especificamente indicado para detectar falhas e fugas no isolamento de cabos e enrolamentos de motores?",
+                options: [
+                    "Alicate Amperímetro",
+                    "Multímetro Digital",
+                    "Megômetro (Testador de Isolamento)",
+                    "Termômetro Infravermelho"
+                ],
+                answer: "Megômetro (Testador de Isolamento)",
+                rationale: "O Megômetro aplica tensões elevadas de ensaio (ex: 500V a 1000V) para medir a resistência de isolação em megaohms, detectando degradações imperceptíveis a multímetros comuns."
+            },
+            {
+                tag: "Tipos de Manutenção",
+                q: "3. Como pode ser definida a Manutenção Preditiva em instalações elétricas?",
+                options: [
+                    "Intervenção realizada somente após a ocorrência de uma quebra ou falha.",
+                    "Ações de substituição periódica baseadas exclusivamente em calendário predefinido.",
+                    "Acompanhamento e monitoramento de parâmetros físicos para antecipar e diagnosticar falhas.",
+                    "Substituição completa e preventiva de todos os equipamentos do painel."
+                ],
+                answer: "Acompanhamento e monitoramento de parâmetros físicos para antecipar e diagnosticar falhas.",
+                rationale: "A manutenção preditiva utiliza dados e medições contínuas (como análise de vibração, termografia e ensaios isolantes) para intervir no momento exato antes da falha ocorrer."
+            },
+            {
+                tag: "Termografia",
+                q: "4. Qual é a principal finalidade da inspeção por Termografia em quadros e circuitos elétricos?",
+                options: [
+                    "Identificar pontos de aquecimento anormal (sobreaquecimento e conexões frouxas).",
+                    "Medir com precisão a Tensão Alternada da tomada.",
+                    "Verificar a presença de corrente contínua em circuitos de controle.",
+                    "Calcular o consumo mensal de energia em quilowatts-hora ($kWh$)."
+                ],
+                answer: "Identificar pontos de aquecimento anormal (sobreaquecimento e conexões frouxas).",
+                rationale: "A câmera termográfica detecta a radiação infravermelha, tornando visíveis conexões frouxas, sobrecargas e desequilíbrios de fase através do calor gerado por efeito Joule."
+            },
+            {
+                tag: "Gestão Profissional",
+                q: "5. Qual a relevância técnica e comercial de incluir 'Recomendações ao Cliente' no relatório final de manutenção?",
+                options: [
+                    "Trata-se de mera obrigação burocrática sem utilidade prática.",
+                    "Serve unicamente para transferir a responsabilidade civil de qualquer sinistro futuro.",
+                    "Transforma o eletricista em um consultor técnico que orienta melhorias de eficiência e segurança.",
+                    "Apenas justifica a cobrança de um valor mais elevado pelo serviço prestado."
+                ],
+                answer: "Transforma o eletricista em um consultor técnico que orienta melhorias de eficiência e segurança.",
+                rationale: "Apresentar recomendações fundamentadas agrega alto valor percebido, educa o cliente quanto à segurança preventiva e abre oportunidades para futuros serviços."
+            },
+            {
+                tag: "Normas & NR-10",
+                q: "6. De acordo com a NR-10 e as boas práticas de segurança, qual diretriz deve ser estritamente cumprida em atividades elétricas?",
+                options: [
+                    "A Análise Preliminar de Risco (APR) pode ser feita apenas mentalmente pelo eletricista.",
+                    "O relatório de manutenção é opcional em serviços residenciais de pequeno porte.",
+                    "Nenhuma atividade deve ser iniciada sem desenergização, sinalização, bloqueio e APR assinada.",
+                    "O uso de EPIs é dispensável caso a rede esteja teoricamente desligada."
+                ],
+                answer: "Nenhuma atividade deve ser iniciada sem desenergização, sinalização, bloqueio e APR assinada.",
+                rationale: "Segurança, procedimentos de LOTO (Lockout/Tagout), teste de ausência de tensão e APR documentada são pilares inegociáveis regulamentados pela NR-10."
+            },
+            {
+                tag: "Tipos de Manutenção",
+                q: "7. O que caracteriza a modalidade de Manutenção Detectiva?",
+                options: [
+                    "Reparação rápida de quebras e avarias visíveis a olho nu.",
+                    "Busca e identificação de falhas ocultas em sistemas de proteção e emergência.",
+                    "Monitoramento de dados de consumo em tempo real via rede Wi-Fi e IoT.",
+                    "Troca periódica de componentes simples antes do fim da vida útil."
+                ],
+                answer: "Busca e identificação de falhas ocultas em sistemas de proteção e emergência.",
+                rationale: "A manutenção detectiva testa sistemas que permanecem em standby (como geradores, no-breaks, disjuntores e dispositivos DR) para garantir que atuarão no momento de emergência."
+            },
+            {
+                tag: "Diagnóstico de Falhas",
+                q: "8. Ao diagnosticar um disjuntor que desarma frequentemente, qual conduta técnica o profissional deve adotar?",
+                options: [
+                    "Trocar o disjuntor por outro de maior corrente nominal (amperagem) imediatamente.",
+                    "Coletar histórico, inspecionar conexões e medir a corrente de carga em operação.",
+                    "Isolar toda a instalação elétrica da edificação de forma indeterminada.",
+                    "Substituir preventivamente toda a fiação sem realizar medições prévias."
+                ],
+                answer: "Coletar histórico, inspecionar conexões e medir a corrente de carga em operação.",
+                rationale: "Substituir o disjuntor por um maior sem recalcular o condutor pode provocar incêndio. O correto é investigar se há sobrecarga, curto-circuito ou mau contato gerando aquecimento."
+            },
+            {
+                tag: "Rastreabilidade",
+                q: "9. Por que é fundamental registrar formalmente a lista de 'Materiais Substituídos' na Ordem de Serviço?",
+                options: [
+                    "Para cobrar margens de lucro superiores sobre os insumos utilizados.",
+                    "Garantir a rastreabilidade técnica, comprovar a qualidade das peças e resguardar a garantia.",
+                    "Apenas para cumprir exigências de fiscalização tributária e nota fiscal.",
+                    "Evitar que o cliente compre peças por conta própria no futuro."
+                ],
+                answer: "Garantir a rastreabilidade técnica, comprovar a qualidade das peças e resguardar a garantia.",
+                rationale: "O registro formal dos materiais com especificações técnicas resguarda o profissional juridicamente, atesta a conformidade das peças e organiza o histórico da instalação."
+            },
+            {
+                tag: "Gestão & Postura",
+                q: "10. Qual é a principal diferença entre um profissional que apenas 'conserta' e um que 'gestiona' instalações elétricas?",
+                options: [
+                    "O valor total cobrado no orçamento final do cliente.",
+                    "O uso exclusivo de aplicativos avançados e softwares pagos.",
+                    "A utilização de procedimentos padronizados, registros técnicos, APR e foco na prevenção.",
+                    "A flexibilidade em relevar exigências de normas técnicas quando necessário."
+                ],
+                answer: "A utilização de procedimentos padronizados, registros técnicos, APR e foco na prevenção.",
+                rationale: "A gestão profissional transforma a manutenção corretiva reativa em um processo preventivo contínuo, pautado por normas técnicas, segurança legal e valorização do serviço."
+            }
+        ];
+
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
+
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
+
+                qData.options.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText.replace(/"/g, '&quot;')}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-sky-100 group-hover:text-sky-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-sky-50 text-sky-600 font-semibold text-xs rounded-md uppercase tracking-wider">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de ${quizQuestions.length}</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
+            });
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            buttons.forEach(btn => { btn.disabled = true; });
+            
+            questionsAnswered++;
+            if (isCorrect) { correctAnswersCount++; }
+            updateProgressBar();
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
+            } else {
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
+                
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+            }
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([feedbackElement]);
+            }
+            
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
+            }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
+        }
+
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const totalCountSpan = document.getElementById('total-count-span');
+            const finalMessageDiv = document.getElementById('final-message');
+            const scoreIcon = document.getElementById('score-icon');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            totalCountSpan.textContent = quizQuestions.length;
+            scoreCard.classList.remove('hidden');
+
+            const percentage = (correctAnswersCount / quizQuestions.length) * 100;
+
+            if (percentage >= 85) {
+                scoreIcon.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Você possui um perfil de gestão técnica maduro, dominando a NR-10, diagnósticos preditivos e procedimentos de segurança.";
+            } else if (percentage >= 60) {
+                scoreIcon.className = "w-16 h-16 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-sky-50 text-sky-800 border border-sky-200";
+                finalMessageDiv.textContent = "Bom resultado! Você compreende bem os conceitos de manutenção e segurança. Vale a pena revisar os detalhes dos ensaios detectivos e preditivos.";
+            } else {
+                scoreIcon.className = "w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Atenção: Revise a Aula 25 para reforçar o uso da APR, a diferença entre aparelhos de teste (Megômetro vs Multímetro) e a importância das normas.";
+            }
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

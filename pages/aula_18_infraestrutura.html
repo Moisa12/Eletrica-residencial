@@ -3,180 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia em Instalações Elétricas Residenciais - Aula 14</title>
+    <title>Guia em Instalações Elétricas Residenciais - Aula 18</title>
+    
+    <link rel="stylesheet" href="estilos.css">
     
     <style>
-        /* ESTILO PADRONIZADO CONFORME MODELO AULA 04 */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f9;
-            padding-top: 110px; /* Espaço para o cabeçalho fixo */
-        }
 
-        /* Cabeçalho Fixo Padronizado */
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 1rem 0;
-            text-align: center;
-            border-bottom: 5px solid #f1c40f;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .logo-header {
-            position: absolute;
-            bottom: 10px; 
-            right: 20px;   
-            height: 50px;  
-            width: auto;
-        }
-
-        header h1 { margin: 0; font-size: 1.6rem; text-transform: uppercase; }
-        .subtitle { font-size: 1rem; font-weight: normal; color: #f1c40f; margin-top: 5px; }
-
-        /* Container de Conteúdo */
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 40px;
-            background: #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 12px;
-        }
-
-        h2 { 
-            color: #2c3e50; 
-            border-left: 6px solid #f1c40f; 
-            padding-left: 15px; 
-            margin-top: 40px;
-            font-size: 1.8rem;
-        }
-
-        h3 { color: #2980b9; margin-top: 25px; font-size: 1.4rem; }
-        
-        p { 
-            margin-bottom: 1.5rem; 
-            text-align: justify; 
-            font-size: 1.05rem;
-        }
-
-        /* Destaque de Fórmulas (Math Box) */
-        .formula-box {
-            background-color: #2c3e50;
-            color: #f1c40f;
-            padding: 25px;
-            text-align: center;
-            font-size: 1.2rem;
+        /* Exercícios */
+        .exercise-box {
+            background-color: #f0f4f8;
+            border: 1px solid #d9e2ec;
             border-radius: 8px;
-            margin: 30px 0;
-            font-family: 'Courier New', Courier, monospace;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            line-height: 1.8;
-        }
-
-        /* Tabelas Estilizadas */
-        .table-container { 
-            overflow-x: auto; 
-            margin: 30px 0; 
-        }
-        
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            background-color: #fff; 
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        th, td { 
-            border: 1px solid #dee2e6; 
-            padding: 15px; 
-            text-align: left; 
-        }
-        
-        th { 
-            background-color: #34495e; 
-            color: #fff; 
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        tr:nth-child(even) { background-color: #f8f9fa; }
-
-        /* Caixas de Exemplo e Alerta */
-        .alert { 
-            padding: 20px; 
-            background-color: #fff3cd; 
-            border-left: 6px solid #f1c40f; 
-            margin: 30px 0; 
-            border-radius: 4px;
-            font-weight: 500;
-        }
-
-        .example-box { 
-            background-color: #e8f5e9; 
-            border-left: 6px solid #2e7d32; 
-            padding: 25px; 
-            margin: 25px 0; 
-            border-radius: 8px; 
-        }
-        
-        .example-box h4 {
-            margin-top: 0;
-            color: #1b5e20;
-            font-size: 1.2rem;
-        }
-
-        .danger-box {
-            background-color: #fdf2f2;
-            border-left: 6px solid #e74c3c;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-box h4 {
+            margin-top: 0;
+            color: #102a43;
         }
 
         /* Listas */
         .list-standard { padding-left: 25px; margin-bottom: 1.5rem; }
         .list-standard li { margin-bottom: 10px; }
 
-        /* Rodapé Padronizado */
-        footer { 
-            background-color: #2c3e50; 
-            color: #bdc3c7; 
-            text-align: center; 
-            padding: 30px 0; 
-            margin-top: 60px; 
-            width: 100%; 
-            border-top: 5px solid #f1c40f;
-        }
-
-        footer p { margin: 0; text-align: center; font-size: 0.9rem; }
-
+      
         @media (max-width: 768px) {
-            header h1 { font-size: 1.2rem; }
+            header h1 { font-size: 1.1rem; }
             .container { padding: 20px; margin: 10px; }
             .logo-header { display: none; }
         }
+        
+        /* ESTILOS DOS CARDS VISUAIS DE COMPONENTES */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0 40px 0;
+        }
+
+        .card-componente {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #2980b9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-componente:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-componente h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .card-componente p {
+            font-size: 0.92rem;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .btn-google-img {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-google-img:hover {
+            background-color: #f1c40f;
+            color: #2c3e50;
+        }
+
     </style>
 </head>
 <body>
 
     <header>
         <h1>Guia em Instalações Elétricas Residenciais | Aula 18</h1>
-        <div class="subtitle">Infraestrutura da Instalação Elétrica</div>
+        <div class="subtitle">Infraestrutura, Dimensionamento e Técnicas de Passagem de Cabos</div>
         <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
     </header>
 
@@ -184,94 +108,604 @@
         
         <div class="alert" style="background-color: #e3f2fd; border-left-color: #1976d2;">
             <p style="margin: 0;">
-                A infraestrutura é a base de qualquer instalação elétrica segura e durável. Exploraremos os eletrodutos, caixas de passagem e o Quadro de Distribuição de Cargas (QDC), seguindo as diretrizes da <strong>NBR 5410</strong>.
+                A infraestrutura é a espinha dorsal de qualquer instalação elétrica segura e durável. Aqui, serão apresentados componentes essenciais (eletrodutos, leitos, eletrocalhas, caixas de passagem e QDC), o dimensionamento e as boas práticas de passagem de condutores à luz da <strong>NBR 5410</strong>.
             </p>
         </div>
 
-        <h2>1. Eletrodutos: Proteção Mecânica</h2>
+        <h2>1. Infraestruturas para Instalações Residenciais e Prediais</h2>
+        <p>A escolha correta da infraestrutura garante a proteção mecânica dos cabos e a facilidade de manutenção futura. Veja os principais componentes utilizados em projetos residenciais e prediais:</p>
         
-        <h3>1.1 Eletrodutos Flexíveis</h3>
-        <p>Utilizados principalmente em trechos que exigem curvas ou embutimento em alvenaria e lajes.</p>
+        <h3>1.1 Eletrodutos Flexíveis e Rígidos</h3>
         
-        <ul class="list-standard">
-            <li><strong>Laranja Corrugado (Reforçado):</strong> Aplicado embutido em lajes de concreto e contra pisos. Alta resistência diametral ($750 \text{ N}/5\text{cm}$).</li>
-            <li><strong>Amarelo Corrugado (Padrão):</strong> Para instalações embutidas em paredes de alvenaria e drywall. Resistência padrão ($320 \text{ N}/5\text{cm}$). <strong>Não usar em lajes.</strong></li>
-            <li><strong>Metálico Flexível:</strong> Conexão de motores e máquinas sujeitas a vibração.</li>
-        </ul>
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #e67e22;">
+                <div>
+                    <h4>Eletroduto Laranja (Reforçado)</h4>
+                    <p>Corrugado de alta resistência mecânica ($750\text{ N}/5\text{cm}$). Ideal para ser embutido em lajes de concreto e contra-pisos sujeitos a esmagamento.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletroduto+corrugado+laranja+reforcado+laje" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
 
-        <h3>1.2 Eletrodutos Rígidos</h3>
-        <ul class="list-standard">
-            <li><strong>PVC Rígido (Rosqueável):</strong> Usado em instalações aparentes ou subterrâneas.</li>
-            <li><strong>Aço Rígido (Metálico):</strong> Máxima proteção mecânica. Áreas industriais ou locais sujeitos a explosão.</li>
-        </ul>
+            <div class="card-componente" style="border-top-color: #f1c40f;">
+                <div>
+                    <h4>Eletroduto Amarelo (Padrão)</h4>
+                    <p>Corrugado leve ($320\text{ N}/5\text{cm}$). Indicado exclusivamente para paredes de alvenaria e estruturas de drywall. <strong>Proibido em lajes.</strong></p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletroduto+corrugado+amarelo+alvenaria" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
 
-        <h2>2. Caixas de Passagem e de Luz</h2>
-        <p>As caixas acomodam emendas e dispositivos nos pontos terminais ou de derivação.</p>
-        <ul class="list-standard">
-            <li><strong>Caixa 4x2:</strong> Pontos de luz e tomadas simples (Retangular).</li>
-            <li><strong>Caixa 4x4:</strong> Múltiplos dispositivos ou maior volume de cabos (Quadrada).</li>
-            <li><strong>Caixa Octogonal:</strong> Pontos de luz no teto (luminárias).</li>
-            <li><strong>Conduletes:</strong> Utilizados em instalações aparentes (alumínio ou PVC).</li>
-        </ul>
+            <div class="card-componente" style="border-top-color: #7f8c8d;">
+                <div>
+                    <h4>PVC Rígido (Rosqueável / Soldável)</h4>
+                    <p>Utilizado em instalações aparentes (garagens, áreas técnicas) ou redes subterrâneas. Garante alinhamento estético e proteção robusta.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletroduto+pvc+rigido+rosqueavel" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
 
-        <h2>3. Dimensionamento (NBR 5410)</h2>
-        <h3>3.1 Taxa Máxima de Ocupação</h3>
-        <p>Para garantir a dissipação de calor e facilitar a passagem dos fios, respeite os limites abaixo:</p>
+            <div class="card-componente" style="border-top-color: #34495e;">
+                <div>
+                    <h4>Aço Galvanizado (Metálico Rígido)</h4>
+                    <p>Oferece máxima proteção mecânica contra impactos e incêndios. Essencial em áreas industriais, comerciais e subsolos prediais.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletroduto+aco+galvanizado+eletrico" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+            
+            <div class="card-componente" style="border-top-color: #5d6d7e;">
+                <div>
+                    <h4>Eletroduto Metálico Flexível (Sealtubo / Spiroflex)</h4>
+                    <p>Construído em fita de aço galvanizado (com ou sem revestimento em PVC). Utilizado na terminação e ligação de motores e máquinas sujeitas a vibração ou movimentação mecânica.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletroduto+metalico+flexivel+sealtubo+motores" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <h3>1.2 Infraestruturas Prediais Aparentes e Prumadas</h3>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente">
+                <div>
+                    <h4>Eletrocalhas (Perfuradas / Lisas)</h4>
+                    <p>Bandejas metálicas ou de PVC para conduzir múltiplos circuitos em shafts, teto de subsolos prediais e corredores técnicos.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=eletrocalha+perfurada+galvanizada" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente">
+                <div>
+                    <h4>Perfilados Metálicos</h4>
+                    <p>Canais metálicos padronizados para sustentação de luminárias comerciais/industriais e passagem de fiação leve em garagens.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=perfilado+metalico+iluminacao+38x38" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente">
+                <div>
+                    <h4>Leitos para Cabos</h4>
+                    <p>Estruturas abertas de alta capacidade mecânica, projetadas para sustentação de cabos alimentadores pesados em prumadas verticais.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=leito+para+cabos+eletricos" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+        
+        <h3>1.3 Método Industrializado: Paredes de Concreto Moldadas <i>in Loco</i></h3>
+        <p>Em grandes empreendimentos prediais e habitacionais, utiliza-se a técnica de <strong>infraestrutura pré-montada (kits elétricos)</strong> inserida diretamente em paredes de concreto estrutural. A infraestrutura não é cortada na alvenaria, mas sim concretada junto com a estrutura da edificação.</p>
+
+        <div class="cards-grid">
+            <div class="card-componente" style="border-top-color: #27ae60;">
+                <div>
+                    <h4>Kits Elétricos para Parede de Concreto</h4>
+                    <p>Conjuntos pré-cortados com eletrodutos reforçados, fiação/guias e caixas de tomada com tampas estanques (que impedem a entrada da nata de cimento durante o bombeamento).</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=kit+eletrico+parede+de+concreto+caixa" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>💡 Passo a Passo da Infraestrutura em Paredes de Concreto:</h4>
+            <ol class="list-standard" style="margin-bottom: 0;">
+                <li><strong>Montagem Industrializada do Kit:</strong> Em uma central no próprio canteiro, os chicotes de eletrodutos e as caixas de passagem são montados sobre gabaritos padronizados.</li>
+                <li><strong>Fixação na Malha de Aço:</strong> Os eletricistas amarradores fixam os kits elétricos diretamente na malha de aço soldada (armadura) da futura parede.</li>
+                <li><strong>Concretagem Monolítica:</strong> As fôrmas (de alumínio ou aço) são fechadas e o concreto fluido é bombeado, envolvendo toda a tubulação elétrica.</li>
+                <li><strong>Desforma e Acabamento:</strong> Na desforma, a parede surge 100% pronta com as caixas de tomada, interruptores e o QDC perfeitamente alinhados, zerando a necessidade de corte ("rasgo") e geração de entulho.</li>
+            </ol>
+        </div>
+
+        <h2>2. Caixas de Passagem, Derivação e Conexão</h2>
+        <p>As caixas abrigam as conexões de condutores, chaves, interruptores e tomadas, além de permitir o enfiamento e manutenção dos cabos.</p>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente">
+                <div>
+                    <h4>Caixas 4x2 e 4x4 (Alvenaria / Drywall)</h4>
+                    <p>Modelos embutidos retangulares ou quadrados para fixação de módulos de tomadas, interruptores e caixas de emenda.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=caixa+de+luz+4x2+e+4x4+pvc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente">
+                <div>
+                    <h4>Caixa Octogonal para Teto</h4>
+                    <p>Instalada no centro das lajes/tetos para ponto de iluminação central e como nó de distribuição de eletrodutos.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=caixa+octogonal+teto+laje" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente">
+                <div>
+                    <h4>Conduletes (Aparente)</h4>
+                    <p>Caixas em alumínio injetado ou PVC rígido para conexões aparentes em garagens, escritórios e áreas industriais (tipos C, E, LL, LR, T, X).</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=condulete+aluminio+tipos" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente">
+                <div>
+                    <h4>Caixas de Passagem Subterrâneas</h4>
+                    <p>Caixas de alvenaria ou polietileno enterradas no solo para interligação de alimentadores gerais, iluminação externa ou blocos de condomínios.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=caixa+de+passagem+eletrica+subterranea" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <h2>3. Tabela de Seções de Cabos e Seção Total do Condutor</h2>
+        <p>Para calcular a ocupação interna do eletroduto, deve-se considerar a <strong>área externa total (seção total)</strong> do cabo, contando condutor e isolamento (Valores médios para cabos 750V PVC segundo NBR NM 247-3):</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Seção Nominal ($mm^2$)</th>
+                        <th>Diâmetro Externo Máx. Aprox. ($mm$)</th>
+                        <th>Seção Total Externa ($S_{tc}$) ($mm^2$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1,5</strong></td>
+                        <td>3,0</td>
+                        <td><strong>7,1</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2,5</strong></td>
+                        <td>3,6</td>
+                        <td><strong>10,2</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4,0</strong></td>
+                        <td>4,1</td>
+                        <td><strong>13,2</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6,0</strong></td>
+                        <td>4,7</td>
+                        <td><strong>17,3</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>10,0</strong></td>
+                        <td>6,1</td>
+                        <td><strong>29,2</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>16,0</strong></td>
+                        <td>7,2</td>
+                        <td><strong>40,7</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>25,0</strong></td>
+                        <td>8,9</td>
+                        <td><strong>62,2</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>4. Dimensionamento de Eletrodutos (NBR 5410)</h2>
+        <h3>4.1 Taxa Máxima de Ocupação</h3>
+        <p>O espaço vazio no eletroduto é vital para a dissipação de calor e para permitir a retirada ou adição de condutores futuramente. Esses limites garantem a dissipação térmica e evitam superaquecimento dos condutores:</p>
         
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Quantidade de Condutores</th>
-                        <th>Ocupação Máxima (Área Útil)</th>
+                        <th>Quantidade de Condutores no Eletroduto</th>
+                        <th>Ocupação Máxima da Área Interna Útil</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Um condutor</td>
+                        <td>1 condutor</td>
                         <td>53%</td>
                     </tr>
                     <tr>
-                        <td>Dois condutores</td>
+                        <td>2 condutores</td>
                         <td>31%</td>
                     </tr>
                     <tr>
-                        <td><strong>Três ou mais condutores</strong></td>
+                        <td><strong>3 ou mais condutores</strong></td>
                         <td><strong>40%</strong></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="example-box">
-            <h4>Exemplo Prático: Dimensionamento para Cabo 6 $mm^2$</h4>
-            <p><strong>Cálculo da Seção Mínima:</strong></p>
-            <div class="formula-box">
-                S<sub>tc</sub> (3 cabos) = 3 × 30 mm² = 90 mm² <br>
-                S<sub>Eletroduto</sub> = (90 × 100) / 40 = 225 mm²
-            </div>
-            <p><strong>Conclusão:</strong> O Eletroduto de 20mm ($186 mm^2$) é insuficiente. Escolhe-se o de <strong>25mm ($3/4''$)</strong> que possui $283 mm^2$.</p>
+        <h3>4.2 Seção Transversal Interna e Capacidade Útil (Referência Tigre)</h3>
+        <p>Abaixo apresenta-se a seção interna real dos eletrodutos flexíveis corrugados (linha Tigreflex® para até 1″) e de dutos subterrâneos em PEAD (para 1 1/4″ e 1 1/2″), juntamente com o limite máximo de ocupação de 40% conforme a NBR 5410:</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bitola Comercial (pol)</th>
+                        <th>DN (mm)</th>
+                        <th>Tipo / Aplicação</th>
+                        <th>Diâmetro Interno ($D_i$)</th>
+                        <th>Seção Total Interna</th>
+                        <th>Área Útil (Taxa 40%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1/2″</strong></td>
+                        <td>20 mm</td>
+                        <td>PVC Corrugado (Tigreflex®)</td>
+                        <td>15,4 mm</td>
+                        <td>186,3 mm²</td>
+                        <td><strong>74,5 mm²</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3/4″</strong></td>
+                        <td>25 mm</td>
+                        <td>PVC Corrugado (Tigreflex®)</td>
+                        <td>19,0 mm</td>
+                        <td>283,5 mm²</td>
+                        <td><strong>113,4 mm²</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>1″</strong></td>
+                        <td>32 mm</td>
+                        <td>PVC Corrugado (Tigreflex®)</td>
+                        <td>25,0 mm</td>
+                        <td>490,9 mm²</td>
+                        <td><strong>196,3 mm²</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>1 1/4″</strong></td>
+                        <td>40 mm</td>
+                        <td>PEAD Duto Flexível (Subterrâneo)</td>
+                        <td>30,0 mm</td>
+                        <td>706,9 mm²</td>
+                        <td><strong>282,7 mm²</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>1 1/2″</strong></td>
+                        <td>50 mm</td>
+                        <td>PEAD Duto Flexível (Subterrâneo)</td>
+                        <td>38,0 mm</td>
+                        <td>1134,1 mm²</td>
+                        <td><strong>453,6 mm²</strong></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <h2>4. Quadro de Distribuição de Cargas (QDC)</h2>
-        
-        <p>O QDC centraliza a proteção e distribuição da energia:</p>
+        <div class="example-box">
+            <h4>Exemplo Prático: Passagem de 4 Cabos de $6,0\text{ mm}^2$</h4>
+            <p><strong>Passo 1: Seção total ocupada pelos condutores ($S_{cabos}$):</strong></p>
+            <p>Conforme a tabela da Seção 3, cada cabo de $6,0\text{ mm}^2$ possui área externa total de $17,3\text{ mm}^2$.</p>
+            <div class="formula-box">
+                S<sub>cabos</sub> = 4 × 17,3 mm² = 69,2 mm²
+            </div>
+            
+            <p><strong>Passo 2: Área Mínima Total Interna do Eletroduto (Taxa a 40%):</strong></p>
+            <div class="formula-box">
+                S<sub>eletroduto_min</sub> = (69,2 × 100) / 40 = 173,0 mm²
+            </div>
+            
+            <p><strong>Passo 3: Seleção pela Tabela de Eletrodutos (Seção 4.2):</strong></p>
+            <ul>
+                <li><strong>Eletroduto de 1/2″ (20 mm):</strong> Possui área útil (40%) de $74,5\text{ mm}^2$. Embora atenda no limite matemático aos $69,2\text{ mm}^2$, deixa pouquíssima folga para puxamento.</li>
+                <li><strong>Eletroduto de 3/4″ (25 mm):</strong> Possui área útil (40%) de $113,4\text{ mm}^2$ (e área total de $283,5\text{ mm}^2$). Superior aos $173,0\text{ mm}^2$ necessários.</li>
+            </ul>
+            <p><strong>Conclusão:</strong> Recomenda-se a utilização do eletroduto de **3/4″ (25 mm)** para garantir a taxa de ocupação exigida pela NBR 5410 e facilitar o enfiamento dos cabos sem danificar a isolação.</p>
+        </div>
+
+        <h2>5. Técnicas de Passagem de Cabos em Eletrodutos</h2>
+        <p>A correta passagem de condutores garante a integridade da isolação, evita danos mecânicos aos cabos e facilita futuras manutenções.</p>
+
+        <h3>5.1 Preparação e Ferramentas</h3>
+        <p>Antes de iniciar, certifique-se de que a tubulação esteja limpa e livre de obstruções. O uso de ferramentas inadequadas pode causar danos permanentes aos cabos.</p>
         <ul class="list-standard">
-            <li><strong>Disjuntor Geral:</strong> Interrupção total da energia.</li>
-            <li><strong>Dispositivo DR:</strong> Proteção contra choques elétricos (Obrigatório em áreas molhadas).</li>
-            <li><strong>Dispositivo DPS:</strong> Proteção contra surtos (raios).</li>
+            <li><strong>Guia Passa-Fio:</strong> Utilize modelos de nylon com alma de aço ou aço revestido. Verifique sempre a integridade da ponteira metálica.</li>
+            <li><strong>Lubrificantes:</strong> Use vaselina industrial ou talco próprio. <strong>Nunca utilize detergente comum</strong>, pois pode causar degradação química da isolação ao longo do tempo.</li>
+            <li><strong>Limpeza:</strong> Se necessário, passe um pano seco amarrado à guia para remover restos de argamassa ou umidade interna.</li>
         </ul>
 
-        <h2>5. Segurança e Ferramentas (NR-10)</h2>
-        <div class="danger-box">
-            <strong>Regra de Ouro:</strong> Antes de qualquer atividade na infraestrutura, a instalação deve estar totalmente <strong>desenergizada</strong>.
+        <h3>5.2 Procedimento Executivo</h3>
+        <ul class="list-standard">
+            <li><strong>Preparação da Ponta (Rabicho):</strong> Descasque cerca de 10cm dos condutores, entrelace-os na argola da guia e cubra com fita isolante, moldando em formato cônico (tipo bala) para evitar enroscar nas curvas.</li>
+            <li><strong>Técnica de Trabalho:</strong> Trabalhe em dupla: uma pessoa puxa a guia com suavidade, enquanto a outra "alimenta" os cabos na caixa de passagem, garantindo que entrem alinhados e sem nós.</li>
+            <li><strong>Folga de Segurança:</strong> Deixe sempre uma sobra de 15 a 20 cm em cada caixa de passagem para futuras manutenções.</li>
+        </ul>
+
+        <div class="img-container">
+            <img src="../images/passagem_cabos.png" alt="Passagem de cabos em eletroduto">
         </div>
-        <p><strong>EPIs Essenciais:</strong> Luvas isolantes, óculos e calçados sem componentes metálicos. Use sempre o <strong>passa fio</strong> para evitar danos aos condutores.</p>
+
+        <div class="caption">
+            <strong>Análise técnica do procedimento de passagem:</strong><br>
+            Observe a preparação da ponta dos condutores (rabicho), com formato afilado e bem isolado com fita. Esse formato evita que o conjunto enrosque nas curvas do eletroduto durante a passagem.<br><br>
+            Note também a organização dos cabos por cores e o alinhamento durante a tração. Esse cuidado reduz o atrito interno e evita danos à isolação.<br><br>
+            👉 Em campo, a má preparação da ponta é uma das principais causas de travamento dos cabos dentro da tubulação.
+        </div>
+
+        <h3>5.3 Identificação dos Circuitos e Raio de Curvatura</h3>
+        <ul class="list-standard">
+            <li><strong>Identificação:</strong> Utilize fita crepe ou etiquetas térmicas nas extremidades de cada cabo.</li>
+            <li><strong>Padrão de Cores:</strong> Siga rigorosamente o padrão normativo (ex: Azul-claro para Neutro, Verde ou Verde/Amarelo para Proteção/Terra).</li>
+            <li><strong>Raio de Curvatura:</strong> Ao realizar a infraestrutura, evite curvas bruscas (de 90° secas). Curvas muito fechadas aumentam o coeficiente de atrito exponencialmente durante a passagem do fio, tornando o trabalho exaustivo e perigoso para a isolação do material.</li>
+        </ul>
+
+        <h3>5.4 Resolução de Problemas Comuns</h3>
+        <p>Nem sempre a passagem ocorre como o planejado. Aqui estão as soluções para os impasses mais comuns de campo:</p>
+        <ul class="list-standard">
+            <li><strong>Cabo travado na curva:</strong> Nunca force excessivamente. Tente lubrificar a ponta do cabo com talco ou lubrificante específico e mova-o para frente e para trás para quebrar a aderência.</li>
+            <li><strong>Guia quebrou dentro do tubo:</strong> Se a guia for de nylon, tente introduzir um arame mais rígido com uma ponta em gancho pelo outro lado para "pescar" o pedaço perdido.</li>
+            <li><strong>Excesso de cabos:</strong> Se o último cabo não passa de jeito nenhum, avalie se a taxa de ocupação foi realmente respeitada. Se a ocupação estiver no limite, forçar causará danos à isolação.</li>
+        </ul>
+
+        <div class="danger-box">
+            <strong>Dica de Campo:</strong> Se sentir excesso de resistência ao puxar, pare imediatamente. O esforço mecânico excessivo pode danificar o condutor e comprometer sua capacidade de condução elétrica.
+        </div>
+
+        <h2>6. Quadro de Distribuição de Cargas (QDC) e Prumadas</h2>
+        <p>O QDC é o coração da instalação elétrica. Ele centraliza os dispositivos de proteção, seccionamento e distribuição dos circuitos alimentadores e terminais, tanto em sistemas residenciais quanto prediais.</p>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #2980b9;">
+                <div>
+                    <h4>Disjuntor Termomagnético (DJ)</h4>
+                    <p>Protege os condutores contra sobrecargas e curtos-circuitos. Disponível nos padrões DIN (trilho) e NEMA, em versões monopolar, bipolar e tripolar.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=disjuntor+termomagnetico+din+qdc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #e74c3c;">
+                <div>
+                    <h4>Dispositivo DR (IDR / DDR)</h4>
+                    <p>Protege pessoas contra choques elétricos e detecta fuga de corrente (sensibilidade de $30\text{ mA}$). Obrigatório pela NBR 5410 em áreas molhadas e tomadas externas.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=interruptor+diferencial+residual+dr+qdc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #f39c12;">
+                <div>
+                    <h4>DPS (Proteção contra Surtos)</h4>
+                    <p>Desvia para o sistema de aterramento as sobretensões causadas por descargas atmosféricas (raios) e manobras na rede da concessionária.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=dps+protetor+de+surto+qdc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #27ae60;">
+                <div>
+                    <h4>Barramentos de Distribuição e Proteção</h4>
+                    <p>Pentes de fase (tipo pino/forquilha) e barramentos isolados de Neutro e Terra (PE). Garantem organização e contato elétrico seguro dentro do quadro.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=barramento+pente+fase+neutro+terra+qdc" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #8e44ad;">
+                <div>
+                    <h4>Prumada Elétrica Predial</h4>
+                    <p>Conjunto de eletrodutos, leitos e barramentos blindados (Bus-way) que sobem pelos shafts centrais do edifício para alimentar os QDCs de cada pavimento.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=prumada+eletrica+predial+shaft" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <h2>7. Tecnologias Modernas em Infraestrutura Elétrica</h2>
+        <p>O perfil das instalações mudou radicalmente com a automação e os novos hábitos de consumo elétrico. A infraestrutura moderna precisa estar preparada para essas demandas:</p>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #9b59b6;">
+                <div>
+                    <h4>Infraestrutura para Casas Inteligentes (Smart Home)</h4>
+                    <p>Exige a passagem do condutor Neutro em todas as caixas de interruptores e o uso de caixas profundas (45mm/50mm) para acomodar os módulos de automação Wi-Fi/Zigbee com folga e segurança térmica.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=modulo+automacao+interruptor+caixa+4x2+fundo+profundo" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #16a085;">
+                <div>
+                    <h4>Pontos para Carregamento de Veículos Elétricos (Wallbox)</h4>
+                    <p>Previsão de eletroduto exclusivo do QDC/Medição até a garagem, dimensionado para suportar correntes contínuas elevadas, com espaço dedicado para DR Tipo A/B e DPS específicos no quadro.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=infraestrutura+eletrica+wallbox+garagem+predial" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #e67e22;">
+                <div>
+                    <h4>Prumadas com Barramento Blindado (Bus-way)</h4>
+                    <p>Barras de cobre ou alumínio pré-fabricadas que substituem os cabos pesados nas prumadas prediais verticais. Reduzem o espaço de shaft e permitem saídas plug-in rápidas por andar.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=busway+barramento+blindado+prumada+predial" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #2c3e50;">
+                <div>
+                    <h4>Conectores Rápidos de Mola (WAGO)</h4>
+                    <p>Substituem as antigas emendas fita-isolante em caixas de passagem e luminárias. Proporcionam conexão rápida, inspecionável e sem aquecimento por mau contato.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=conector+de+mola+wago+caixa+de+passagem" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <h2>8. Tendências de Mercado: BIM, Segurança e Energia Solar</h2>
+        <p>A compatibilização de projetos e a transição energética trouxeram novas rotinas para o planejamento e a montagem das infraestruturas elétricas:</p>
+
+        <div class="cards-grid">
+            
+            <div class="card-componente" style="border-top-color: #00a8ff;">
+                <div>
+                    <h4>Compatibilização em BIM (Projetos 3D)</h4>
+                    <p>Uso de software 3D para traçar a rota exata de eletrodutos e eletrocalhas. Evita interferências (<i>clash detection</i>) com vigas, pilares e tubulações de hidráulica antes da execução.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=bim+eletrica+revit+eletrocalha+3d" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #fbc531;">
+                <div>
+                    <h4>Infraestrutura para Energia Solar (Fotovoltaica)</h4>
+                    <p>Exige rotas exclusivas para os cabos de Corrente Contínua (CC) vindos do telhado até a String Box, isolados da rede de Corrente Alternada (CA) e com eletrodutos resistentes a UV.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=infraestrutura+eletroduto+energia+solar+inversor" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #c23616;">
+                <div>
+                    <h4>Selagem Corta-Fogo (Sistemas Firestop)</h4>
+                    <p>Barreiras intumescentes instaladas na passagem de eletrocalhas em shafts e paredes corta-fogo. Vedam automaticamente o vão durante um incêndio, impedindo a fumaça de subir os andares.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=selagem+corta+fogo+firestop+eletrocalha+shaft" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+            <div class="card-componente" style="border-top-color: #4cd137;">
+                <div>
+                    <h4>Cabos Livre de Halógenos (LSZH)</h4>
+                    <p>Condutores com isolação especial que não produzem fumaça escura nem gases corrosivos ao queimar. Exigidos pela NBR 5410 para infraestruturas de prédios públicos e comerciais.</p>
+                </div>
+                <a href="https://www.google.com/search?tbm=isch&q=cabo+lszh+nao+halogenado+nbr+5410" target="_blank" class="btn-google-img">
+                    🔍 Ver Imagens no Google
+                </a>
+            </div>
+
+        </div>
+
+        <h2>9. Segurança na Infraestrutura (NR-10)</h2>
+        <div class="alert-box">
+            <strong>Segurança em Primeiro Lugar:</strong> Desenergize o circuito antes de qualquer intervenção, realize a sinalização/bloqueio (Lockout/Tagout) e teste a ausência de tensão.
+        </div>
+
+        <h2>10. Exercícios de Fixação</h2>
+
+        <div class="exercise-box">
+            <h4>Exercício 1: Tipos de Eletrodutos</h4>
+            <p>Qual tipo de eletroduto corrugado deve ser utilizado preferencialmente para embutir em lajes de concreto durante a concretagem e por quê?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>Eletroduto corrugado <strong>Laranja (Reforçado)</strong>, pois possui resistência mecânica diametral de $750 \text{ N}/5\text{cm}$, adequada para suportar o peso do concreto e a deformação durante a concretagem.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 2: Taxa de Ocupação</h4>
+            <p>Qual é a taxa máxima de ocupação permitida pela NBR 5410 para um eletroduto que conterá 3 condutores Fases e 1 condutor Neutro?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>A taxa máxima é de <strong>40%</strong>, pois o eletroduto conterá 3 ou mais condutores (no caso, 4 condutores no total).</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 3: Cálculo de Área para Eletroduto</h4>
+            <p>Deseja-se passar 3 condutores de $10\text{ mm}^2$ em um eletroduto. Sabendo que cada cabo tem uma área externa total de $29,2\text{ mm}^2$, qual é a área útil interna mínima que o eletroduto deve ter?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>Área dos cabos = $3 \times 29,2 = 87,6\text{ mm}^2$.<br>
+                Com taxa de ocupação de 40%: Área Mínima = $(87,6 \times 100) / 40 = \mathbf{219\text{ mm}^2}$.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 4: Práticas de Passagem de Cabos</h4>
+            <p>Por que é expressamente proibido o uso de detergente líquido caseiro como lubrificante para a passagem de fios e cabos em eletrodutos?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>O detergente possui componentes químicos reagentes que, ao secarem dentro do eletroduto, degradam o PVC da isolação dos cabos ao longo do tempo, podendo causar ressecamento, fuga de corrente e curtos-circuitos. Deve-se utilizar apenas <strong>talco ou vaselina industrial</strong>.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 5: Infraestrutura Predial</h4>
+            <p>Qual infraestrutura metálica aparente e aberta é mais indicada para condução de cabos alimentadores pesados em prumadas verticais prediais?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p><strong>Leitos para cabos</strong>, pois suportam elevada carga mecânica, facilitam a fixação de cabos de grande bitola e proporcionam excelente ventilação/dissipação térmica.</p>
+            </details>
+        </div>
+
+        <div class="exercise-box">
+            <h4>Exercício 6: Segurança (NR-10)</h4>
+            <p>Ao realizar a infraestrutura para expansão de um QDC predial energizado, qual procedimento é fundamental segundo a NR-10 antes de tocar nos componentes elétricos?</p>
+            <details>
+                <summary><b>Ver Resposta</b></summary>
+                <p>Realizar o seccionamento (desenergização), bloqueio, sinalização e a comprovação da ausência de tensão elétrica com instrumento de medição adequado.</p>
+            </details>
+        </div>
 
     </div>
 
     <footer>
-        <p>© 2026 - Guia em Instalações Elétricas Residenciais | Aula 18</p>
+        <p>© 2026 - Guia em Instalações Elétricas Residenciais e Prediais | Aula 18</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>

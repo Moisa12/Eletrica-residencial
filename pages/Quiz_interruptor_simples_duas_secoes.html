@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Interruptor Simples e Duas Seções</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Config -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .option-card {
+            transition: all 0.15s ease-in-out;
+        }
+        .option-card:not([disabled]):hover {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+            transform: translateY(-1px);
+        }
+        .correct-answer {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            font-weight: 600;
+        }
+        .correct-answer .badge-letter {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+        }
+        .incorrect-answer {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            font-weight: 600;
+        }
+        .incorrect-answer .badge-letter {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body class="min-h-full bg-slate-50 text-slate-800 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+
+    <div class="max-w-3xl w-full space-y-6">
+        <!-- CABEÇALHO DA PÁGINA -->
+        <header class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                💡 Instalações Elétricas: Prática e Teoria
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+                Revise os diagramas de ligação de Interruptor Simples e Duas Seções e teste seus conhecimentos.
+            </p>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4 text-xs font-medium text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                    <span id="total-questions-count">10 Questões Técnicas</span>
+                </div>
+                <div id="progress-text" class="text-slate-700 font-semibold">
+                    Respondidas: 0 / 10
+                </div>
+            </div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div id="progress-bar" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </header>
+
+        <!-- SEÇÃO DE REVISÃO DOS DIAGRAMAS -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Card Interruptor Simples -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border-t-4 border-blue-500 border-x border-b border-slate-200">
+                <div class="flex items-center mb-3">
+                    <div class="bg-blue-50 p-2 rounded-xl mr-3 text-blue-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Interruptor Simples</h3>
+                </div>
+                <p class="text-xs text-slate-600 mb-3">Comanda um ou mais pontos de luz a partir de um único local.</p>
+                <ul class="space-y-1.5 text-xs text-slate-700">
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                        <strong>Fase:</strong> Conectada direto ao interruptor.
+                    </li>
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                        <strong>Retorno:</strong> Sai do interruptor para o ponto de luz.
+                    </li>
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <strong>Neutro:</strong> Ligado direto no receptáculo/bocal.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card Interruptor de Duas Seções -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border-t-4 border-purple-500 border-x border-b border-slate-200">
+                <div class="flex items-center mb-3">
+                    <div class="bg-purple-50 p-2 rounded-xl mr-3 text-purple-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">Dupla Seção (Duplo)</h3>
+                </div>
+                <p class="text-xs text-slate-600 mb-3">Comanda dois grupos de lâmpadas de forma independente.</p>
+                <ul class="space-y-1.5 text-xs text-slate-700">
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                        <strong>Fase:</strong> 1 condutor chega e realiza jumper para a 2ª tecla.
+                    </li>
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                        <strong>Retornos:</strong> 2 condutores independentes (um p/ cada grupo).
+                    </li>
+                    <li class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <strong>Neutro:</strong> Comum às cargas alimentadas.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ÁREA DAS QUESTÕES -->
+        <main id="quiz-area" class="space-y-6"></main>
+
+        <!-- CARD FINAL DE RESULTADOS -->
+        <section id="score-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 text-center hidden">
+            <div id="score-icon" class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Desempenho Final</h2>
+            <p class="text-slate-600 mt-2">
+                Você acertou <span id="correct-count" class="font-black text-indigo-600 text-2xl">0</span> de <span id="total-count-span">10</span> perguntas.
+            </p>
+            <div id="final-message" class="mt-4 p-4 rounded-xl text-sm font-semibold"></div>
+            
+            <button onclick="location.reload()" class="mt-6 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-sm transition-colors text-sm">
+                Refazer Quiz
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                tag: "Interruptor Simples",
+                q: "1. Qual condutor deve ser conectado diretamente ao borne do interruptor simples?",
+                options: [
+                    "Neutro",
+                    "Fase",
+                    "Terra",
+                    "Retorno"
+                ],
+                answer: "Fase",
+                rationale: "Por normas de segurança (NBR 5410), o condutor seccionado no interruptor deve ser sempre a Fase para evitar que o receptáculo permaneça energizado quando desligado."
+            },
+            {
+                tag: "Condutores",
+                q: "2. Em uma instalação de interruptor simples, como se chama o fio que liga o interruptor à lâmpada?",
+                options: [
+                    "Fase",
+                    "Neutro",
+                    "Retorno",
+                    "Paralelo"
+                ],
+                answer: "Retorno",
+                rationale: "O condutor de retorno é aquele que conduz a fase 'seccionada' a partir do borne de saída do interruptor até o ponto de iluminação."
+            },
+            {
+                tag: "Dupla Seção",
+                q: "3. Quantos condutores de 'fase' chegam a um interruptor de dupla seção para comandar duas lâmpadas de circuitos iguais?",
+                options: [
+                    "Um condutor de fase (com jumper)",
+                    "Dois condutores de fase independentes",
+                    "Quatro condutores",
+                    "Nenhum, apenas neutro"
+                ],
+                answer: "Um condutor de fase (com jumper)",
+                rationale: "Geralmente deriva-se a mesma fase para alimentarmos os dois bornes de entrada da chave através de uma ponte (jumper)."
+            },
+            {
+                tag: "Conexão no Receptáculo",
+                q: "4. Onde o condutor Neutro deve ser conectado em uma instalação de iluminação comum?",
+                options: [
+                    "No interruptor",
+                    "No borne central da lâmpada",
+                    "No borne lateral (rosca) do receptáculo da lâmpada",
+                    "No pino de aterramento"
+                ],
+                answer: "No borne lateral (rosca) do receptáculo da lâmpada",
+                rationale: "O neutro vai direto para a parte externa (rosca) do receptáculo como medida de proteção preventiva contra choques elétricos durante a troca da lâmpada."
+            },
+            {
+                tag: "Funcionalidade",
+                q: "5. Qual a principal vantagem do interruptor de dupla seção?",
+                options: [
+                    "Aumentar a voltagem da rede",
+                    "Comandar dois grupos de lâmpadas de forma independente no mesmo ponto",
+                    "Economizar fiação de terra",
+                    "Permitir ligar a lâmpada em dois lugares diferentes"
+                ],
+                answer: "Comandar dois grupos de lâmpadas de forma independente no mesmo ponto",
+                rationale: "O interruptor duplo agrupa duas teclas mecânicas independentes em uma mesma caixa 4x2, reduzindo a infraestrutura necessária."
+            },
+            {
+                tag: "Simbologia Unifilar",
+                q: "6. No diagrama unifilar, o símbolo de um interruptor simples é representado por:",
+                options: [
+                    "Um círculo dividido ao meio",
+                    "Um círculo pequeno",
+                    "Um triângulo preenchido",
+                    "Um quadrado com diagonal"
+                ],
+                answer: "Um círculo pequeno",
+                rationale: "O símbolo padrão de interruptor simples de uma seção é um pequeno círculo. Quando possui duas seções, o círculo traz uma divisão intermediária (duas letras indicativas)."
+            },
+            {
+                tag: "Diagnóstico de Defeito",
+                q: "7. Se uma lâmpada LED permanece levemente acesa (brilho residual) mesmo com o interruptor desligado, qual pode ser a causa mais provável?",
+                options: [
+                    "O interruptor está interrompendo o neutro em vez da fase",
+                    "A lâmpada está queimada",
+                    "Falta de aterramento na carcaça",
+                    "O disjuntor de proteção é de capacidade alta"
+                ],
+                answer: "O interruptor está interrompendo o neutro em vez da fase",
+                rationale: "Seccionando o neutro, a fase contínua no bocal cria correntes parasitas capacitivas com a estrutura/eletroduto, acendendo fracamente lâmpadas de tecnologia LED."
+            },
+            {
+                tag: "Contagem de Condutores",
+                q: "8. Quantos retornos saem de um interruptor de dupla seção que comanda dois lustres?",
+                options: [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                answer: "2",
+                rationale: "Cada seção (tecla) gera um retorno exclusivo para chavear o seu respectivo grupo de iluminação."
+            },
+            {
+                tag: "NBR 5410",
+                q: "9. Para uma instalação em 127V ou 220V, qual a cor padronizada para o condutor Neutro?",
+                options: [
+                    "Verde ou verde/amarelo",
+                    "Preto",
+                    "Azul claro",
+                    "Vermelho"
+                ],
+                answer: "Azul claro",
+                rationale: "Segundo o item 6.1.5.3.1 da NBR 5410, qualquer condutor utilizado como Neutro deve possuir a isolação na cor Azul Claro."
+            },
+            {
+                tag: "Segurança do Trabalho",
+                q: "10. Qual é o principal risco ao seccionar o Neutro no interruptor ao invés da Fase?",
+                options: [
+                    "Nenhum risco relevante",
+                    "Aumento no consumo de energia medido em kWh",
+                    "Manter o bocal da lâmpada energizado, gerando risco de choque na substituição",
+                    "Curto-circuito direto no disjuntor"
+                ],
+                answer: "Manter o bocal da lâmpada energizado, gerando risco de choque na substituição",
+                rationale: "Ao cortar apenas o neutro, o circuito permanece no potencial da fase ($127\\text{ V}$ ou $220\\text{ V}$). Uma pessoa tocando no bocal ao trocar a lâmpada fechará o circuito com a terra."
+            }
+        ];
+
+        let questionsAnswered = 0;
+        let correctAnswersCount = 0;
+
+        function renderQuiz() {
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = '';
+            
+            quizQuestions.forEach((qData, index) => {
+                let optionsHtml = '';
+
+                qData.options.forEach((optionText, optIndex) => {
+                    const letter = String.fromCharCode(65 + optIndex);
+                    optionsHtml += `
+                        <button data-question-index="${index}"
+                                data-option-text="${optionText.replace(/"/g, '&quot;')}"
+                                onclick="checkAnswer(this, ${index})"
+                                class="option-card w-full text-left p-3.5 sm:p-4 rounded-xl border border-slate-200 bg-white flex items-start space-x-3 group">
+                            <span class="badge-letter flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center transition-colors group-hover:bg-indigo-100 group-hover:text-indigo-700">
+                                ${letter}
+                            </span>
+                            <span class="text-slate-700 text-sm sm:text-base leading-snug pt-0.5">
+                                ${optionText}
+                            </span>
+                        </button>
+                    `;
+                });
+
+                const questionHtml = `
+                    <article id="q-card-${index}" class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                            <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 font-semibold text-xs rounded-md uppercase tracking-wider">
+                                ${qData.tag}
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">Questão ${index + 1} de ${quizQuestions.length}</span>
+                        </div>
+                        
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                            ${qData.q}
+                        </h3>
+                        
+                        <div id="options-${index}" class="space-y-2.5 pt-1">
+                            ${optionsHtml}
+                        </div>
+                        
+                        <div id="feedback-${index}" class="mt-4 p-4 text-xs sm:text-sm font-medium rounded-xl hidden border leading-relaxed"></div>
+                    </article>
+                `;
+                quizArea.innerHTML += questionHtml;
+            });
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        window.checkAnswer = function(selectedButton, qIndex) {
+            const qData = quizQuestions[qIndex];
+            const selectedText = selectedButton.getAttribute('data-option-text').trim();
+            const isCorrect = selectedText === qData.answer;
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const feedbackElement = document.getElementById(`feedback-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            buttons.forEach(btn => { btn.disabled = true; });
+            
+            questionsAnswered++;
+            if (isCorrect) { correctAnswersCount++; }
+            updateProgressBar();
+            
+            selectedButton.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+
+            feedbackElement.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackElement.classList.add('bg-emerald-50', 'text-emerald-900', 'border-emerald-200');
+                feedbackElement.innerHTML = `<strong>Correto!</strong> ${qData.rationale}`;
+            } else {
+                feedbackElement.classList.add('bg-rose-50', 'text-rose-900', 'border-rose-200');
+                feedbackElement.innerHTML = `<strong>Incorreto.</strong> A resposta certa é: <em>"${qData.answer}"</em>.<br><span class="mt-1 block">${qData.rationale}</span>`;
+                
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-option-text').trim() === qData.answer) {
+                        btn.classList.add('correct-answer');
+                    }
+                });
+            }
+
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([feedbackElement]);
+            }
+            
+            if (questionsAnswered === quizQuestions.length) { 
+                displayFinalScore(); 
+            }
+        };
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const percentage = (questionsAnswered / quizQuestions.length) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `Respondidas: ${questionsAnswered} / ${quizQuestions.length}`;
+        }
+
+        function displayFinalScore() {
+            const scoreCard = document.getElementById('score-card');
+            const correctCountSpan = document.getElementById('correct-count');
+            const totalCountSpan = document.getElementById('total-count-span');
+            const finalMessageDiv = document.getElementById('final-message');
+            const scoreIcon = document.getElementById('score-icon');
+
+            correctCountSpan.textContent = correctAnswersCount;
+            totalCountSpan.textContent = quizQuestions.length;
+            scoreCard.classList.remove('hidden');
+
+            const percentage = (correctAnswersCount / quizQuestions.length) * 100;
+
+            if (percentage >= 85) {
+                scoreIcon.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+                finalMessageDiv.textContent = "Excelente! Você domina a teoria e prática sobre interruptores simples e de duas seções conforme a NBR 5410.";
+            } else if (percentage >= 60) {
+                scoreIcon.className = "w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200";
+                finalMessageDiv.textContent = "Bom trabalho! Você possui boa noção dos circuitos de iluminação, apenas atente-se à simbologia e identificação de retornos.";
+            } else {
+                scoreIcon.className = "w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4";
+                finalMessageDiv.className = "mt-4 p-4 rounded-xl text-sm font-semibold bg-amber-50 text-amber-800 border border-amber-200";
+                finalMessageDiv.textContent = "Precisa revisar: Estude novamente as diferenças de ligação entre Fase, Neutro e Retornos nos diagramas unifilares.";
+            }
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

@@ -25,3 +25,4 @@ Validação Técnica: Verificação humana detalhada baseada em manuais técnico
 Foco na Experiência do Usuário: Design focado em legibilidade e interatividade para facilitar o aprendizado.
 
 Este material é constantemente atualizado para refletir as melhores práticas do setor elétrico.
+Última versão - 01/08/2026

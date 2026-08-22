@@ -7,9 +7,7 @@
   <title>Guia em Instalações Elétricas Residenciais - Educação Financeira (Módulo)</title>
 
   <style>
-    /* =========================================================
-       Base visual (mesmos estilos da aula_19_aterramento_eletrico.html)
-       ========================================================= */
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
@@ -62,6 +60,42 @@
       background-color: #e8f5e9; border-left: 5px solid #2e7d32;
       padding: 20px; margin: 20px 0; border-radius: 4px;
     }
+
+
+/* Estilos para Tooltips e Painel Informativo */
+    .field { display: grid; gap: 6px; position: relative; }
+    .field label { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .field input:focus { border-color: #2980b9; box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.2); }
+
+    /* Ícone de Ajuda (?) */
+    .tooltip-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 18px; height: 18px; background-color: #2980b9; color: #fff;
+      border-radius: 50%; font-size: 0.75rem; font-weight: bold; cursor: help;
+      position: relative;
+    }
+    .tooltip-icon:hover::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+      background-color: #2c3e50; color: #fff; padding: 8px 12px; border-radius: 6px;
+      font-size: 0.85rem; font-weight: normal; width: 220px; text-align: left;
+      z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.2); line-height: 1.3;
+      pointer-events: none;
+    }
+    .tooltip-icon:hover::before {
+      content: ''; position: absolute; bottom: 105%; left: 50%; transform: translateX(-50%);
+      border-width: 5px; border-style: solid; border-color: #2c3e50 transparent transparent transparent;
+      z-index: 100; pointer-events: none;
+    }
+
+    /* Caixa explicativa abaixo dos campos */
+    .info-panel {
+      margin-top: 15px; padding: 12px 16px; background: #eef7fc;
+      border-left: 4px solid #2980b9; border-radius: 4px; font-size: 0.95rem; color: #2c3e50;
+    }
+
+    .kpi h4 { margin: 0; color: #2c3e50; display: flex; align-items: center; gap: 6px; }
+
     footer {
       background-color: #2c3e50;
       color: #bdc3c7;
@@ -127,8 +161,8 @@
 <body>
   
   <header>
-    <h1>Guia em Instalações Elétricas Residenciais</h1>
-    <div class="subtitle">Módulo — Educação Financeira para Eletricistas Autônomos</div>
+    <h1>Guia em Instalações Elétricas Residenciais | Módulo Educação Financeira</h1>
+    <div class="subtitle">Educação Financeira para Eletricistas Autônomos</div>
     <img src="../images/logo-.png" alt="Logotipo" class="logo-header">
   </header>
 
@@ -155,64 +189,95 @@
     <div class="box" id="calc-preco">
       <div class="grid-3">
         <div class="field">
-          <label for="cf">Custos fixos mensais (R$)</label>
-          <input id="cf" inputmode="decimal" placeholder="Ex.: 1800"/>
-          <span class="help">Ex.: internet, transporte, EPIs, ferramentas, celular, seguros.</span>
+          <label for="cf">
+            Custos fixos mensais (R$)
+            <span class="tooltip-icon" data-tooltip="Despesas recorrentes da sua estrutura (internet, MEI, seguro, EPIs, ferramentas). Não mudam se você fizer 1 ou 20 serviços no mês.">?</span>
+          </label>
+          <input id="cf" inputmode="decimal" placeholder="Ex.: 1800" onfocus="mostrarInfo('cf')"/>
         </div>
         <div class="field">
-          <label for="horas">Horas faturáveis/mês (h)</label>
-          <input id="horas" type="number" step="1" placeholder="Ex.: 160"/>
-          <span class="help">Horas realmente produtivas/faturadas.</span>
+          <label for="horas">
+            Horas faturáveis/mês (h)
+            <span class="tooltip-icon" data-tooltip="Horas reais trabalhadas e cobradas em serviços no mês. Não inclui tempo gasto com orçamentos, trajetos ou compras.">?</span>
+          </label>
+          <input id="horas" type="number" step="1" placeholder="Ex.: 160" onfocus="mostrarInfo('horas')"/>
         </div>
         <div class="field">
-          <label for="cv">Custo variável por serviço (R$)</label>
-          <input id="cv" inputmode="decimal" placeholder="Ex.: 35"/>
-          <span class="help">Ex.: deslocamento, pequenos materiais, taxas.</span>
+          <label for="cv">
+            Custo variável por serviço (R$)
+            <span class="tooltip-icon" data-tooltip="Despesas diretas geradas especificamente para este serviço (combustível/deslocamento, conectores, fita isolante, alimentação).">?</span>
+          </label>
+          <input id="cv" inputmode="decimal" placeholder="Ex.: 35" onfocus="mostrarInfo('cv')"/>
         </div>
       </div>
 
-      <div class="grid-3">
+      <div class="grid-3" style="margin-top:12px;">
         <div class="field">
-          <label for="tempo">Tempo estimado do serviço (h)</label>
-          <input id="tempo" type="number" step="0.25" placeholder="Ex.: 2"/>
+          <label for="tempo">
+            Tempo estimado do serviço (h)
+            <span class="tooltip-icon" data-tooltip="Duração média prevista em horas para a execução completa deste trabalho específico.">?</span>
+          </label>
+          <input id="tempo" type="number" step="0.25" placeholder="Ex.: 2" onfocus="mostrarInfo('tempo')"/>
         </div>
         <div class="field">
-          <label for="margem">Margem desejada (%)</label>
-          <input id="margem" type="number" step="0.5" placeholder="Ex.: 30"/>
+          <label for="margem">
+            Margem desejada (%)
+            <span class="tooltip-icon" data-tooltip="Porcentagem de lucro sobre o custo total. Destinada ao crescimento do negócio, investimentos e capital de giro.">?</span>
+          </label>
+          <input id="margem" type="number" step="0.5" placeholder="Ex.: 30" onfocus="mostrarInfo('margem')"/>
         </div>
         <div class="field">
-          <label for="imposto">Impostos/Taxas (%)</label>
-          <input id="imposto" type="number" step="0.5" placeholder="Ex.: 8"/>
+          <label for="imposto">
+            Impostos/Taxas (%)
+            <span class="tooltip-icon" data-tooltip="Percentual gasto com impostos da nota fiscal (ex.: Simples) ou taxas cobradas pela maquininha de cartão.">?</span>
+          </label>
+          <input id="imposto" type="number" step="0.5" placeholder="Ex.: 8" onfocus="mostrarInfo('imposto')"/>
         </div>
       </div>
 
-      <div class="actions" style="margin-top:8px;">
+      <!-- Caixa de Informação Dinâmica -->
+      <div id="info-dinamica" class="info-panel">
+        <strong>💡 Dica:</strong> Passe o mouse sobre os ícones <strong>(?)</strong> ou clique nos campos para ver a explicação detalhada de cada termo.
+      </div>
+
+      <div class="actions" style="margin-top:16px;">
         <button class="btn" onclick="calcPreco()">Calcular</button>
         <button class="btn btn-outline" onclick="limparPreco()">Limpar</button>
       </div>
 
-      <div class="grid-4" style="display:grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 12px;">
+      <div class="grid-4" style="display:grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 16px;">
         <div class="kpi">
-          <h4>Hora técnica</h4>
+          <h4>
+            Hora técnica
+            <span class="tooltip-icon" data-tooltip="Valor por hora necessário apenas para cobrir seus Custos Fixos (Custos Fixos ÷ Horas Faturáveis).">?</span>
+          </h4>
           <p id="out-hora">—</p>
         </div>
         <div class="kpi">
-          <h4>Preço base (custo)</h4>
+          <h4>
+            Preço base (custo)
+            <span class="tooltip-icon" data-tooltip="Custo mínimo do serviço (Hora Técnica × Tempo + Custo Variável). Abaixo deste valor você terá prejuízo!">?</span>
+          </h4>
           <p id="out-base">—</p>
         </div>
         <div class="kpi">
-          <h4>Preço com margem</h4>
+          <h4>
+            Preço com margem
+            <span class="tooltip-icon" data-tooltip="Preço Base cobrindo todos os custos + a porcentagem de Lucro (Margem) desejada.">?</span>
+          </h4>
           <p id="out-margem">—</p>
         </div>
         <div class="kpi">
-          <h4>Preço final c/ impostos</h4>
+          <h4>
+            Preço final c/ impostos
+            <span class="tooltip-icon" data-tooltip="Preço final a ser informado na proposta/orçamento ao cliente, já contemplando os impostos/taxas.">?</span>
+          </h4>
           <p id="out-final">—</p>
         </div>
       </div>
 
       <div class="example-box">
-        <strong>Dica:</strong> Se o cliente pedir desconto, evite mexer na sua margem abaixo do viável.
-        Em vez disso, reduza escopo ou ofereça etapas (visita + execução).
+        <strong>Dica:</strong> Se o cliente pedir desconto, evite mexer na sua margem abaixo do viável. Em vez disso, reduza escopo ou ofereça etapas (visita + execução).
       </div>
     </div>
 
@@ -489,14 +554,22 @@
     const fmtNum = (v, dec=2) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(Number(v) || 0);
 
     // Aceita "1.234,56" ou "1234.56" ou "1234"
-    function parseBR(value){
-      if(value == null) return 0;
-      let s = String(value).trim();
-      if(!s) return 0;
-      s = s.replace(/[R$\s]/g,'').replace(/\./g,'').replace(',', '.');
-      const n = Number(s);
-      return isFinite(n) ? n : 0;
-    }
+   function parseBR(value){
+  if(value == null) return 0;
+  let s = String(value).trim();
+  if(!s) return 0;
+  
+  // Limpa R$ e espaços
+  s = s.replace(/[R$\s]/g,'');
+  
+  // Se contiver vírgula, assume padrão brasileiro (ex: 1.234,56 ou 0,7)
+  if(s.includes(',')){
+    s = s.replace(/\./g, '').replace(',', '.');
+  }
+  
+  const n = Number(s);
+  return isFinite(n) ? n : 0;
+}
 
     // ============================
     // 1) Precificação
@@ -524,9 +597,26 @@
       document.getElementById('out-margem').textContent = fmtBRL(precoComMargem);
       document.getElementById('out-final').textContent  = fmtBRL(precoFinal);
     }
+    // Dicionário de explicações detalhadas para a caixa dinâmica
+    const explicacoes = {
+      cf: "<strong>Custos Fixos Mensais:</strong> São suas despesas recorrentes de estrutura que existem vendendo ou não serviços (ex.: celular, internet, depreciação de ferramentas, MEI, seguro).",
+      horas: "<strong>Horas Faturáveis/Mês:</strong> Total de horas no mês dedicadas puramente à execução de serviços cobrados (em média 140h a 160h/mês).",
+      cv: "<strong>Custo Variável por Serviço:</strong> Gastos diretos criados por este serviço em específico (combustível para deslocamento, conectores, fitas, pedágio).",
+      tempo: "<strong>Tempo Estimado:</strong> Horas estimadas para finalizar o serviço do início ao fim (incluindo testes e limpeza).",
+      margem: "<strong>Margem Desejada (%):</strong> Porcentagem sobre o custo destinada ao lucro líquido da empresa (para reserva, investimentos e expansão).",
+      imposto: "<strong>Impostos/Taxas (%):</strong> Alíquota praticada pela Nota Fiscal/Simples Nacional e/ou taxas cobradas pelas maquininhas de cartão."
+    };
+
+    function mostrarInfo(campo) {
+      const el = document.getElementById('info-dinamica');
+      if(explicacoes[campo]) {
+        el.innerHTML = explicacoes[campo];
+      }
+    }
     function limparPreco(){
       ['cf','horas','cv','tempo','margem','imposto'].forEach(id => document.getElementById(id).value = '');
       ['out-hora','out-base','out-margem','out-final'].forEach(id => document.getElementById(id).textContent = '—');
+      document.getElementById('info-dinamica').innerHTML = '<strong>💡 Dica:</strong> Passe o mouse sobre os ícones <strong>(?)</strong> ou clique nos campos para ver a explicação detalhada de cada termo.';
     }
 
     // ============================
@@ -663,25 +753,32 @@
     // ============================
     // 4) Simulador de investimento
     // ============================
-    function simularInvestimento(){
-      const inicial = parseBR(document.getElementById('si-inicial').value);
-      const mensal  = parseBR(document.getElementById('si-mensal').value);
-      const taxa    = parseBR(document.getElementById('si-juros').value) / 100;
-      const meses   = parseBR(document.getElementById('si-meses').value);
+function simularInvestimento(){
+  const inicial = parseBR(document.getElementById('si-inicial').value);
+  const mensal  = parseBR(document.getElementById('si-mensal').value);
+  const taxa    = parseBR(document.getElementById('si-juros').value) / 100;
+  const meses   = parseBR(document.getElementById('si-meses').value);
 
-      if(meses <= 0){ alert('Informe o número de meses.'); return; }
+  if(meses <= 0){ 
+    alert('Informe o número de meses.'); 
+    return; 
+  }
 
-      let montante = inicial;
-      for(let i=1;i<=meses;i++){
-        montante = montante * (1 + taxa) + mensal;
-      }
-      const investido = inicial + (mensal * meses);
-      const juros     = montante - investido;
+  let montante = inicial;
+  
+  // Executa exatamente N meses de capitalização
+  for(let i = 1; i <= meses; i++){
+    // Rende o saldo acumulado + adiciona o novo aporte no final do mês
+    montante = montante * (1 + taxa) + mensal;
+  }
+  
+  const investido = inicial + (mensal * meses);
+  const juros     = montante - investido;
 
-      document.getElementById('si-montante').textContent   = fmtBRL(montante);
-      document.getElementById('si-investido').textContent  = fmtBRL(investido);
-      document.getElementById('si-juros-total').textContent= fmtBRL(juros);
-    }
+  document.getElementById('si-montante').textContent   = fmtBRL(montante);
+  document.getElementById('si-investido').textContent  = fmtBRL(investido);
+  document.getElementById('si-juros-total').textContent= fmtBRL(juros);
+}
     function limparSimulador(){
       ['si-inicial','si-mensal','si-juros','si-meses'].forEach(id => document.getElementById(id).value = '');
       ['si-montante','si-investido','si-juros-total'].forEach(id => document.getElementById(id).textContent = '—');
